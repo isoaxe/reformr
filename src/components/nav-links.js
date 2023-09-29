@@ -9,7 +9,7 @@ export default function NavLinks({ setOpen }) {
   // Link styles.
   const constant = ' h-full flex items-center px-4';
   const active = 'font-bold bg-primary' + constant;
-  const dormant = 'font-semibold' + constant;
+  const dormant = 'font-normal' + constant;
 
   return (
     <div className="flex h-40 w-full flex-col justify-between text-xl md:h-full md:w-96 md:flex-row">
