@@ -12,7 +12,7 @@ export default function Navbar() {
     <>
       <div className="fixed top-0 z-30 flex h-16 w-full flex-row justify-between bg-violet-600 px-9 md:h-24">
         <div className="max-w-400 m-auto flex h-full w-full flex-row items-center justify-between">
-          <div className="hidden h-full md:flex">
+          <div className="hidden h-full w-full md:flex">
             <NavLinks setOpen={setOpen} />
           </div>
           {/* Hide hamburger menu on large screens. */}

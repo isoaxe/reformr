@@ -12,17 +12,19 @@ export default function NavLinks({ setOpen }) {
   const dormant = 'font-normal' + constant;
 
   return (
-    <div className="flex h-40 w-full flex-col justify-between text-xl md:h-full md:w-96 md:flex-row">
-      <h6 className={pathname === '/quiz' ? active : dormant}>
-        <Link href="/quiz" onClick={close}>
-          Quiz
-        </Link>
-      </h6>
-      <h6 className={pathname === '/contact' ? active : dormant}>
-        <Link href="/contact" onClick={close}>
-          Contact
-        </Link>
-      </h6>
+    <div className="flex h-40 w-full flex-col justify-between text-xl md:h-full md:flex-row">
+      <div className="flex flex-col md:flex-row">
+        <h6 className={pathname === '/quiz' ? active : dormant}>
+          <Link href="/quiz" onClick={close}>
+            Quiz
+          </Link>
+        </h6>
+        <h6 className={pathname === '/contact' ? active : dormant}>
+          <Link href="/contact" onClick={close}>
+            Contact
+          </Link>
+        </h6>
+      </div>
       <h6 className={pathname === '/login' ? active : dormant}>
         <Link href="/login" onClick={close}>
           Login
