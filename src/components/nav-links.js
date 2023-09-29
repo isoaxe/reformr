@@ -13,7 +13,7 @@ export default function NavLinks({ setOpen }) {
 
   return (
     <div className="flex h-40 w-full flex-col justify-between text-xl md:h-full md:flex-row">
-      <div className="flex flex-col md:flex-row">
+      <div className="flex h-80 flex-col md:h-full md:flex-row">
         <h6 className={pathname === '/quiz' ? active : dormant}>
           <Link href="/quiz" onClick={close}>
             Quiz
