@@ -1,4 +1,5 @@
 import { Montserrat, Work_Sans } from 'next/font/google';
+import Navbar from '@/components/navbar';
 import './globals.css';
 
 const montserrat = Montserrat({
@@ -22,7 +23,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.className} ${work.variable}`}>
+      <body
+        className={`${montserrat.className} ${work.variable} mt-16 md:mt-24`}
+      >
+        <Navbar />
         {children}
       </body>
     </html>
