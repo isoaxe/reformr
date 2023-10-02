@@ -14,6 +14,8 @@ export default function Navbar() {
 
   const pathname = usePathname();
 
+  const close = () => setOpen(false);
+
   // Logo styles.
   const active = ' mr-10 w-32 md:w-44';
   const dormant = 'hover:opacity-60' + active;
@@ -21,13 +23,16 @@ export default function Navbar() {
   return (
     <>
       <div
-        className={`fixed top-0 z-30 flex h-12 w-full flex-row justify-between bg-violet-500 px-9 md:h-16 ${
+        className={`fixed top-0 z-30 flex h-12 w-full flex-row justify-between bg-violet-500 px-4 xs:px-9 md:h-16 ${
           isOpen ? '' : 'border-b-2 border-violet-800'
         }`}
       >
         <div className="max-w-400 m-auto flex h-full w-full flex-row items-center justify-between">
           <Link href="/">
-            <div className={pathname === '/' ? active : dormant}>
+            <div
+              className={pathname === '/' ? active : dormant}
+              onClick={close}
+            >
               <Image
                 src={logo}
                 alt="Plain monotone version of Reformr text logo."
