@@ -7,17 +7,17 @@ import { INSTAGRAM } from '@/util/urls';
 import logo from 'public/images/text-logo-coloured.png';
 
 export default function Footer() {
-  const linkStyle = 'hover:text-violet-600 transition';
+  const linkStyle = 'mt-3 hover:text-violet-600 transition';
 
   return (
-    <footer className="px-9">
-      <div className="flex flex-row text-xl md:text-2xl">
-        <section>
-          <div className="mb-5 w-64 md:w-80">
+    <footer className="px-4 xs:px-9">
+      <div className="flex flex-col justify-between text-xl md:flex-row lg:text-2xl">
+        <section className="mb-10 flex flex-col items-center md:mb-0">
+          <div className="mb-5 w-64 max-w-full sm:w-80">
             <Image
               src={logo}
               alt="Coloured version of Reformr text logo."
-              sizes="(max-width: 767px) 16rem, 20rem"
+              sizes="(max-width: 639px) 16rem, 20rem"
             />
           </div>
           <a
@@ -29,29 +29,31 @@ export default function Footer() {
             <Instagram size={50} className="transition hover:fill-violet-600" />
           </a>
         </section>
-        <section className="flex flex-col">
-          <h4 className="font-bold">Support</h4>
-          <Link href="/contact" className={linkStyle}>
-            Contact Us
-          </Link>
-          <Link href="/contact" className={linkStyle}>
-            Customer Support
-          </Link>
-          <a href="/#faq" className={linkStyle}>
-            FAQs
-          </a>
-        </section>
-        <section className="flex flex-col">
-          <h4 className="font-bold">Resources</h4>
-          <Link href="/blog" className={linkStyle}>
-            Knowledge Hub
-          </Link>
-          <Link href="/" className={linkStyle}>
-            Privacy Policy
-          </Link>
-          <Link href="/" className={linkStyle}>
-            Terms of Service
-          </Link>
+        <section className="flex flex-col justify-between xs:flex-row md:ml-8 md:justify-start">
+          <div className="mr-8 flex flex-col md:mr-12 lg:mr-28">
+            <h4 className="font-bold">Support</h4>
+            <Link href="/contact" className={linkStyle}>
+              Contact Us
+            </Link>
+            <Link href="/contact" className={linkStyle}>
+              Customer Support
+            </Link>
+            <a href="/#faq" className={linkStyle}>
+              FAQs
+            </a>
+          </div>
+          <div className="mt-8 flex flex-col xs:mt-0">
+            <h4 className="font-bold">Resources</h4>
+            <Link href="/blog" className={linkStyle}>
+              Knowledge Hub
+            </Link>
+            <Link href="/" className={linkStyle}>
+              Privacy Policy
+            </Link>
+            <Link href="/" className={linkStyle}>
+              Terms of Service
+            </Link>
+          </div>
         </section>
       </div>
       <p className="my-10 text-center">
