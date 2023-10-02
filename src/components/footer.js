@@ -41,6 +41,18 @@ export default function Footer() {
             FAQs
           </a>
         </section>
+        <section className="flex flex-col">
+          <h4 className="font-bold">Resources</h4>
+          <Link href="/blog" className={linkStyle}>
+            Knowledge Hub
+          </Link>
+          <Link href="/" className={linkStyle}>
+            Privacy Policy
+          </Link>
+          <Link href="/" className={linkStyle}>
+            Terms of Service
+          </Link>
+        </section>
       </div>
       <p className="my-10 text-center">
         © {new Date().getFullYear()} Reformr Health LLC. All rights reserved.
