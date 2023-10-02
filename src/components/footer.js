@@ -47,10 +47,10 @@ export default function Footer() {
             <Link href="/blog" className={linkStyle}>
               Knowledge Hub
             </Link>
-            <Link href="/" className={linkStyle}>
+            <Link href="/privacy-policy" className={linkStyle}>
               Privacy Policy
             </Link>
-            <Link href="/" className={linkStyle}>
+            <Link href="/tos" className={linkStyle}>
               Terms of Service
             </Link>
           </div>
