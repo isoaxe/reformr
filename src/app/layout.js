@@ -1,5 +1,6 @@
 import { Montserrat, Work_Sans } from 'next/font/google';
 import Navbar from '@/components/navbar';
+import Footer from '@/components/footer';
 import './globals.css';
 
 const montserrat = Montserrat({
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
       >
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
