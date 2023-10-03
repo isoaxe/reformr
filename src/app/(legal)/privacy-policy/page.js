@@ -1,11 +1,13 @@
 export default function PrivacyPolicy() {
   const Heading = ({ text }) => (
-    <h2 className="mt-10 text-xl font-bold md:text-3xl">{text}</h2>
+    <h2 className="mt-10 text-xl font-semibold md:text-3xl">{text}</h2>
   );
 
-  const Point = ({ text }) => <p className="mt-3">{text}</p>;
+  const Point = ({ text }) => <p className="mt-3 font-light">{text}</p>;
 
-  const SubPoint = ({ text }) => <p className="ml-6 mt-3 md:ml-12">{text}</p>;
+  const SubPoint = ({ text }) => (
+    <p className="ml-6 mt-3 font-light md:ml-12">{text}</p>
+  );
 
   return (
     <main className="m-auto my-28 max-w-7xl px-4 text-lg xs:px-9 md:text-2xl">

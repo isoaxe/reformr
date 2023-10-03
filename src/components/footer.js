@@ -7,7 +7,7 @@ import { INSTAGRAM } from '@/util/urls';
 import logo from 'public/images/text-logo-coloured.png';
 
 export default function Footer() {
-  const linkStyle = 'mt-3 hover:text-violet-600 transition';
+  const linkStyle = 'mt-3 hover:text-violet-600 font-light transition';
 
   return (
     <footer className="mt-8 px-4 xs:px-9">
@@ -26,12 +26,15 @@ export default function Footer() {
             target="_blank"
             rel="noreferrer"
           >
-            <Instagram size={50} className="transition hover:fill-violet-600" />
+            <Instagram
+              size={50}
+              className="fill-slate-700 transition hover:fill-violet-600"
+            />
           </a>
         </section>
         <section className="flex flex-col justify-between xs:flex-row md:ml-8 md:justify-start">
           <div className="mr-8 flex flex-col md:mr-12 lg:mr-28">
-            <h4 className="font-bold">Support</h4>
+            <h4 className="font-semibold">Support</h4>
             <Link href="/contact" className={linkStyle}>
               Contact Us
             </Link>
@@ -43,7 +46,7 @@ export default function Footer() {
             </a>
           </div>
           <div className="mt-8 flex flex-col xs:mt-0">
-            <h4 className="font-bold">Resources</h4>
+            <h4 className="font-semibold">Resources</h4>
             <Link href="/blog" className={linkStyle}>
               Knowledge Hub
             </Link>
@@ -56,7 +59,7 @@ export default function Footer() {
           </div>
         </section>
       </div>
-      <p className="my-10 text-center">
+      <p className="my-10 text-center font-light">
         © {new Date().getFullYear()} Reformr Health LLC. All rights reserved.
       </p>
     </footer>
