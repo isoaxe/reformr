@@ -17,7 +17,7 @@ export default function Home() {
         >
           <source src="videos/home-hero.mp4" type="video/mp4" />
         </video>
-        <div className="relative flex flex-col pl-32 pt-72 text-white">
+        <div className="relative flex flex-col pl-32 pt-72 text-white drop-shadow-black">
           <TypeAnimation
             sequence={[
               'TRANSFORMATIVE',
