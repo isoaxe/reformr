@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${montserrat.className} ${work.variable} mt-16 md:mt-24`}
+        className={`${montserrat.className} ${work.variable} mt-12 md:mt-16`}
       >
         <Navbar />
         {children}
