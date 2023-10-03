@@ -38,7 +38,7 @@ export default function Home() {
               interval,
             ]}
             speed={50}
-            className="text-7xl font-extrabold"
+            className="w-fit bg-gradient-to-l from-violet-300 to-violet-600 bg-clip-text text-7xl font-extrabold text-transparent"
             repeat={Infinity}
           />
           <h1 className="mb-8 mt-4 text-7xl font-extrabold">weight loss</h1>
