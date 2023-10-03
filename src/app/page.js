@@ -1,5 +1,6 @@
 'use client';
 
+import Button from '@/components/button';
 import { TypeAnimation } from 'react-type-animation';
 
 export default function Home() {
@@ -17,7 +18,7 @@ export default function Home() {
         >
           <source src="videos/home-hero.mp4" type="video/mp4" />
         </video>
-        <div className="relative flex flex-col pl-32 pt-72 text-white drop-shadow-black">
+        <div className="relative flex w-fit flex-col pl-32 pt-56 text-white drop-shadow-black">
           <TypeAnimation
             sequence={[
               'TRANSFORMATIVE',
@@ -41,10 +42,13 @@ export default function Home() {
             className="w-fit bg-gradient-to-l from-violet-300 to-violet-600 bg-clip-text text-7xl font-extrabold text-transparent"
             repeat={Infinity}
           />
-          <h1 className="mb-8 mt-4 text-7xl font-extrabold">weight loss</h1>
-          <h2 className="max-w-2xl text-4xl font-bold leading-snug">
+          <h1 className="mt-4 text-7xl font-extrabold">weight loss</h1>
+          <h2 className="my-8 max-w-2xl text-4xl font-bold leading-snug">
             Prescription medication that addresses weight at a biological level.
           </h2>
+          <div className="w-fit">
+            <Button text="Check Eligibility" link="/quiz" />
+          </div>
         </div>
       </section>
     </main>
