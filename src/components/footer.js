@@ -10,7 +10,7 @@ export default function Footer() {
   const linkStyle = 'mt-3 hover:text-violet-600 transition';
 
   return (
-    <footer className="px-4 xs:px-9">
+    <footer className="mt-8 px-4 xs:px-9">
       <div className="flex flex-col justify-between text-xl md:flex-row lg:text-2xl">
         <section className="mb-10 flex flex-col items-center md:mb-0">
           <div className="mb-5 w-64 max-w-full sm:w-80">
