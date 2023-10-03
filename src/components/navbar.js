@@ -17,8 +17,9 @@ export default function Navbar() {
   const close = () => setOpen(false);
 
   // Logo styles.
-  const active = ' mr-10 lg:mr-20 w-32 md:w-44';
-  const dormant = 'hover:opacity-60' + active;
+  const constant = ' mr-10 lg:mr-20 w-32 md:w-44';
+  const active = 'border-b border-cyan-200 pb-1' + constant;
+  const dormant = 'hover:opacity-60' + constant;
 
   return (
     <>
