@@ -18,7 +18,7 @@ export default function Hero() {
       >
         <source src="videos/home-hero.mp4" type="video/mp4" />
       </video>
-      <div className="relative flex w-fit flex-col pl-32 pt-56 text-white drop-shadow-black">
+      <div className="pt- relative flex h-full w-fit flex-col justify-center px-4 text-white drop-shadow-black xs:pl-12 lg:pl-32">
         <TypeAnimation
           sequence={[
             'TRANSFORMATIVE',
@@ -39,11 +39,13 @@ export default function Hero() {
             interval,
           ]}
           speed={50}
-          className="w-fit bg-gradient-to-l from-violet-300 to-violet-600 bg-clip-text text-7xl font-extrabold text-transparent"
+          className="w-fit bg-gradient-to-l from-violet-300 to-violet-600 bg-clip-text text-4xl font-extrabold text-transparent xs:text-5xl md:text-6xl lg:text-7xl"
           repeat={Infinity}
         />
-        <h1 className="mt-4 text-7xl font-extrabold">weight loss</h1>
-        <h2 className="my-8 max-w-2xl text-4xl font-bold leading-snug">
+        <h1 className="mt-4 text-4xl font-extrabold xs:text-5xl md:text-6xl lg:text-7xl">
+          weight loss
+        </h1>
+        <h2 className="my-8 mr-8 max-w-2xl text-xl font-bold leading-snug xs:text-2xl md:text-3xl lg:text-4xl">
           Prescription medication that addresses weight at a biological level.
         </h2>
         <div className="w-fit">
