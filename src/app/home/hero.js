@@ -18,7 +18,7 @@ export default function Hero() {
       >
         <source src="videos/home-hero.mp4" type="video/mp4" />
       </video>
-      <div className="pt- relative flex h-full w-fit flex-col justify-center px-4 text-white drop-shadow-black xs:pl-12 lg:pl-32">
+      <div className="relative flex h-full w-fit flex-col justify-center px-4 text-white drop-shadow-dark xs:pl-12 lg:pl-32">
         <TypeAnimation
           sequence={[
             'TRANSFORMATIVE',

@@ -48,7 +48,7 @@ export default function Process() {
         <Stage
           title="3. Ongoing Care"
           image={stage3}
-          description="Your state-of-the-art weight loss medication arrives in discreet packaging."
+          description="Your doctor will monitor your progress and make changes to your treatment as needed."
         />
       </div>
       <Button text="Take Quiz" link="/quiz" bgShade="light" />
