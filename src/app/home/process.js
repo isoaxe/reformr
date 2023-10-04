@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Button from '@/components/button';
 import stage1 from '/public/images/stage-1.png';
 import stage2 from '/public/images/stage-2.png';
 import stage3 from '/public/images/stage-3.png';
@@ -29,8 +30,8 @@ export default function Process() {
   }
 
   return (
-    <section className="my-10 px-4 md:my-28">
-      <h2 className="text-center text-xl md:text-2xl lg:text-3xl">
+    <section className="my-10 flex flex-col items-center px-4 md:my-28">
+      <h2 className="text-xl md:text-2xl lg:text-3xl">
         Personalised medical weight loss. One simple subscription.
       </h2>
       <div className="m-auto flex w-full max-w-[100rem] flex-wrap justify-around md:flex-nowrap">
@@ -50,6 +51,7 @@ export default function Process() {
           description="Your state-of-the-art weight loss medication arrives in discreet packaging."
         />
       </div>
+      <Button text="Take Quiz" link="/quiz" bgShade="light" />
     </section>
   );
 }
