@@ -19,8 +19,8 @@ module.exports = {
         xs: '430px', // extra-small
       },
       dropShadow: {
-        black: 'rgba(0, 0, 0, 1) 0px 0px 15px',
-        white: 'rgba(255, 255, 255, 1) 0px 0px 12px',
+        dark: 'rgba(0, 0, 0, 1) 0px 0px 15px',
+        light: 'rgba(153, 246, 228, 1) 0px 0px 12px',
       },
     },
   },
