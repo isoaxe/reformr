@@ -16,8 +16,8 @@ export default function Advantages() {
   return (
     <>
       <section className="flex flex-col-reverse items-center justify-center bg-sky-200 px-4 py-20 xs:px-9 lg:flex-row lg:py-32">
-        <div className="mr-8 mt-12 flex max-w-2xl flex-col items-center lg:mt-0 lg:max-w-lg lg:items-start xl:mr-32 2xl:mr-56 2xl:max-w-4xl">
-          <h2 className="mb-8 text-2xl font-bold md:mb-16 md:text-3xl lg:text-4xl">
+        <div className="mt-12 flex max-w-2xl flex-col items-center lg:mr-8 lg:mt-0 lg:max-w-lg lg:items-start xl:mr-32 2xl:mr-56 2xl:max-w-4xl">
+          <h2 className="mb-8 text-center text-2xl font-bold md:mb-16 md:text-3xl lg:text-4xl">
             Experience the next generation of weight loss
           </h2>
           <p className="mb-4 text-lg font-light md:mb-8 md:text-xl lg:text-2xl">
@@ -46,8 +46,8 @@ export default function Advantages() {
         </div>
       </section>
       <section className="flex flex-col-reverse items-center justify-center px-4 py-20 xs:px-9 lg:flex-row-reverse lg:py-32">
-        <div className="ml-8 mt-12 flex max-w-2xl flex-col items-center lg:mt-0 lg:max-w-lg lg:items-start xl:ml-32 2xl:ml-56 2xl:max-w-4xl">
-          <h2 className="mb-8 text-2xl font-bold md:mb-16 md:text-3xl lg:text-4xl">
+        <div className="mt-12 flex max-w-2xl flex-col items-center lg:ml-8 lg:mt-0 lg:max-w-lg lg:items-start xl:ml-32 2xl:ml-56 2xl:max-w-4xl">
+          <h2 className="mb-8 text-center text-2xl font-bold md:mb-16 md:text-3xl lg:text-4xl">
             Cutting-edge medications
           </h2>
           <p className="mb-8 text-lg font-light md:mb-16 md:text-xl lg:text-2xl">
@@ -71,8 +71,8 @@ export default function Advantages() {
         </div>
       </section>
       <section className="flex flex-col-reverse items-center justify-center bg-pink-200 px-4 py-20 xs:px-9 lg:flex-row lg:py-32">
-        <div className="mr-8 mt-12 flex max-w-2xl flex-col items-center lg:mt-0 lg:max-w-lg lg:items-start xl:mr-32 2xl:mr-56 2xl:max-w-4xl">
-          <h2 className="mb-8 text-2xl font-bold md:mb-16 md:text-3xl lg:text-4xl">
+        <div className="mt-12 flex max-w-2xl flex-col items-center lg:mr-8 lg:mt-0 lg:max-w-lg lg:items-start xl:mr-32 2xl:mr-56 2xl:max-w-4xl">
+          <h2 className="mb-8 text-center text-2xl font-bold md:mb-16 md:text-3xl lg:text-4xl">
             More than just weight loss
           </h2>
           <p className="mb-1 text-lg font-light md:text-xl lg:text-2xl">
