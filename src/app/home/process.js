@@ -8,9 +8,11 @@ export default function Process() {
   /* Sub-component to show the current stage of the process */
   function Stage({ title, image, description }) {
     return (
-      <div className="mx-3 my-10 flex w-full flex-col font-light xs:w-72 md:my-20 lg:w-96">
-        <h3 className="text-center text-lg md:text-xl lg:text-2xl">{title}</h3>
-        <div className="min-w-60 relative my-6 aspect-square w-full">
+      <div className="mx-3 my-10 flex w-full flex-col xs:w-72 md:my-20 lg:w-96">
+        <h3 className="text-center text-lg font-light md:text-xl lg:text-2xl">
+          {title}
+        </h3>
+        <div className="min-w-60 relative my-6 aspect-square w-full rounded-lg shadow-lg">
           <Image
             src={image}
             alt="Graphic showing the current stage of the process being described."
@@ -19,7 +21,9 @@ export default function Process() {
             sizes="(max-width: 429px) 18rem, 24rem"
           />
         </div>
-        <p className="text-lg md:text-xl lg:text-2xl">{description}</p>
+        <p className="text-lg font-extralight md:text-xl lg:text-2xl">
+          {description}
+        </p>
       </div>
     );
   }
