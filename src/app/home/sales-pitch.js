@@ -5,7 +5,7 @@ import dna from '/public/images/dna.jpg';
 import labLady from '/public/images/lab-lady.png';
 
 /* Three sections of the homepage that comprise the product pitch. */
-export default function Advantages() {
+export default function SalesPitch() {
   const BulletPoint = ({ text }) => (
     <div className="my-1 flex flex-row items-start lg:my-2">
       <div className="mr-2 mt-3 aspect-square h-1.5 rounded-full border border-black lg:mt-3.5"></div>
