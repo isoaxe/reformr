@@ -1,7 +1,8 @@
 'use client';
 
-import Button from '@/components/button';
 import { TypeAnimation } from 'react-type-animation';
+import PlayBgVideo from '@/components/play-bg-video';
+import Button from '@/components/button';
 
 /* Hero section that the user first sees at the top of the homepage. */
 export default function Hero() {
@@ -9,15 +10,11 @@ export default function Hero() {
 
   return (
     <section className="relative h-[calc(100vh-3rem)] md:h-[calc(100vh-4rem)]">
-      <video
-        autoPlay
-        loop
-        muted
+      <PlayBgVideo
         className="absolute z-0 h-full w-full object-cover"
-        alt="Slow-motion video of a woman slowly exhaling whilst rolling her shoulders."
-      >
-        <source src="videos/home-hero.mp4" type="video/mp4" />
-      </video>
+        videoSrc="videos/home-hero.mp4"
+        altText="Slow-motion video of a woman slowly exhaling whilst rolling her shoulders."
+      />
       <div className="relative flex h-full w-fit flex-col justify-center px-4 text-white drop-shadow-dark xs:pl-12 lg:pl-32">
         <TypeAnimation
           sequence={[
