@@ -8,15 +8,14 @@ import Button from '@/components/button';
 
 /* The Frequently Asked Questions section of the homepage. */
 export default function FAQ() {
-  const initialFaqState = new Array(faqs.length).fill(false);
-  const [isOpen, setOpen] = useState(initialFaqState);
+  const [isOpen, setOpen] = useState(new Array(faqs.length).fill(false));
 
   /* Single question with animated expansion. */
   const faq = ({ question, answer }, faqIdx) => (
     <div className="max-w-2xl text-lg md:text-xl lg:text-2xl" key={faqIdx}>
       <div
         onClick={() => {
-          const updatedState = initialFaqState;
+          const updatedState = new Array(faqs.length).fill(false);
           if (!isOpen[faqIdx]) updatedState[faqIdx] = true;
           setOpen(updatedState);
         }}
