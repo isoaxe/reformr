@@ -1,9 +1,17 @@
+import Hero from './home/hero';
+import Process from './home/process';
+import SalesPitch from './home/sales-pitch';
+import FAQ from './home/faq';
+import Closer from './home/closer';
+
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      <h1 className="p-4 text-2xl md:p-8 md:text-4xl">
-        This is the <span className="font-bold text-blue-600">Home</span> page
-      </h1>
+    <main>
+      <Hero />
+      <Process />
+      <SalesPitch />
+      <FAQ />
+      <Closer />
     </main>
   );
 }

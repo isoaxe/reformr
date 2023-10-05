@@ -18,6 +18,10 @@ module.exports = {
       screens: {
         xs: '430px', // extra-small
       },
+      dropShadow: {
+        dark: 'rgba(0, 0, 0, 1) 0px 0px 15px',
+        light: 'rgba(153, 246, 228, 1) 0px 0px 12px',
+      },
     },
   },
   plugins: [],
