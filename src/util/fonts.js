@@ -4,7 +4,7 @@ export const sohne = localFont({
   display: 'swap',
   src: [
     {
-      path: '../../public/fonts/söhne/Söhne-Extraleicht.otf',
+      path: '../../public/fonts/sohne/Sohne-Extraleicht.otf',
       weight: '200',
       style: 'normal',
     },
