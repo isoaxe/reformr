@@ -35,15 +35,17 @@ export default function FAQ() {
   );
 
   return (
-    <section className="mx-auto my-20 flex max-w-7xl flex-row justify-between lg:my-32 ">
-      <div className="flex flex-col">
-        <h2 className="text-4xl font-extrabold xs:text-5xl md:text-6xl lg:text-7xl">
+    <section className="mx-auto my-20 flex max-w-7xl flex-col justify-between px-4 xs:px-9 sm:flex-row lg:my-32 ">
+      <div className="mb-5 flex w-full shrink-0 flex-row items-center justify-between sm:mb-0 sm:w-44 sm:flex-col sm:items-start sm:justify-start md:w-52">
+        <h2 className="text-5xl font-extrabold md:text-6xl lg:text-7xl">
           FAQs
         </h2>
-        <h3 className="mb-6 mt-16 text-lg xs:text-xl lg:text-2xl">
-          Other Questions?
-        </h3>
-        <Button text="Contact Us" link="/contact" bgShade="light" />
+        <div className="flex flex-col">
+          <h3 className="mb-2 text-lg sm:mb-6 sm:mt-16 md:text-xl lg:text-2xl">
+            Other Questions?
+          </h3>
+          <Button text="Contact Us" link="/contact" bgShade="light" />
+        </div>
       </div>
       <div className="flex flex-col">
         {faqs.map((singleFaqData, index) => faq(singleFaqData, index))}
