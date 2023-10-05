@@ -13,7 +13,11 @@ export default function FAQ() {
       <p onClick={() => setChecked(!checked)}>{question}</p>
       <Collapse in={checked}>
         {/* This is the answer that is initially hidden. */}
-        <p className="font-light">{answer}</p>
+        {answer.map((paragraph, idx) => (
+          <p className="font-light" key={idx}>
+            {paragraph}
+          </p>
+        ))}
       </Collapse>
     </div>
   );
@@ -22,7 +26,9 @@ export default function FAQ() {
     <section>
       {faq(
         'You can read more about Saxenda including how it works, how effective it is, and its side effects here.',
-        'The Reformr Metabolic Reset Program includes a monthly supply of liraglutide (Saxenda). Saxenda is the only GLP-1 medication approved for the treatment of obesity in New Zealand.'
+        [
+          'The Reformr Metabolic Reset Program includes a monthly supply of liraglutide (Saxenda). Saxenda is the only GLP-1 medication approved for the treatment of obesity in New Zealand.',
+        ]
       )}
     </section>
   );
