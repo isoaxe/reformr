@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Collapse from '@mui/material/Collapse';
 import { faqs } from '@/util/data';
+import Button from '@/components/button';
 
 /* The Frequently Asked Questions section of the homepage. */
 export default function FAQ() {
@@ -34,7 +35,16 @@ export default function FAQ() {
   );
 
   return (
-    <section className="my-20 flex flex-row lg:my-32">
+    <section className="mx-auto my-20 flex max-w-7xl flex-row justify-between lg:my-32 ">
+      <div className="flex flex-col">
+        <h2 className="text-4xl font-extrabold xs:text-5xl md:text-6xl lg:text-7xl">
+          FAQs
+        </h2>
+        <h3 className="mb-6 mt-16 text-lg xs:text-xl lg:text-2xl">
+          Other Questions?
+        </h3>
+        <Button text="Contact Us" link="/contact" bgShade="light" />
+      </div>
       <div className="flex flex-col">
         {faqs.map((singleFaqData, index) => faq(singleFaqData, index))}
       </div>
