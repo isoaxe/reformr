@@ -29,8 +29,9 @@ export const faqs = [
   },
   {
     question: 'How long will I need to be on treatment for?',
-    answer:
+    answer: [
       'This depends on your weight loss goals, your body’s unique response to the medication.',
+    ],
   },
   {
     question: 'How much does the Reformr program cost?',
