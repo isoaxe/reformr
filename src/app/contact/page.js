@@ -1,6 +1,7 @@
 'use client';
 
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 export default function Contact() {
   return (
@@ -21,7 +22,13 @@ export default function Contact() {
           <TextField label="Last Name" className="w-full sm:w-1/2" />
         </div>
         <TextField label="Email" sx={{ my: 1 }} />
-        <TextField label="Message" sx={{ my: 1 }} multiline rows={6} />
+        <TextField label="Message" sx={{ mt: 1, mb: 2 }} multiline rows={6} />
+        <Button
+          variant="contained"
+          className="w-32 bg-blue-600 py-2 hover:bg-blue-500"
+        >
+          Submit
+        </Button>
       </section>
     </main>
   );
