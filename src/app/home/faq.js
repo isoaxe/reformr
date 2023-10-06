@@ -1,51 +1,13 @@
-'use client';
-
-import { useState } from 'react';
-import { Spiral as Hamburger } from 'hamburger-react';
-import Collapse from '@mui/material/Collapse';
-import { faqs } from '@/util/data';
+import { faqData } from '@/util/data';
+import CollapsibleMenu from '@/components/collapsible-menu';
 import Button from '@/components/button';
 
 /* The Frequently Asked Questions section of the homepage. */
 export default function FAQ() {
-  const [isOpen, setOpen] = useState(new Array(faqs.length).fill(false));
-
-  /* Single question with animated expansion. */
-  const faq = ({ question, answer }, faqIdx) => (
-    <div className="max-w-2xl text-lg md:text-xl lg:text-2xl" key={faqIdx}>
-      <div
-        onClick={() => {
-          const updatedState = new Array(faqs.length).fill(false);
-          if (!isOpen[faqIdx]) updatedState[faqIdx] = true;
-          setOpen(updatedState);
-        }}
-        className="my-1 flex w-fit flex-row rounded-lg bg-sky-200 px-4 py-2 hover:cursor-pointer"
-      >
-        <div className="w-12">
-          <Hamburger
-            size={25}
-            distance="lg"
-            toggled={isOpen[faqIdx]}
-            label="Animated icon to show question expanding to reveal answer."
-          />
-        </div>
-        <p className="pl-2 pt-2.5 sm:pt-2 lg:pt-1.5">{question}</p>
-      </div>
-      <Collapse in={isOpen[faqIdx]}>
-        {/* This is the answer that is initially hidden. */}
-        {answer.map((paragraph, idx) => (
-          <p className="ml-6 py-2 font-light lg:ml-9" key={idx}>
-            {paragraph}
-          </p>
-        ))}
-      </Collapse>
-    </div>
-  );
-
   return (
     <section
       id="faq"
-      className="mx-auto my-20 flex max-w-7xl flex-col justify-between px-4 xs:px-9 sm:flex-row lg:my-32"
+      className="mx-auto flex max-w-7xl flex-col justify-between px-4 py-16 xs:px-9 sm:flex-row lg:py-28"
     >
       <div className="mb-5 flex w-full shrink-0 flex-row items-center justify-between sm:mb-0 sm:w-44 sm:flex-col sm:items-start sm:justify-start md:w-52">
         <h2 className="text-5xl font-extrabold md:text-6xl lg:text-7xl">
@@ -55,12 +17,10 @@ export default function FAQ() {
           <h3 className="mb-2 text-lg sm:mb-6 sm:mt-16 md:text-xl lg:text-2xl">
             Other Questions?
           </h3>
-          <Button text="Contact Us" link="/contact" bgShade="light" />
+          <Button text="Contact Us" link="/contact" haloShade="dark" />
         </div>
       </div>
-      <div className="flex flex-col">
-        {faqs.map((singleFaqData, index) => faq(singleFaqData, index))}
-      </div>
+      <CollapsibleMenu data={faqData} />
     </section>
   );
 }
