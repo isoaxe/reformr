@@ -45,7 +45,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="mx-auto my-20 flex max-w-7xl flex-col justify-between px-4 xs:px-9 sm:flex-row lg:my-32"
+      className="mx-auto my-16 flex max-w-7xl flex-col justify-between px-4 xs:px-9 sm:flex-row lg:my-28"
     >
       <div className="mb-5 flex w-full shrink-0 flex-row items-center justify-between sm:mb-0 sm:w-44 sm:flex-col sm:items-start sm:justify-start md:w-52">
         <h2 className="text-5xl font-extrabold md:text-6xl lg:text-7xl">
