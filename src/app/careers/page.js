@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Button from '@/components/button';
 import womanWithPhone from '/public/images/woman-smiling-with-phone.jpeg';
+import CollapsibleMenu from '@/components/collapsible-menu';
+import { careersData } from '@/util/data';
 
 export default function Careers() {
   return (
@@ -40,6 +42,12 @@ export default function Careers() {
         <div className="w-fit">
           <Button text="Get in Touch" link="/contact" haloShade="dark" />
         </div>
+      </section>
+      <section className="mx-auto flex flex-col items-center bg-pink-200 px-4 py-16 xs:px-9 md:py-28">
+        <h1 className="mb-12 text-3xl font-extrabold xs:text-4xl sm:mb-6 sm:text-5xl ml:text-6xl lg:text-7xl">
+          Current Openings
+        </h1>
+        <CollapsibleMenu data={careersData} />
       </section>
     </main>
   );
