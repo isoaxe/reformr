@@ -49,3 +49,35 @@ export const faqData = [
     ],
   },
 ];
+
+export const careersData = [
+  {
+    visible: 'Back-end Engineer',
+    hidden: [
+      "As a senior back-end engineer at Reformr, you'll be responsible for designing, developing, and maintaining our cloud-based infrastructure, services, and APIs.",
+      "You'll work closely with our front-end developers, product managers, and data scientists to deliver a high-quality user experience and robust data-driven solutions.",
+      "You'll have deep expertise in modern back-end technologies, such as Node.js, Python, MongoDB, and AWS, and experience in building scalable, secure, and fault-tolerant systems.",
+    ],
+  },
+  {
+    visible: 'Senior Product Manager',
+    hidden: [
+      "As a senior product manager at Reformr, you'll be responsible for driving the strategy and execution of our digital health products. You'll collaborate with cross-functional teams, including engineering, design, data, and clinical, to define and prioritise product features, create user stories and product roadmaps, and conduct user research and testing.",
+      "You'll have experience in the healthcare industry, knowledge of regulatory compliance, and ability to communicate and influence stakeholders at all levels.",
+    ],
+  },
+  {
+    visible: 'Growth Marketer',
+    hidden: [
+      "As a growth marketer at Reformr, you'll be responsible for driving user acquisition, retention, and engagement across multiple channels, including social media, email, content marketing, and paid advertising. You'll develop and execute data-driven growth experiments, analyse metrics, and optimise campaigns to achieve business goals.",
+      "You'll have a strong understanding of digital marketing tactics, customer psychology, and analytics tools, and ability to work independently and collaboratively.",
+    ],
+  },
+  {
+    visible: 'Partnering Doctors',
+    hidden: [
+      "As a partnering doctor at Reformr, you'll be responsible for providing clinical expertise, guidance, telehealth services to our members and feedback on our digital health products and services. You'll collaborate with our product and engineering teams to design and validate clinical workflows, algorithms, and decision support tools.",
+      "You’ll join a growing team of partner doctors and allied health. You'll have a passion for innovation, patient-centric care, continuous learning, and hold an active FRACGP or FRACP (Endocrinology) certification. You'll work on a part-time or full-time basis, depending on your availability and interest.",
+    ],
+  },
+];
