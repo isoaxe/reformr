@@ -16,6 +16,17 @@ export default function Contact() {
   const [helpType, setHelpType] = useState('');
   const [message, setMessage] = useState('');
 
+  const helpOptions = [
+    'Issue with my order or delivery',
+    'Medical support',
+    'Careers at Reformr',
+    'Media enquiries',
+    'Learn more about Reformr',
+    'Following up from consultation',
+    'Partnering with Reformr',
+    'Something else',
+  ];
+
   /* Dropdown menu that allows user to select type of help required. */
   function HelpSelect() {
     return (
@@ -29,14 +40,11 @@ export default function Contact() {
             label="How can we help you?"
             onChange={(e) => setHelpType(e.target.value)}
           >
-            <MenuItem value={1}>Issue with my order or delivery</MenuItem>
-            <MenuItem value={2}>Medical support</MenuItem>
-            <MenuItem value={3}>Careers at Reformr</MenuItem>
-            <MenuItem value={4}>Media enquiries</MenuItem>
-            <MenuItem value={5}>Learn more about Reformr</MenuItem>
-            <MenuItem value={6}>Following up from consultation</MenuItem>
-            <MenuItem value={7}>Partnering with Reformr</MenuItem>
-            <MenuItem value={8}>Something else</MenuItem>
+            {helpOptions.map((option, idx) => (
+              <MenuItem value={option} key={idx}>
+                {option}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Box>
