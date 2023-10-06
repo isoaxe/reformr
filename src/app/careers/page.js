@@ -24,7 +24,7 @@ export default function Careers() {
             access to the latest evidence-based treatments.
           </p>
           <div className="w-fit md:pb-20 lg:pb-64 2xl:pb-96">
-            <Button text="Contact Us" link="/contact" bgShade="dark" />
+            <Button text="Contact Us" link="/contact" haloShade="light" />
           </div>
         </div>
       </section>

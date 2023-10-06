@@ -51,7 +51,7 @@ export default function Process() {
           description="Your doctor will monitor your progress and make changes to your treatment as needed."
         />
       </div>
-      <Button text="Take Quiz" link="/quiz" bgShade="light" />
+      <Button text="Take Quiz" link="/quiz" haloShade="dark" />
     </section>
   );
 }
