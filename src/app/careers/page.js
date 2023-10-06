@@ -28,6 +28,19 @@ export default function Careers() {
           </div>
         </div>
       </section>
+      <section className="mx-auto my-16 flex max-w-6xl flex-col items-center px-4 text-center xs:px-9 md:my-28">
+        <h1 className="text-3xl font-extrabold xs:text-4xl sm:text-5xl ml:text-6xl lg:text-7xl">
+          Patient-centred digital health. It’s in our DNA.
+        </h1>
+        <p className="my-8 text-sm xs:text-base sm:my-16 sm:text-lg ml:text-xl lg:my-24 lg:text-2xl">
+          We are cultivating a growing multidisciplinary team to advance our
+          digital health capabilities, support astronomical growth, forge
+          strategic partnerships, and nurture our members.
+        </p>
+        <div className="w-fit">
+          <Button text="Get in Touch" link="/contact" haloShade="dark" />
+        </div>
+      </section>
     </main>
   );
 }
