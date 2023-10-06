@@ -29,7 +29,7 @@ export default function FAQ() {
             label="Animated icon to show question expanding to reveal answer."
           />
         </div>
-        <p className="pl-2 pt-2.5 sm:pt-2 lg:pt-1.5">{question}</p>
+        <p className="py-2.5 pl-2 sm:py-2 lg:py-1.5">{question}</p>
       </div>
       <Collapse in={isOpen[faqIdx]}>
         {/* This is the answer that is initially hidden. */}
