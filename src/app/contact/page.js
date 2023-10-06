@@ -10,15 +10,21 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 export default function Contact() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
   const [helpType, setHelpType] = useState('');
+  const [message, setMessage] = useState('');
 
   /* Dropdown menu that allows user to select type of help required. */
   function HelpSelect() {
     return (
       <Box sx={{ my: 1 }}>
         <FormControl fullWidth>
-          <InputLabel>How can we help you?</InputLabel>
+          <InputLabel id="help-select-label">How can we help you?</InputLabel>
           <Select
+            labelId="help-select-label"
+            id="help-select"
             value={helpType}
             label="How can we help you?"
             onChange={(e) => setHelpType(e.target.value)}
@@ -48,15 +54,33 @@ export default function Contact() {
           possible and we will get back to you within 2 business days.
         </p>
         <div className="my-2 flex flex-col sm:flex-row">
-          <TextField label="First Name" className="w-full sm:w-1/2" />
+          <TextField
+            label="First Name"
+            className="w-full sm:w-1/2"
+            onChange={(e) => setFirstName(e.target.value)}
+          />
           <div className="h-4 w-4 sm:w-4">
             {/* Spacer between Name fields */}
           </div>
-          <TextField label="Last Name" className="w-full sm:w-1/2" />
+          <TextField
+            label="Last Name"
+            className="w-full sm:w-1/2"
+            onChange={(e) => setLastName(e.target.value)}
+          />
         </div>
-        <TextField label="Email" sx={{ my: 1 }} />
+        <TextField
+          label="Email"
+          sx={{ my: 1 }}
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <HelpSelect />
-        <TextField label="Message" sx={{ mt: 1, mb: 2 }} multiline rows={6} />
+        <TextField
+          label="Message"
+          sx={{ mt: 1, mb: 2 }}
+          onChange={(e) => setMessage(e.target.value)}
+          multiline
+          rows={6}
+        />
         <Button
           variant="contained"
           className="w-32 bg-blue-600 py-2 hover:bg-blue-500"
