@@ -31,7 +31,7 @@ export default function Careers() {
         </div>
       </section>
       <section className="mx-auto my-16 flex max-w-6xl flex-col items-center px-4 text-center xs:px-9 md:my-28">
-        <h1 className="text-3xl font-extrabold xs:text-4xl sm:text-5xl ml:text-6xl lg:text-7xl">
+        <h1 className="text-3xl font-bold xs:text-4xl sm:text-5xl ml:text-6xl lg:text-7xl">
           Patient-centred digital health. It’s in our DNA.
         </h1>
         <p className="my-8 text-sm xs:text-base sm:my-16 sm:text-lg ml:text-xl lg:my-24 lg:text-2xl">
@@ -44,7 +44,7 @@ export default function Careers() {
         </div>
       </section>
       <section className="mx-auto flex flex-col items-center bg-pink-200 px-4 py-16 xs:px-9 md:py-28">
-        <h1 className="mb-12 text-3xl font-extrabold xs:text-4xl sm:mb-6 sm:text-5xl ml:text-6xl lg:text-7xl">
+        <h1 className="mb-12 text-3xl font-bold xs:text-4xl sm:mb-6 sm:text-5xl ml:text-6xl lg:text-7xl">
           Current Openings
         </h1>
         <CollapsibleMenu data={careersData} />
