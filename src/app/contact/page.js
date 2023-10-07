@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useForm } from '@formspree/react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -15,6 +16,7 @@ export default function Contact() {
   const [email, setEmail] = useState('');
   const [helpType, setHelpType] = useState('');
   const [message, setMessage] = useState('');
+  const [state, handleSubmit] = useForm('xjvqpzde'); // Formspree form ID
 
   const helpOptions = [
     'Issue with my order or delivery',
@@ -36,6 +38,7 @@ export default function Contact() {
           <Select
             labelId="help-select-label"
             id="help-select"
+            name="Help Type:"
             value={helpType}
             label="How can we help you?"
             onChange={(e) => setHelpType(e.target.value)}
@@ -53,7 +56,7 @@ export default function Contact() {
 
   return (
     <main>
-      <section className="mx-auto my-20 flex max-w-3xl flex-col px-4 xs:px-9 sm:my-28">
+      <section className="mx-auto my-20 max-w-3xl px-4 xs:px-9 sm:my-28">
         <h1 className="text-4xl font-extrabold xs:text-5xl md:text-6xl">
           Contact Us
         </h1>
@@ -61,40 +64,52 @@ export default function Contact() {
           Thanks for getting in touch. Please provide as much information as
           possible and we will get back to you within 2 business days.
         </p>
-        <div className="my-2 flex flex-col sm:flex-row">
-          <TextField
-            label="First Name"
-            className="w-full sm:w-1/2"
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          <div className="h-4 w-4 sm:w-4">
-            {/* Spacer between Name fields */}
+        <form onSubmit={handleSubmit} className="flex flex-col">
+          <div className="my-2 flex flex-col sm:flex-row">
+            <TextField
+              label="First Name"
+              name="First Name:"
+              value={firstName}
+              className="w-full sm:w-1/2"
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <div className="h-4 w-4 sm:w-4">
+              {/* Spacer between Name fields */}
+            </div>
+            <TextField
+              label="Last Name"
+              name="Last Name:"
+              value={lastName}
+              className="w-full sm:w-1/2"
+              onChange={(e) => setLastName(e.target.value)}
+            />
           </div>
           <TextField
-            label="Last Name"
-            className="w-full sm:w-1/2"
-            onChange={(e) => setLastName(e.target.value)}
+            label="Email"
+            name="Email:"
+            value={email}
+            sx={{ my: 1 }}
+            onChange={(e) => setEmail(e.target.value)}
           />
-        </div>
-        <TextField
-          label="Email"
-          sx={{ my: 1 }}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <HelpSelect />
-        <TextField
-          label="Message"
-          sx={{ mt: 1, mb: 2 }}
-          onChange={(e) => setMessage(e.target.value)}
-          multiline
-          rows={6}
-        />
-        <Button
-          variant="contained"
-          className="w-32 bg-blue-600 py-2 hover:bg-blue-500"
-        >
-          Submit
-        </Button>
+          <HelpSelect />
+          <TextField
+            label="Message"
+            name="Message:"
+            value={message}
+            sx={{ mt: 1, mb: 2 }}
+            onChange={(e) => setMessage(e.target.value)}
+            multiline
+            rows={6}
+          />
+          <Button
+            variant="contained"
+            type="submit"
+            disabled={state.submitting}
+            className="w-32 bg-blue-600 py-2 hover:bg-blue-500"
+          >
+            Submit
+          </Button>
+        </form>
       </section>
     </main>
   );
