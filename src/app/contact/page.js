@@ -54,6 +54,16 @@ export default function Contact() {
     );
   }
 
+  useEffect(() => {
+    if (state.succeeded) {
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setHelpType('');
+      setMessage('');
+    }
+  }, [state.succeeded]);
+
   return (
     <main>
       <section className="mx-auto my-20 max-w-3xl px-4 xs:px-9 sm:my-28">
