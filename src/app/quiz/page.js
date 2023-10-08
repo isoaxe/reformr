@@ -1,9 +1,21 @@
+import Image from 'next/image';
+import peaceSign from '/public/images/hand-peace-sign.png';
+
+/* This is just the first intro page of the quiz and doen't contain questions. */
 export default function Quiz() {
   return (
     <main className="min-h-screen">
-      <h1 className="p-4 text-2xl md:p-8 md:text-4xl">
-        This is the <span className="font-bold text-blue-600">Quiz</span> page
-      </h1>
+      <div className="mx-auto flex max-w-6xl flex-row">
+        <div className="relative aspect-square w-1/2 px-4 xs:px-9">
+          <Image
+            src={peaceSign}
+            alt="A hand making a peace sign with a yellow background."
+            fill
+            className="z-0 object-cover"
+            sizes="24rem"
+          />
+        </div>
+      </div>
     </main>
   );
 }
