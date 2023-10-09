@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import QuizButton from '@/components/quiz-button';
+import QuizButton from '@/components/quiz/button';
 import peaceSign from '/public/images/hand-peace-sign.png';
 
 /* This is just the first intro page of the quiz and doen't contain questions. */

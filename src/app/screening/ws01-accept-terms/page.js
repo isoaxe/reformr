@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import QuizButton from '@/components/quiz-button';
+import QuizButton from '@/components/quiz/button';
 
 /* Accept Reformr terms and conditions. */
 export default function AcceptTerms() {
