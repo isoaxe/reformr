@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import QuizButton from '@/components/quiz/button';
+import Button from '@/components/quiz/button';
 import peaceSign from '/public/images/hand-peace-sign.png';
 
 /* This is just the first intro page of the quiz and doen't contain questions. */
@@ -21,7 +21,7 @@ export default function Screening() {
           Answer a few simple questions to see if you&apos;re eligible for the
           <span className="font-semibold"> Metabolic Reset Program.</span>
         </p>
-        <QuizButton text="Start" link="/screening/ws01-accept-terms" />
+        <Button text="Start" link="/screening/ws01-accept-terms" />
       </div>
     </main>
   );

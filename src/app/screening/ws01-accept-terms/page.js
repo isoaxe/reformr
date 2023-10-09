@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import QuizButton from '@/components/quiz/button';
+import Button from '@/components/quiz/button';
 
 /* Accept Reformr terms and conditions. */
 export default function AcceptTerms() {
@@ -20,7 +20,7 @@ export default function AcceptTerms() {
         </Link>
         .
       </p>
-      <QuizButton text="Ok" link="/screening/ws02-first-name" />
+      <Button text="Ok" link="/screening/ws02-first-name" />
     </main>
   );
 }
