@@ -3,7 +3,7 @@ import QuizButton from '@/components/quiz/button';
 import peaceSign from '/public/images/hand-peace-sign.png';
 
 /* This is just the first intro page of the quiz and doen't contain questions. */
-export default function Quiz() {
+export default function Screening() {
   return (
     <main className="flex sm:flex-row">
       <div className="relative aspect-square sm:w-1/2">
