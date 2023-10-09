@@ -15,7 +15,7 @@ export default function Quiz() {
           sizes="24rem"
         />
       </div>
-      <div className="flex aspect-square flex-col justify-center px-4 text-xl sm:w-1/2 md:px-9 md:text-2xl xl:text-3xl">
+      <div className="flex aspect-square flex-col justify-center px-4 sm:w-1/2 md:px-9">
         <p>Kia Ora!</p>
         <p className="my-6">
           Answer a few simple questions to see if you&apos;re eligible for the
