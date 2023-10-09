@@ -21,7 +21,7 @@ export default function AcceptTerms() {
           </Link>
           .
         </p>
-        <QuizButton text="Ok" link="/ws02-first-name" />
+        <QuizButton text="Ok" link="/screening/ws02-first-name" />
       </section>
     </main>
   );

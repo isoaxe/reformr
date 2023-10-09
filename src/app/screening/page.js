@@ -22,7 +22,7 @@ export default function Quiz() {
             Answer a few simple questions to see if you&apos;re eligible for the
             <span className="font-semibold"> Metabolic Reset Program.</span>
           </p>
-          <QuizButton text="Start" link="/ws01-accept-terms" />
+          <QuizButton text="Start" link="/screening/ws01-accept-terms" />
         </div>
       </section>
     </main>
