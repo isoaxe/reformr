@@ -15,7 +15,7 @@ export default function Screening() {
           sizes="24rem"
         />
       </div>
-      <div className="flex aspect-square flex-col justify-center px-4 sm:w-1/2 md:px-9">
+      <div className="flex aspect-square flex-col justify-center sm:w-1/2 sm:px-9">
         <p>Kia Ora!</p>
         <p className="my-6">
           Answer a few simple questions to see if you&apos;re eligible for the
