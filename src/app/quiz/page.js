@@ -20,7 +20,7 @@ export default function Quiz() {
           <p>Kia Ora!</p>
           <p className="my-6">
             Answer a few simple questions to see if you&apos;re eligible for the
-            Metabolic Reset Program.
+            <span className="font-semibold"> Metabolic Reset Program.</span>
           </p>
           <Button variant="outlined" className="w-fit text-lg md:text-xl">
             Start
