@@ -33,7 +33,7 @@ export default function SalesPitch() {
             </span>{' '}
             compared with diet and exercise alone.
           </p>
-          <Button text="Start Consult" link="/quiz" haloShade="dark" />
+          <Button text="Start Consult" link="/screening" haloShade="dark" />
         </div>
         <div className="relative aspect-square w-full max-w-md rounded-full shadow-2xl lg:max-w-lg">
           <Image
@@ -58,7 +58,7 @@ export default function SalesPitch() {
             that are revolutionising how hundreds of thousands of people are
             losing weight.
           </p>
-          <Button text="Begin Assessment" link="/quiz" haloShade="dark" />
+          <Button text="Begin Assessment" link="/screening" haloShade="dark" />
         </div>
         <div className="relative aspect-square w-full max-w-md rounded-full shadow-2xl lg:max-w-lg">
           <Image
