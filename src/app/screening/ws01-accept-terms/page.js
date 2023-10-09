@@ -4,7 +4,7 @@ import Button from '@/components/quiz/button';
 /* Accept Reformr terms and conditions. */
 export default function AcceptTerms() {
   return (
-    <main>
+    <main className="max-w-4xl self-center">
       <p className="mb-6">
         By proceeding, you acknowledge you have read and agree with our{' '}
         <Link href="/tos" target="_blank" className="text-blue-700 underline">
