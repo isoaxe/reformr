@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { TextField } from '@mui/material';
 import Button from '@/components/quiz/button';
+import TextInput from '@/components/quiz/text-input';
 
-/* Collect user first name. */
+/* Collect first name of the user. */
 export default function FirstName() {
   const [firstName, setFirstName] = useState('');
 
@@ -14,13 +14,7 @@ export default function FirstName() {
         Let&apos;s start with your{' '}
         <span className="font-semibold">first name</span>.
       </p>
-      <TextField
-        variant="standard"
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-        sx={{ mb: 3 }}
-        InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
-      />
+      <TextInput text={firstName} setText={setFirstName} />
       <Button text="Ok" link="/screening/ws03-last-name" />
     </main>
   );
