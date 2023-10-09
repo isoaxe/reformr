@@ -1,6 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import { Button } from '@mui/material';
+import QuizButton from '@/components/quiz-button';
 import peaceSign from '/public/images/hand-peace-sign.png';
 
 /* This is just the first intro page of the quiz and doen't contain questions. */
@@ -23,11 +22,7 @@ export default function Quiz() {
             Answer a few simple questions to see if you&apos;re eligible for the
             <span className="font-semibold"> Metabolic Reset Program.</span>
           </p>
-          <Link href="/ws01-accept-terms">
-            <Button variant="outlined" className="w-fit text-lg md:text-xl">
-              Start
-            </Button>
-          </Link>
+          <QuizButton text="Start" link="/ws01-accept-terms" />
         </div>
       </section>
     </main>

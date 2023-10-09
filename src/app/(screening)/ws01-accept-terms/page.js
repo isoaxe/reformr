@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Button } from '@mui/material';
+import QuizButton from '@/components/quiz-button';
 
 /* Accept Reformr terms and conditions. */
 export default function AcceptTerms() {
@@ -21,9 +21,7 @@ export default function AcceptTerms() {
           </Link>
           .
         </p>
-        <Button variant="outlined" className="w-fit text-lg md:text-xl">
-          Ok
-        </Button>
+        <QuizButton text="Ok" link="/ws02-first-name" />
       </section>
     </main>
   );
