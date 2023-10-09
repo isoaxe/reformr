@@ -5,7 +5,7 @@ import peaceSign from '/public/images/hand-peace-sign.png';
 /* This is just the first intro page of the quiz and doen't contain questions. */
 export default function Quiz() {
   return (
-    <main className="mx-auto flex w-full max-w-md flex-col sm:max-w-6xl sm:flex-row">
+    <main className="flex sm:flex-row">
       <div className="relative aspect-square sm:w-1/2">
         <Image
           src={peaceSign}
