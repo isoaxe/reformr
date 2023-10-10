@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@/components/quiz/button';
 
 /* Collect the users sex as recorded at birth. */
-export default function Sex() {
+export default function SexAtBirth() {
   const [sex, setSex] = useState('');
 
   const FormLabel = ({ label }) => (
