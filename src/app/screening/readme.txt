@@ -11,11 +11,10 @@ Question 02 => ws02-first-name
 Question 03 => ws03-last-name
 Question 04 => ws04-email
 Question 05 => ws05-mobile-number
-Question 06 => ws06-age
-Question 07 => ws07-dob
-Question 08 => ws08-sex-at-birth
-Question 09 => ws09-height
-Question 10 => ws10-weight
+Question 06 => ws06-dob
+Question 07 => ws07-sex-at-birth
+Question 08 => ws08-height
+Question 09 => ws09-weight
 
 After this the patients BMI gets displayed which can lead down 3 different paths (pass / fail / needs review).
 
