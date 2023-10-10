@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Button from '@/components/quiz/button';
 import TextInput from '@/components/quiz/text-input';
 
-/* Collect last name of the user. */
+/* Collect users email address. */
 export default function Email() {
   const [email, setEmail] = useState('');
 
