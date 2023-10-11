@@ -5,14 +5,18 @@ import { Button as MuiButton } from '@mui/material';
 import { useCookies } from 'next-client-cookies';
 
 /* Material UI button used in the screening and medical quizzes. */
-export default function Button({ text, link, state }) {
+export default function Button({ text, link, state, quiz = 'screening' }) {
   const cookies = useCookies();
 
   const setCookie = () => {
-    if (!state) return; // exit early as no cookie to set
+    if (!state) return; // exit early as no state to add to cookie
 
+    let quizCookieAsString = cookies.get(quiz) ?? '{}'; // cookie is stored as string
+    const quizCookie = JSON.parse(quizCookieAsString); // cookie as JSON object
     const key = Object.keys(state)[0]; // get name of state, e.g. 'firstName'
-    cookies.set(key, state[key]);
+    quizCookie[key] = state[key]; // add state to cookie
+    quizCookieAsString = JSON.stringify(quizCookie); // convert back to string
+    cookies.set(quiz, quizCookieAsString); // cookie must be set as string
   };
 
   return (
