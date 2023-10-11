@@ -6,7 +6,7 @@ export function useCookieState(quiz, state, setState) {
 
   useEffect(() => {
     const quizCookieAsString = cookies.get(quiz);
-    if (!quizCookieAsString) return;
+    if (!quizCookieAsString) return; // exit early if no cookie
     const quizCookie = JSON.parse(quizCookieAsString);
     const existingState = quizCookie[state];
     if (existingState) setState(existingState);
