@@ -19,7 +19,7 @@ export default function Email() {
         &#40;spam sucks&#41;
       </p>
       <TextInput text={email} setText={setEmail} />
-      <Button text="Ok" link="/screening/ws05-phone-number" />
+      <Button text="Ok" link="/screening/ws05-phone-number" state={{ email }} />
     </main>
   );
 }

@@ -15,7 +15,11 @@ export default function FirstName() {
         <span className="font-semibold">first name</span>.
       </p>
       <TextInput text={firstName} setText={setFirstName} />
-      <Button text="Ok" link="/screening/ws03-last-name" />
+      <Button
+        text="Ok"
+        link="/screening/ws03-last-name"
+        state={{ firstName }}
+      />
     </main>
   );
 }
