@@ -18,7 +18,7 @@ export default function Weight() {
         kilograms (kg)?
       </p>
       <NumberInput number={weight} setNumber={setWeight} placeholder={'85'} />
-      <Button text="Ok" link="/screening" state={{ weight }} />
+      <Button text="Ok" link="/screening" state={{ weight }} quiz="screening" />
     </main>
   );
 }

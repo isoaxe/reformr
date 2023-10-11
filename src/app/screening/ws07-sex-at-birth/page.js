@@ -48,7 +48,12 @@ export default function SexAtBirth() {
           label={<FormLabel label="Intersex" />}
         />
       </RadioGroup>
-      <Button text="Ok" link="/screening/ws08-height" state={{ sex }} />
+      <Button
+        text="Ok"
+        link="/screening/ws08-height"
+        state={{ sex }}
+        quiz="screening"
+      />
     </main>
   );
 }

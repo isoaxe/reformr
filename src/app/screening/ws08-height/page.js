@@ -18,7 +18,12 @@ export default function Height() {
         centimetres (cm)?
       </p>
       <NumberInput number={height} setNumber={setHeight} placeholder={'165'} />
-      <Button text="Ok" link="/screening/ws09-weight" state={{ height }} />
+      <Button
+        text="Ok"
+        link="/screening/ws09-weight"
+        state={{ height }}
+        quiz="screening"
+      />
     </main>
   );
 }

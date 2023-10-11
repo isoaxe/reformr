@@ -30,7 +30,12 @@ export default function PhoneNumber() {
         onlyCountries={['NZ', 'AU']}
         InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
       />
-      <Button text="Ok" link="/screening/ws06-dob" state={{ phone }} />
+      <Button
+        text="Ok"
+        link="/screening/ws06-dob"
+        state={{ phone }}
+        quiz="screening"
+      />
     </main>
   );
 }

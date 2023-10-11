@@ -40,7 +40,12 @@ export default function DateOfBirth() {
           sx={{ mb: 3 }}
         />
       </LocalizationProvider>
-      <Button text="Ok" link="/screening/ws07-sex-at-birth" state={{ dob }} />
+      <Button
+        text="Ok"
+        link="/screening/ws07-sex-at-birth"
+        state={{ dob }}
+        quiz="screening"
+      />
     </main>
   );
 }

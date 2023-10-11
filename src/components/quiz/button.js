@@ -5,7 +5,7 @@ import { Button as MuiButton } from '@mui/material';
 import { useCookies } from 'next-client-cookies';
 
 /* Material UI button used in the screening and medical quizzes. */
-export default function Button({ text, link, state, quiz = 'screening' }) {
+export default function Button({ text, link, state, quiz = 'medical' }) {
   const cookies = useCookies();
 
   const setCookie = () => {

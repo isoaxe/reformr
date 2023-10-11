@@ -17,7 +17,12 @@ export default function LastName() {
         And your <span className="font-semibold">last name</span>?
       </p>
       <TextInput text={lastName} setText={setLastName} />
-      <Button text="Ok" link="/screening/ws04-email" state={{ lastName }} />
+      <Button
+        text="Ok"
+        link="/screening/ws04-email"
+        state={{ lastName }}
+        quiz="screening"
+      />
     </main>
   );
 }
