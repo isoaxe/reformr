@@ -3,10 +3,13 @@
 import { useState } from 'react';
 import Button from '@/components/quiz/button';
 import TextInput from '@/components/quiz/text-input';
+import { useCookieState } from '@/util/hooks';
 
 /* Collect users email address. */
 export default function Email() {
   const [email, setEmail] = useState('');
+
+  useCookieState('screening', 'email', setEmail);
 
   return (
     <main className="mx-auto flex max-w-4xl flex-col">
@@ -19,7 +22,12 @@ export default function Email() {
         &#40;spam sucks&#41;
       </p>
       <TextInput text={email} setText={setEmail} />
-      <Button text="Ok" link="/screening/ws05-phone-number" />
+      <Button
+        text="Ok"
+        link="/screening/ws05-phone-number"
+        state={{ email }}
+        quiz="screening"
+      />
     </main>
   );
 }
