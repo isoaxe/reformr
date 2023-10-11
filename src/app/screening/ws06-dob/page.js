@@ -1,14 +1,20 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import moment from 'moment';
 import Button from '@/components/quiz/button';
 
 /* Collect the users date of birth. */
 export default function DateOfBirth() {
-  const [dob, setDob] = useState(null);
+  const [birthday, setBirthday] = useState(null); // moment object
+  const [dob, setDob] = useState(''); // string to store in cookie
+
+  useEffect(() => {
+    setDob(moment(birthday).toISOString()?.slice(0, 10));
+  }, [birthday]);
 
   return (
     <main className="mx-auto flex max-w-4xl flex-col">
@@ -17,8 +23,8 @@ export default function DateOfBirth() {
       </p>
       <LocalizationProvider dateAdapter={AdapterMoment}>
         <DatePicker
-          value={dob}
-          onChange={(newValue) => setDob(newValue)}
+          value={birthday}
+          onChange={(newValue) => setBirthday(newValue)}
           format="DD/MM/YYYY"
           sx={{ mb: 3 }}
         />
