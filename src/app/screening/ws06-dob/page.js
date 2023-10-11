@@ -6,15 +6,26 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import moment from 'moment';
 import Button from '@/components/quiz/button';
+import { useCookieState } from '@/util/hooks';
 
 /* Collect the users date of birth. */
 export default function DateOfBirth() {
   const [birthday, setBirthday] = useState(null); // moment object
   const [dob, setDob] = useState(''); // string to store in cookie
 
+  useCookieState('screening', 'dob', setDob);
+
   useEffect(() => {
-    setDob(moment(birthday).format()?.slice(0, 10));
+    /* Check that user has finished inputting date. */
+    const dobToCheck = moment(birthday).format()?.slice(0, 10);
+    const firstTwoDigits = dobToCheck?.slice(0, 2);
+    /* Validate by checking if date is in the 20th or 21st centuries. */
+    if (firstTwoDigits === '19' || firstTwoDigits === '20') setDob(dobToCheck);
   }, [birthday]);
+
+  useEffect(() => {
+    if (dob) setBirthday(moment(dob, 'YYYY-MM-DD'));
+  }, [dob]);
 
   return (
     <main className="mx-auto flex max-w-4xl flex-col">
