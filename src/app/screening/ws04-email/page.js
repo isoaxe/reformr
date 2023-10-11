@@ -3,10 +3,13 @@
 import { useState } from 'react';
 import Button from '@/components/quiz/button';
 import TextInput from '@/components/quiz/text-input';
+import { useCookieState } from '@/util/hooks';
 
 /* Collect users email address. */
 export default function Email() {
   const [email, setEmail] = useState('');
+
+  useCookieState('screening', 'email', setEmail);
 
   return (
     <main className="mx-auto flex max-w-4xl flex-col">

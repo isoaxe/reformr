@@ -3,10 +3,13 @@
 import { useState } from 'react';
 import Button from '@/components/quiz/button';
 import TextInput from '@/components/quiz/text-input';
+import { useCookieState } from '@/util/hooks';
 
 /* Collect last name of the user. */
 export default function LastName() {
   const [lastName, setLastName] = useState('');
+
+  useCookieState('screening', 'lastName', setLastName);
 
   return (
     <main className="mx-auto flex flex-col">

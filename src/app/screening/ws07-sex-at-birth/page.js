@@ -6,10 +6,13 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
 import Button from '@/components/quiz/button';
+import { useCookieState } from '@/util/hooks';
 
 /* Collect the users sex as recorded at birth. */
 export default function SexAtBirth() {
   const [sex, setSex] = useState('');
+
+  useCookieState('screening', 'sex', setSex);
 
   const FormLabel = ({ label }) => (
     <Typography className="mt-1 text-lg md:text-xl xl:text-2xl">

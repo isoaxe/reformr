@@ -3,10 +3,13 @@
 import { useState } from 'react';
 import { MuiTelInput } from 'mui-tel-input';
 import Button from '@/components/quiz/button';
+import { useCookieState } from '@/util/hooks';
 
 /* Collect users mobile phone number. */
 export default function PhoneNumber() {
   const [phone, setPhone] = useState('');
+
+  useCookieState('screening', 'phone', setPhone);
 
   const handleChange = (newValue) => setPhone(newValue);
 
