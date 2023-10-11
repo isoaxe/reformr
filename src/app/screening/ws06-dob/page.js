@@ -13,7 +13,7 @@ export default function DateOfBirth() {
   const [dob, setDob] = useState(''); // string to store in cookie
 
   useEffect(() => {
-    setDob(moment(birthday).toISOString()?.slice(0, 10));
+    setDob(moment(birthday).format()?.slice(0, 10));
   }, [birthday]);
 
   return (
