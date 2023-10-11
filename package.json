@@ -18,6 +18,7 @@
     "moment": "^2.29.4",
     "mui-tel-input": "^4.0.0",
     "next": "latest",
+    "next-client-cookies": "^1.0.5",
     "react": "latest",
     "react-dom": "latest",
     "react-icons": "^4.11.0",
