@@ -1,15 +1,33 @@
 'use client';
 
 import { useState } from 'react';
+import { useCookies } from 'next-client-cookies';
+import { doc, setDoc } from 'firebase/firestore';
 import Button from '@/components/quiz/button';
 import NumberInput from '@/components/quiz/number-input';
 import { useCookieState } from '@/util/hooks';
+import { createDocumentId } from '@/util/helpers';
+import { db } from '@/util/firebase';
 
 /* Collect weight of the user in kg as an integer. */
 export default function Weight() {
   const [weight, setWeight] = useState('');
+  const cookies = useCookies();
 
   useCookieState('screening', 'weight', setWeight);
+
+  async function saveScreeningData() {
+    const screeningCookieAsString = cookies.get('screening');
+    const screeningCookie = JSON.parse(screeningCookieAsString);
+    const docId = createDocumentId(screeningCookie.lastName);
+    try {
+      await setDoc(doc(db, 'users', docId), {
+        screening: screeningCookie,
+      });
+    } catch (err) {
+      console.error('Error adding document: ', err);
+    }
+  }
 
   return (
     <main className="mx-auto flex flex-col">
@@ -18,7 +36,14 @@ export default function Weight() {
         kilograms (kg)?
       </p>
       <NumberInput number={weight} setNumber={setWeight} placeholder={'85'} />
-      <Button text="Ok" link="/screening" state={{ weight }} quiz="screening" />
+      <div onClick={saveScreeningData}>
+        <Button
+          text="Ok"
+          link="/screening"
+          state={{ weight }}
+          quiz="screening"
+        />
+      </div>
     </main>
   );
 }
