@@ -8,12 +8,14 @@ import { useCookieState } from '@/util/hooks';
 /* Collect users email address. */
 export default function Email() {
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
 
   useCookieState('screening', 'email', setEmail);
+  useCookieState('screening', 'firstName', setName);
 
   return (
     <main className="mx-auto flex max-w-4xl flex-col">
-      <p className="mb-8">Thanks!</p>
+      <p className="mb-8">Thanks, {name}.</p>
       <p className="mb-4">
         What <span className="font-semibold">email address</span> can we reach
         you at? This is only to get in touch, not to send spam.
