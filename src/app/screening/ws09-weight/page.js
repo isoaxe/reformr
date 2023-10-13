@@ -6,7 +6,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import Button from '@/components/quiz/button';
 import NumberInput from '@/components/quiz/number-input';
 import { useCookieState } from '@/util/hooks';
-import { createDocumentId } from '@/util/helpers';
+import { createDocId } from '@/util/helpers';
 import { db } from '@/util/firebase';
 
 /* Collect weight of the user in kg as an integer. */
@@ -19,7 +19,7 @@ export default function Weight() {
   async function saveScreeningData() {
     const screeningCookieAsString = cookies.get('screening');
     const screeningCookie = JSON.parse(screeningCookieAsString);
-    const docId = createDocumentId(screeningCookie.lastName);
+    const docId = createDocId(screeningCookie.lastName);
     try {
       await setDoc(doc(db, 'users', docId), {
         screening: screeningCookie,

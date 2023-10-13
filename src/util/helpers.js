@@ -3,7 +3,7 @@
  */
 
 /* Creates a unique document ID for Firestore. */
-export function createDocumentId(name) {
+export function createDocId(name) {
   const number = Math.floor(Math.random() * 1000000);
   return `${name}-${number}`;
 }
