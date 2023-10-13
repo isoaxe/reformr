@@ -34,6 +34,8 @@ export default function Weight() {
         });
         if (isEmailMatch)
           console.log(`Overwriting previous screening data for ${email}...`);
+      } else {
+        console.log(`Account already created for ${email}...`);
       }
     } catch (err) {
       console.error('Error adding document: ', err);
