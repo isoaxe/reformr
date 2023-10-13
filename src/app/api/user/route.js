@@ -7,13 +7,15 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const email = searchParams.get('email');
 
+  let isEmailMatch = false;
   let isAccountCreated = null;
   const users = collection(db, 'users');
   const q = query(users, where('screening.email', '==', email));
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
     /* Required to iterate, not allowed to simply access first element. */
+    isEmailMatch = true;
     isAccountCreated = doc.data().isAccountCreated;
   });
-  return NextResponse.json({ isAccountCreated });
+  return NextResponse.json({ isAccountCreated, isEmailMatch });
 }
