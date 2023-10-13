@@ -23,6 +23,7 @@ export default function Weight() {
     try {
       await setDoc(doc(db, 'users', docId), {
         screening: screeningCookie,
+        isAccountCreated: false,
       });
     } catch (err) {
       console.error('Error adding document: ', err);
