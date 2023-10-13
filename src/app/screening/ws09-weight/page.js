@@ -17,14 +17,20 @@ export default function Weight() {
   useCookieState('screening', 'weight', setWeight);
 
   async function saveScreeningData() {
-    const screeningCookieAsString = cookies.get('screening');
-    const screeningCookie = JSON.parse(screeningCookieAsString);
-    const docId = createDocId(screeningCookie.lastName);
+    const cookieAsString = cookies.get('screening');
+    const cookie = JSON.parse(cookieAsString);
+    const docId = createDocId(cookie.lastName);
     try {
-      await setDoc(doc(db, 'users', docId), {
-        screening: screeningCookie,
-        isAccountCreated: false,
-      });
+      const res = await fetch(`/api/user?email=${cookie.email}`);
+      const { isAccountCreated } = await res.json();
+      /* Overwrite user data only if no account has already been created. */
+      /* Fine to overwrite data saved to Firestore before account creation. */
+      if (!isAccountCreated) {
+        await setDoc(doc(db, 'users', docId), {
+          screening: cookie,
+          isAccountCreated: false,
+        });
+      }
     } catch (err) {
       console.error('Error adding document: ', err);
     }
