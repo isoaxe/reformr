@@ -23,14 +23,15 @@ export default function Weight() {
     let docId = createDocId(cookie.lastName);
     try {
       const res = await fetch(`/api/user?email=${email}`);
-      const { isAccountCreated, isEmailMatch, currentDocId } = await res.json();
+      const { dateAccountCreated, isEmailMatch, currentDocId } =
+        await res.json();
       if (isEmailMatch) docId = currentDocId;
       /* Overwrite user data only if no account has already been created. */
       /* Fine to overwrite data saved to Firestore before account creation. */
-      if (!isAccountCreated) {
+      if (!dateAccountCreated) {
         await setDoc(doc(db, 'users', docId), {
           screening: cookie,
-          isAccountCreated: false,
+          dateAccountCreated: null,
         });
         if (isEmailMatch)
           console.log(`Overwriting previous screening data for ${email}...`);

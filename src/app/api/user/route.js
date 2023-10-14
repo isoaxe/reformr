@@ -9,7 +9,7 @@ export async function GET(request) {
 
   let currentDocId = null;
   let isEmailMatch = false;
-  let isAccountCreated = null;
+  let dateAccountCreated = null;
   const users = collection(db, 'users');
   const q = query(users, where('screening.email', '==', email));
   const querySnapshot = await getDocs(q);
@@ -17,7 +17,7 @@ export async function GET(request) {
     /* Required to iterate, not allowed to simply access first element. */
     currentDocId = doc.id;
     isEmailMatch = true;
-    isAccountCreated = doc.data().isAccountCreated;
+    dateAccountCreated = doc.data().dateAccountCreated;
   });
-  return NextResponse.json({ isAccountCreated, isEmailMatch, currentDocId });
+  return NextResponse.json({ dateAccountCreated, isEmailMatch, currentDocId });
 }
