@@ -36,6 +36,7 @@ export default function Weight() {
           console.log(`Overwriting previous screening data for ${email}...`);
       } else {
         console.log(`Account already created for ${email}...`);
+        cookies.set('isAccountCreated', 'true');
       }
     } catch (err) {
       console.error('Error adding document: ', err);
