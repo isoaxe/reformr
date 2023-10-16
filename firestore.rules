@@ -1,0 +1,20 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function hasScreeningData() {
+      return request.resource.data.keys().hasAll(['screening', 'dateAccountCreated']);
+    }
+    match /users/{userId} {
+      allow read: if false;
+      allow create: if hasScreeningData();
+      allow update: if resource.data.dateAccountCreated == null && hasScreeningData(); // allow auth users in future
+    }
+    match /emails/{userEmail} {
+      allow get;
+      allow list: if false; // don't allow fetching of all emails
+      allow create;
+      allow update: if false; // allow auth users in future
+    }
+  }
+}

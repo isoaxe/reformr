@@ -21,7 +21,7 @@ export default function Email() {
         you at? This is only to get in touch, not to send spam.
       </p>
       <p className="mb-8 text-lg text-slate-600 md:text-xl xl:text-2xl">
-        &#40;spam sucks&#41;
+        (spam sucks)
       </p>
       <TextInput text={email} setText={setEmail} />
       <Button

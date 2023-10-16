@@ -9,8 +9,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
+import Toast from '@/components/toast';
 
 export default function Contact() {
   const [firstName, setFirstName] = useState('');
@@ -20,9 +19,6 @@ export default function Contact() {
   const [message, setMessage] = useState('');
   const [state, handleSubmit] = useForm('xjvqpzde'); // Formspree form ID
   const [showSuccess, setShowSuccess] = useState(false); // Snackbar toast message
-
-  const vertical = 'bottom';
-  const horizontal = 'center';
 
   const helpOptions = [
     'Issue with my order or delivery',
@@ -127,16 +123,12 @@ export default function Contact() {
             Submit
           </Button>
         </form>
-        <Snackbar
+        <Toast
+          message="Message sent!"
+          severity="success"
           open={showSuccess}
-          autoHideDuration={3000}
-          onClose={() => setShowSuccess(false)}
-          anchorOrigin={{ vertical, horizontal }}
-        >
-          <Alert severity="success" variant="filled">
-            Message sent!
-          </Alert>
-        </Snackbar>
+          setOpen={setShowSuccess}
+        />
       </section>
     </main>
   );
