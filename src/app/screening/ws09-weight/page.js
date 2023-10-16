@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useCookies } from 'next-client-cookies';
-import { doc, setDoc } from 'firebase/firestore';
+import { collection, query, where } from 'firebase/firestore';
+import { doc, getDocs, setDoc } from 'firebase/firestore';
 import Button from '@/components/quiz/button';
 import NumberInput from '@/components/quiz/number-input';
 import { useCookieState } from '@/util/hooks';
@@ -16,25 +17,54 @@ export default function Weight() {
 
   useCookieState('screening', 'weight', setWeight);
 
+  /* Checks if email exists in Firestore. If not, then save it. */
+  async function checkEmailExists(docId, email) {
+    const users = collection(db, 'emails');
+    const q = query(users, where('email', '==', email));
+    const querySnapshot = await getDocs(q);
+    let result;
+    querySnapshot.forEach((doc) => {
+      /* Required to iterate, not allowed to simply access first element. */
+      /* Returns just one document at most since emails are unique. */
+      result = {
+        currentDocId: doc.id,
+        isScreeningSaved: true,
+        isAccountCreated: doc.data().isAccountCreated,
+      };
+    });
+    if (result === undefined) {
+      await setDoc(doc(db, 'emails', docId), {
+        email,
+        isAccountCreated: false,
+      });
+      result = {
+        currentDocId: docId,
+        isScreeningSaved: false,
+        isAccountCreated: false,
+      };
+    }
+    return result;
+  }
+
   async function saveScreeningData() {
     const cookieAsString = cookies.get('screening');
     const cookie = JSON.parse(cookieAsString);
     const { email } = cookie;
     let docId = createDocId(cookie.lastName);
     try {
-      const res = await fetch(`/api/user?email=${email}`);
-      const { dateAccountCreated, isEmailMatch, currentDocId } =
-        await res.json();
-      if (isEmailMatch) docId = currentDocId;
+      const { currentDocId, isScreeningSaved, isAccountCreated } =
+        await checkEmailExists(docId, email);
+      docId = currentDocId; // updates docId to existing one from database
       /* Overwrite user data only if no account has already been created. */
       /* Fine to overwrite data saved to Firestore before account creation. */
-      if (!dateAccountCreated) {
+      if (!isAccountCreated) {
         await setDoc(doc(db, 'users', docId), {
           screening: cookie,
           dateAccountCreated: null,
         });
-        if (isEmailMatch)
+        if (isScreeningSaved)
           console.log(`Overwriting previous screening data for ${email}...`);
+        else console.log(`Saving new screening data for ${email}...`);
       } else {
         console.log(`Account already created for ${email}...`);
         cookies.set('isAccountCreated', 'true', { sameSite: 'strict' });
