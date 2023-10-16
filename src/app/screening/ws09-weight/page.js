@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import { useCookies } from 'next-client-cookies';
-import { collection, query, where } from 'firebase/firestore';
-import { doc, getDocs, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import Button from '@/components/quiz/button';
 import NumberInput from '@/components/quiz/number-input';
 import { useCookieState } from '@/util/hooks';
@@ -19,31 +18,22 @@ export default function Weight() {
 
   /* Checks if email exists in Firestore. If not, then save it. */
   async function checkEmailExists(docId, email) {
-    const users = collection(db, 'emails');
-    const q = query(users, where('email', '==', email));
-    const querySnapshot = await getDocs(q);
-    let result;
-    querySnapshot.forEach((doc) => {
-      /* Required to iterate, not allowed to simply access first element. */
-      /* Returns just one document at most since emails are unique. */
-      result = {
-        currentDocId: doc.id,
-        isScreeningSaved: true,
-        isAccountCreated: doc.data().isAccountCreated,
-      };
-    });
-    if (result === undefined) {
-      await setDoc(doc(db, 'emails', docId), {
+    const emailsRef = doc(db, 'emails', email);
+    const emailSnap = await getDoc(emailsRef);
+    if (emailSnap.exists()) {
+      const emailsData = emailSnap.data();
+      emailsData.isScreeningSaved = true;
+      return emailsData;
+    } else {
+      const emailsData = {
         email,
         isAccountCreated: false,
-      });
-      result = {
-        currentDocId: docId,
-        isScreeningSaved: false,
-        isAccountCreated: false,
+        userDocId: docId,
       };
+      await setDoc(doc(db, 'emails', email), emailsData);
+      emailsData.isScreeningSaved = false;
+      return emailsData;
     }
-    return result;
   }
 
   async function saveScreeningData() {
@@ -53,9 +43,9 @@ export default function Weight() {
     const { email } = cookie;
     let docId = createDocId(cookie.lastName);
     try {
-      const { currentDocId, isScreeningSaved, isAccountCreated } =
+      const { userDocId, isScreeningSaved, isAccountCreated } =
         await checkEmailExists(docId, email);
-      docId = currentDocId; // updates docId to existing one from database
+      docId = userDocId; // updates docId to existing one from database
       /* Overwrite user data only if no account has already been created. */
       /* Fine to overwrite data saved to Firestore before account creation. */
       if (!isAccountCreated) {
