@@ -49,6 +49,7 @@ export default function Weight() {
   async function saveScreeningData() {
     const cookieAsString = cookies.get('screening');
     const cookie = JSON.parse(cookieAsString);
+    cookie.dateCreated = new Date();
     const { email } = cookie;
     let docId = createDocId(cookie.lastName);
     try {
