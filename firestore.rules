@@ -4,13 +4,14 @@ service cloud.firestore {
   match /databases/{database}/documents {
     match /users/{userId} {
       allow read: if false;
-      allow write: if true; // too permissive
+      allow create: if request.resource.data.keys().hasAll(['screening', 'dateAccountCreated']);
+      allow update: if resource.data.dateAccountCreated == null; // allow auth users in future
     }
     match /emails/{userEmail} {
       allow get;
-      allow list: if false; // don't want someone to fetch all emails
+      allow list: if false; // don't allow fetching of all emails
       allow create;
-      allow update: if false; // will allow for auth users in due course
+      allow update: if false; // allow auth users in future
     }
   }
 }
