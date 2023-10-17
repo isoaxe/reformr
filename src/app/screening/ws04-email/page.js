@@ -28,6 +28,7 @@ export default function Email() {
         text="Ok"
         link="/screening/ws05-phone-number"
         state={{ email }}
+        isDisabled={!/\S+@\S+\.\S+/.test(email)}
         quiz="screening"
       />
     </main>
