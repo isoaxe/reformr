@@ -24,7 +24,12 @@ export default function Height() {
         What is your <span className="font-semibold">height</span> in
         centimetres (cm)?
       </p>
-      <NumberInput number={height} setNumber={setHeight} placeholder={'165'} />
+      <NumberInput
+        number={height}
+        setNumber={setHeight}
+        isError={isDisabled}
+        placeholder={'165'}
+      />
       <Button
         text="Ok"
         link="/screening/ws09-weight"

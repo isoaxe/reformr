@@ -78,7 +78,12 @@ export default function Weight() {
         What is your <span className="font-semibold">current weight</span> in
         kilograms (kg)?
       </p>
-      <NumberInput number={weight} setNumber={setWeight} placeholder={'85'} />
+      <NumberInput
+        number={weight}
+        setNumber={setWeight}
+        isError={isDisabled}
+        placeholder={'85'}
+      />
       <div onClick={saveScreeningData}>
         <Button
           text="Ok"
