@@ -9,7 +9,7 @@ import MobileNavbar from './navbar-mobile';
 import NavLinks from './nav-links';
 import logo from 'public/images/text-logo-plain.png';
 
-export default function Navbar() {
+export default function FullNavbar() {
   const [isOpen, setOpen] = useState(false);
 
   const pathname = usePathname();
