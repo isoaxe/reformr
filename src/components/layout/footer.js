@@ -35,25 +35,25 @@ export default function Footer() {
         <section className="flex flex-col justify-between xs:flex-row md:ml-8 md:justify-start">
           <div className="mr-8 flex flex-col md:mr-12 lg:mr-28">
             <h4 className="font-semibold">Support</h4>
-            <Link href="/contact" className={linkStyle}>
+            <Link href="/main/contact" className={linkStyle}>
               Contact Us
             </Link>
-            <Link href="/contact" className={linkStyle}>
+            <Link href="/main/contact" className={linkStyle}>
               Customer Support
             </Link>
-            <a href="/#faq" className={linkStyle}>
+            <a href="/main/home#faq" className={linkStyle}>
               FAQs
             </a>
           </div>
           <div className="mt-8 flex flex-col xs:mt-0">
             <h4 className="font-semibold">Resources</h4>
-            <Link href="/blog" className={linkStyle}>
+            <Link href="/main/blog" className={linkStyle}>
               Knowledge Hub
             </Link>
-            <Link href="/privacy-policy" className={linkStyle}>
+            <Link href="/main/privacy-policy" className={linkStyle}>
               Privacy Policy
             </Link>
-            <Link href="/tos" className={linkStyle}>
+            <Link href="/main/tos" className={linkStyle}>
               Terms of Service
             </Link>
           </div>

@@ -1,3 +1,0 @@
-There are two types of directories in the app directory - ones for a single page and ones for (route-groups) which themselves contain single pages.
-
-This home directory is the only exception to that rule. It contains page fragments of the homepage from which it is assembled, but not the page itself. This is because the homepage is the only page located at root in the app directory and so fragments can't be colocated without creating a mess.
