@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '@/components/quiz/button';
 import NumberInput from '@/components/quiz/number-input';
 import { useCookieState } from '@/util/hooks';
@@ -8,8 +8,15 @@ import { useCookieState } from '@/util/hooks';
 /* Collect height of the user in cm as an integer. */
 export default function Height() {
   const [height, setHeight] = useState('');
+  const [isDisabled, setDisabled] = useState(true);
 
   useCookieState('screening', 'height', setHeight);
+
+  useEffect(() => {
+    const heightInt = parseInt(height); // was a string, convert to int
+    if (heightInt < 100 || heightInt > 300) setDisabled(true);
+    else setDisabled(false);
+  }, [height]);
 
   return (
     <main className="mx-auto flex flex-col">
@@ -22,6 +29,7 @@ export default function Height() {
         text="Ok"
         link="/screening/ws09-weight"
         state={{ height }}
+        isDisabled={isDisabled} // enabled if height is 1-3m
         quiz="screening"
       />
     </main>

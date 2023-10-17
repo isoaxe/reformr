@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCookies } from 'next-client-cookies';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import Button from '@/components/quiz/button';
@@ -12,6 +12,7 @@ import { db } from '@/util/firebase';
 /* Collect weight of the user in kg as an integer. */
 export default function Weight() {
   const [weight, setWeight] = useState('');
+  const [isDisabled, setDisabled] = useState(true);
   const cookies = useCookies();
 
   useCookieState('screening', 'weight', setWeight);
@@ -65,6 +66,12 @@ export default function Weight() {
     }
   }
 
+  useEffect(() => {
+    const weightInt = parseInt(weight); // was a string, convert to int
+    if (weightInt < 50 || weightInt > 500) setDisabled(true);
+    else setDisabled(false);
+  }, [weight]);
+
   return (
     <main className="mx-auto flex flex-col">
       <p className="mb-6">
@@ -77,6 +84,7 @@ export default function Weight() {
           text="Ok"
           link="/screening"
           state={{ weight }}
+          isDisabled={isDisabled} // enabled if weight is 50-500kg
           quiz="screening"
         />
       </div>
