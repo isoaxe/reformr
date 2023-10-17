@@ -29,17 +29,16 @@ export default function FullNavbar() {
         }`}
       >
         <div className="max-w-400 m-auto flex h-full w-full flex-row items-center justify-between">
-          <Link href="/main/home">
-            <div
-              className={pathname === '/main/home' ? active : dormant}
-              onClick={close}
-            >
-              <Image
-                src={logo}
-                alt="Plain monotone version of Reformr text logo."
-                sizes="(max-width: 767px) 8rem, 11rem"
-              />
-            </div>
+          <Link
+            href="/main/home"
+            className={pathname === '/main/home' ? active : dormant}
+            onClick={close}
+          >
+            <Image
+              src={logo}
+              alt="Plain monotone version of Reformr text logo."
+              sizes="(max-width: 767px) 8rem, 11rem"
+            />
           </Link>
           <div className="hidden h-full w-full md:flex">
             <NavLinks setOpen={setOpen} />
