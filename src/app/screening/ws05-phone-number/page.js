@@ -1,17 +1,23 @@
 'use client';
 
-import { useState } from 'react';
-import { MuiTelInput } from 'mui-tel-input';
+import { useState, useEffect } from 'react';
+import { MuiTelInput, matchIsValidTel } from 'mui-tel-input';
 import Button from '@/components/quiz/button';
 import { useCookieState } from '@/util/hooks';
 
 /* Collect users mobile phone number. */
 export default function PhoneNumber() {
   const [phone, setPhone] = useState('');
+  const [isDisabled, setDisabled] = useState(true);
 
   useCookieState('screening', 'phone', setPhone);
 
   const handleChange = (newValue) => setPhone(newValue);
+
+  useEffect(() => {
+    if (matchIsValidTel(phone)) setDisabled(false);
+    else setDisabled(true);
+  }, [phone]);
 
   return (
     <main className="mx-auto flex flex-col">
@@ -29,11 +35,13 @@ export default function PhoneNumber() {
         forceCallingCode
         onlyCountries={['NZ', 'AU']}
         InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
+        error={isDisabled && phone.length > 3}
       />
       <Button
         text="Ok"
         link="/screening/ws06-dob"
         state={{ phone }}
+        isDisabled={isDisabled}
         quiz="screening"
       />
     </main>
