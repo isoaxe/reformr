@@ -52,6 +52,7 @@ export default function SexAtBirth() {
         text="Ok"
         link="/screening/ws08-height"
         state={{ sex }}
+        isDisabled={!sex}
         quiz="screening"
       />
     </main>

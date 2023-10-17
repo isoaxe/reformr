@@ -12,6 +12,8 @@ import { useCookieState } from '@/util/hooks';
 export default function DateOfBirth() {
   const [birthday, setBirthday] = useState(null); // moment object
   const [dob, setDob] = useState(''); // string to store in cookie
+  const [isDisabled, setDisabled] = useState(true);
+  const [error, setError] = useState('');
 
   useCookieState('screening', 'dob', setDob);
 
@@ -20,12 +22,20 @@ export default function DateOfBirth() {
     const dobToCheck = moment(birthday).format()?.slice(0, 10);
     const firstTwoDigits = dobToCheck?.slice(0, 2);
     /* Validate by checking if date is in the 20th or 21st centuries. */
-    if (firstTwoDigits === '19' || firstTwoDigits === '20') setDob(dobToCheck);
+    if (firstTwoDigits === '19' || firstTwoDigits === '20') {
+      setDob(dobToCheck); // valid DoB
+      setDisabled(false);
+    }
   }, [birthday]);
 
   useEffect(() => {
+    /* Set birthday state using DoB retrieved from cookie. */
     if (dob) setBirthday(moment(dob, 'YYYY-MM-DD'));
   }, [dob]);
+
+  useEffect(() => {
+    if (error === 'invalidDate') setDisabled(true);
+  }, [error]);
 
   return (
     <main className="mx-auto flex max-w-4xl flex-col">
@@ -36,6 +46,7 @@ export default function DateOfBirth() {
         <DatePicker
           value={birthday}
           onChange={(newValue) => setBirthday(newValue)}
+          onError={(err) => setError(err)}
           format="DD/MM/YYYY"
           sx={{ mb: 3 }}
         />
@@ -44,6 +55,7 @@ export default function DateOfBirth() {
         text="Ok"
         link="/screening/ws07-sex-at-birth"
         state={{ dob }}
+        isDisabled={isDisabled}
         quiz="screening"
       />
     </main>

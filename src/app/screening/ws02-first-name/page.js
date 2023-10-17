@@ -22,6 +22,7 @@ export default function FirstName() {
         text="Ok"
         link="/screening/ws03-last-name"
         state={{ firstName }}
+        isDisabled={!firstName}
         quiz="screening"
       />
     </main>
