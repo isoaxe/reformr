@@ -6,11 +6,11 @@ import { useCookies } from 'next-client-cookies';
 
 /* Material UI button used in the screening and medical quizzes. */
 export default function Button(props) {
-  const { text, link, state, disabled = true, quiz = 'medical' } = props;
+  const { text, link, state, isDisabled, quiz = 'medical' } = props;
   const cookies = useCookies();
 
   function setCookie() {
-    if (!state || disabled) return; // exit early as no state to add to cookie
+    if (!state || isDisabled) return; // exit early as no state to add to cookie
 
     const options = { expires: 7, sameSite: 'strict' }; // expires in one week
     let quizCookieAsString = cookies.get(quiz) ?? '{}'; // cookie is stored as string
@@ -24,14 +24,14 @@ export default function Button(props) {
   return (
     <Link
       href={link}
-      className={`w-fit ${disabled ? 'pointer-events-none' : ''}`}
+      className={`w-fit ${isDisabled ? 'pointer-events-none' : ''}`}
       disabled
     >
       <MuiButton
         variant="outlined"
         className="text-lg md:text-xl"
         onClick={setCookie}
-        disabled={disabled}
+        disabled={isDisabled}
       >
         {text}
       </MuiButton>
