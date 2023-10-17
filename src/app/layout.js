@@ -1,6 +1,4 @@
 import { cookies } from 'next/headers';
-import Navbar from '@/components/layout/navbar';
-import Footer from '@/components/layout/footer';
 import { ClientCookiesProvider } from './providers';
 import { sohne } from '@/util/fonts';
 import './globals.css';
@@ -14,11 +12,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${sohne.className} mt-12 md:mt-16`}>
-        <Navbar />
         <ClientCookiesProvider value={cookies().getAll()}>
           {children}
         </ClientCookiesProvider>
-        <Footer />
       </body>
     </html>
   );
