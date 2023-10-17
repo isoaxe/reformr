@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
-import Navbar from '@/components/navbar';
-import Footer from '@/components/footer';
+import Navbar from '@/components/layout/navbar';
+import Footer from '@/components/layout/footer';
 import { ClientCookiesProvider } from './providers';
 import { sohne } from '@/util/fonts';
 import './globals.css';
