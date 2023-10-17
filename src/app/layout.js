@@ -11,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${sohne.className} mt-12 md:mt-16`}>
+      <body className={sohne.className}>
         <ClientCookiesProvider value={cookies().getAll()}>
           {children}
         </ClientCookiesProvider>

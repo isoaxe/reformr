@@ -3,7 +3,7 @@ import Footer from '@/components/layout/footer';
 
 export default function MainLayout({ children }) {
   return (
-    <div>
+    <div className="mt-12 md:mt-16">
       <FullNavbar />
       {children}
       <Footer />
