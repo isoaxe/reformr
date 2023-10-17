@@ -16,7 +16,7 @@ export default function FullNavbar() {
 
   const close = () => setOpen(false);
 
-  // Logo styles.
+  // Link styles.
   const constant = ' mr-10 lg:mr-20 w-32 md:w-44';
   const active = 'border-b border-cyan-200 pb-1' + constant;
   const dormant = 'hover:opacity-60' + constant;
@@ -29,9 +29,9 @@ export default function FullNavbar() {
         }`}
       >
         <div className="max-w-400 m-auto flex h-full w-full flex-row items-center justify-between">
-          <Link href="/">
+          <Link href="/main/home">
             <div
-              className={pathname === '/' ? active : dormant}
+              className={pathname === '/main/home' ? active : dormant}
               onClick={close}
             >
               <Image
