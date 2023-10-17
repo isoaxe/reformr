@@ -21,6 +21,7 @@ export default function LastName() {
         text="Ok"
         link="/screening/ws04-email"
         state={{ lastName }}
+        disabled={!lastName}
         quiz="screening"
       />
     </main>
