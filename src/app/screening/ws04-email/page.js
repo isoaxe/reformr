@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '@/components/quiz/button';
 import TextInput from '@/components/quiz/text-input';
 import { useCookieState } from '@/util/hooks';
@@ -9,9 +9,15 @@ import { useCookieState } from '@/util/hooks';
 export default function Email() {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [isDisabled, setDisabled] = useState(true);
 
   useCookieState('screening', 'email', setEmail);
   useCookieState('screening', 'firstName', setName);
+
+  useEffect(() => {
+    if (!/\S+@\S+\.\S+/.test(email)) setDisabled(true);
+    else setDisabled(false);
+  }, [email]);
 
   return (
     <main className="mx-auto flex max-w-4xl flex-col">
@@ -23,12 +29,12 @@ export default function Email() {
       <p className="mb-8 text-lg text-slate-600 md:text-xl xl:text-2xl">
         (spam sucks)
       </p>
-      <TextInput text={email} setText={setEmail} />
+      <TextInput text={email} setText={setEmail} isError={isDisabled} />
       <Button
         text="Ok"
         link="/screening/ws05-phone-number"
         state={{ email }}
-        isDisabled={!/\S+@\S+\.\S+/.test(email)}
+        isDisabled={isDisabled}
         quiz="screening"
       />
     </main>
