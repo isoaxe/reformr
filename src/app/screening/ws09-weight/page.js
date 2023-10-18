@@ -62,7 +62,6 @@ export default function Weight() {
         else console.log(`Saving new screening data for ${email}...`);
       } else {
         console.log(`Account already created for ${email}...`);
-        cookies.set('isAccountCreated', 'true', { sameSite: 'strict' });
       }
     } catch (err) {
       console.error('Error saving screening data: ', err);
