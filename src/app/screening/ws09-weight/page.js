@@ -12,6 +12,7 @@ import { db } from '@/util/firebase';
 /* Collect weight of the user in kg as an integer. */
 export default function Weight() {
   const [weight, setWeight] = useState('');
+  const [nextPage, setNextPage] = useState('/');
   const [isDisabled, setDisabled] = useState(true);
   const [cookie, setCookie] = useState({});
   const cookies = useCookies();
@@ -84,6 +85,9 @@ export default function Weight() {
     const heightInMetres = height / 100;
     const bmi = parseFloat((weight / heightInMetres ** 2).toFixed(2));
     cookie.bmi = bmi; // save BMI to cookie for next page
+    if (bmi < 27) setNextPage('/screening/bmi-low');
+    else if (bmi > 30) setNextPage('/screening/bmi-high');
+    else setNextPage('/screening/bmi-mid');
   }, [cookie, weight]);
 
   return (
@@ -101,7 +105,7 @@ export default function Weight() {
       <div onClick={saveScreeningData}>
         <Button
           text="Ok"
-          link="/screening"
+          link={nextPage}
           state={{ weight }}
           isDisabled={isDisabled} // enabled if weight is 50-500kg
           quiz="screening"
