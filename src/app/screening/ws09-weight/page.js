@@ -15,6 +15,7 @@ export default function Weight() {
   const [nextPage, setNextPage] = useState('/');
   const [isDisabled, setDisabled] = useState(true);
   const [cookie, setCookie] = useState({});
+  const [bmi, setBmi] = useState(null);
   const cookies = useCookies();
 
   useCookieState('screening', 'weight', setWeight);
@@ -49,8 +50,11 @@ export default function Weight() {
       /* Overwrite user data only if no account has already been created. */
       /* Fine to overwrite data saved to Firestore before account creation. */
       if (!isAccountCreated) {
+        /* Save BMI to Firestore but also as a separate cookie. */
+        cookies.set('bmi', bmi, { sameSite: 'strict' });
+        const updatedCookie = { ...cookie, bmi };
         await setDoc(doc(db, 'users', docId), {
-          screening: cookie,
+          screening: updatedCookie,
           dateAccountCreated: null,
         });
         if (isScreeningSaved)
@@ -83,10 +87,10 @@ export default function Weight() {
     /* Calculate BMI and select path based on this. */
     const { height } = cookie;
     const heightInMetres = height / 100;
-    const bmi = parseFloat((weight / heightInMetres ** 2).toFixed(2));
-    cookie.bmi = bmi; // save BMI to cookie for next page
-    if (bmi < 27) setNextPage('/screening/bmi-low');
-    else if (bmi > 30) setNextPage('/screening/bmi-high');
+    const updatedBmi = parseFloat((weight / heightInMetres ** 2).toFixed(2));
+    setBmi(updatedBmi);
+    if (updatedBmi < 27) setNextPage('/screening/bmi-low');
+    else if (updatedBmi > 30) setNextPage('/screening/bmi-high');
     else setNextPage('/screening/bmi-mid');
   }, [cookie, weight]);
 
