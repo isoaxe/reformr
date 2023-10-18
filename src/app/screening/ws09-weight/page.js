@@ -13,6 +13,7 @@ import { db } from '@/util/firebase';
 export default function Weight() {
   const [weight, setWeight] = useState('');
   const [isDisabled, setDisabled] = useState(true);
+  const [cookie, setCookie] = useState({});
   const cookies = useCookies();
 
   useCookieState('screening', 'weight', setWeight);
@@ -38,12 +39,9 @@ export default function Weight() {
   }
 
   async function saveScreeningData() {
-    const cookieAsString = cookies.get('screening');
-    const cookie = JSON.parse(cookieAsString);
-    cookie.dateCreated = new Date();
-    const { email } = cookie;
-    let docId = createDocId(cookie.lastName);
     try {
+      const { lastName, email } = cookie;
+      let docId = createDocId(lastName);
       const { userDocId, isScreeningSaved, isAccountCreated } =
         await checkEmailExists(docId, email);
       docId = userDocId; // updates docId to existing one from database
@@ -62,7 +60,7 @@ export default function Weight() {
         cookies.set('isAccountCreated', 'true', { sameSite: 'strict' });
       }
     } catch (err) {
-      console.error('Error adding document: ', err);
+      console.error('Error saving screening data: ', err);
     }
   }
 
@@ -71,6 +69,22 @@ export default function Weight() {
     if (weightInt < 50 || weightInt > 500) setDisabled(true);
     else setDisabled(false);
   }, [weight]);
+
+  useEffect(() => {
+    /* Save existing cookie to state. */
+    const cookieAsString = cookies.get('screening');
+    const cookieAsJson = JSON.parse(cookieAsString);
+    cookieAsJson.dateCreated = new Date();
+    setCookie(cookieAsJson);
+  }, [cookies]);
+
+  useEffect(() => {
+    /* Calculate BMI and select path based on this. */
+    const { height } = cookie;
+    const heightInMetres = height / 100;
+    const bmi = parseFloat((weight / heightInMetres ** 2).toFixed(2));
+    cookie.bmi = bmi; // save BMI to cookie for next page
+  }, [cookie, weight]);
 
   return (
     <main className="mx-auto flex flex-col">
