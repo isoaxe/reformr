@@ -1,18 +1,20 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { Button as CheckEmailButton } from '@mui/material';
 import Button from '@/components/quiz/button';
 import TextInput from '@/components/quiz/text-input';
 import Toast from '@/components/toast';
 import { useCookieState } from '@/util/hooks';
+import { createDocId } from '@/util/helpers';
 import { db } from '@/util/firebase';
 
 /* Collect users email address. */
 export default function Email() {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [isEmailChecked, setEmailChecked] = useState(false);
   const [isDisabled, setDisabled] = useState(true);
   const [showFailureToast, setShowFailureToast] = useState(false);
@@ -20,6 +22,7 @@ export default function Email() {
 
   useCookieState('screening', 'email', setEmail);
   useCookieState('screening', 'firstName', setFirstName);
+  useCookieState('screening', 'lastName', setLastName);
 
   useEffect(() => {
     if (!/\S+@\S+\.\S+/.test(email)) setDisabled(true);
@@ -27,7 +30,7 @@ export default function Email() {
     setEmailChecked(false);
   }, [email]);
 
-  /* Save cookie to warn user on next screen if account with that email already exists. */
+  /* Show toast to confirm if email is ok based in whether account exists already. */
   async function checkAccountCreated() {
     const emailsRef = doc(db, 'emails', email);
     const emailSnap = await getDoc(emailsRef);
@@ -38,6 +41,17 @@ export default function Email() {
     else {
       setShowSuccessToast(true);
       setEmailChecked(true);
+    }
+    /* Save email to Firestore if not present. */
+    if (!isAccountCreated && !emailSnap.exists()) {
+      let docId = createDocId(lastName);
+      const emailsData = {
+        email,
+        isAccountCreated: false,
+        docId,
+        firstName,
+      };
+      await setDoc(doc(db, 'emails', email), emailsData);
     }
   }
 
