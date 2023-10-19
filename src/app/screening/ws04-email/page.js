@@ -16,7 +16,7 @@ export default function Email() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [isEmailChecked, setEmailChecked] = useState(false);
-  const [isDisabled, setDisabled] = useState(true);
+  const [isInvalid, setInvalid] = useState(true);
   const [showFailureToast, setShowFailureToast] = useState(false);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
 
@@ -25,8 +25,8 @@ export default function Email() {
   useCookieState('screening', 'lastName', setLastName);
 
   useEffect(() => {
-    if (!/\S+@\S+\.\S+/.test(email)) setDisabled(true);
-    else setDisabled(false);
+    if (!/\S+@\S+\.\S+/.test(email)) setInvalid(true);
+    else setInvalid(false);
     setEmailChecked(false);
   }, [email]);
 
@@ -65,14 +65,14 @@ export default function Email() {
       <p className="mb-8 text-lg text-slate-600 md:text-xl xl:text-2xl">
         (spam sucks)
       </p>
-      <TextInput text={email} setText={setEmail} isError={isDisabled} />
+      <TextInput text={email} setText={setEmail} isError={isInvalid} />
       {/* Renders email checking button first. Replaced by usual one on success. */}
       {!isEmailChecked ? (
         <CheckEmailButton
           onClick={checkAccountCreated}
           variant="outlined"
           className="w-fit text-lg md:text-xl"
-          disabled={isDisabled}
+          disabled={isInvalid}
         >
           Check Email
         </CheckEmailButton>
@@ -81,7 +81,7 @@ export default function Email() {
           text="Ok"
           link="/screening/ws05-phone-number"
           state={{ email }}
-          isDisabled={isDisabled}
+          isDisabled={isInvalid}
           quiz="screening"
         />
       )}

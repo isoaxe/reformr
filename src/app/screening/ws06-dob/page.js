@@ -12,7 +12,7 @@ import { useCookieState } from '@/util/hooks';
 export default function DateOfBirth() {
   const [birthday, setBirthday] = useState(null); // moment object
   const [dob, setDob] = useState(''); // string to store in cookie
-  const [isDisabled, setDisabled] = useState(true);
+  const [isInvalid, setInvalid] = useState(true);
   const [error, setError] = useState('');
 
   useCookieState('screening', 'dob', setDob);
@@ -24,7 +24,7 @@ export default function DateOfBirth() {
     /* Validate by checking if date is in the 20th or 21st centuries. */
     if (firstTwoDigits === '19' || firstTwoDigits === '20') {
       setDob(dobToCheck); // valid DoB
-      setDisabled(false);
+      setInvalid(false);
     }
   }, [birthday]);
 
@@ -34,7 +34,7 @@ export default function DateOfBirth() {
   }, [dob]);
 
   useEffect(() => {
-    if (error === 'invalidDate') setDisabled(true);
+    if (error === 'invalidDate') setInvalid(true);
   }, [error]);
 
   return (
@@ -55,7 +55,7 @@ export default function DateOfBirth() {
         text="Ok"
         link="/screening/ws07-sex-at-birth"
         state={{ dob }}
-        isDisabled={isDisabled}
+        isDisabled={isInvalid}
         quiz="screening"
       />
     </main>

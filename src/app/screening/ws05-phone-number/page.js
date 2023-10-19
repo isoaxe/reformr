@@ -8,15 +8,15 @@ import { useCookieState } from '@/util/hooks';
 /* Collect users mobile phone number. */
 export default function PhoneNumber() {
   const [phone, setPhone] = useState('');
-  const [isDisabled, setDisabled] = useState(true);
+  const [isInvalid, setInvalid] = useState(true);
 
   useCookieState('screening', 'phone', setPhone);
 
   const handleChange = (newValue) => setPhone(newValue);
 
   useEffect(() => {
-    if (matchIsValidTel(phone)) setDisabled(false);
-    else setDisabled(true);
+    if (matchIsValidTel(phone)) setInvalid(false);
+    else setInvalid(true);
   }, [phone]);
 
   return (
@@ -35,13 +35,13 @@ export default function PhoneNumber() {
         forceCallingCode
         onlyCountries={['NZ', 'AU']}
         InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
-        error={isDisabled && phone.length > 3}
+        error={isInvalid && phone.length > 3}
       />
       <Button
         text="Ok"
         link="/screening/ws06-dob"
         state={{ phone }}
-        isDisabled={isDisabled}
+        isDisabled={isInvalid}
         quiz="screening"
       />
     </main>

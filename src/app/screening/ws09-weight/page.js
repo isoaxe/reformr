@@ -12,7 +12,7 @@ import { db } from '@/util/firebase';
 export default function Weight() {
   const [weight, setWeight] = useState('');
   const [nextPage, setNextPage] = useState('/');
-  const [isDisabled, setDisabled] = useState(true);
+  const [isInvalid, setInvalid] = useState(true);
   const [cookie, setCookie] = useState({});
   const [bmi, setBmi] = useState(null);
   const cookies = useCookies();
@@ -43,8 +43,8 @@ export default function Weight() {
 
   useEffect(() => {
     const weightInt = parseInt(weight); // was a string, convert to int
-    if (weightInt < 50 || weightInt > 500) setDisabled(true);
-    else setDisabled(false);
+    if (weightInt < 50 || weightInt > 500) setInvalid(true);
+    else setInvalid(false);
   }, [weight]);
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export default function Weight() {
       <NumberInput
         number={weight}
         setNumber={setWeight}
-        isError={isDisabled}
+        isError={isInvalid}
         placeholder={'85'}
       />
       <div onClick={saveScreeningData}>
@@ -83,7 +83,7 @@ export default function Weight() {
           text="Ok"
           link={nextPage}
           state={{ weight }}
-          isDisabled={isDisabled} // enabled if weight is 50-500kg
+          isDisabled={isInvalid} // enabled if weight is 50-500kg
           quiz="screening"
         />
       </div>
