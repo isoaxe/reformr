@@ -12,14 +12,14 @@ import { db } from '@/util/firebase';
 /* Collect users email address. */
 export default function Email() {
   const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
   const [isEmailChecked, setEmailChecked] = useState(false);
   const [isDisabled, setDisabled] = useState(true);
   const [showFailureToast, setShowFailureToast] = useState(false);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
 
   useCookieState('screening', 'email', setEmail);
-  useCookieState('screening', 'firstName', setName);
+  useCookieState('screening', 'firstName', setFirstName);
 
   useEffect(() => {
     if (!/\S+@\S+\.\S+/.test(email)) setDisabled(true);
@@ -43,7 +43,7 @@ export default function Email() {
 
   return (
     <main className="mx-auto flex max-w-4xl flex-col">
-      <p className="mb-8">Thanks, {name}.</p>
+      <p className="mb-8">Thanks, {firstName}.</p>
       <p className="mb-4">
         What <span className="font-semibold">email address</span> can we reach
         you at? This is only to get in touch, not to send spam.
