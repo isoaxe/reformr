@@ -6,7 +6,6 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import Button from '@/components/quiz/button';
 import NumberInput from '@/components/quiz/number-input';
 import { useCookieState } from '@/util/hooks';
-import { createDocId } from '@/util/helpers';
 import { db } from '@/util/firebase';
 
 /* Collect weight of the user in kg as an integer. */
@@ -20,49 +19,23 @@ export default function Weight() {
 
   useCookieState('screening', 'weight', setWeight);
 
-  /* Checks if email exists in Firestore. If not, then save it. */
-  async function checkEmailExists(docId, email) {
-    const emailsRef = doc(db, 'emails', email);
-    const emailSnap = await getDoc(emailsRef);
-    if (emailSnap.exists()) {
-      const emailsData = emailSnap.data();
-      emailsData.isScreeningSaved = true;
-      return emailsData;
-    } else {
-      const emailsData = {
-        email,
-        isAccountCreated: false,
-        userDocId: docId,
-      };
-      await setDoc(doc(db, 'emails', email), emailsData);
-      emailsData.isScreeningSaved = false;
-      return emailsData;
-    }
-  }
-
   async function saveScreeningData() {
     try {
-      const { lastName, email } = cookie;
-      let docId = createDocId(lastName);
-      const { userDocId, isScreeningSaved, isAccountCreated } =
-        await checkEmailExists(docId, email);
-      docId = userDocId; // updates docId to existing one from database
-      /* Overwrite user data only if no account has already been created. */
+      /* Get docId from Firestore. */
+      const { email } = cookie;
+      const emailsRef = doc(db, 'emails', email);
+      const emailSnap = await getDoc(emailsRef);
+      const emailsData = emailSnap.data();
+      const { docId } = emailsData; // get docId from Firestore
+
+      /* Save BMI to Firestore but also as a separate cookie. */
+      cookies.set('bmi', bmi, { sameSite: 'strict' });
+      const updatedCookie = { ...cookie, bmi };
       /* Fine to overwrite data saved to Firestore before account creation. */
-      if (!isAccountCreated) {
-        /* Save BMI to Firestore but also as a separate cookie. */
-        cookies.set('bmi', bmi, { sameSite: 'strict' });
-        const updatedCookie = { ...cookie, bmi };
-        await setDoc(doc(db, 'users', docId), {
-          screening: updatedCookie,
-          dateAccountCreated: null,
-        });
-        if (isScreeningSaved)
-          console.log(`Overwriting previous screening data for ${email}...`);
-        else console.log(`Saving new screening data for ${email}...`);
-      } else {
-        console.log(`Account already created for ${email}...`);
-      }
+      await setDoc(doc(db, 'users', docId), {
+        screening: updatedCookie,
+        dateAccountCreated: null,
+      });
     } catch (err) {
       console.error('Error saving screening data: ', err);
     }
