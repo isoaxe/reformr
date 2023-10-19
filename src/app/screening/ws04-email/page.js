@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useCookies } from 'next-client-cookies';
 import { doc, getDoc } from 'firebase/firestore';
+import { Button as CheckEmailButton } from '@mui/material';
 import Button from '@/components/quiz/button';
 import TextInput from '@/components/quiz/text-input';
 import { useCookieState } from '@/util/hooks';
@@ -12,6 +13,7 @@ import { db } from '@/util/firebase';
 export default function Email() {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [isEmailChecked, setEmailChecked] = useState(false);
   const [isDisabled, setDisabled] = useState(true);
   const cookies = useCookies();
 
@@ -21,6 +23,7 @@ export default function Email() {
   useEffect(() => {
     if (!/\S+@\S+\.\S+/.test(email)) setDisabled(true);
     else setDisabled(false);
+    setEmailChecked(false);
   }, [email]);
 
   /* Save cookie to warn user on next screen if account with that email already exists. */
@@ -32,6 +35,7 @@ export default function Email() {
       isAccountCreated = emailSnap.data().isAccountCreated;
     if (isAccountCreated)
       console.log(`Account already created for ${email}...`);
+    else setEmailChecked(true);
     cookies.set('isAccountCreated', isAccountCreated, { sameSite: 'strict' });
   }
 
@@ -46,7 +50,17 @@ export default function Email() {
         (spam sucks)
       </p>
       <TextInput text={email} setText={setEmail} isError={isDisabled} />
-      <div onClick={checkAccountCreated}>
+      {/* Renders email checking button first. Replaced by usual one on success. */}
+      {!isEmailChecked ? (
+        <CheckEmailButton
+          onClick={checkAccountCreated}
+          variant="outlined"
+          className="w-fit text-lg md:text-xl"
+          disabled={isDisabled}
+        >
+          Check Email
+        </CheckEmailButton>
+      ) : (
         <Button
           text="Ok"
           link="/screening/ws05-phone-number"
@@ -54,7 +68,7 @@ export default function Email() {
           isDisabled={isDisabled}
           quiz="screening"
         />
-      </div>
+      )}
     </main>
   );
 }
