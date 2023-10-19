@@ -53,10 +53,11 @@ export default function PhoneNumber() {
         quiz="screening"
       />
       <Toast
-        message="An account for this email has already been created"
+        message="An account for this email has already been created. Please login or use a different email."
         severity="warning"
         open={showToast}
         setOpen={setShowToast}
+        duration={10}
       />
     </main>
   );
