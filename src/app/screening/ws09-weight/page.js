@@ -83,7 +83,7 @@ export default function Weight() {
           text="Ok"
           link={nextPage}
           state={{ weight }}
-          isDisabled={isInvalid} // enabled if weight is 50-500kg
+          isDisabled={isInvalid || !weight} // enabled if weight is 50-500kg
           quiz="screening"
         />
       </div>

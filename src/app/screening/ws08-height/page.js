@@ -34,7 +34,7 @@ export default function Height() {
         text="Ok"
         link="/screening/ws09-weight"
         state={{ height }}
-        isDisabled={isInvalid} // enabled if height is 1-3m
+        isDisabled={isInvalid || !height} // enabled if height is 1-3m
         quiz="screening"
       />
     </main>
