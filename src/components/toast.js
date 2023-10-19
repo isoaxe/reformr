@@ -13,7 +13,11 @@ export default function Toast(props) {
       onClose={() => setOpen(false)}
       anchorOrigin={{ vertical, horizontal }}
     >
-      <Alert severity={severity} variant="filled">
+      <Alert
+        severity={severity}
+        variant="filled"
+        className="max-w-xl text-lg md:text-xl xl:text-2xl"
+      >
         {message}
       </Alert>
     </Snackbar>
