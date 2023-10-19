@@ -2,17 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { MuiTelInput, matchIsValidTel } from 'mui-tel-input';
-import { useCookies } from 'next-client-cookies';
 import Button from '@/components/quiz/button';
-import Toast from '@/components/toast';
 import { useCookieState } from '@/util/hooks';
 
 /* Collect users mobile phone number. */
 export default function PhoneNumber() {
   const [phone, setPhone] = useState('');
   const [isDisabled, setDisabled] = useState(true);
-  const [showToast, setShowToast] = useState(false);
-  const cookies = useCookies();
 
   useCookieState('screening', 'phone', setPhone);
 
@@ -22,10 +18,6 @@ export default function PhoneNumber() {
     if (matchIsValidTel(phone)) setDisabled(false);
     else setDisabled(true);
   }, [phone]);
-
-  useEffect(() => {
-    if (cookies.get('isAccountCreated') === 'true') setShowToast(true);
-  }, [cookies]);
 
   return (
     <main className="mx-auto flex flex-col">
@@ -51,13 +43,6 @@ export default function PhoneNumber() {
         state={{ phone }}
         isDisabled={isDisabled}
         quiz="screening"
-      />
-      <Toast
-        message="An account for this email has already been created. Please login or use a different email."
-        severity="warning"
-        open={showToast}
-        setOpen={setShowToast}
-        duration={10}
       />
     </main>
   );

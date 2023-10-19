@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useCookies } from 'next-client-cookies';
 import { doc, getDoc } from 'firebase/firestore';
 import { Button as CheckEmailButton } from '@mui/material';
 import Button from '@/components/quiz/button';
 import TextInput from '@/components/quiz/text-input';
+import Toast from '@/components/toast';
 import { useCookieState } from '@/util/hooks';
 import { db } from '@/util/firebase';
 
@@ -15,7 +15,7 @@ export default function Email() {
   const [name, setName] = useState('');
   const [isEmailChecked, setEmailChecked] = useState(false);
   const [isDisabled, setDisabled] = useState(true);
-  const cookies = useCookies();
+  const [showFailureToast, setShowFailureToast] = useState(false);
 
   useCookieState('screening', 'email', setEmail);
   useCookieState('screening', 'firstName', setName);
@@ -33,10 +33,8 @@ export default function Email() {
     let isAccountCreated = false;
     if (emailSnap.exists())
       isAccountCreated = emailSnap.data().isAccountCreated;
-    if (isAccountCreated)
-      console.log(`Account already created for ${email}...`);
+    if (isAccountCreated) setShowFailureToast(true);
     else setEmailChecked(true);
-    cookies.set('isAccountCreated', isAccountCreated, { sameSite: 'strict' });
   }
 
   return (
@@ -69,6 +67,13 @@ export default function Email() {
           quiz="screening"
         />
       )}
+      <Toast
+        message="An account for this email has already been created. Please login or use a different email."
+        severity="warning"
+        open={showFailureToast}
+        setOpen={setShowFailureToast}
+        duration={6}
+      />
     </main>
   );
 }
