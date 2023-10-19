@@ -16,6 +16,7 @@ export default function Email() {
   const [isEmailChecked, setEmailChecked] = useState(false);
   const [isDisabled, setDisabled] = useState(true);
   const [showFailureToast, setShowFailureToast] = useState(false);
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
 
   useCookieState('screening', 'email', setEmail);
   useCookieState('screening', 'firstName', setName);
@@ -34,7 +35,10 @@ export default function Email() {
     if (emailSnap.exists())
       isAccountCreated = emailSnap.data().isAccountCreated;
     if (isAccountCreated) setShowFailureToast(true);
-    else setEmailChecked(true);
+    else {
+      setShowSuccessToast(true);
+      setEmailChecked(true);
+    }
   }
 
   return (
@@ -73,6 +77,12 @@ export default function Email() {
         open={showFailureToast}
         setOpen={setShowFailureToast}
         duration={6}
+      />
+      <Toast
+        message="This email is available."
+        severity="success"
+        open={showSuccessToast}
+        setOpen={setShowSuccessToast}
       />
     </main>
   );
