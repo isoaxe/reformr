@@ -8,6 +8,7 @@ import Button from '@/components/quiz/button';
 /* Accept Reformr terms and conditions. */
 export default function AcceptTerms() {
   const [token, setToken] = useState(null);
+  const [isVerified, setVerified] = useState(false);
   const captchaRef = useRef(null);
 
   function handleChange(value) {
@@ -17,6 +18,16 @@ export default function AcceptTerms() {
   useEffect(() => {
     setTimeout(() => captchaRef.current.execute(), 1000);
   }, [captchaRef]);
+
+  useEffect(() => {
+    if (token) {
+      (async () => {
+        const res = await fetch(`/api/captcha?token=${token}`);
+        const json = await res.json();
+        if (json.success) setVerified(true);
+      })();
+    }
+  }, [token]);
 
   return (
     <main className="mx-auto max-w-4xl">
