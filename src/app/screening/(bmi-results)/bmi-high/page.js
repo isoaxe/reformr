@@ -1,13 +1,16 @@
 'use client';
 
-import { useCookies } from 'next-client-cookies';
+import { useState } from 'react';
 import Image from 'next/image';
 import Button from '@/components/quiz/button';
+import { useFreshCookie } from '@/util/hooks';
 import peaceSign from '/public/images/hand-peace-sign.png';
 
 /* User can proceed to account creation if they have a high BMI. */
 export default function HighBmi() {
-  const cookies = useCookies();
+  const [bmi, setBmi] = useState(null);
+
+  useFreshCookie('bmi', setBmi);
 
   return (
     <main className="flex flex-col sm:flex-row">
@@ -23,8 +26,8 @@ export default function HighBmi() {
       <div className="flex aspect-square flex-col justify-center sm:w-1/2 sm:px-9">
         <p>Thanks for taking the time to complete this quiz.</p>
         <p className="my-6">
-          You have a BMI of {cookies.get('bmi')} and are eligible for the
-          Reformr weight loss program.
+          You have a BMI of {bmi} and are eligible for the Reformr weight loss
+          program.
         </p>
         <Button text="Create Account" link="/account" />
       </div>
