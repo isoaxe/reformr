@@ -24,6 +24,10 @@ Development for this phase will commence immediately following the launch of MVP
 
 Clone or fork the project, then run the command from the project directory.
 
+### `npm run env-var`
+
+Pull the environment variables from Vercel and save locally to `.env.local` with this command. Need to install the Vercel CLI first. Used for getting the secret required to call the reCAPTCHA API from the backend via a route handler.
+
 ### `npm run dev`
 
 Start the app locally in development mode.
