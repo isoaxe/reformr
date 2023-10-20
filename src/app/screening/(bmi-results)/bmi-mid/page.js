@@ -1,13 +1,16 @@
 'use client';
 
-import { useCookies } from 'next-client-cookies';
+import { useState } from 'react';
 import Image from 'next/image';
 import Button from '@/components/quiz/button';
+import { useFreshCookie } from '@/util/hooks';
 import peaceSign from '/public/images/hand-peace-sign.png';
 
 /* User will be asked some medical questions to determine eligibility. */
 export default function MidBmi() {
-  const cookies = useCookies();
+  const [bmi, setBmi] = useState(null);
+
+  useFreshCookie('bmi', setBmi);
 
   return (
     <main className="flex flex-col sm:flex-row">
@@ -23,9 +26,9 @@ export default function MidBmi() {
       <div className="flex aspect-square flex-col justify-center sm:w-1/2 sm:px-9">
         <p>Thanks for taking the time to complete this quiz.</p>
         <p className="my-6">
-          You have a BMI of {cookies.get('bmi')}, so we will need to ask some
-          additional questions to determine your eligibility for the Reformr
-          weight loss program.
+          You have a BMI of {bmi}, so we will need to ask some additional
+          questions to determine your eligibility for the Reformr weight loss
+          program.
         </p>
         <Button text="More Questions" link="/medical" />
       </div>

@@ -1,13 +1,16 @@
 'use client';
 
-import { useCookies } from 'next-client-cookies';
+import { useState } from 'react';
 import Image from 'next/image';
 import Button from '@/components/quiz/button';
+import { useFreshCookie } from '@/util/hooks';
 import peaceSign from '/public/images/hand-peace-sign.png';
 
 /* Assessment ends if the user has a low BMI and they return to homepage. */
 export default function LowBmi() {
-  const cookies = useCookies();
+  const [bmi, setBmi] = useState(null);
+
+  useFreshCookie('bmi', setBmi);
 
   return (
     <main className="flex flex-col sm:flex-row">
@@ -23,8 +26,8 @@ export default function LowBmi() {
       <div className="flex aspect-square flex-col justify-center sm:w-1/2 sm:px-9">
         <p>Thanks for taking the time to complete this quiz.</p>
         <p className="my-6">
-          Based on your BMI of {cookies.get('bmi')}, the Reformr weight loss
-          program is unsuitable for you.
+          Based on your BMI of {bmi}, the Reformr weight loss program is
+          unsuitable for you.
         </p>
         <Button text="Return Home" link="/main/home" />
       </div>
