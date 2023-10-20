@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "env-var": "vercel env pull .env.local"
   },
   "dependencies": {
     "@emotion/react": "latest",
