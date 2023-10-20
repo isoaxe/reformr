@@ -8,7 +8,7 @@ export async function GET(request) {
   const baseUrl = 'https://www.google.com/recaptcha/api/siteverify';
   const fullUrl = `${baseUrl}?secret=${process.env.RECAPTCHA_SECRET}&response=${token}`;
   const apiRes = await fetch(fullUrl, { method: 'POST' });
-  let verified = false;
-  if (apiRes.status === 200) verified = true;
-  return NextResponse.json({ success: verified });
+  const json = await apiRes.json();
+  const { success } = json;
+  return NextResponse.json({ success });
 }
