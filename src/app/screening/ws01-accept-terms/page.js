@@ -1,8 +1,23 @@
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import Link from 'next/link';
 import Button from '@/components/quiz/button';
 
 /* Accept Reformr terms and conditions. */
 export default function AcceptTerms() {
+  const [token, setToken] = useState(null);
+  const captchaRef = useRef(null);
+
+  function handleChange(value) {
+    if (value) setToken(value);
+  }
+
+  useEffect(() => {
+    setTimeout(() => captchaRef.current.execute(), 1000);
+  }, [captchaRef]);
+
   return (
     <main className="mx-auto max-w-4xl">
       <p className="mb-6">
@@ -25,6 +40,13 @@ export default function AcceptTerms() {
         .
       </p>
       <Button text="Ok" link="/screening/ws02-first-name" />
+      <ReCAPTCHA
+        ref={captchaRef}
+        size="invisible"
+        badge="bottomright"
+        sitekey="6LdcGLYoAAAAALiS3p1uTXU5979fEhDbF-yyhNda"
+        onChange={handleChange}
+      />
     </main>
   );
 }
