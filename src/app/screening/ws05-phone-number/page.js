@@ -9,11 +9,13 @@ import { useCookieState } from '@/util/hooks';
 /* Collect users mobile phone number. */
 export default function PhoneNumber() {
   const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
   const [lastName, setLastName] = useState('');
   const [isInvalid, setInvalid] = useState(true);
   const [isVerified, setVerified] = useState(false);
 
   useCookieState('screening', 'phone', setPhone);
+  useCookieState('screening', 'email', setEmail);
   useCookieState('screening', 'lastName', setLastName);
 
   const handleChange = (newValue) => setPhone(newValue);
@@ -48,7 +50,7 @@ export default function PhoneNumber() {
         isDisabled={isInvalid}
         quiz="screening"
       />
-      <Captcha setVerified={setVerified} />
+      {email && <Captcha email={email} setVerified={setVerified} />}
     </main>
   );
 }

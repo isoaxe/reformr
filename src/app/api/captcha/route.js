@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 /* Check if the reCAPTCHA token is correct with Google. */
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
+  const email = searchParams.get('email');
   const token = searchParams.get('token');
 
   const baseUrl = 'https://www.google.com/recaptcha/api/siteverify';
