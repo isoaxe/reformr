@@ -27,6 +27,7 @@ export async function saveEmail(email, firstName, lastName) {
       isAccountCreated: false,
       docId,
       firstName,
+      lastName,
     };
     await setDoc(doc(db, 'emails', email), emailsData);
   }
