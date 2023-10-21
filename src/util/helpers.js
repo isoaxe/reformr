@@ -1,6 +1,8 @@
 /*
  * Helper functions available for use throughout the project.
  */
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { db } from '@/util/firebase';
 
 /* Creates a unique document ID for Firestore. Number always 6 digits long. */
 export function createDocId(name) {
@@ -22,6 +24,22 @@ export function generateToken(length) {
     token += characters[randomIndex];
   }
   return token;
+}
+
+/* Save email document to Firestore if not already there. */
+export async function saveEmail(email, firstName, lastName) {
+  const emailsRef = doc(db, 'emails', email);
+  const emailSnap = await getDoc(emailsRef);
+  if (!emailSnap.exists()) {
+    let docId = createDocId(lastName);
+    const emailsData = {
+      email,
+      isAccountCreated: false,
+      docId,
+      firstName,
+    };
+    await setDoc(doc(db, 'emails', email), emailsData);
+  }
 }
 
 /*
