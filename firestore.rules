@@ -16,5 +16,10 @@ service cloud.firestore {
       allow create;
       allow update: if false; // allow auth users in future
     }
+    match /captchas/{userEmail} {
+      allow get;
+      allow list: if false;
+      allow write; // don't want to write if email doesn't exist
+    }
   }
 }
