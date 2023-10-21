@@ -1,20 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { Button as CheckEmailButton } from '@mui/material';
 import Button from '@/components/quiz/button';
 import TextInput from '@/components/quiz/text-input';
 import Toast from '@/components/toast';
 import { useCookieState } from '@/util/hooks';
-import { createDocId } from '@/util/helpers';
 import { db } from '@/util/firebase';
 
 /* Collect users email address. */
 export default function Email() {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [isEmailChecked, setEmailChecked] = useState(false);
   const [isInvalid, setInvalid] = useState(true);
   const [showFailureToast, setShowFailureToast] = useState(false);
@@ -22,7 +20,6 @@ export default function Email() {
 
   useCookieState('screening', 'email', setEmail);
   useCookieState('screening', 'firstName', setFirstName);
-  useCookieState('screening', 'lastName', setLastName);
 
   useEffect(() => {
     if (!/\S+@\S+\.\S+/.test(email)) setInvalid(true);
@@ -41,17 +38,6 @@ export default function Email() {
     else {
       setShowSuccessToast(true);
       setEmailChecked(true);
-    }
-    /* Save email to Firestore if not present. */
-    if (!isAccountCreated && !emailSnap.exists()) {
-      let docId = createDocId(lastName);
-      const emailsData = {
-        email,
-        isAccountCreated: false,
-        docId,
-        firstName,
-      };
-      await setDoc(doc(db, 'emails', email), emailsData);
     }
   }
 
