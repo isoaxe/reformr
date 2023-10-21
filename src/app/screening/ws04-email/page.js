@@ -13,7 +13,6 @@ import { db } from '@/util/firebase';
 export default function Email() {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [isEmailChecked, setEmailChecked] = useState(false);
   const [isInvalid, setInvalid] = useState(true);
   const [showFailureToast, setShowFailureToast] = useState(false);
@@ -21,7 +20,6 @@ export default function Email() {
 
   useCookieState('screening', 'email', setEmail);
   useCookieState('screening', 'firstName', setFirstName);
-  useCookieState('screening', 'lastName', setLastName);
 
   useEffect(() => {
     if (!/\S+@\S+\.\S+/.test(email)) setInvalid(true);

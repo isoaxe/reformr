@@ -8,9 +8,11 @@ import { useCookieState } from '@/util/hooks';
 /* Collect users mobile phone number. */
 export default function PhoneNumber() {
   const [phone, setPhone] = useState('');
+  const [lastName, setLastName] = useState('');
   const [isInvalid, setInvalid] = useState(true);
 
   useCookieState('screening', 'phone', setPhone);
+  useCookieState('screening', 'lastName', setLastName);
 
   const handleChange = (newValue) => setPhone(newValue);
 
