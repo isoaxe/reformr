@@ -19,7 +19,7 @@ service cloud.firestore {
     match /captchas/{userEmail} {
       allow get;
       allow list: if false;
-      allow write; // don't want to write if email doesn't exist
+      allow write;
     }
   }
 }
