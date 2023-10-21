@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-export default function Captcha({ firstName, lastName, email, setVerified }) {
+export default function Captcha(props) {
+  const { firstName, lastName, email, setVerified, setToken } = props;
   const [captchaToken, setCaptchaToken] = useState(null);
   const captchaRef = useRef(null);
 
@@ -22,10 +23,13 @@ export default function Captcha({ firstName, lastName, email, setVerified }) {
           `/api/captcha?firstName=${firstName}&lastName=${lastName}&email=${email}&captchaToken=${captchaToken}`
         );
         const json = await res.json();
-        if (json.success) setVerified(true);
+        if (json.success) {
+          setVerified(true);
+          setToken(json.token);
+        }
       })();
     }
-  }, [captchaToken, firstName, lastName, email, setVerified]);
+  }, [captchaToken, firstName, lastName, email, setVerified, setToken]);
 
   return (
     <ReCAPTCHA
