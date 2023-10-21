@@ -12,6 +12,18 @@ export function createDocId(name) {
   return `${name}-${idString}`;
 }
 
+/* Generate a token of a given length. */
+export function generateToken(length) {
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let token = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    token += characters[randomIndex];
+  }
+  return token;
+}
+
 /*
  * Helpers for the helper functions. Only used within helpers.js and not exported.
  */
