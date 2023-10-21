@@ -55,7 +55,7 @@ export default function PhoneNumber() {
         text="Ok"
         link="/screening/ws06-dob"
         state={{ phone }}
-        isDisabled={isInvalid}
+        isDisabled={isInvalid || !token}
         quiz="screening"
       />
       {email && (
