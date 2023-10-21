@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { MuiTelInput, matchIsValidTel } from 'mui-tel-input';
 import Button from '@/components/quiz/button';
+import Captcha from '@/components/captcha';
 import { useCookieState } from '@/util/hooks';
 
 /* Collect users mobile phone number. */
@@ -10,6 +11,7 @@ export default function PhoneNumber() {
   const [phone, setPhone] = useState('');
   const [lastName, setLastName] = useState('');
   const [isInvalid, setInvalid] = useState(true);
+  const [isVerified, setVerified] = useState(false);
 
   useCookieState('screening', 'phone', setPhone);
   useCookieState('screening', 'lastName', setLastName);
@@ -46,6 +48,7 @@ export default function PhoneNumber() {
         isDisabled={isInvalid}
         quiz="screening"
       />
+      <Captcha setVerified={setVerified} />
     </main>
   );
 }

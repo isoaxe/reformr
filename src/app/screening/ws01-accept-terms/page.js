@@ -1,14 +1,8 @@
-'use client';
-
-import { useState } from 'react';
 import Link from 'next/link';
 import Button from '@/components/quiz/button';
-import Captcha from '@/components/captcha';
 
 /* Accept Reformr terms and conditions. */
 export default function AcceptTerms() {
-  const [isVerified, setVerified] = useState(false);
-
   return (
     <main className="mx-auto max-w-4xl">
       <p className="mb-6">
@@ -31,7 +25,6 @@ export default function AcceptTerms() {
         .
       </p>
       <Button text="Ok" link="/screening/ws02-first-name" />
-      <Captcha setVerified={setVerified} />
     </main>
   );
 }
