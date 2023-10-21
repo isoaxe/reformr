@@ -17,10 +17,11 @@ export function generateToken(length) {
 }
 
 /* Save email document to Firestore if not already there. */
-export async function saveEmail(email, firstName, lastName) {
+export async function saveEmailDoc(email, firstName, lastName) {
   const emailsRef = doc(db, 'emails', email);
   const emailSnap = await getDoc(emailsRef);
   if (!emailSnap.exists()) {
+    const token = generateToken(50);
     let docId = createDocId(lastName);
     const emailsData = {
       email,
@@ -28,8 +29,10 @@ export async function saveEmail(email, firstName, lastName) {
       docId,
       firstName,
       lastName,
+      token,
     };
     await setDoc(doc(db, 'emails', email), emailsData);
+    return token;
   }
 }
 
