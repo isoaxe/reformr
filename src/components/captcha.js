@@ -4,11 +4,11 @@ import { useState, useEffect, useRef } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 export default function Captcha({ firstName, lastName, email, setVerified }) {
-  const [token, setToken] = useState(null);
+  const [captchaToken, setCaptchaToken] = useState(null);
   const captchaRef = useRef(null);
 
   function handleChange(value) {
-    if (value) setToken(value);
+    if (value) setCaptchaToken(value);
   }
 
   useEffect(() => {
@@ -16,16 +16,16 @@ export default function Captcha({ firstName, lastName, email, setVerified }) {
   }, [captchaRef]);
 
   useEffect(() => {
-    if (token) {
+    if (captchaToken) {
       (async () => {
         const res = await fetch(
-          `/api/captcha?firstName=${firstName}&lastName=${lastName}&email=${email}&token=${token}`
+          `/api/captcha?firstName=${firstName}&lastName=${lastName}&email=${email}&captchaToken=${captchaToken}`
         );
         const json = await res.json();
         if (json.success) setVerified(true);
       })();
     }
-  }, [token, firstName, lastName, email, setVerified]);
+  }, [captchaToken, firstName, lastName, email, setVerified]);
 
   return (
     <ReCAPTCHA
