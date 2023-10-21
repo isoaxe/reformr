@@ -28,6 +28,7 @@ export async function saveEmailDoc(email, firstName, lastName) {
       docId,
       firstName,
       lastName,
+      dateCreated: new Date(),
     };
     await setDoc(emailsRef, emailsData);
   }
