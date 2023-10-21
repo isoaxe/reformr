@@ -14,7 +14,6 @@ export default function PhoneNumber() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [isInvalid, setInvalid] = useState(true);
-  const [isVerified, setVerified] = useState(false);
   const [token, setToken] = useState(null);
   const cookies = useCookies();
 
@@ -64,7 +63,6 @@ export default function PhoneNumber() {
           firstName={firstName}
           lastName={lastName}
           email={email}
-          setVerified={setVerified}
           setToken={setToken}
         />
       )}
