@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { saveEmailDoc } from '@/util/helpers';
+import { saveEmailDoc, saveToken } from '@/util/helpers';
 
 /* Check if the reCAPTCHA token is correct with Google. */
 export async function GET(request) {
@@ -17,6 +17,7 @@ export async function GET(request) {
 
   let token = null;
   if (success) token = await saveEmailDoc(email, firstName, lastName);
+  if (token) await saveToken(email, token);
 
   return NextResponse.json({ success, token });
 }

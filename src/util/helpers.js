@@ -31,9 +31,15 @@ export async function saveEmailDoc(email, firstName, lastName) {
       lastName,
       token,
     };
-    await setDoc(doc(db, 'emails', email), emailsData);
+    await setDoc(emailsRef, emailsData);
     return token;
   }
+}
+
+/* Save reCAPTCHA token generated in saveEmailDoc to Firestore. */
+export async function saveToken(email, token) {
+  const captchaRef = doc(db, 'captchas', email);
+  await setDoc(captchaRef, { token });
 }
 
 /*
