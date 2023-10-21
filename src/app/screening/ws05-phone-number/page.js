@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { MuiTelInput, matchIsValidTel } from 'mui-tel-input';
+import { useCookies } from 'next-client-cookies';
 import Button from '@/components/quiz/button';
 import Captcha from '@/components/captcha';
 import { useCookieState } from '@/util/hooks';
@@ -15,6 +16,7 @@ export default function PhoneNumber() {
   const [isInvalid, setInvalid] = useState(true);
   const [isVerified, setVerified] = useState(false);
   const [token, setToken] = useState(null);
+  const cookies = useCookies();
 
   useCookieState('screening', 'phone', setPhone);
   useCookieState('screening', 'email', setEmail);
@@ -27,6 +29,10 @@ export default function PhoneNumber() {
     if (matchIsValidTel(phone)) setInvalid(false);
     else setInvalid(true);
   }, [phone]);
+
+  useEffect(() => {
+    if (token) cookies.set('token', token, { sameSite: 'strict' });
+  }, [cookies, token]);
 
   return (
     <main className="mx-auto flex flex-col">
