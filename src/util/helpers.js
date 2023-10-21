@@ -21,7 +21,6 @@ export async function saveEmailDoc(email, firstName, lastName) {
   const emailsRef = doc(db, 'emails', email);
   const emailSnap = await getDoc(emailsRef);
   if (!emailSnap.exists()) {
-    const token = generateToken(50);
     let docId = createDocId(lastName);
     const emailsData = {
       email,
@@ -29,17 +28,17 @@ export async function saveEmailDoc(email, firstName, lastName) {
       docId,
       firstName,
       lastName,
-      token,
     };
     await setDoc(emailsRef, emailsData);
-    return token;
   }
 }
 
 /* Save reCAPTCHA token generated in saveEmailDoc to Firestore. */
-export async function saveToken(email, token) {
+export async function saveToken(email) {
+  const token = generateToken(50);
   const captchaRef = doc(db, 'captchas', email);
   await setDoc(captchaRef, { token });
+  return token;
 }
 
 /*

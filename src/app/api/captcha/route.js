@@ -16,8 +16,10 @@ export async function GET(request) {
   const { success } = json;
 
   let token = null;
-  if (success) token = await saveEmailDoc(email, firstName, lastName);
-  if (token) await saveToken(email, token);
+  if (success) {
+    await saveEmailDoc(email, firstName, lastName);
+    token = await saveToken(email);
+  }
 
   return NextResponse.json({ success, token });
 }
