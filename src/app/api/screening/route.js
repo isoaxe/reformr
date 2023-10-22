@@ -7,23 +7,23 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const bmi = searchParams.get('bmi');
   const screeningAsString = searchParams.get('screening');
-  const screeningAsJson = JSON.parse(screeningAsString);
+  const screening = JSON.parse(screeningAsString); // screening as JSON
 
   try {
     /* Get docId from Firestore. */
-    const { email } = screeningAsJson;
+    const { email } = screening;
     const emailsRef = doc(db, 'emails', email);
     const emailSnap = await getDoc(emailsRef);
     const emailsData = emailSnap.data();
     const { docId } = emailsData; // get docId from Firestore
 
-    screeningAsJson.bmi = parseFloat(bmi);
-    screeningAsJson.height = parseInt(screeningAsJson.height);
-    screeningAsJson.weight = parseInt(screeningAsJson.weight);
-    screeningAsJson.dateCreated = new Date();
+    screening.bmi = parseFloat(bmi);
+    screening.height = parseInt(screening.height);
+    screening.weight = parseInt(screening.weight);
+    screening.dateCreated = new Date();
     /* Fine to overwrite data saved to Firestore before account creation. */
     await setDoc(doc(db, 'users', docId), {
-      screening: screeningAsJson,
+      screening: screening,
       dateAccountCreated: null,
     });
   } catch (err) {
