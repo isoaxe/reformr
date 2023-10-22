@@ -20,11 +20,12 @@ export default function Weight() {
 
   async function saveScreeningData() {
     const screening = cookies.get('screening');
+    const token = cookies.get('token');
     /* Save BMI as a separate cookie for next page. */
     cookies.set('bmi', bmi, { sameSite: 'strict' });
     try {
       /* Pass screening cookie and token generated after reCAPTCHA success. */
-      fetch(`/api/screening?screening=${screening}&bmi=${bmi}`);
+      fetch(`/api/screening?screening=${screening}&bmi=${bmi}&token=${token}`);
     } catch (err) {
       console.error('Error saving screening data: ', err);
     }
