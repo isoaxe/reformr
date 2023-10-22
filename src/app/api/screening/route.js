@@ -6,24 +6,24 @@ import { db } from '@/util/firebase';
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const bmi = searchParams.get('bmi');
-  const cookieAsString = searchParams.get('cookie');
-  const cookieAsJson = JSON.parse(cookieAsString);
+  const screeningAsString = searchParams.get('screening');
+  const screeningAsJson = JSON.parse(screeningAsString);
 
   try {
     /* Get docId from Firestore. */
-    const { email } = cookieAsJson;
+    const { email } = screeningAsJson;
     const emailsRef = doc(db, 'emails', email);
     const emailSnap = await getDoc(emailsRef);
     const emailsData = emailSnap.data();
     const { docId } = emailsData; // get docId from Firestore
 
-    cookieAsJson.bmi = parseFloat(bmi);
-    cookieAsJson.height = parseInt(cookieAsJson.height);
-    cookieAsJson.weight = parseInt(cookieAsJson.weight);
-    cookieAsJson.dateCreated = new Date();
+    screeningAsJson.bmi = parseFloat(bmi);
+    screeningAsJson.height = parseInt(screeningAsJson.height);
+    screeningAsJson.weight = parseInt(screeningAsJson.weight);
+    screeningAsJson.dateCreated = new Date();
     /* Fine to overwrite data saved to Firestore before account creation. */
     await setDoc(doc(db, 'users', docId), {
-      screening: cookieAsJson,
+      screening: screeningAsJson,
       dateAccountCreated: null,
     });
   } catch (err) {
