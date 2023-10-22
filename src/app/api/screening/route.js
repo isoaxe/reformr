@@ -24,7 +24,7 @@ export async function GET(request) {
     screening.dateCreated = new Date();
     /* Fine to overwrite data saved to Firestore before account creation. */
     await setDoc(doc(db, 'users', docId), {
-      screening: screening,
+      screening,
       dateAccountCreated: null,
     });
   } catch (err) {
