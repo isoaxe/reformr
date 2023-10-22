@@ -3,8 +3,9 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     function screeningDataVerified() {
+      let screen = request.resource.data.screening;
       let hasPrimaryKeys = request.resource.data.keys().hasAll(['screening', 'dateAccountCreated']);
-      let hasSecondaryKeys = request.resource.data.screening.keys().hasAll(['firstName', 'lastName', 'email', 'phone', 'sex', 'height', 'weight', 'bmi', 'dateCreated' ]);
+      let hasSecondaryKeys = screen.keys().hasAll(['firstName', 'lastName', 'email', 'phone', 'sex', 'height', 'weight', 'bmi', 'dateCreated' ]);
       let hasKeys = hasPrimaryKeys && hasSecondaryKeys;
       return hasKeys;
     }
