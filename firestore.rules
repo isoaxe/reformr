@@ -7,7 +7,8 @@ service cloud.firestore {
       let hasPrimaryKeys = request.resource.data.keys().hasAll(['screening', 'dateAccountCreated']);
       let hasSecondaryKeys = screen.keys().hasAll(['firstName', 'lastName', 'email', 'phone', 'sex', 'height', 'weight', 'bmi', 'dateCreated' ]);
       let hasKeys = hasPrimaryKeys && hasSecondaryKeys;
-      return hasKeys;
+      let validTypes = screen.height is int && screen.weight is int && screen.bmi is float && screen.dateCreated is timestamp;
+      return hasKeys && validTypes;
     }
     match /users/{userId} {
       allow read: if false;
