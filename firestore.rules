@@ -2,13 +2,16 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    function hasScreeningData() {
-      return request.resource.data.keys().hasAll(['screening', 'dateAccountCreated']);
+    function screeningDataVerified() {
+      let hasPrimaryKeys = request.resource.data.keys().hasAll(['screening', 'dateAccountCreated']);
+      let hasSecondaryKeys = request.resource.data.screening.keys().hasAll(['firstName', 'lastName', 'email', 'phone', 'sex', 'height', 'weight', 'bmi', 'dateCreated' ]);
+      let hasKeys = hasPrimaryKeys && hasSecondaryKeys;
+      return hasKeys;
     }
     match /users/{userId} {
       allow read: if false;
-      allow create: if hasScreeningData();
-      allow update: if resource.data.dateAccountCreated == null && hasScreeningData(); // allow auth users in future
+      allow create: if screeningDataVerified();
+      allow update: if resource.data.dateAccountCreated == null && screeningDataVerified(); // allow auth users in future
     }
     match /emails/{userEmail} {
       allow get;
