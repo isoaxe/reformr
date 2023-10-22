@@ -20,6 +20,7 @@ export async function GET(request) {
     screening.bmi = parseFloat(bmi);
     screening.height = parseInt(screening.height);
     screening.weight = parseInt(screening.weight);
+    screening.phone = '+' + screening.phone.slice(1); // fix phone formatting
     screening.dateCreated = new Date();
     /* Fine to overwrite data saved to Firestore before account creation. */
     await setDoc(doc(db, 'users', docId), {
