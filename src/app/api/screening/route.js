@@ -17,7 +17,9 @@ export async function GET(request) {
     const emailsData = emailSnap.data();
     const { docId } = emailsData; // get docId from Firestore
 
-    cookieAsJson.bmi = bmi;
+    cookieAsJson.bmi = parseFloat(bmi);
+    cookieAsJson.height = parseInt(cookieAsJson.height);
+    cookieAsJson.weight = parseInt(cookieAsJson.weight);
     cookieAsJson.dateCreated = new Date();
     /* Fine to overwrite data saved to Firestore before account creation. */
     await setDoc(doc(db, 'users', docId), {
