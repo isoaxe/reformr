@@ -53,7 +53,7 @@ export default function PhoneNumber() {
       />
       <Button
         text="Ok"
-        link="/screening/ws06-dob"
+        link="/signup/screening/ws06-dob"
         state={{ phone }}
         isDisabled={isInvalid || !token}
         quiz="screening"

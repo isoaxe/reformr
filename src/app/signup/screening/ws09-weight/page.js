@@ -42,9 +42,9 @@ export default function Weight() {
     const heightInMetres = height / 100;
     const updatedBmi = parseFloat((weight / heightInMetres ** 2).toFixed(2));
     setBmi(updatedBmi);
-    if (updatedBmi < 27) setNextPage('/screening/bmi-low');
-    else if (updatedBmi > 30) setNextPage('/screening/bmi-high');
-    else setNextPage('/screening/bmi-mid');
+    if (updatedBmi < 27) setNextPage('/signup/screening/bmi-low');
+    else if (updatedBmi > 30) setNextPage('/signup/screening/bmi-high');
+    else setNextPage('/signup/screening/bmi-mid');
   }, [height, weight]);
 
   return (

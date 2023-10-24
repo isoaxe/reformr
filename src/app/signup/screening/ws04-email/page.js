@@ -65,7 +65,7 @@ export default function Email() {
       ) : (
         <Button
           text="Ok"
-          link="/screening/ws05-phone-number"
+          link="/signup/screening/ws05-phone-number"
           state={{ email }}
           isDisabled={isInvalid}
           quiz="screening"
