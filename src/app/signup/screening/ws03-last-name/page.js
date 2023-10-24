@@ -19,7 +19,7 @@ export default function LastName() {
       <TextInput text={lastName} setText={setLastName} />
       <Button
         text="Ok"
-        link="/signup/screening/ws04-email"
+        link="./ws04-email"
         state={{ lastName }}
         isDisabled={!lastName}
         quiz="screening"

@@ -21,7 +21,7 @@ export default function Screening() {
           Answer a few simple questions to see if you&apos;re eligible for the
           <span className="font-semibold"> Metabolic Reset Program.</span>
         </p>
-        <Button text="Start" link="/signup/screening/ws01-accept-terms" />
+        <Button text="Start" link="./screening/ws01-accept-terms" />
       </div>
     </main>
   );
