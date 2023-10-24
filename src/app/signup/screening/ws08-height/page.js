@@ -32,7 +32,7 @@ export default function Height() {
       />
       <Button
         text="Ok"
-        link="/screening/ws09-weight"
+        link="./ws09-weight"
         state={{ height }}
         isDisabled={isInvalid || !height} // enabled if height is 1-3m
         quiz="screening"

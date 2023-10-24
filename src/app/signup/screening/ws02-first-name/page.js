@@ -20,7 +20,7 @@ export default function FirstName() {
       <TextInput text={firstName} setText={setFirstName} />
       <Button
         text="Ok"
-        link="/screening/ws03-last-name"
+        link="./ws03-last-name"
         state={{ firstName }}
         isDisabled={!firstName}
         quiz="screening"

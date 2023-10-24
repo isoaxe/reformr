@@ -50,7 +50,7 @@ export default function SexAtBirth() {
       </RadioGroup>
       <Button
         text="Ok"
-        link="/screening/ws08-height"
+        link="./ws08-height"
         state={{ sex }}
         isDisabled={!sex}
         quiz="screening"

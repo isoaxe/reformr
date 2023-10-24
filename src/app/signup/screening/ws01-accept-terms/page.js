@@ -24,7 +24,7 @@ export default function AcceptTerms() {
         </Link>
         .
       </p>
-      <Button text="Ok" link="/screening/ws02-first-name" />
+      <Button text="Ok" link="./ws02-first-name" />
     </main>
   );
 }

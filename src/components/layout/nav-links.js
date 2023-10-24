@@ -21,8 +21,8 @@ export default function NavLinks({ setOpen }) {
             Learn
           </Link>
         </h6>
-        <h6 className={pathname === '/screening' ? active : dormant}>
-          <Link href="/screening" onClick={close}>
+        <h6 className={pathname === '/signup/screening' ? active : dormant}>
+          <Link href="/signup/screening" onClick={close}>
             Quiz
           </Link>
         </h6>

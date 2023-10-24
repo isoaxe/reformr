@@ -53,7 +53,7 @@ export default function DateOfBirth() {
       </LocalizationProvider>
       <Button
         text="Ok"
-        link="/screening/ws07-sex-at-birth"
+        link="./ws07-sex-at-birth"
         state={{ dob }}
         isDisabled={isInvalid}
         quiz="screening"

@@ -48,7 +48,7 @@ export default function Hero() {
         <div className="w-fit">
           <Button
             text="Check Eligibility"
-            link="/screening"
+            link="/signup/screening"
             haloShade="light"
           />
         </div>
