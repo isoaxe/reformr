@@ -13,6 +13,7 @@ export default function Password({ password, setPassword }) {
       type={isVisible ? 'text' : 'password'}
       onChange={(e) => setPassword(e.target.value)}
       InputProps={{
+        className: 'text-xl md:text-2xl xl:text-3xl',
         endAdornment: (
           <InputAdornment position="end">
             <IconButton
