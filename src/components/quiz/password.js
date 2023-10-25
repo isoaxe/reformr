@@ -8,7 +8,6 @@ export default function Password({ password, setPassword }) {
   return (
     <TextField
       id="password-field"
-      label="Password"
       variant="standard"
       value={password}
       type={isVisible ? 'text' : 'password'}
