@@ -13,6 +13,7 @@
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
     "@formspree/react": "^2.5.1",
+    "@mui/icons-material": "^5.14.15",
     "@mui/material": "latest",
     "@mui/x-date-pickers": "^6.16.1",
     "firebase": "^10.4.0",
