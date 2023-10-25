@@ -26,7 +26,7 @@ export default function HighBmi() {
           You have a BMI of {cookies.get('bmi')} and are eligible for the
           Reformr weight loss program.
         </p>
-        <Button text="Create Account" link="/account" />
+        <Button text="Create Account" link="/signup/create-account" />
       </div>
     </main>
   );
