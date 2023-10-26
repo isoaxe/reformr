@@ -30,7 +30,6 @@ export default function Password({ password, setPassword }) {
               <IconButton
                 aria-label="toggle password visibility"
                 onClick={() => setVisible(!isVisible)}
-                edge="end"
               >
                 {isVisible ? <VisibilityOff /> : <Visibility />}
               </IconButton>
