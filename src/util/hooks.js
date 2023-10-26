@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useCookies } from 'next-client-cookies';
+import { authContext } from './context';
+import { auth } from './firebase';
 
 /* Checks if a provided key is on the cookie and saves to state if so. */
 export function useCookieState(quiz, stateName, setState) {
@@ -32,4 +34,56 @@ export function useFreshCookie(stateName, setState) {
       return () => clearInterval(interval);
     }
   }, [stateName, setState, cookies, staleCookie]);
+}
+
+/* Hook for child components to get the auth object and re-render when it changes. */
+export const useAuth = () => useContext(authContext);
+
+/* Provider hook that creates auth object and handles state. */
+export function useAuthProvider() {
+  const [user, setUser] = useState(null);
+
+  /* Wrap any Firebase methods we want to use making sure to save the user to state. */
+  async function signIn(email, password) {
+    const response = await auth.signInWithEmailAndPassword(email, password);
+    setUser(response.user);
+    return response.user;
+  }
+
+  async function signOut() {
+    await auth.signOut();
+    setUser(null);
+  }
+
+  async function sendPasswordResetEmail(email) {
+    await auth.sendPasswordResetEmail(email);
+    return true;
+  }
+
+  async function confirmPasswordReset(code, password) {
+    await auth.confirmPasswordReset(code, password);
+    return true;
+  }
+
+  /* Subscribe to user on mount. */
+  useEffect(() => {
+    function unsubscribe() {
+      auth.onAuthStateChanged((user) => {
+        if (user) setUser(user);
+        else setUser(null);
+      });
+    }
+
+    /* Cleanup subscription on unmount. */
+    return () => unsubscribe();
+  }, [setUser]);
+
+  /* Return the user object and auth methods. */
+  return {
+    user,
+    signIn,
+    signOut,
+    sendPasswordResetEmail,
+    confirmPasswordReset,
+  };
 }
