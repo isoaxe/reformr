@@ -13,15 +13,17 @@ export default function CreateAccount() {
   useCookieState('screening', 'email', setEmail);
 
   return (
-    <main>
-      <TextField
-        variant="standard"
-        value={email}
-        disabled={true}
-        sx={{ mb: 3 }}
-        InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
-      />
-      <Password password={password} setPassword={setPassword} />
+    <main className="flex w-full justify-center">
+      <section className="flex flex-col">
+        <TextField
+          variant="standard"
+          value={email}
+          disabled={true}
+          sx={{ mb: 8 }}
+          InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
+        />
+        <Password password={password} setPassword={setPassword} />
+      </section>
     </main>
   );
 }
