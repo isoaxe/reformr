@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { AuthProvider, ClientCookiesProvider } from './providers';
+import { AuthProvider, ClientCookiesProvider } from '@/util/providers';
 import { sohne } from '@/util/fonts';
 import './globals.css';
 
