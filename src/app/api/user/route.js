@@ -31,10 +31,15 @@ export async function GET(request) {
     const emailsData = emailSnap.data();
     const { docId } = emailsData;
 
-    /* Update account creation date and uid on Firestore. */
+    /* Update account creation date, uid and status on Firestore. */
     await setDoc(
       doc(db, 'users', docId),
       { dateAccountCreated: new Date(), userId: user.uid },
+      { merge: true }
+    );
+    await setDoc(
+      doc(db, 'emails', email),
+      { isAccountCreated: true },
       { merge: true }
     );
   } catch (err) {
