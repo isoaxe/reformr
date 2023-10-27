@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useCookies } from 'next-client-cookies';
 import { TextField } from '@mui/material';
 import { Button } from '@mui/material';
 import Password from '@/components/quiz/password';
@@ -11,12 +12,16 @@ export default function CreateAccount() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [helperText, setHelperText] = useState('');
+  const cookies = useCookies();
   const auth = useAuth();
 
   useCookieState('screening', 'email', setEmail);
 
   async function createPatientAccount() {
-    const res = await fetch(`/api/user?email=${email}&password=${password}`);
+    const token = cookies.get('token');
+    const res = await fetch(
+      `/api/user?email=${email}&password=${password}&token=${token}`
+    );
     const json = await res.json();
     if (json.success) await auth.signIn(email, password);
   }
