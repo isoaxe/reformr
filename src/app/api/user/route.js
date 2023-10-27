@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 import { auth } from '@/util/firebase';
 import { db } from '@/util/firebase';
@@ -12,9 +12,8 @@ export async function GET(request) {
   const token = searchParams.get('token');
 
   let success = false;
-  let error = '';
   try {
-    /* Get reCAPTCHA token from Firestore. */
+    /* Verify reCAPTCHA token against one from Firestore. */
     const captchasRef = doc(db, 'captchas', email);
     const captchaSnap = await getDoc(captchasRef);
     const captchasData = captchaSnap.data();
@@ -25,6 +24,19 @@ export async function GET(request) {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
     if (user) success = true;
+
+    /* Get docId from Firestore. */
+    const emailsRef = doc(db, 'emails', email);
+    const emailSnap = await getDoc(emailsRef);
+    const emailsData = emailSnap.data();
+    const { docId } = emailsData;
+
+    /* Update account creation date and uid on Firestore. */
+    await setDoc(
+      doc(db, 'users', docId),
+      { dateAccountCreated: new Date(), userId: user.uid },
+      { merge: true }
+    );
   } catch (err) {
     console.error('Error creating new user: ', err);
   }
