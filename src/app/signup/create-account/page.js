@@ -15,6 +15,12 @@ export default function CreateAccount() {
 
   useCookieState('screening', 'email', setEmail);
 
+  async function createPatientAccount() {
+    const res = await fetch(`/api/user?email=${email}&password=${password}`);
+    const json = await res.json();
+    if (json.success) await auth.signIn(email, password);
+  }
+
   return (
     <main className="flex w-full justify-center">
       <section className="flex flex-col">
@@ -34,7 +40,7 @@ export default function CreateAccount() {
         <Button
           variant="outlined"
           className="mt-8 w-fit text-lg md:text-xl"
-          onClick={() => auth.createPatientAccount(email, password)}
+          onClick={createPatientAccount}
           disabled={!password || !!helperText}
         >
           Create Account
