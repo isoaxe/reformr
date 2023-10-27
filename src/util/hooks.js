@@ -6,6 +6,7 @@ import {
   sendPasswordResetEmail,
   confirmPasswordReset,
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
 } from 'firebase/auth';
 import { authContext } from './context';
 import { auth } from './firebase';
@@ -85,7 +86,7 @@ export function useAuthProvider() {
   /* Subscribe to user on mount. */
   useEffect(() => {
     function unsubscribe() {
-      auth.onAuthStateChanged((user) => {
+      onAuthStateChanged(auth, (user) => {
         if (user) setUser(user);
         else setUser(null);
       });
