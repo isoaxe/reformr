@@ -24,7 +24,7 @@ service cloud.firestore {
       allow get;
       allow list: if false; // don't allow fetching of all emails
       allow create;
-      allow update: if false; // allow auth users in future
+      allow update: if isSameUser();
     }
     match /captchas/{userEmail} {
       allow get;
