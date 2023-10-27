@@ -10,6 +10,7 @@ import { useCookieState, useAuth } from '@/util/hooks';
 export default function CreateAccount() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [helperText, setHelperText] = useState('');
   const auth = useAuth();
 
   useCookieState('screening', 'email', setEmail);
@@ -24,12 +25,17 @@ export default function CreateAccount() {
           sx={{ mb: 8 }}
           InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
         />
-        <Password password={password} setPassword={setPassword} />
+        <Password
+          password={password}
+          setPassword={setPassword}
+          helperText={helperText}
+          setHelperText={setHelperText}
+        />
         <Button
           variant="outlined"
           className="mt-8 w-fit text-lg md:text-xl"
           onClick={() => auth.createPatientAccount(email, password)}
-          disabled={!password}
+          disabled={!password || helperText}
         >
           Create Account
         </Button>

@@ -3,16 +3,16 @@ import { TextField, InputAdornment, IconButton } from '@mui/material';
 import { FormHelperText } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-export default function Password({ password, setPassword }) {
+export default function Password(props) {
+  const { password, setPassword, helperText, setHelperText } = props;
   const [isVisible, setVisible] = useState(false);
-  const [helperText, setHelperText] = useState('');
 
   /* Display password validation in DOM as user types. */
   useEffect(() => {
     if (password && password.length < 12)
       setHelperText('Needs to be > 11 characters');
     else setHelperText('');
-  }, [password]);
+  }, [password, setHelperText]);
 
   return (
     <>
