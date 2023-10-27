@@ -35,7 +35,7 @@ export default function CreateAccount() {
           variant="outlined"
           className="mt-8 w-fit text-lg md:text-xl"
           onClick={() => auth.createPatientAccount(email, password)}
-          disabled={!password || helperText}
+          disabled={!password || !!helperText}
         >
           Create Account
         </Button>
