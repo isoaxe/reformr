@@ -11,7 +11,9 @@ service cloud.firestore {
       return hasKeys && validTypes;
     }
     function isSameUser() {
-    	return request.auth != null && request.auth.uid == resource.data.userId;
+      let docId = get(/databases/$(database)/documents/emails/$(request.auth.token.email)).data.docId;
+      let userId = get(/databases/$(database)/documents/users/$(docId)).data.userId;
+    	return request.auth != null && request.auth.uid == userId;
     }
     match /users/{userId} {
       allow read: if false;
