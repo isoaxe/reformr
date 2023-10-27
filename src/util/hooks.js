@@ -1,5 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
 import { useCookies } from 'next-client-cookies';
+import {
+  signInWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail,
+  confirmPasswordReset,
+  createUserWithEmailAndPassword,
+} from 'firebase/auth';
 import { authContext } from './context';
 import { auth } from './firebase';
 
@@ -45,33 +52,34 @@ export function useAuthProvider() {
 
   /* Wrap any Firebase methods we want to use making sure to save the user to state. */
   async function signIn(email, password) {
-    const response = await auth.signInWithEmailAndPassword(email, password);
+    const response = await signInWithEmailAndPassword(auth, email, password);
     setUser(response.user);
     return response.user;
   }
 
   async function signOut() {
-    await auth.signOut();
+    await signOut(auth);
     setUser(null);
   }
 
   async function sendPasswordResetEmail(email) {
-    await auth.sendPasswordResetEmail(email);
+    await sendPasswordResetEmail(auth, email);
     return true;
   }
 
   async function confirmPasswordReset(code, password) {
-    await auth.confirmPasswordReset(code, password);
+    await confirmPasswordReset(auth, code, password);
     return true;
   }
 
   async function createPatientAccount(email, password) {
-    const userCredential = await auth.createUserWithEmailAndPassword(
+    const response = await createUserWithEmailAndPassword(
+      auth,
       email,
       password
     );
-    const user = userCredential.user;
-    setUser(user);
+    setUser(response.user);
+    return response.user;
   }
 
   /* Subscribe to user on mount. */
