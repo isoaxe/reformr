@@ -65,6 +65,15 @@ export function useAuthProvider() {
     return true;
   }
 
+  async function createPatientAccount(email, password) {
+    const userCredential = await auth.createUserWithEmailAndPassword(
+      email,
+      password
+    );
+    const user = userCredential.user;
+    setUser(user);
+  }
+
   /* Subscribe to user on mount. */
   useEffect(() => {
     function unsubscribe() {
@@ -85,5 +94,6 @@ export function useAuthProvider() {
     signOut,
     sendPasswordResetEmail,
     confirmPasswordReset,
+    createPatientAccount,
   };
 }
