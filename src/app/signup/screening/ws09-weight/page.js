@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useCookies } from 'next-client-cookies';
 import { Button } from '@mui/material';
 import NumberInput from '@/components/quiz/number-input';
+import Toast from '@/components/toast';
 import { useCookieState } from '@/util/hooks';
 import { setQuizCookie } from '@/util/helpers';
 
@@ -14,6 +15,7 @@ export default function Weight() {
   const [nextPage, setNextPage] = useState('/');
   const [isInvalid, setInvalid] = useState(true);
   const [bmi, setBmi] = useState(null);
+  const [showFailure, setShowFailure] = useState(false);
   const cookies = useCookies();
 
   useCookieState('screening', 'weight', setWeight);
@@ -32,7 +34,9 @@ export default function Weight() {
         body: JSON.stringify({ screening, bmi, token }),
         headers: { 'content-type': 'application/json' },
       };
-      fetch('/api/screening', options);
+      const res = await fetch('/api/screening', options);
+      const { success } = await res.json();
+      if (!success) setShowFailure(true);
     } catch (err) {
       console.error('Error saving screening data: ', err);
     }
@@ -73,6 +77,13 @@ export default function Weight() {
       >
         Ok
       </Button>
+      <Toast
+        message="There was an issue saving data from the screening quiz. Please send us a message via the contact page."
+        severity="error"
+        open={showFailure}
+        setOpen={setShowFailure}
+        duration={6}
+      />
     </main>
   );
 }
