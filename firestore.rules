@@ -10,16 +10,21 @@ service cloud.firestore {
       let validTypes = screen.height is int && screen.weight is int && screen.bmi is float && screen.dateCreated is timestamp;
       return hasKeys && validTypes;
     }
+    function isSameUser() {
+      let docId = get(/databases/$(database)/documents/emails/$(request.auth.token.email)).data.docId;
+      let userId = get(/databases/$(database)/documents/users/$(docId)).data.userId;
+    	return request.auth != null && request.auth.uid == userId;
+    }
     match /users/{userId} {
       allow read: if false;
       allow create: if screeningDataVerified();
-      allow update: if resource.data.dateAccountCreated == null && screeningDataVerified(); // allow auth users in future
+      allow update: if resource.data.dateAccountCreated == null || isSameUser();
     }
     match /emails/{userEmail} {
       allow get;
       allow list: if false; // don't allow fetching of all emails
       allow create;
-      allow update: if false; // allow auth users in future
+      allow update: if isSameUser();
     }
     match /captchas/{userEmail} {
       allow get;
