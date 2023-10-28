@@ -3,11 +3,10 @@ import { NextResponse } from 'next/server';
 import { db } from '@/util/firebase';
 
 /* Save screening data to Firestore if token is valid. */
-export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const bmi = searchParams.get('bmi');
-  const token = searchParams.get('token');
-  const screeningAsString = searchParams.get('screening');
+export async function POST(request) {
+  const data = await request.json();
+  const { bmi, token } = data;
+  const screeningAsString = data.screening;
   const screening = JSON.parse(screeningAsString); // screening as JSON
 
   try {
