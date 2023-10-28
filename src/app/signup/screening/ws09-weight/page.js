@@ -74,6 +74,7 @@ export default function Weight() {
         onClick={saveScreeningData}
         variant="outlined"
         className="w-fit text-lg md:text-xl"
+        disabled={isInvalid || !weight} // enabled if weight is 50-500kg
       >
         Ok
       </Button>
