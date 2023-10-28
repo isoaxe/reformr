@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useCookies } from 'next-client-cookies';
+import { useRouter } from 'next/navigation';
 import { TextField } from '@mui/material';
 import { Button } from '@mui/material';
 import Password from '@/components/quiz/password';
@@ -14,6 +15,7 @@ export default function CreateAccount() {
   const [helperText, setHelperText] = useState('');
   const cookies = useCookies();
   const auth = useAuth();
+  const router = useRouter();
 
   useCookieState('screening', 'email', setEmail);
 
@@ -23,7 +25,10 @@ export default function CreateAccount() {
       `/api/user?email=${email}&password=${password}&token=${token}`
     );
     const json = await res.json();
-    if (json.success) await auth.signIn(email, password);
+
+    let user = null;
+    if (json.success) user = await auth.signIn(email, password);
+    if (user) router.push('/signup/payments');
   }
 
   return (
