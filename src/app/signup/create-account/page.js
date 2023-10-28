@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { TextField } from '@mui/material';
 import { Button } from '@mui/material';
 import Password from '@/components/quiz/password';
+import Toast from '@/components/toast';
 import { useCookieState, useAuth } from '@/util/hooks';
 
 /* Immutable email field and password field for account creation. */
@@ -13,6 +14,7 @@ export default function CreateAccount() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [helperText, setHelperText] = useState('');
+  const [showFailure, setShowFailure] = useState(false);
   const cookies = useCookies();
   const auth = useAuth();
   const router = useRouter();
@@ -29,6 +31,7 @@ export default function CreateAccount() {
     let user = null;
     if (json.success) user = await auth.signIn(email, password);
     if (user) router.push('/signup/payments');
+    else setShowFailure(true);
   }
 
   return (
@@ -55,6 +58,13 @@ export default function CreateAccount() {
         >
           Create Account
         </Button>
+        <Toast
+          message="There was an issue when creating your account. Please try again or send a message via the contact page."
+          severity="error"
+          open={showFailure}
+          setOpen={setShowFailure}
+          duration={6}
+        />
       </section>
     </main>
   );
