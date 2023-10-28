@@ -23,9 +23,12 @@ export default function CreateAccount() {
 
   async function createPatientAccount() {
     const token = cookies.get('token');
-    const res = await fetch(
-      `/api/user?email=${email}&password=${password}&token=${token}`
-    );
+    const options = {
+      method: 'POST',
+      body: JSON.stringify({ email, password, token }),
+      headers: { 'content-type': 'application/json' },
+    };
+    const res = await fetch('/api/user', options);
     const json = await res.json();
 
     let user = null;
