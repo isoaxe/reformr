@@ -5,7 +5,6 @@ import {
   signOut,
   sendPasswordResetEmail,
   confirmPasswordReset,
-  createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from 'firebase/auth';
 import { authContext } from './context';
