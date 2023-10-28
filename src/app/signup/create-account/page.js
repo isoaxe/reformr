@@ -29,7 +29,7 @@ export default function CreateAccount() {
     const json = await res.json();
 
     let user = null;
-    if (json.success) user = await auth.signIn(email, password);
+    if (json.success) user = await auth.login(email, password);
     if (user) router.push('/signup/payments');
     else setShowFailure(true);
   }

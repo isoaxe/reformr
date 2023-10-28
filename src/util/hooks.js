@@ -52,13 +52,13 @@ export function useAuthProvider() {
   const [user, setUser] = useState(null);
 
   /* Wrap any Firebase methods we want to use making sure to save the user to state. */
-  async function signIn(email, password) {
+  async function login(email, password) {
     const response = await signInWithEmailAndPassword(auth, email, password);
     setUser(response.user);
     return response.user;
   }
 
-  async function signOut() {
+  async function logout() {
     await signOut(auth);
     setUser(null);
   }
@@ -89,8 +89,8 @@ export function useAuthProvider() {
   /* Return the user object and auth methods. */
   return {
     user,
-    signIn,
-    signOut,
+    login,
+    logout,
     sendPasswordResetEmail,
     confirmPasswordReset,
   };
