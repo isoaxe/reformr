@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useCookies } from 'next-client-cookies';
-import Button from '@/components/quiz/button';
+import { Button } from '@mui/material';
 import NumberInput from '@/components/quiz/number-input';
 import { useCookieState } from '@/util/hooks';
+import { setQuizCookie } from '@/util/helpers';
 
 /* Collect weight of the user in kg as an integer. */
 export default function Weight() {
@@ -19,6 +20,7 @@ export default function Weight() {
   useCookieState('screening', 'height', setHeight);
 
   async function saveScreeningData() {
+    setQuizCookie('screening', { weight }, cookies);
     const screening = cookies.get('screening');
     const token = cookies.get('token');
     /* Save BMI as a separate cookie for next page. */
@@ -64,15 +66,13 @@ export default function Weight() {
         isError={isInvalid}
         placeholder={'85'}
       />
-      <div onClick={saveScreeningData}>
-        <Button
-          text="Ok"
-          link={nextPage}
-          state={{ weight }}
-          isDisabled={isInvalid || !weight} // enabled if weight is 50-500kg
-          quiz="screening"
-        />
-      </div>
+      <Button
+        onClick={saveScreeningData}
+        variant="outlined"
+        className="w-fit text-lg md:text-xl"
+      >
+        Ok
+      </Button>
     </main>
   );
 }
