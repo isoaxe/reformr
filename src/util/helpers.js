@@ -42,6 +42,19 @@ export async function saveToken(email) {
   return token;
 }
 
+/* Save new data to quiz cookie on client. */
+export function setQuizCookie(quiz, state, cookies) {
+  if (!state) return; // exit early as no state to add to cookie
+
+  const options = { expires: 7, sameSite: 'strict' }; // expires in one week
+  let quizCookieAsString = cookies.get(quiz) ?? '{}'; // cookie is stored as string
+  const quizCookie = JSON.parse(quizCookieAsString); // cookie as JSON object
+  const key = Object.keys(state)[0]; // get name of state, e.g. 'firstName'
+  quizCookie[key] = state[key]; // add state to cookie
+  quizCookieAsString = JSON.stringify(quizCookie); // convert back to string
+  cookies.set(quiz, quizCookieAsString, options); // cookie must be set as string
+}
+
 /*
  * Helpers for the helper functions. Only used within helpers.js and not exported.
  */

@@ -5,11 +5,9 @@ import { auth } from '@/util/firebase';
 import { db } from '@/util/firebase';
 
 /* Save screening data to Firestore if token is valid. */
-export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const email = searchParams.get('email');
-  const password = searchParams.get('password');
-  const token = searchParams.get('token');
+export async function POST(request) {
+  const data = await request.json();
+  const { email, password, token } = data;
 
   let success = false;
   try {

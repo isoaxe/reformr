@@ -19,9 +19,12 @@ export default function Captcha(props) {
   useEffect(() => {
     if (captchaToken) {
       (async () => {
-        const res = await fetch(
-          `/api/captcha?firstName=${firstName}&lastName=${lastName}&email=${email}&captchaToken=${captchaToken}`
-        );
+        const options = {
+          method: 'POST',
+          body: JSON.stringify({ firstName, lastName, email, captchaToken }),
+          headers: { 'content-type': 'application/json' },
+        };
+        const res = await fetch('/api/captcha', options);
         const json = await res.json();
         if (json.success) setToken(json.token);
       })();

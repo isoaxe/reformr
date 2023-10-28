@@ -1,13 +1,10 @@
 import { NextResponse } from 'next/server';
 import { saveEmailDoc, saveToken } from '@/util/helpers';
 
-/* Check if the reCAPTCHA token is correct with Google. */
-export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const firstName = searchParams.get('firstName');
-  const lastName = searchParams.get('lastName');
-  const email = searchParams.get('email');
-  const captchaToken = searchParams.get('captchaToken');
+/* Check if the reCAPTCHA token is correct and save email data to Firestore. */
+export async function POST(request) {
+  const data = await request.json();
+  const { firstName, lastName, email, captchaToken } = data;
 
   const baseUrl = 'https://www.google.com/recaptcha/api/siteverify';
   const fullUrl = `${baseUrl}?secret=${process.env.RECAPTCHA_SECRET}&response=${captchaToken}`;

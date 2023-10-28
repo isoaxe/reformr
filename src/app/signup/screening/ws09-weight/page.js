@@ -2,9 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { useCookies } from 'next-client-cookies';
-import Button from '@/components/quiz/button';
+import { useRouter } from 'next/navigation';
+import { Button } from '@mui/material';
 import NumberInput from '@/components/quiz/number-input';
+import Toast from '@/components/toast';
 import { useCookieState } from '@/util/hooks';
+import { setQuizCookie } from '@/util/helpers';
 
 /* Collect weight of the user in kg as an integer. */
 export default function Weight() {
@@ -13,19 +16,30 @@ export default function Weight() {
   const [nextPage, setNextPage] = useState('/');
   const [isInvalid, setInvalid] = useState(true);
   const [bmi, setBmi] = useState(null);
+  const [showFailure, setShowFailure] = useState(false);
   const cookies = useCookies();
+  const router = useRouter();
 
   useCookieState('screening', 'weight', setWeight);
   useCookieState('screening', 'height', setHeight);
 
   async function saveScreeningData() {
+    setQuizCookie('screening', { weight }, cookies);
     const screening = cookies.get('screening');
     const token = cookies.get('token');
     /* Save BMI as a separate cookie for next page. */
     cookies.set('bmi', bmi, { sameSite: 'strict' });
     try {
       /* Pass screening cookie and token generated after reCAPTCHA success. */
-      fetch(`/api/screening?screening=${screening}&bmi=${bmi}&token=${token}`);
+      const options = {
+        method: 'POST',
+        body: JSON.stringify({ screening, bmi, token }),
+        headers: { 'content-type': 'application/json' },
+      };
+      const res = await fetch('/api/screening', options);
+      const { success } = await res.json();
+      if (success) router.push(nextPage);
+      else setShowFailure(true);
     } catch (err) {
       console.error('Error saving screening data: ', err);
     }
@@ -59,15 +73,21 @@ export default function Weight() {
         isError={isInvalid}
         placeholder={'85'}
       />
-      <div onClick={saveScreeningData}>
-        <Button
-          text="Ok"
-          link={nextPage}
-          state={{ weight }}
-          isDisabled={isInvalid || !weight} // enabled if weight is 50-500kg
-          quiz="screening"
-        />
-      </div>
+      <Button
+        onClick={saveScreeningData}
+        variant="outlined"
+        className="w-fit text-lg md:text-xl"
+        disabled={isInvalid || !weight} // enabled if weight is 50-500kg
+      >
+        Ok
+      </Button>
+      <Toast
+        message="There was an issue saving data from the screening quiz. Please send us a message via the contact page."
+        severity="error"
+        open={showFailure}
+        setOpen={setShowFailure}
+        duration={6}
+      />
     </main>
   );
 }
