@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useCookies } from 'next-client-cookies';
+import { useRouter } from 'next/navigation';
 import { Button } from '@mui/material';
 import NumberInput from '@/components/quiz/number-input';
 import Toast from '@/components/toast';
@@ -17,6 +18,7 @@ export default function Weight() {
   const [bmi, setBmi] = useState(null);
   const [showFailure, setShowFailure] = useState(false);
   const cookies = useCookies();
+  const router = useRouter();
 
   useCookieState('screening', 'weight', setWeight);
   useCookieState('screening', 'height', setHeight);
@@ -36,7 +38,8 @@ export default function Weight() {
       };
       const res = await fetch('/api/screening', options);
       const { success } = await res.json();
-      if (!success) setShowFailure(true);
+      if (success) router.push(nextPage);
+      else setShowFailure(true);
     } catch (err) {
       console.error('Error saving screening data: ', err);
     }
