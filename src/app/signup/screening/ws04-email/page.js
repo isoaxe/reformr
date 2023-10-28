@@ -1,22 +1,24 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useCookies } from 'next-client-cookies';
 import { doc, getDoc } from 'firebase/firestore';
-import { Button as CheckEmailButton } from '@mui/material';
-import Button from '@/components/quiz/button';
+import { Button } from '@mui/material';
 import TextInput from '@/components/quiz/text-input';
 import Toast from '@/components/toast';
 import { useCookieState } from '@/util/hooks';
+import { setQuizCookie } from '@/util/helpers';
 import { db } from '@/util/firebase';
 
 /* Collect users email address. */
 export default function Email() {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
-  const [isEmailChecked, setEmailChecked] = useState(false);
   const [isInvalid, setInvalid] = useState(true);
   const [showFailureToast, setShowFailureToast] = useState(false);
-  const [showSuccessToast, setShowSuccessToast] = useState(false);
+  const cookies = useCookies();
+  const router = useRouter();
 
   useCookieState('screening', 'email', setEmail);
   useCookieState('screening', 'firstName', setFirstName);
@@ -24,21 +26,18 @@ export default function Email() {
   useEffect(() => {
     if (!/\S+@\S+\.\S+/.test(email)) setInvalid(true);
     else setInvalid(false);
-    setEmailChecked(false);
   }, [email]);
 
-  /* Show toast to confirm if email is ok based in whether account exists already. */
-  async function checkAccountCreated() {
+  /* Show error toast if account exists already, navigate to next page if not. */
+  async function nextPage() {
+    setQuizCookie('screening', { email }, cookies);
     const emailsRef = doc(db, 'emails', email);
     const emailSnap = await getDoc(emailsRef);
     let isAccountCreated = false;
     if (emailSnap.exists())
       isAccountCreated = emailSnap.data().isAccountCreated;
     if (isAccountCreated) setShowFailureToast(true);
-    else {
-      setShowSuccessToast(true);
-      setEmailChecked(true);
-    }
+    else router.push('./ws05-phone-number');
   }
 
   return (
@@ -52,37 +51,20 @@ export default function Email() {
         (spam sucks)
       </p>
       <TextInput text={email} setText={setEmail} isError={isInvalid} />
-      {/* Renders email checking button first. Replaced by usual one on success. */}
-      {!isEmailChecked ? (
-        <CheckEmailButton
-          onClick={checkAccountCreated}
-          variant="outlined"
-          className="w-fit text-lg md:text-xl"
-          disabled={isInvalid}
-        >
-          Check Email
-        </CheckEmailButton>
-      ) : (
-        <Button
-          text="Ok"
-          link="./ws05-phone-number"
-          state={{ email }}
-          isDisabled={isInvalid}
-          quiz="screening"
-        />
-      )}
+      <Button
+        onClick={nextPage}
+        variant="outlined"
+        className="w-fit text-lg md:text-xl"
+        disabled={isInvalid}
+      >
+        Ok
+      </Button>
       <Toast
         message="An account for this email has already been created. Please login or use a different email."
         severity="warning"
         open={showFailureToast}
         setOpen={setShowFailureToast}
         duration={6}
-      />
-      <Toast
-        message="This email is available."
-        severity="success"
-        open={showSuccessToast}
-        setOpen={setShowSuccessToast}
       />
     </main>
   );
