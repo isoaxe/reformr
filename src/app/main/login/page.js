@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TextField, Typography } from '@mui/material';
 import { Button } from '@mui/material';
 import Password from '@/components/quiz/password';
@@ -9,10 +9,16 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [helperText, setHelperText] = useState('');
+  const [isInvalidEmail, setInvalidEmail] = useState(false);
 
   async function login() {
     return null;
   }
+
+  useEffect(() => {
+    if (!/\S+@\S+\.\S+/.test(email)) setInvalidEmail(true);
+    else setInvalidEmail(false);
+  }, [email]);
 
   return (
     <main className="flex min-h-[calc(100vh-23rem)] items-center">
@@ -25,6 +31,7 @@ export default function Login() {
             </Typography>
           }
           value={email}
+          error={isInvalidEmail && !!email}
           onChange={(e) => setEmail(e.target.value)}
           sx={{ mb: 6 }}
           InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
@@ -39,7 +46,7 @@ export default function Login() {
           variant="outlined"
           className="mt-16 w-fit text-lg md:text-xl"
           onClick={login}
-          disabled={!password || !!helperText}
+          disabled={!password || !!helperText || isInvalidEmail}
         >
           Login
         </Button>
