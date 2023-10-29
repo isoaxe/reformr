@@ -1,8 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { TextField, Typography } from '@mui/material';
-import { Button } from '@mui/material';
+import { TextField, Typography, Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import Password from '@/components/quiz/password';
 import Toast from '@/components/toast';
