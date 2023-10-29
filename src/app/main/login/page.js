@@ -4,15 +4,17 @@ import { useState, useEffect } from 'react';
 import { TextField, Typography } from '@mui/material';
 import { Button } from '@mui/material';
 import Password from '@/components/quiz/password';
+import { useAuth } from '@/util/hooks';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [helperText, setHelperText] = useState('');
   const [isInvalidEmail, setInvalidEmail] = useState(false);
+  const auth = useAuth();
 
-  async function login() {
-    return null;
+  async function signIn() {
+    await auth.login(email, password);
   }
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export default function Login() {
         <Button
           variant="outlined"
           className="mt-16 w-fit text-lg md:text-xl"
-          onClick={login}
+          onClick={signIn}
           disabled={!password || !!helperText || isInvalidEmail}
         >
           Login
