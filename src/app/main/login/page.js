@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { TextField } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import { Button } from '@mui/material';
 import Password from '@/components/quiz/password';
 
@@ -19,6 +19,11 @@ export default function Login() {
       <div className="mx-auto flex w-full max-w-md flex-col px-4 py-28 xs:px-9 sm:max-w-lg">
         <TextField
           variant="standard"
+          label={
+            <Typography className="text-lg md:text-xl xl:text-2xl">
+              Email
+            </Typography>
+          }
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           sx={{ mb: 8 }}
