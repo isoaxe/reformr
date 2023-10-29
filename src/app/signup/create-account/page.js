@@ -16,7 +16,7 @@ export default function CreateAccount() {
   const [helperText, setHelperText] = useState('');
   const [showFailure, setShowFailure] = useState(false);
   const cookies = useCookies();
-  const auth = useAuth();
+  const { login } = useAuth();
   const router = useRouter();
 
   useCookieState('screening', 'email', setEmail);
@@ -32,7 +32,7 @@ export default function CreateAccount() {
     const json = await res.json();
 
     let user = null;
-    if (json.success) user = await auth.login(email, password);
+    if (json.success) user = await login(email, password);
     if (user) router.push('/signup/payments');
     else setShowFailure(true);
   }
@@ -44,7 +44,7 @@ export default function CreateAccount() {
           variant="standard"
           value={email}
           disabled={true}
-          sx={{ mb: 8 }}
+          sx={{ mb: 6 }}
           InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
         />
         <Password
@@ -55,7 +55,7 @@ export default function CreateAccount() {
         />
         <Button
           variant="outlined"
-          className="mt-8 w-fit text-lg md:text-xl"
+          className="mt-16 w-fit text-lg md:text-xl"
           onClick={createPatientAccount}
           disabled={!password || !!helperText}
         >

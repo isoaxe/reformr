@@ -1,9 +1,94 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { TextField, Typography, Button } from '@mui/material';
+import { useRouter } from 'next/navigation';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import Password from '@/components/quiz/password';
+import Toast from '@/components/toast';
+import { useAuth } from '@/util/hooks';
+import { auth } from '@/util/firebase';
+
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [helperText, setHelperText] = useState('');
+  const [isInvalidEmail, setInvalidEmail] = useState(false);
+  const [showFailure, setShowFailure] = useState(false); // toast message for login failure
+  const [showSuccess, setShowSuccess] = useState(false); // toast message for password reset
+  const { login } = useAuth();
+  const router = useRouter();
+
+  async function signIn() {
+    try {
+      const user = await login(email, password);
+      if (user) router.push('/signup/payments'); // TODO: redirect to dashboard
+    } catch (error) {
+      console.log(error);
+      setShowFailure(true);
+    }
+  }
+
+  function passwordReset() {
+    sendPasswordResetEmail(auth, email);
+    setShowSuccess(true);
+  }
+
+  useEffect(() => {
+    if (!/\S+@\S+\.\S+/.test(email)) setInvalidEmail(true);
+    else setInvalidEmail(false);
+  }, [email]);
+
   return (
-    <main className="min-h-screen">
-      <h1 className="p-4 text-2xl md:p-8 md:text-4xl">
-        This is the <span className="font-bold text-blue-600">Login</span> page
-      </h1>
+    <main className="flex min-h-[calc(100vh-23rem)] items-center">
+      <div className="mx-auto flex w-full max-w-md flex-col px-4 py-28 xs:px-9 sm:max-w-lg">
+        <TextField
+          variant="standard"
+          label={
+            <Typography className="text-lg md:text-xl xl:text-2xl">
+              Email
+            </Typography>
+          }
+          value={email}
+          error={isInvalidEmail && !!email}
+          onChange={(e) => setEmail(e.target.value)}
+          sx={{ mb: 6 }}
+          InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
+        />
+        <Password
+          password={password}
+          setPassword={setPassword}
+          helperText={helperText}
+          setHelperText={setHelperText}
+        />
+        <Button
+          variant="outlined"
+          className="mt-16 w-fit text-lg md:text-xl"
+          onClick={signIn}
+          disabled={!password || !!helperText || isInvalidEmail}
+        >
+          Login
+        </Button>
+        <p
+          className="mt-10 text-sm text-blue-600 hover:cursor-pointer hover:underline sm:text-base"
+          onClick={passwordReset}
+        >
+          Forgot Password?
+        </p>
+      </div>
+      <Toast
+        message="There was an error logging in. Please check that your email and password are correct."
+        severity="error"
+        open={showFailure}
+        setOpen={setShowFailure}
+        duration={6}
+      />
+      <Toast
+        message="Password reset email sent."
+        severity="success"
+        open={showSuccess}
+        setOpen={setShowSuccess}
+      />
     </main>
   );
 }

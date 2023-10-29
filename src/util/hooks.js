@@ -3,8 +3,6 @@ import { useCookies } from 'next-client-cookies';
 import {
   signInWithEmailAndPassword,
   signOut,
-  sendPasswordResetEmail,
-  confirmPasswordReset,
   onAuthStateChanged,
 } from 'firebase/auth';
 import { authContext } from './context';
@@ -62,16 +60,6 @@ export function useAuthProvider() {
     setUser(null);
   }
 
-  async function sendPasswordResetEmail(email) {
-    await sendPasswordResetEmail(auth, email);
-    return true;
-  }
-
-  async function confirmPasswordReset(code, password) {
-    await confirmPasswordReset(auth, code, password);
-    return true;
-  }
-
   /* Subscribe to user on mount. */
   useEffect(() => {
     function unsubscribe() {
@@ -90,7 +78,5 @@ export function useAuthProvider() {
     user,
     login,
     logout,
-    sendPasswordResetEmail,
-    confirmPasswordReset,
   };
 }

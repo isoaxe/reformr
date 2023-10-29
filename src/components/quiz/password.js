@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { TextField, InputAdornment, IconButton } from '@mui/material';
-import { FormHelperText } from '@mui/material';
+import { FormHelperText, Typography } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 export default function Password(props) {
@@ -19,6 +19,11 @@ export default function Password(props) {
       <TextField
         id="password-field"
         variant="standard"
+        label={
+          <Typography className="text-lg md:text-xl xl:text-2xl">
+            Password
+          </Typography>
+        }
         value={password}
         type={isVisible ? 'text' : 'password'}
         onChange={(e) => setPassword(e.target.value)}
