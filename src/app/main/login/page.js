@@ -14,7 +14,8 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [helperText, setHelperText] = useState('');
   const [isInvalidEmail, setInvalidEmail] = useState(false);
-  const [showFailure, setShowFailure] = useState(false);
+  const [showFailure, setShowFailure] = useState(false); // toast message for login failure
+  const [showSuccess, setShowSuccess] = useState(false); // toast message for password reset
   const { login } = useAuth();
   const router = useRouter();
 
@@ -30,6 +31,7 @@ export default function Login() {
 
   function passwordReset() {
     sendPasswordResetEmail(auth, email);
+    setShowSuccess(true);
   }
 
   useEffect(() => {
@@ -80,6 +82,12 @@ export default function Login() {
         open={showFailure}
         setOpen={setShowFailure}
         duration={6}
+      />
+      <Toast
+        message="Password reset email sent."
+        severity="success"
+        open={showSuccess}
+        setOpen={setShowSuccess}
       />
     </main>
   );
