@@ -15,7 +15,7 @@ export async function POST(request) {
     const captchasRef = doc(db, 'captchas', email);
     const captchaSnap = await getDoc(captchasRef);
     const captchasData = captchaSnap.data();
-    const savedToken = captchasData.token;
+    const savedToken = captchasData?.token;
     if (token !== savedToken || token.length !== 50)
       return NextResponse.json({ success, error: 'Invalid reCAPTCHA token' });
 
