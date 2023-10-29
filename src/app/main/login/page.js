@@ -5,6 +5,7 @@ import { TextField, Typography } from '@mui/material';
 import { Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import Password from '@/components/quiz/password';
+import Toast from '@/components/toast';
 import { useAuth } from '@/util/hooks';
 
 export default function Login() {
@@ -12,12 +13,18 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [helperText, setHelperText] = useState('');
   const [isInvalidEmail, setInvalidEmail] = useState(false);
+  const [showFailure, setShowFailure] = useState(false);
   const auth = useAuth();
   const router = useRouter();
 
   async function signIn() {
-    const user = await auth.login(email, password);
-    if (user) router.push('/signup/payments'); // TODO: redirect to dashboard
+    try {
+      const user = await auth.login(email, password);
+      if (user) router.push('/signup/payments'); // TODO: redirect to dashboard
+    } catch (error) {
+      console.log(error);
+      setShowFailure(true);
+    }
   }
 
   useEffect(() => {
@@ -56,6 +63,13 @@ export default function Login() {
           Login
         </Button>
       </div>
+      <Toast
+        message="There was an error logging in. Please check that your email and password are correct."
+        severity="error"
+        open={showFailure}
+        setOpen={setShowFailure}
+        duration={6}
+      />
     </main>
   );
 }
