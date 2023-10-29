@@ -3,9 +3,11 @@
 import { useState, useEffect } from 'react';
 import { TextField, Typography, Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
+import { sendPasswordResetEmail } from 'firebase/auth';
 import Password from '@/components/quiz/password';
 import Toast from '@/components/toast';
 import { useAuth } from '@/util/hooks';
+import { auth } from '@/util/firebase';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -13,17 +15,21 @@ export default function Login() {
   const [helperText, setHelperText] = useState('');
   const [isInvalidEmail, setInvalidEmail] = useState(false);
   const [showFailure, setShowFailure] = useState(false);
-  const auth = useAuth();
+  const { login } = useAuth();
   const router = useRouter();
 
   async function signIn() {
     try {
-      const user = await auth.login(email, password);
+      const user = await login(email, password);
       if (user) router.push('/signup/payments'); // TODO: redirect to dashboard
     } catch (error) {
       console.log(error);
       setShowFailure(true);
     }
+  }
+
+  function passwordReset() {
+    sendPasswordResetEmail(auth, email);
   }
 
   useEffect(() => {
@@ -61,6 +67,12 @@ export default function Login() {
         >
           Login
         </Button>
+        <p
+          className="mt-10 text-blue-600 hover:cursor-pointer hover:underline"
+          onClick={passwordReset}
+        >
+          Forgot Password?
+        </p>
       </div>
       <Toast
         message="There was an error logging in. Please check that your email and password are correct."
