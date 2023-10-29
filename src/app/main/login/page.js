@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { TextField, Typography } from '@mui/material';
 import { Button } from '@mui/material';
+import { useRouter } from 'next/navigation';
 import Password from '@/components/quiz/password';
 import { useAuth } from '@/util/hooks';
 
@@ -12,9 +13,11 @@ export default function Login() {
   const [helperText, setHelperText] = useState('');
   const [isInvalidEmail, setInvalidEmail] = useState(false);
   const auth = useAuth();
+  const router = useRouter();
 
   async function signIn() {
-    await auth.login(email, password);
+    const user = await auth.login(email, password);
+    if (user) router.push('/signup/payments'); // TODO: redirect to dashboard
   }
 
   useEffect(() => {
