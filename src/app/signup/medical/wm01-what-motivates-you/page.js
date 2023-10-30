@@ -44,7 +44,6 @@ export default function WhatMotivatesYou() {
         sx={{ mb: 3, width: 'fit-content' }}
       >
         <FormControlLabel
-          value="physical-appearance"
           name="A"
           checked={A}
           onChange={handleChange}
@@ -52,7 +51,6 @@ export default function WhatMotivatesYou() {
           label={<FormLabel label="Physical appearance" />}
         />
         <FormControlLabel
-          value="physical-health"
           name="B"
           checked={B}
           onChange={handleChange}
@@ -60,7 +58,6 @@ export default function WhatMotivatesYou() {
           label={<FormLabel label="Physical health" />}
         />
         <FormControlLabel
-          value="mental-health"
           name="C"
           checked={C}
           onChange={handleChange}
@@ -68,7 +65,6 @@ export default function WhatMotivatesYou() {
           label={<FormLabel label="Mental health" />}
         />
         <FormControlLabel
-          value="feel-better-day-to-day"
           name="D"
           checked={D}
           onChange={handleChange}
@@ -76,7 +72,6 @@ export default function WhatMotivatesYou() {
           label={<FormLabel label="Feeling better day-to-day" />}
         />
         <FormControlLabel
-          value="family-friends"
           name="E"
           checked={E}
           onChange={handleChange}
@@ -84,7 +79,6 @@ export default function WhatMotivatesYou() {
           label={<FormLabel label="Family / friends" />}
         />
         <FormControlLabel
-          value="work"
           name="F"
           checked={F}
           onChange={handleChange}
@@ -92,7 +86,6 @@ export default function WhatMotivatesYou() {
           label={<FormLabel label="Work" />}
         />
         <FormControlLabel
-          value="other"
           name="G"
           checked={G}
           onChange={handleChange}
