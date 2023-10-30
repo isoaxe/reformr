@@ -19,7 +19,7 @@ export default function DeepDive() {
         <p className="my-6">
           Let&apos;s dive a bit deeper into your weight loss journey.
         </p>
-        <Button text="Continue" link="./medical/wm01-what-motivates-you" />
+        <Button text="Continue" link="./wm01-what-motivates-you" />
       </div>
     </main>
   );
