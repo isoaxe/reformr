@@ -24,7 +24,7 @@ export default function WhatMotivatesYou() {
     setAnswers({ ...answers, [e.target.name]: e.target.checked });
   }
 
-  useCookieState('medical', 'wm01-what-motivates-you', setAnswers);
+  useCookieState('medical', 'wm01_what_motivates_you', setAnswers);
 
   const FormLabel = ({ label }) => (
     <Typography className="mt-1 text-lg md:text-xl xl:text-2xl">
@@ -103,7 +103,7 @@ export default function WhatMotivatesYou() {
       <Button
         text="Ok"
         link="./wm02-when-last-ideal-weight"
-        state={{ answers }}
+        state={{ wm01_what_motivates_you: answers }}
         isDisabled={!A && !B && !C && !D && !E && !F && !G}
         quiz="medical"
       />
