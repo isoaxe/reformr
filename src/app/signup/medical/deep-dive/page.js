@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Button from '@/components/quiz/button';
 import womanOnRock from '/public/images/woman-on-rock.jpg';
 
-/* This is the intro to the first of 3 sections for the medical quiz. */
+/* This is the intro to the first of three sections for the medical quiz. */
 export default function DeepDive() {
   return (
     <main className="flex w-full max-w-5xl flex-col sm:flex-row">
