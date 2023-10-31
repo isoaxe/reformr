@@ -7,7 +7,8 @@ import { useCookieState } from '@/util/hooks';
 
 /* Choose a single answer from a list. */
 export default function RadioList(props) {
-  const { heading, subheading, questionId, answerLabels, nextPage } = props;
+  const { heading, subheading = '', answerLabels } = props;
+  const { questionId, nextPage } = props;
   const [answer, setAnswer] = useState('');
 
   useCookieState('medical', questionId, setAnswer);
