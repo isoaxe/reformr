@@ -26,7 +26,10 @@ export default function WhatMotivatesYou() {
 
   useCookieState('medical', 'wm01_what_motivates_you', setAnswers);
 
-  function CheckboxOption({ name, checked, label }) {
+  function CheckboxOption({ state, label }) {
+    const name = Object.keys(state)[0];
+    const checked = state[name];
+
     return (
       <FormControlLabel
         name={name}
@@ -53,17 +56,13 @@ export default function WhatMotivatesYou() {
         name="choose-motivation"
         sx={{ mb: 3, width: 'fit-content' }}
       >
-        <CheckboxOption name="A" checked={A} label="Physical appearance" />
-        <CheckboxOption name="B" checked={B} label="Physical health" />
-        <CheckboxOption name="C" checked={C} label="Mental health" />
-        <CheckboxOption
-          name="D"
-          checked={D}
-          label="Feeling better day-to-day"
-        />
-        <CheckboxOption name="E" checked={E} label="Family / friends" />
-        <CheckboxOption name="F" checked={F} label="Work" />
-        <CheckboxOption name="G" checked={G} label="Other" />
+        <CheckboxOption state={{ A }} label="Physical appearance" />
+        <CheckboxOption state={{ B }} label="Physical health" />
+        <CheckboxOption state={{ C }} label="Mental health" />
+        <CheckboxOption state={{ D }} label="Feeling better day-to-day" />
+        <CheckboxOption state={{ E }} label="Family / friends" />
+        <CheckboxOption state={{ F }} label="Work" />
+        <CheckboxOption state={{ G }} label="Other" />
       </FormGroup>
       <Button
         text="Ok"
