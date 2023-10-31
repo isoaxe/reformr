@@ -26,11 +26,21 @@ export default function WhatMotivatesYou() {
 
   useCookieState('medical', 'wm01_what_motivates_you', setAnswers);
 
-  const FormLabel = ({ label }) => (
-    <Typography className="mt-1 text-lg md:text-xl xl:text-2xl">
-      {label}
-    </Typography>
-  );
+  function CheckboxOption({ name, checked, label }) {
+    return (
+      <FormControlLabel
+        name={name}
+        checked={checked}
+        onChange={handleChange}
+        control={<Checkbox />}
+        label={
+          <Typography className="mt-1 text-lg md:text-xl xl:text-2xl">
+            {label}
+          </Typography>
+        }
+      />
+    );
+  }
 
   return (
     <main className="mx-auto flex flex-col">
@@ -43,55 +53,17 @@ export default function WhatMotivatesYou() {
         name="choose-motivation"
         sx={{ mb: 3, width: 'fit-content' }}
       >
-        <FormControlLabel
-          name="A"
-          checked={A}
-          onChange={handleChange}
-          control={<Checkbox />}
-          label={<FormLabel label="Physical appearance" />}
-        />
-        <FormControlLabel
-          name="B"
-          checked={B}
-          onChange={handleChange}
-          control={<Checkbox />}
-          label={<FormLabel label="Physical health" />}
-        />
-        <FormControlLabel
-          name="C"
-          checked={C}
-          onChange={handleChange}
-          control={<Checkbox />}
-          label={<FormLabel label="Mental health" />}
-        />
-        <FormControlLabel
+        <CheckboxOption name="A" checked={A} label="Physical appearance" />
+        <CheckboxOption name="B" checked={B} label="Physical health" />
+        <CheckboxOption name="C" checked={C} label="Mental health" />
+        <CheckboxOption
           name="D"
           checked={D}
-          onChange={handleChange}
-          control={<Checkbox />}
-          label={<FormLabel label="Feeling better day-to-day" />}
+          label="Feeling better day-to-day"
         />
-        <FormControlLabel
-          name="E"
-          checked={E}
-          onChange={handleChange}
-          control={<Checkbox />}
-          label={<FormLabel label="Family / friends" />}
-        />
-        <FormControlLabel
-          name="F"
-          checked={F}
-          onChange={handleChange}
-          control={<Checkbox />}
-          label={<FormLabel label="Work" />}
-        />
-        <FormControlLabel
-          name="G"
-          checked={G}
-          onChange={handleChange}
-          control={<Checkbox />}
-          label={<FormLabel label="Other" />}
-        />
+        <CheckboxOption name="E" checked={E} label="Family / friends" />
+        <CheckboxOption name="F" checked={F} label="Work" />
+        <CheckboxOption name="G" checked={G} label="Other" />
       </FormGroup>
       <Button
         text="Ok"
