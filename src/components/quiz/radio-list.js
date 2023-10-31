@@ -48,7 +48,7 @@ export default function RadioList(props) {
       </RadioGroup>
       <Button
         text="Ok"
-        link={nextPage}
+        link={'./' + nextPage}
         state={{ [questionId]: answer }}
         isDisabled={!answer}
         quiz="medical"
