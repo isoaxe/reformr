@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Slider } from '@mui/material';
+import Button from '@/components/quiz/button';
 
 export default function HowWeightAffects() {
   const [answers, setAnswers] = useState({
@@ -38,7 +39,14 @@ export default function HowWeightAffects() {
   }
 
   return (
-    <main className="m-auto w-full max-w-xl">
+    <main className="m-auto w-full max-w-2xl">
+      <p className="mb-2">
+        How much would you say your weight is{' '}
+        <span className="font-semibold">affecting the following:</span>
+      </p>
+      <p className="mb-14 text-lg text-slate-700 md:text-xl xl:text-2xl">
+        Rank each from 1 (minimum impact) to 5 (maximum impact).
+      </p>
       <SliderWithLabel label="Physical health" value={A} name="A" />
       <SliderWithLabel label="Mental health" value={B} name="B" />
       <SliderWithLabel label="Socialising" value={C} name="C" />
@@ -46,6 +54,14 @@ export default function HowWeightAffects() {
       <SliderWithLabel label="Employment" value={E} name="E" />
       <SliderWithLabel label="Family activities" value={F} name="F" />
       <SliderWithLabel label="Exercise" value={G} name="G" />
+      <div className="invisible h-14">This is a spacer - for layout only</div>
+      <Button
+        text="Ok"
+        link="./wm04-freq-loss-of-control"
+        state={{ wm03_how_weight_affects: answers }}
+        isDisabled={!A || !B || !C || !D || !E || !F || !G}
+        quiz="medical"
+      />
     </main>
   );
 }
