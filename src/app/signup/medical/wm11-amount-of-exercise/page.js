@@ -2,7 +2,7 @@ import RadioList from '@/components/quiz/radio-list';
 
 export default function AmountOfExercise() {
   const heading = [
-    'how may hours of',
+    'How may hours of',
     'moderate physical activity',
     'do you do in a week?',
   ];
