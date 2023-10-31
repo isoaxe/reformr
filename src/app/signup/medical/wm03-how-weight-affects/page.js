@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Slider } from '@mui/material';
 import Button from '@/components/quiz/button';
+import { useCookieState } from '@/util/hooks';
 
 export default function HowWeightAffects() {
   const [answers, setAnswers] = useState({
@@ -20,6 +21,8 @@ export default function HowWeightAffects() {
   function handleChange(e) {
     setAnswers({ ...answers, [e.target.name]: e.target.value });
   }
+
+  useCookieState('medical', 'wm03_how_weight_affects', setAnswers);
 
   function SliderWithLabel({ label, value, name }) {
     return (
