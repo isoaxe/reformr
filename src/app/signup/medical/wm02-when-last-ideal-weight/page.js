@@ -14,11 +14,19 @@ export default function WhenLastIdealWeight() {
 
   useCookieState('medical', 'wm02_when_last_ideal_weight', setAnswer);
 
-  const FormLabel = ({ label }) => (
-    <Typography className="mt-1 text-lg md:text-xl xl:text-2xl">
-      {label}
-    </Typography>
-  );
+  function RadioOption({ label }) {
+    return (
+      <FormControlLabel
+        value={label} // value saved can be the same as label
+        control={<Radio />}
+        label={
+          <Typography className="mt-1 text-lg md:text-xl xl:text-2xl">
+            {label}
+          </Typography>
+        }
+      />
+    );
+  }
 
   return (
     <main className="mx-auto flex flex-col">
@@ -33,26 +41,10 @@ export default function WhenLastIdealWeight() {
         onChange={(e) => setAnswer(e.target.value)}
         sx={{ mb: 3, width: 'fit-content' }}
       >
-        <FormControlLabel
-          value="less_than_1_year_ago"
-          control={<Radio />}
-          label={<FormLabel label="Less than 1 year ago" />}
-        />
-        <FormControlLabel
-          value="1_to_5_years_ago"
-          control={<Radio />}
-          label={<FormLabel label="1-5 years ago" />}
-        />
-        <FormControlLabel
-          value="6_to_10_years_ago"
-          control={<Radio />}
-          label={<FormLabel label="6-10 years ago" />}
-        />
-        <FormControlLabel
-          value="more_than_10_years_ago"
-          control={<Radio />}
-          label={<FormLabel label="More than 10 years ago" />}
-        />
+        <RadioOption label="Less than 1 year ago" />
+        <RadioOption label="1-5 years ago" />
+        <RadioOption label="6-10 years ago" />
+        <RadioOption label="More than 10 years ago" />
       </RadioGroup>
       <Button
         text="Ok"
