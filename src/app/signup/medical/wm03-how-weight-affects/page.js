@@ -49,10 +49,10 @@ export default function HowWeightAffects() {
   }
 
   return (
-    <main className="m-auto w-full max-w-2xl">
+    <main className="m-auto max-w-2xl">
       <p className="mb-2">
-        How much would you say your weight is{' '}
-        <span className="font-semibold">affecting the following:</span>
+        How much would you say your weight is
+        <span className="font-semibold"> affecting the following:</span>
       </p>
       <p className="mb-14 text-lg text-slate-700 md:text-xl xl:text-2xl">
         Rank each from 1 (minimum impact) to 5 (maximum impact).

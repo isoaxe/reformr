@@ -29,10 +29,10 @@ export default function WhenLastIdealWeight() {
   }
 
   return (
-    <main className="mx-auto flex flex-col">
+    <main className="mx-auto flex max-w-2xl flex-col">
       <p className="mb-6">
-        When were you last at your{' '}
-        <span className="font-semibold">ideal weight</span>?
+        When were you last at your
+        <span className="font-semibold"> ideal weight</span>?
       </p>
       <RadioGroup
         aria-labelledby="when-last-ideal-weight-label"

@@ -12,7 +12,7 @@ export default function ExtentOfFoodDomination() {
   useCookieState('medical', 'wm05_extent_of_food_domination', setAnswer);
 
   return (
-    <main className="m-auto w-full max-w-2xl">
+    <main className="m-auto max-w-2xl">
       <p className="mb-2">
         To what extent would you say that food
         <span className="font-semibold"> dominates your life</span>?

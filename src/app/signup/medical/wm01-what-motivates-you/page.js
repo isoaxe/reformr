@@ -46,7 +46,7 @@ export default function WhatMotivatesYou() {
   }
 
   return (
-    <main className="mx-auto flex flex-col">
+    <main className="mx-auto flex max-w-2xl flex-col">
       <p className="mb-6">
         So...what <span className="font-semibold">motivates you</span> to lose
         weight?

@@ -29,10 +29,10 @@ export default function FreqLossOfControl() {
   }
 
   return (
-    <main className="mx-auto flex w-full max-w-2xl flex-col">
+    <main className="mx-auto flex max-w-2xl flex-col">
       <p className="mb-6">
-        Do you ever feel like you have{' '}
-        <span className="font-semibold">lost control over what you eat</span>?
+        Do you ever feel like you have
+        <span className="font-semibold"> lost control over what you eat</span>?
       </p>
       <RadioGroup
         value={answer}
