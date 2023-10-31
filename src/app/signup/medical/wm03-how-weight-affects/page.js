@@ -5,6 +5,7 @@ import { Slider } from '@mui/material';
 import Button from '@/components/quiz/button';
 import { useCookieState } from '@/util/hooks';
 
+/* Multiple questions with a 1-5 range response. */
 export default function HowWeightAffects() {
   const [answers, setAnswers] = useState({
     A: 0,
@@ -27,7 +28,13 @@ export default function HowWeightAffects() {
   function SliderWithLabel({ label, value, name }) {
     return (
       <div className="mb-3 flex flex-row items-center justify-between">
-        <p className="w-64 text-lg md:text-xl xl:w-96 xl:text-2xl">{label}</p>
+        <p
+          className={`w-64 text-lg md:text-xl xl:w-96 xl:text-2xl ${
+            !answers[name] ? 'text-slate-400' : ''
+          }`}
+        >
+          {label}
+        </p>
         <Slider
           valueLabelDisplay="auto"
           min={1}
