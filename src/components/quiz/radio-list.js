@@ -15,7 +15,7 @@ export default function RadioList(props) {
   function RadioOption({ label }) {
     return (
       <FormControlLabel
-        value={label}
+        value={label} // value saved can be the same as label
         control={<Radio />}
         label={
           <Typography className="mt-1 text-lg md:text-xl xl:text-2xl">
