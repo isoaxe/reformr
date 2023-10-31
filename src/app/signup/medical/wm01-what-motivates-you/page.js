@@ -51,11 +51,7 @@ export default function WhatMotivatesYou() {
         So...what <span className="font-semibold">motivates you</span> to lose
         weight?
       </p>
-      <FormGroup
-        aria-labelledby="choose-motivation-label"
-        name="choose-motivation"
-        sx={{ mb: 3, width: 'fit-content' }}
-      >
+      <FormGroup sx={{ mb: 3, width: 'fit-content' }}>
         <CheckboxOption state={{ A }} label="Physical appearance" />
         <CheckboxOption state={{ B }} label="Physical health" />
         <CheckboxOption state={{ C }} label="Mental health" />

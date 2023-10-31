@@ -35,8 +35,6 @@ export default function WhenLastIdealWeight() {
         <span className="font-semibold"> ideal weight</span>?
       </p>
       <RadioGroup
-        aria-labelledby="when-last-ideal-weight-label"
-        name="when-last-ideal-weight"
         value={answer}
         onChange={(e) => setAnswer(e.target.value)}
         sx={{ mb: 3, width: 'fit-content' }}
