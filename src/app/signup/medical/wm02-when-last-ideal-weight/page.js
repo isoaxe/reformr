@@ -12,7 +12,7 @@ import { useCookieState } from '@/util/hooks';
 export default function WhenLastIdealWeight() {
   const [answer, setAnswer] = useState('');
 
-  useCookieState('screening', 'wm02_when_last_ideal_weight', setAnswer);
+  useCookieState('medical', 'wm02_when_last_ideal_weight', setAnswer);
 
   const FormLabel = ({ label }) => (
     <Typography className="mt-1 text-lg md:text-xl xl:text-2xl">
