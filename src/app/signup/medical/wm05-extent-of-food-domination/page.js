@@ -17,10 +17,10 @@ export default function ExtentOfFoodDomination() {
         To what extent would you say that food
         <span className="font-semibold"> dominates your life</span>?
       </p>
-      <p className="mb-14 text-lg text-slate-700 md:text-xl xl:text-2xl">
+      <p className="text-lg text-slate-700 md:text-xl xl:text-2xl">
         Rank from 1 (minimum impact) to 10 (maximum impact).
       </p>
-      <div className="mb-3 flex flex-row items-center justify-between">
+      <div className="my-16 flex flex-row items-center justify-between">
         <Slider
           valueLabelDisplay="on"
           min={1}
@@ -30,7 +30,6 @@ export default function ExtentOfFoodDomination() {
           onChange={(e) => setAnswer(e.target.value)}
         />
       </div>
-      <div className="invisible h-14">This is a spacer - for layout only</div>
       <Button
         text="Ok"
         link="./wm06-weight-loss-techniques"
