@@ -9,16 +9,19 @@ import { authContext } from './context';
 import { auth } from './firebase';
 
 /* Checks if a provided key is on the cookie and saves to state if so. */
-export function useCookieState(quiz, stateName, setState) {
+export function useCookieState(quiz, stateName, setState, delay = 0) {
   const cookies = useCookies();
 
   useEffect(() => {
-    const quizCookieAsString = cookies.get(quiz);
-    if (!quizCookieAsString) return; // exit early if no cookie
-    const quizCookie = JSON.parse(quizCookieAsString);
-    const existingState = quizCookie[stateName];
-    if (existingState) setState(existingState);
-  }, [cookies, quiz, stateName, setState]);
+    /* Optional delay before execution if initial state requires calculation. */
+    setTimeout(() => {
+      const quizCookieAsString = cookies.get(quiz);
+      if (!quizCookieAsString) return; // exit early if no cookie
+      const quizCookie = JSON.parse(quizCookieAsString);
+      const existingState = quizCookie[stateName];
+      if (existingState) setState(existingState);
+    }, delay);
+  }, [cookies, quiz, stateName, setState, delay]);
 }
 
 /* Keep checking for a fresh cookie and stop when found. */
