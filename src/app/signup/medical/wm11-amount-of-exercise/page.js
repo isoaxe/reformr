@@ -16,7 +16,7 @@ export default function AmountOfExercise() {
       subheading={subheading}
       questionId="wm11_amount_of_exercise"
       answerLabels={answerLabels}
-      nextPage="wm12-current-health-vices"
+      nextPage="wm12-health-vices"
     />
   );
 }
