@@ -1,4 +1,4 @@
-import RadioList from '@/components/quiz/radio-list';
+import RadioList from '@/components/quiz/choose-one';
 
 export default function AmountOfExercise() {
   const heading = [

@@ -6,7 +6,7 @@ import Button from '@/components/quiz/button';
 import { useCookieState } from '@/util/hooks';
 
 /* Choose a single answer from a list. */
-export default function RadioList(props) {
+export default function ChooseOne(props) {
   const { heading, subheading = '', answerLabels } = props;
   const { questionId, nextPage } = props;
   const [answer, setAnswer] = useState('');

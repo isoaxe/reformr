@@ -1,4 +1,4 @@
-import RadioList from '@/components/quiz/radio-list';
+import ChooseOne from '@/components/quiz/choose-one';
 
 export default function FreqEatOut() {
   const heading = ['How many times a week do you', 'eat out or order in?', ''];
@@ -11,7 +11,7 @@ export default function FreqEatOut() {
   ];
 
   return (
-    <RadioList
+    <ChooseOne
       heading={heading}
       questionId="wm09_freq_eat_out"
       answerLabels={answerLabels}

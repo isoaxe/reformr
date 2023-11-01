@@ -1,4 +1,4 @@
-import RadioList from '@/components/quiz/radio-list';
+import ChooseOne from '@/components/quiz/choose-one';
 
 export default function FreqLossOfControl() {
   const heading = [
@@ -16,7 +16,7 @@ export default function FreqLossOfControl() {
   ];
 
   return (
-    <RadioList
+    <ChooseOne
       heading={heading}
       questionId="wm04_freq_loss_of_control"
       answerLabels={answerLabels}

@@ -1,11 +1,11 @@
-import RadioList from '@/components/quiz/radio-list';
+import ChooseOne from '@/components/quiz/choose-one';
 
 export default function LastingResults() {
   const heading = ['Did you see', 'lasting results?', ''];
   const answerLabels = ['Yes', 'Sort of', 'Nope'];
 
   return (
-    <RadioList
+    <ChooseOne
       heading={heading}
       questionId="wm07_lasting_results"
       answerLabels={answerLabels}

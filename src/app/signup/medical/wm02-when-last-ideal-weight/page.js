@@ -1,4 +1,4 @@
-import RadioList from '@/components/quiz/radio-list';
+import ChooseOne from '@/components/quiz/choose-one';
 
 export default function WhenLastIdealWeight() {
   const heading = ['When were you last at your', 'ideal weight?', ''];
@@ -10,7 +10,7 @@ export default function WhenLastIdealWeight() {
   ];
 
   return (
-    <RadioList
+    <ChooseOne
       heading={heading}
       questionId="wm02_when_last_ideal_weight"
       answerLabels={answerLabels}
