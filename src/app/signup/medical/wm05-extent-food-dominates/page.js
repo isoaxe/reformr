@@ -1,42 +1,19 @@
-'use client';
+import Range from '@/components/quiz/range';
 
-import { useState } from 'react';
-import { Slider } from '@mui/material';
-import Button from '@/components/quiz/button';
-import { useCookieState } from '@/util/hooks';
-
-/* Single question with a 1-10 range response. */
 export default function ExtentFoodDominates() {
-  const [answer, setAnswer] = useState(0);
-
-  useCookieState('medical', 'wm05_extent_food_dominates', setAnswer);
+  const heading = [
+    'To what extent would you say that food',
+    'dominates your life?',
+    '',
+  ];
+  const subheading = 'Rank from 1 (minimum impact) to 10 (maximum impact).';
 
   return (
-    <main className="m-auto max-w-2xl">
-      <p className="mb-2">
-        To what extent would you say that food
-        <span className="font-semibold"> dominates your life</span>?
-      </p>
-      <p className="text-lg text-slate-700 md:text-xl xl:text-2xl">
-        Rank from 1 (minimum impact) to 10 (maximum impact).
-      </p>
-      <div className="my-16 flex flex-row items-center justify-between">
-        <Slider
-          valueLabelDisplay="on"
-          min={1}
-          max={10}
-          marks
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
-        />
-      </div>
-      <Button
-        text="Ok"
-        link="./wm06-weight-loss-techniques"
-        state={{ wm05_extent_food_dominates: answer }}
-        isDisabled={!answer}
-        quiz="medical"
-      />
-    </main>
+    <Range
+      heading={heading}
+      subheading={subheading}
+      questionId="wm05_extent_food_dominates"
+      nextPage="wm06-weight-loss-techniques"
+    />
   );
 }
