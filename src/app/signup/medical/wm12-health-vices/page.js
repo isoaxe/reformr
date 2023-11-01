@@ -18,7 +18,7 @@ export default function HealthVices() {
       heading={heading}
       questionId="wm12_health_vices"
       answerLabels={answerLabels}
-      nextPage="wm13-thyroid-activity"
+      nextPage="health-and-treatment"
     />
   );
 }
