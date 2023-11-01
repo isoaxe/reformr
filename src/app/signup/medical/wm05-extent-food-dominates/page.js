@@ -6,10 +6,10 @@ import Button from '@/components/quiz/button';
 import { useCookieState } from '@/util/hooks';
 
 /* Single question with a 1-10 range response. */
-export default function ExtentOfFoodDomination() {
+export default function ExtentFoodDominates() {
   const [answer, setAnswer] = useState(0);
 
-  useCookieState('medical', 'wm05_extent_of_food_domination', setAnswer);
+  useCookieState('medical', 'wm05_extent_food_dominates', setAnswer);
 
   return (
     <main className="m-auto max-w-2xl">
@@ -33,7 +33,7 @@ export default function ExtentOfFoodDomination() {
       <Button
         text="Ok"
         link="./wm06-weight-loss-techniques"
-        state={{ wm05_extent_of_food_domination: answer }}
+        state={{ wm05_extent_food_dominates: answer }}
         isDisabled={!answer}
         quiz="medical"
       />

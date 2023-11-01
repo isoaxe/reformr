@@ -20,7 +20,7 @@ export default function FreqLossOfControl() {
       heading={heading}
       questionId="wm04_freq_loss_of_control"
       answerLabels={answerLabels}
-      nextPage="wm05-extent-of-food-domination"
+      nextPage="wm05-extent-food-dominates"
     />
   );
 }
