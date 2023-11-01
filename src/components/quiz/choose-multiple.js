@@ -51,11 +51,14 @@ export default function ChooseMultiple(props) {
 
   return (
     <main className="mx-auto flex max-w-2xl flex-col">
-      <p className="mb-6">
+      <h1 className="mb-6">
         {heading[0]}
         <span className="font-semibold"> {heading[1]} </span>
         {heading[2]}
-      </p>
+      </h1>
+      <h2 className="-mt-4 mb-6 text-lg text-slate-700 md:text-xl xl:text-2xl">
+        {subheading}
+      </h2>
       <FormGroup sx={{ mb: 3, width: 'fit-content' }}>
         {answerLabels.map((label, idx) => {
           const letter = letters[idx];
