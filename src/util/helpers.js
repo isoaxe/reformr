@@ -51,6 +51,16 @@ export async function saveToken(email) {
   return token;
 }
 
+/* Verify reCAPTCHA token matches one from Firestore. */
+export async function validateToken(email, token) {
+  const captchasRef = doc(db, 'captchas', email);
+  const captchaSnap = await getDoc(captchasRef);
+  const captchasData = captchaSnap.data();
+  const savedToken = captchasData?.token;
+  if (token !== savedToken || token.length !== 50) return false; // invalid
+  else return true; // valid
+}
+
 /* Save new data to quiz cookie on client. */
 export function setQuizCookie(quiz, state, cookies) {
   if (!state) return; // exit early as no state to add to cookie
