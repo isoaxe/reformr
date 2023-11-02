@@ -17,7 +17,7 @@ export default function ThyroidActivity() {
       heading={heading}
       questionId="wm13_thyroid_activity"
       answerLabels={answerLabels}
-      nextPage="health-and-treatment"
+      nextPage="wm14-thyroid-tumor"
     />
   );
 }
