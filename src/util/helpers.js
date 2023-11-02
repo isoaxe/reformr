@@ -16,6 +16,15 @@ export function generateToken(length) {
   return token;
 }
 
+/* Get docId from Firestore. */
+export async function getDocId(email) {
+  const emailsRef = doc(db, 'emails', email);
+  const emailSnap = await getDoc(emailsRef);
+  const emailsData = emailSnap.data();
+  const { docId } = emailsData;
+  return docId;
+}
+
 /* Save email document to Firestore if not already there. */
 export async function saveEmailDoc(email, firstName, lastName) {
   const emailsRef = doc(db, 'emails', email);
