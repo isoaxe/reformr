@@ -30,10 +30,7 @@ export default function ChooseMultiple(props) {
     setAnswers(newStartingState);
   }, [answerLabels]);
 
-  function CheckboxOption({ state, label }) {
-    const name = Object.keys(state)[0];
-    const checked = state[name];
-
+  function CheckboxOption({ name, checked, label }) {
     return (
       <FormControlLabel
         name={name}
@@ -64,7 +61,8 @@ export default function ChooseMultiple(props) {
           const letter = letters[idx];
           return (
             <CheckboxOption
-              state={{ [letter]: answers[letter] }}
+              name={letter}
+              checked={answers[letter]}
               label={label}
               key={idx}
             />
