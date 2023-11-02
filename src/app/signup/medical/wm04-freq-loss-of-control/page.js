@@ -6,7 +6,7 @@ export default function FreqLossOfControl() {
     'lost control over what you eat?',
     '',
   ];
-  answerLabels = [
+  const answerLabels = [
     'All the time',
     'Every day',
     'Most days',
