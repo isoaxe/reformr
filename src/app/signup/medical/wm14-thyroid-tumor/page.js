@@ -1,4 +1,4 @@
-import ChooseMultiple from '@/components/quiz/choose-multiple';
+import ChooseMany from '@/components/quiz/choose-many';
 import { medicalQuizLabels } from '@/util/data';
 
 export default function ThyroidTumor() {
@@ -9,7 +9,7 @@ export default function ThyroidTumor() {
   ];
 
   return (
-    <ChooseMultiple
+    <ChooseMany
       heading={heading}
       questionId="wm14_thyroid_tumor"
       answerLabels={medicalQuizLabels.wm14_thyroid_tumor}

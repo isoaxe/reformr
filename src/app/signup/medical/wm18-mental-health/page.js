@@ -1,4 +1,4 @@
-import ChooseMultiple from '@/components/quiz/choose-multiple';
+import ChooseMany from '@/components/quiz/choose-many';
 import { medicalQuizLabels } from '@/util/data';
 
 export default function MentalHealth() {
@@ -10,7 +10,7 @@ export default function MentalHealth() {
   const subheading = 'Your responses are confidential.';
 
   return (
-    <ChooseMultiple
+    <ChooseMany
       heading={heading}
       subheading={subheading}
       questionId="wm18_mental_health"

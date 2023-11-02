@@ -7,7 +7,7 @@ import Button from '@/components/quiz/button';
 import { useCookieState } from '@/util/hooks';
 
 /* Multiple choice question with multiple answers. Support for up to 12 answers. */
-export default function ChooseMultiple(props) {
+export default function ChooseMany(props) {
   const { heading, subheading = '', answerLabels } = props;
   const { questionId, nextPage } = props;
   const [answers, setAnswers] = useState({});

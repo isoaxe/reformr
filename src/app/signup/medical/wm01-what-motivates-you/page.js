@@ -1,11 +1,11 @@
-import ChooseMultiple from '@/components/quiz/choose-multiple';
+import ChooseMany from '@/components/quiz/choose-many';
 import { medicalQuizLabels } from '@/util/data';
 
 export default function WhatMotivatesYou() {
   const heading = ['So...what', 'motivates you', 'to lose weight?'];
 
   return (
-    <ChooseMultiple
+    <ChooseMany
       heading={heading}
       questionId="wm01_what_motivates_you"
       answerLabels={medicalQuizLabels.wm01_what_motivates_you}
