@@ -30,7 +30,7 @@ export default function PhoneNumber() {
   }, [phone]);
 
   useEffect(() => {
-    if (token) cookies.set('token', token, { expires: 7, sameSite: 'strict' });
+    if (token) cookies.set('token', token, { expires: 90, sameSite: 'strict' });
   }, [cookies, token]);
 
   return (
