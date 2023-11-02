@@ -17,8 +17,8 @@ export default function HowWeightAffects() {
     F: 0,
     G: 0,
   });
-
   const { A, B, C, D, E, F, G } = answers;
+  const letters = 'ABCDEFG';
 
   function handleChange(e) {
     setAnswers({ ...answers, [e.target.name]: e.target.value });
@@ -26,7 +26,7 @@ export default function HowWeightAffects() {
 
   useCookieState('medical', 'wm03_how_weight_affects', setAnswers);
 
-  function SliderWithLabel({ label, value, name }) {
+  function SliderWithLabel({ label, name, value }) {
     return (
       <div className="mb-3 flex flex-row items-center justify-between">
         <p
@@ -58,41 +58,17 @@ export default function HowWeightAffects() {
       <p className="mb-14 text-lg text-slate-700 md:text-xl xl:text-2xl">
         Rank each from 1 (minimum impact) to 5 (maximum impact).
       </p>
-      <SliderWithLabel
-        label={medicalQuizLabels.wm03_how_weight_affects[0]}
-        value={A}
-        name="A"
-      />
-      <SliderWithLabel
-        label={medicalQuizLabels.wm03_how_weight_affects[1]}
-        value={B}
-        name="B"
-      />
-      <SliderWithLabel
-        label={medicalQuizLabels.wm03_how_weight_affects[2]}
-        value={C}
-        name="C"
-      />
-      <SliderWithLabel
-        label={medicalQuizLabels.wm03_how_weight_affects[3]}
-        value={D}
-        name="D"
-      />
-      <SliderWithLabel
-        label={medicalQuizLabels.wm03_how_weight_affects[4]}
-        value={E}
-        name="E"
-      />
-      <SliderWithLabel
-        label={medicalQuizLabels.wm03_how_weight_affects[5]}
-        value={F}
-        name="F"
-      />
-      <SliderWithLabel
-        label={medicalQuizLabels.wm03_how_weight_affects[6]}
-        value={G}
-        name="G"
-      />
+      {medicalQuizLabels.wm03_how_weight_affects.map((label, idx) => {
+        const letter = letters[idx];
+        return (
+          <SliderWithLabel
+            label={label}
+            name={letter}
+            value={answers[letter]}
+            key={idx}
+          />
+        );
+      })}
       <div className="invisible h-14">This is a spacer - for layout only</div>
       <Button
         text="Ok"
