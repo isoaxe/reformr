@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
+import { getDocId } from '@/util/helpers';
 import { auth } from '@/util/firebase';
 import { db } from '@/util/firebase';
 
@@ -24,10 +25,7 @@ export async function POST(request) {
     if (user) success = true;
 
     /* Get docId from Firestore. */
-    const emailsRef = doc(db, 'emails', email);
-    const emailSnap = await getDoc(emailsRef);
-    const emailsData = emailSnap.data();
-    const { docId } = emailsData;
+    const docId = await getDocId(email);
 
     /* Update account creation date, uid and status on Firestore. */
     await setDoc(

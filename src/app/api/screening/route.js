@@ -1,5 +1,6 @@
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
+import { getDocId } from '@/util/helpers';
 import { db } from '@/util/firebase';
 
 /* Save screening data to Firestore if token is valid. */
@@ -12,10 +13,7 @@ export async function POST(request) {
   try {
     /* Get docId from Firestore. */
     const { email } = screening;
-    const emailsRef = doc(db, 'emails', email);
-    const emailSnap = await getDoc(emailsRef);
-    const emailsData = emailSnap.data();
-    const { docId } = emailsData; // get docId from Firestore
+    const docId = await getDocId(email);
 
     /* Get token from Firestore. */
     const captchasRef = doc(db, 'captchas', email);
