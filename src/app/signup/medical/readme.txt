@@ -10,7 +10,7 @@ Question 01 => wm01-what-motivates-you
 Question 02 => wm02-when-last-ideal-weight
 Question 03 => wm03-how-weight-affects
 Question 04 => wm04-freq-loss-of-control
-Question 05 => wm05-extent-of-food-domination
+Question 05 => wm05-extent-food-dominates
 Question 06 => wm06-weight-loss-techniques
 Question 07 => wm07-lasting-results
 Question 08 => wm08-how-healthy
@@ -19,5 +19,14 @@ Question 10 => wm10-physical-fitness
 Question 11 => wm11-amount-of-exercise
 Question 12 => wm12-health-vices
 Question 13 => wm13-thyroid-activity
+Question 14 => wm14-thyroid-tumor
+Question 15 => wm15-health-ailments
+Question 16 => wm16-sugar-ailments
+Question 17 => wm17-other-ailments
+Question 18 => wm18-mental-health
+Question 19 => wm19-other-medical
+Question 20 => wm20-medications
+Question 21 => wm21-allergies
+Question 22 => wm22-past-procedures
 
 These are the initial ordering of questions. If any get moved around they will be updated in the list above so we have a reference. If any more get added, the numbering system will continue to increment. This will be the case even if numbers before are 'freed up' due to the removal of a question that was previously included.
