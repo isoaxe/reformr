@@ -20,7 +20,7 @@ export default function PastProcedures() {
       heading={heading}
       questionId="wm22_past_procedures"
       answerLabels={answerLabels}
-      nextPage="book-telehealth"
+      nextPage="../book-telehealth"
     />
   );
 }
