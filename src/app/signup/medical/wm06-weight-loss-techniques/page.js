@@ -1,4 +1,5 @@
 import ChooseMultiple from '@/components/quiz/choose-multiple';
+import { medicalQuizLabels } from '@/util/data';
 
 export default function WeightLossTechniques() {
   const heading = [
@@ -6,21 +7,12 @@ export default function WeightLossTechniques() {
     'what did you try?',
     '',
   ];
-  const answerLabels = [
-    'Diet',
-    'Exercise',
-    'Fasting',
-    'Meal replacement shakes',
-    'Prescription medication',
-    'Surgery',
-    'None of the above',
-  ];
 
   return (
     <ChooseMultiple
       heading={heading}
       questionId="wm06_weight_loss_techniques"
-      answerLabels={answerLabels}
+      answerLabels={medicalQuizLabels.wm06_weight_loss_techniques}
       nextPage="wm07-lasting-results"
     />
   );

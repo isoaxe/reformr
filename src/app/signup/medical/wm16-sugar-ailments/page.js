@@ -1,4 +1,5 @@
 import ChooseMultiple from '@/components/quiz/choose-multiple';
+import { medicalQuizLabels } from '@/util/data';
 
 export default function SugarAilments() {
   const heading = [
@@ -6,21 +7,12 @@ export default function SugarAilments() {
     'diagnosed',
     'with any of the following?',
   ];
-  const answerLabels = [
-    'Diabetes (Type 2)',
-    'Diabetes (Type 1)',
-    'Diabetes (Other)',
-    'Pre-diabetes',
-    'High blood sugar (Hyperglycemia)',
-    'Low blood sugar (Hypoglycemia)',
-    'None of these issues',
-  ];
 
   return (
     <ChooseMultiple
       heading={heading}
       questionId="wm16_sugar_ailments"
-      answerLabels={answerLabels}
+      answerLabels={medicalQuizLabels.wm16_sugar_ailments}
       nextPage="wm17-other-ailments"
     />
   );

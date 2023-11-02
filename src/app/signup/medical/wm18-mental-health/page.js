@@ -1,4 +1,5 @@
 import ChooseMultiple from '@/components/quiz/choose-multiple';
+import { medicalQuizLabels } from '@/util/data';
 
 export default function MentalHealth() {
   const heading = [
@@ -7,24 +8,13 @@ export default function MentalHealth() {
     'any of the following?',
   ];
   const subheading = 'Your responses are confidential.';
-  const answerLabels = [
-    'Depression',
-    'Anxiety',
-    'Bipolar disorder',
-    'PTSD',
-    'Schizophrenia or psychosis',
-    'Self-harm',
-    'Suicidal thoughts',
-    'Previous suicide attempts',
-    'None of the above',
-  ];
 
   return (
     <ChooseMultiple
       heading={heading}
       subheading={subheading}
       questionId="wm18_mental_health"
-      answerLabels={answerLabels}
+      answerLabels={medicalQuizLabels.wm18_mental_health}
       nextPage="wm19-other-medical"
     />
   );

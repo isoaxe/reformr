@@ -1,4 +1,5 @@
 import ChooseMultiple from '@/components/quiz/choose-multiple';
+import { medicalQuizLabels } from '@/util/data';
 
 export default function HealthAilments() {
   const heading = [
@@ -6,22 +7,12 @@ export default function HealthAilments() {
     'diagnosed',
     'with any of the following?',
   ];
-  const answerLabels = [
-    'Fatty liver',
-    'Abnormal liver function',
-    'Pancreatitis',
-    'Other issues with pancreas',
-    'Gallstones',
-    'Inflamed gallbladder (cholecystitis)',
-    'Kidney disease / reduced kidney function',
-    'None of these',
-  ];
 
   return (
     <ChooseMultiple
       heading={heading}
       questionId="wm15_health_ailments"
-      answerLabels={answerLabels}
+      answerLabels={medicalQuizLabels.wm15_health_ailments}
       nextPage="wm16-sugar-ailments"
     />
   );
