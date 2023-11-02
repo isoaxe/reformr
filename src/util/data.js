@@ -101,14 +101,6 @@ export const medicalQuizLabels = {
     'Family activities',
     'Exercise',
   ],
-  wm04_freq_loss_of_control: [
-    'All the time',
-    'Every day',
-    'Most days',
-    'Occasionally',
-    'Rarely',
-    'Never',
-  ],
   wm06_weight_loss_techniques: [
     'Diet',
     'Exercise',
@@ -117,13 +109,6 @@ export const medicalQuizLabels = {
     'Prescription medication',
     'Surgery',
     'None of the above',
-  ],
-  wm09_freq_eat_out: [
-    'Multiple times a day',
-    'At least once a day',
-    'Between 4-6 days',
-    'Between 2-3 days',
-    'Once or less',
   ],
   wm12_health_vices: [
     'Frequently under stress',
