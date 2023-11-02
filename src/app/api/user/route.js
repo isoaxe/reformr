@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
-import { getDocId } from '@/util/helpers';
+import { getDocId, validateToken } from '@/util/helpers';
 import { auth } from '@/util/firebase';
 import { db } from '@/util/firebase';
 
@@ -12,13 +12,10 @@ export async function POST(request) {
 
   let success = false;
   try {
-    /* Verify reCAPTCHA token against one from Firestore. */
-    const captchasRef = doc(db, 'captchas', email);
-    const captchaSnap = await getDoc(captchasRef);
-    const captchasData = captchaSnap.data();
-    const savedToken = captchasData?.token;
-    if (token !== savedToken || token.length !== 50)
-      return NextResponse.json({ success, error: 'Invalid reCAPTCHA token' });
+    /* Verify reCAPTCHA token matches one from Firestore. */
+    const isVerified = await validateToken(email, token);
+    if (!isVerified)
+      return NextResponse.json({ success: false, error: 'Invalid token.' });
 
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;

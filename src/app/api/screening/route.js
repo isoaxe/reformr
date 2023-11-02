@@ -1,6 +1,6 @@
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
-import { getDocId } from '@/util/helpers';
+import { getDocId, validateToken } from '@/util/helpers';
 import { db } from '@/util/firebase';
 
 /* Save screening data to Firestore if token is valid. */
@@ -15,12 +15,9 @@ export async function POST(request) {
     const { email } = screening;
     const docId = await getDocId(email);
 
-    /* Get token from Firestore. */
-    const captchasRef = doc(db, 'captchas', email);
-    const captchaSnap = await getDoc(captchasRef);
-    const captchasData = captchaSnap.data();
-    const savedToken = captchasData.token;
-    if (token !== savedToken || token.length !== 50)
+    /* Verify reCAPTCHA token matches one from Firestore. */
+    const isVerified = await validateToken(email, token);
+    if (!isVerified)
       return NextResponse.json({ success: false, error: 'Invalid token.' });
 
     screening.bmi = parseFloat(bmi);
