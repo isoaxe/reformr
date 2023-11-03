@@ -1,4 +1,4 @@
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 import { getDocId, validateToken } from '@/util/helpers';
 import { chooseManyLabels, manyRangeLabels } from '@/util/data';
@@ -52,7 +52,7 @@ export async function POST(request) {
     /* Check that there's the correct number of fields in the submission. */
     const numFields = Object.keys(medical).length;
     if (numFields === 23) {
-      await setDoc(doc(db, 'users', docId), { medical }, { merge: true });
+      await updateDoc(doc(db, 'users', docId), { medical });
     } else console.log('Incorrect number of answers to medical.');
   } catch (err) {
     console.error('Error saving screening data: ', err);

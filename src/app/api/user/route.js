@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 import { getDocId, validateToken } from '@/util/helpers';
 import { auth } from '@/util/firebase';
@@ -25,16 +25,11 @@ export async function POST(request) {
     const docId = await getDocId(email);
 
     /* Update account creation date, uid and status on Firestore. */
-    await setDoc(
-      doc(db, 'users', docId),
-      { dateAccountCreated: new Date(), userId: user.uid },
-      { merge: true }
-    );
-    await setDoc(
-      doc(db, 'emails', email),
-      { isAccountCreated: true },
-      { merge: true }
-    );
+    await updateDoc(doc(db, 'users', docId), {
+      dateAccountCreated: new Date(),
+      userId: user.uid,
+    });
+    await updateDoc(doc(db, 'emails', email), { isAccountCreated: true });
   } catch (err) {
     console.error('Error creating new user: ', err);
   }
