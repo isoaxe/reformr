@@ -1,5 +1,5 @@
 import ChooseMany from '@/components/quiz/choose-many';
-import { medicalQuizLabels } from '@/util/data';
+import { chooseManyLabels } from '@/util/data';
 
 export default function WhatMotivatesYou() {
   const heading = ['So...what', 'motivates you', 'to lose weight?'];
@@ -8,7 +8,7 @@ export default function WhatMotivatesYou() {
     <ChooseMany
       heading={heading}
       questionId="wm01_what_motivates_you"
-      answerLabels={medicalQuizLabels.wm01_what_motivates_you}
+      answerLabels={chooseManyLabels.wm01_what_motivates_you}
       nextPage="wm02-when-last-ideal-weight"
     />
   );

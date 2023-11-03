@@ -1,5 +1,5 @@
 import ChooseMany from '@/components/quiz/choose-many';
-import { medicalQuizLabels } from '@/util/data';
+import { chooseManyLabels } from '@/util/data';
 
 export default function Medications() {
   const heading = [
@@ -12,7 +12,7 @@ export default function Medications() {
     <ChooseMany
       heading={heading}
       questionId="wm20_medications"
-      answerLabels={medicalQuizLabels.wm20_medications}
+      answerLabels={chooseManyLabels.wm20_medications}
       nextPage="wm21-allergies"
     />
   );

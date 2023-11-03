@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Slider } from '@mui/material';
 import Button from '@/components/quiz/button';
 import { useCookieState } from '@/util/hooks';
-import { medicalQuizLabels } from '@/util/data';
+import { manyRangeLabels } from '@/util/data';
 
 /* Multiple questions with a 1-5 range response. */
 export default function HowWeightAffects() {
@@ -58,7 +58,7 @@ export default function HowWeightAffects() {
       <p className="mb-14 text-lg text-slate-700 md:text-xl xl:text-2xl">
         Rank each from 1 (minimum impact) to 5 (maximum impact).
       </p>
-      {medicalQuizLabels.wm03_how_weight_affects.map((label, idx) => {
+      {manyRangeLabels.wm03_how_weight_affects.map((label, idx) => {
         const letter = letters[idx];
         return (
           <SliderWithLabel

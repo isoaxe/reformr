@@ -1,5 +1,5 @@
 import ChooseMany from '@/components/quiz/choose-many';
-import { medicalQuizLabels } from '@/util/data';
+import { chooseManyLabels } from '@/util/data';
 
 export default function HealthVices() {
   const heading = ['Select all of the following that', 'apply to you.', ''];
@@ -8,7 +8,7 @@ export default function HealthVices() {
     <ChooseMany
       heading={heading}
       questionId="wm12_health_vices"
-      answerLabels={medicalQuizLabels.wm12_health_vices}
+      answerLabels={chooseManyLabels.wm12_health_vices}
       nextPage="health-and-treatment"
     />
   );

@@ -82,7 +82,9 @@ export const careersData = [
   },
 ];
 
-export const medicalQuizLabels = {
+/* These are labels for medical quiz questions based on the ChooseMany component (i.e. checkboxes). */
+/* Each label maps to a corresponding boolean value. */
+export const chooseManyLabels = {
   wm01_what_motivates_you: [
     'Physical appearance',
     'Physical health',
@@ -91,15 +93,6 @@ export const medicalQuizLabels = {
     'Family / friends',
     'Work',
     'Other',
-  ],
-  wm03_how_weight_affects: [
-    'Physical health',
-    'Mental health',
-    'Socialising',
-    'Hobbies',
-    'Employment',
-    'Family activities',
-    'Exercise',
   ],
   wm06_weight_loss_techniques: [
     'Diet',
@@ -189,5 +182,19 @@ export const medicalQuizLabels = {
     'Gastric balloon',
     'Other',
     'None',
+  ],
+};
+
+/* These are labels for the medical quiz question where there are several range sliders. */
+/* Each label maps to a corresponding integer between 1 and 5. */
+export const manyRangeLabels = {
+  wm03_how_weight_affects: [
+    'Physical health',
+    'Mental health',
+    'Socialising',
+    'Hobbies',
+    'Employment',
+    'Family activities',
+    'Exercise',
   ],
 };
