@@ -1,8 +1,8 @@
-import { doc, updateDoc } from 'firebase/firestore';
+import admin from 'firebase-admin';
 import { NextResponse } from 'next/server';
 import { getDocId, validateToken } from '@/util/helpers';
 import { chooseManyLabels, manyRangeLabels } from '@/util/data';
-import { db } from '@/util/firebase';
+import { initializeAdmin } from '@/util/admin';
 
 /* Save screening data to Firestore if token is valid. */
 export async function POST(request) {
@@ -52,7 +52,10 @@ export async function POST(request) {
     /* Check that there's the correct number of fields in the submission. */
     const numFields = Object.keys(medical).length;
     if (numFields === 23) {
-      await updateDoc(doc(db, 'users', docId), { medical });
+      await initializeAdmin();
+      const db = admin.firestore();
+      const user = db.collection('users').doc(docId);
+      await user.set({ medical }, { merge: true });
     } else console.log('Incorrect number of answers to medical.');
   } catch (err) {
     console.error('Error saving screening data: ', err);
