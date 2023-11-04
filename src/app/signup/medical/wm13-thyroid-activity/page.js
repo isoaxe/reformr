@@ -1,4 +1,5 @@
-import ChooseMultiple from '@/components/quiz/choose-multiple';
+import ChooseMany from '@/components/quiz/choose-many';
+import { chooseManyLabels } from '@/util/data';
 
 export default function ThyroidActivity() {
   const heading = [
@@ -6,17 +7,12 @@ export default function ThyroidActivity() {
     'diagnosed',
     'with either of the following?',
   ];
-  const answerLabels = [
-    'Hyperthyroidism (overactive thyroid)',
-    'Hypothyroidism (underactive thyroid)',
-    'Neither of these',
-  ];
 
   return (
-    <ChooseMultiple
+    <ChooseMany
       heading={heading}
       questionId="wm13_thyroid_activity"
-      answerLabels={answerLabels}
+      answerLabels={chooseManyLabels.wm13_thyroid_activity}
       nextPage="wm14-thyroid-tumor"
     />
   );

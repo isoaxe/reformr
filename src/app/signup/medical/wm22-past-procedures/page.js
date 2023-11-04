@@ -1,4 +1,5 @@
-import ChooseMultiple from '@/components/quiz/choose-multiple';
+import ChooseMany from '@/components/quiz/choose-many';
+import { chooseManyLabels } from '@/util/data';
 
 export default function PastProcedures() {
   const heading = [
@@ -6,21 +7,13 @@ export default function PastProcedures() {
     'weight loss procedures?',
     '',
   ];
-  const answerLabels = [
-    'Lab band',
-    'Roux-en-Y gastric bypass',
-    'Sleeve gastrectomy',
-    'Gastric balloon',
-    'Other',
-    'None',
-  ];
 
   return (
-    <ChooseMultiple
+    <ChooseMany
       heading={heading}
       questionId="wm22_past_procedures"
-      answerLabels={answerLabels}
-      nextPage="book-telehealth"
+      answerLabels={chooseManyLabels.wm22_past_procedures}
+      nextPage="../book-telehealth"
     />
   );
 }

@@ -1,6 +1,6 @@
 {
   "name": "reformr",
-  "version": "0.19.2",
+  "version": "0.20.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -17,6 +17,7 @@
     "@mui/material": "latest",
     "@mui/x-date-pickers": "^6.16.1",
     "firebase": "^10.4.0",
+    "firebase-admin": "^11.11.0",
     "hamburger-react": "^2.5.0",
     "moment": "^2.29.4",
     "mui-tel-input": "^4.0.0",

@@ -1,4 +1,5 @@
-import ChooseMultiple from '@/components/quiz/choose-multiple';
+import ChooseMany from '@/components/quiz/choose-many';
+import { chooseManyLabels } from '@/util/data';
 
 export default function Medications() {
   const heading = [
@@ -6,26 +7,12 @@ export default function Medications() {
     'medications or supplements?',
     '',
   ];
-  const answerLabels = [
-    'Anti-inflammatories',
-    'Heart medications',
-    'Diuretics',
-    'Diabetes medications',
-    'Insulin',
-    'Anti-convulsants',
-    'Lithium',
-    'Anti-depressants',
-    'Anxiety medication',
-    'Other medications',
-    'Other supplements',
-    'None of the above',
-  ];
 
   return (
-    <ChooseMultiple
+    <ChooseMany
       heading={heading}
       questionId="wm20_medications"
-      answerLabels={answerLabels}
+      answerLabels={chooseManyLabels.wm20_medications}
       nextPage="wm21-allergies"
     />
   );

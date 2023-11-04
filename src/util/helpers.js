@@ -16,6 +16,15 @@ export function generateToken(length) {
   return token;
 }
 
+/* Get docId from Firestore. */
+export async function getDocId(email) {
+  const emailsRef = doc(db, 'emails', email);
+  const emailSnap = await getDoc(emailsRef);
+  const emailsData = emailSnap.data();
+  const { docId } = emailsData;
+  return docId;
+}
+
 /* Save email document to Firestore if not already there. */
 export async function saveEmailDoc(email, firstName, lastName) {
   const emailsRef = doc(db, 'emails', email);
@@ -40,6 +49,16 @@ export async function saveToken(email) {
   const captchaRef = doc(db, 'captchas', email);
   await setDoc(captchaRef, { token });
   return token;
+}
+
+/* Verify reCAPTCHA token matches one from Firestore. */
+export async function validateToken(email, token) {
+  const captchasRef = doc(db, 'captchas', email);
+  const captchaSnap = await getDoc(captchasRef);
+  const captchasData = captchaSnap.data();
+  const savedToken = captchasData?.token;
+  if (token !== savedToken || token.length !== 50) return false; // invalid
+  else return true; // valid
 }
 
 /* Save new data to quiz cookie on client. */

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Slider } from '@mui/material';
 import Button from '@/components/quiz/button';
 import { useCookieState } from '@/util/hooks';
+import { manyRangeLabels } from '@/util/data';
 
 /* Multiple questions with a 1-5 range response. */
 export default function HowWeightAffects() {
@@ -16,8 +17,8 @@ export default function HowWeightAffects() {
     F: 0,
     G: 0,
   });
-
   const { A, B, C, D, E, F, G } = answers;
+  const letters = 'ABCDEFG';
 
   function handleChange(e) {
     setAnswers({ ...answers, [e.target.name]: e.target.value });
@@ -25,7 +26,7 @@ export default function HowWeightAffects() {
 
   useCookieState('medical', 'wm03_how_weight_affects', setAnswers);
 
-  function SliderWithLabel({ label, value, name }) {
+  function SliderWithLabel({ label, name, value }) {
     return (
       <div className="mb-3 flex flex-row items-center justify-between">
         <p
@@ -57,13 +58,17 @@ export default function HowWeightAffects() {
       <p className="mb-14 text-lg text-slate-700 md:text-xl xl:text-2xl">
         Rank each from 1 (minimum impact) to 5 (maximum impact).
       </p>
-      <SliderWithLabel label="Physical health" value={A} name="A" />
-      <SliderWithLabel label="Mental health" value={B} name="B" />
-      <SliderWithLabel label="Socialising" value={C} name="C" />
-      <SliderWithLabel label="Hobbies" value={D} name="D" />
-      <SliderWithLabel label="Employment" value={E} name="E" />
-      <SliderWithLabel label="Family activities" value={F} name="F" />
-      <SliderWithLabel label="Exercise" value={G} name="G" />
+      {manyRangeLabels.wm03_how_weight_affects.map((label, idx) => {
+        const letter = letters[idx];
+        return (
+          <SliderWithLabel
+            label={label}
+            name={letter}
+            value={answers[letter]}
+            key={idx}
+          />
+        );
+      })}
       <div className="invisible h-14">This is a spacer - for layout only</div>
       <Button
         text="Ok"

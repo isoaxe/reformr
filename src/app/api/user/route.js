@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
+import { getDocId, validateToken } from '@/util/helpers';
 import { auth } from '@/util/firebase';
 import { db } from '@/util/firebase';
 
@@ -11,35 +12,24 @@ export async function POST(request) {
 
   let success = false;
   try {
-    /* Verify reCAPTCHA token against one from Firestore. */
-    const captchasRef = doc(db, 'captchas', email);
-    const captchaSnap = await getDoc(captchasRef);
-    const captchasData = captchaSnap.data();
-    const savedToken = captchasData?.token;
-    if (token !== savedToken || token.length !== 50)
-      return NextResponse.json({ success, error: 'Invalid reCAPTCHA token' });
+    /* Verify reCAPTCHA token matches one from Firestore. */
+    const isVerified = await validateToken(email, token);
+    if (!isVerified)
+      return NextResponse.json({ success: false, error: 'Invalid token.' });
 
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
     if (user) success = true;
 
     /* Get docId from Firestore. */
-    const emailsRef = doc(db, 'emails', email);
-    const emailSnap = await getDoc(emailsRef);
-    const emailsData = emailSnap.data();
-    const { docId } = emailsData;
+    const docId = await getDocId(email);
 
     /* Update account creation date, uid and status on Firestore. */
-    await setDoc(
-      doc(db, 'users', docId),
-      { dateAccountCreated: new Date(), userId: user.uid },
-      { merge: true }
-    );
-    await setDoc(
-      doc(db, 'emails', email),
-      { isAccountCreated: true },
-      { merge: true }
-    );
+    await updateDoc(doc(db, 'users', docId), {
+      dateAccountCreated: new Date(),
+      userId: user.uid,
+    });
+    await updateDoc(doc(db, 'emails', email), { isAccountCreated: true });
   } catch (err) {
     console.error('Error creating new user: ', err);
   }

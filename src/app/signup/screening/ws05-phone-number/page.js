@@ -30,8 +30,11 @@ export default function PhoneNumber() {
   }, [phone]);
 
   useEffect(() => {
-    if (token) cookies.set('token', token, { expires: 7, sameSite: 'strict' });
-  }, [cookies, token]);
+    if (token) {
+      cookies.set('token', token, { expires: 90, sameSite: 'strict' });
+      cookies.set('email', email, { expires: 90, sameSite: 'strict' });
+    }
+  }, [cookies, token, email]);
 
   return (
     <main className="mx-auto flex flex-col">
