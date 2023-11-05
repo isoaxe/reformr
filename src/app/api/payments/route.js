@@ -1,10 +1,7 @@
-import Stripe from 'stripe';
 import { NextResponse } from 'next/server';
-import { STRIPE_SECRET_KEY } from '@/util/constants';
 
 /* Sign up a new user and create a monthly subscription payment plan. */
 export async function POST(request) {
-  const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
   const data = await request.json();
   const { paymentInfo } = data;
 
