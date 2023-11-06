@@ -74,6 +74,17 @@ export function setQuizCookie(quiz, state, cookies) {
   cookies.set(quiz, quizCookieAsString, options); // cookie must be set as string
 }
 
+/* Check what URL is currently being used and return to caller. */
+export function getBaseUrl() {
+  let baseUrl;
+  const currentUrl = window.location.href;
+  if (currentUrl.includes('localhost')) baseUrl = 'http://localhost:3000';
+  else if (currentUrl.includes('.app')) baseUrl = 'https://reformr.vercel.app';
+  else if (currentUrl.includes('.nz')) baseUrl = 'https://reformr.nz';
+  else if (currentUrl.includes('.com')) baseUrl = 'https://reformr.com';
+  return baseUrl;
+}
+
 /*
  * Helpers for the helper functions. Only used within helpers.js and not exported.
  */

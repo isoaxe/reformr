@@ -3,7 +3,7 @@ import { PaymentElement } from '@stripe/react-stripe-js';
 import { useStripe, useElements } from '@stripe/react-stripe-js';
 import { Button } from '@mui/material';
 import Toast from '@/components/toast';
-import { BASE_URL } from '@/util/urls';
+import { getBaseUrl } from '@/util/helpers';
 
 export default function PaymentWrapper() {
   const [message, setMessage] = useState('');
@@ -14,11 +14,12 @@ export default function PaymentWrapper() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    const baseUrl = getBaseUrl();
     if (!stripe || !elements) return;
     setLoading(true);
     const { error } = await stripe.confirmPayment({
       elements,
-      confirmParams: { return_url: `${BASE_URL}/signup/identity-verification` },
+      confirmParams: { return_url: `${baseUrl}/signup/identity-verification` },
     });
     /* The code below only executes on error as redirect occurs on success. */
     if (error.type === 'card_error' || error.type === 'validation_error')
