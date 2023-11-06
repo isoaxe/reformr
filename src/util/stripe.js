@@ -16,7 +16,7 @@ export async function createSubscription(customerId) {
     customer: customerId,
     items: [{ price: STRIPE_PRICE_ID }],
     payment_behavior: 'default_incomplete',
-    payment_settings: { payment_method_types: 'card' },
+    payment_settings: { payment_method_types: ['card'] },
     expand: ['latest_invoice.payment_intent'],
   });
 
