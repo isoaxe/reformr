@@ -21,8 +21,8 @@ export async function createSubscription(customerId) {
   });
 
   return {
-    subscription_id: subscription.id,
-    client_secret: subscription.latest_invoice.payment_intent.client_secret,
-    payment_intent_id: subscription.latest_invoice.payment_intent.id,
+    subscriptionId: subscription.id,
+    clientSecret: subscription.latest_invoice.payment_intent.client_secret,
+    paymentIntentId: subscription.latest_invoice.payment_intent.id,
   };
 }
