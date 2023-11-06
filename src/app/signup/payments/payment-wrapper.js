@@ -31,6 +31,7 @@ export default function PaymentWrapper() {
         onClick={handleSubmit}
         variant="outlined"
         className="mt-4 w-full md:text-lg"
+        disabled={isLoading || !stripe || !elements}
       >
         Submit
       </Button>
