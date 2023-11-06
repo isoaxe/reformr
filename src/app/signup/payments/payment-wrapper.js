@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { PaymentElement } from '@stripe/react-stripe-js';
 import { useStripe, useElements } from '@stripe/react-stripe-js';
 import { Button } from '@mui/material';
+import Toast from '@/components/toast';
 import { BASE_URL } from '@/util/urls';
 
 export default function PaymentWrapper() {
   const [message, setMessage] = useState('');
+  const [showMessage, setShowMessage] = useState(false); // Snackbar toast message
   const [isLoading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
@@ -18,9 +20,11 @@ export default function PaymentWrapper() {
       elements,
       confirmParams: { return_url: `${BASE_URL}/signup/identity-verification` },
     });
+    /* The code below only executes on error as redirect occurs on success. */
     if (error.type === 'card_error' || error.type === 'validation_error')
       setMessage(error.message);
     else setMessage('An unexpected error occured.');
+    setShowMessage(true);
     setLoading(false);
   }
 
@@ -35,6 +39,13 @@ export default function PaymentWrapper() {
       >
         Submit
       </Button>
+      <Toast
+        message={message}
+        severity="error"
+        open={showMessage}
+        setOpen={setShowMessage}
+        duration={6}
+      />
     </section>
   );
 }
