@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useCookies } from 'next-client-cookies';
-import { Elements, PaymentElement } from '@stripe/react-stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import PaymentWrapper from './payment-wrapper';
 import { STRIPE_PUBLIC_KEY } from '@/util/constants';
 
 const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
@@ -38,7 +39,7 @@ export default function Payments() {
       </h1>
       {Object.keys(options).length && (
         <Elements stripe={stripePromise} options={options}>
-          <PaymentElement />
+          <PaymentWrapper />
         </Elements>
       )}
     </main>
