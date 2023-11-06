@@ -6,8 +6,7 @@ export async function POST(request) {
   const data = await request.json();
   const { email } = data;
   const userId = await createCustomer(email);
-  const { subscriptionId, clientSecret, paymentIntentId } =
-    await createSubscription(userId);
+  const subscription = await createSubscription(userId);
 
-  return NextResponse.json({ success: true });
+  return NextResponse.json(subscription);
 }
