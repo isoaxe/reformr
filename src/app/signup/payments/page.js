@@ -33,9 +33,8 @@ export default function Payments() {
 
   return (
     <main className="mx-auto min-h-[calc(100vh-8rem)] w-full max-w-xl">
-      <h1 className="mt-16 p-4 text-2xl md:p-8 md:text-4xl">
-        This is the<span className="font-bold text-blue-600"> Payments </span>
-        page
+      <h1 className="mb-4 text-center font-semibold text-sky-600">
+        Complete your payment
       </h1>
       {Object.keys(options).length ? (
         <Elements stripe={stripePromise} options={options}>
