@@ -37,11 +37,11 @@ export default function Payments() {
         This is the<span className="font-bold text-blue-600"> Payments </span>
         page
       </h1>
-      {Object.keys(options).length && (
+      {Object.keys(options).length ? (
         <Elements stripe={stripePromise} options={options}>
           <PaymentWrapper />
         </Elements>
-      )}
+      ) : null}
     </main>
   );
 }
