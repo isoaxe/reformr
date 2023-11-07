@@ -21,6 +21,6 @@ export const STRIPE_SECRET_WEBHOOK = isLive
   ? stripeSecretWebhookLive
   : stripeSecretWebhookTest;
 
-const stripePriceIdTest = 'price_1O9hv3FPKktQy8tphRMSlqgV';
+const stripePriceIdTest = 'price_1O9rYQFPKktQy8tpBuZCaJAw';
 const stripePriceIdLive = 'price_1NlkQrFPKktQy8tpqjntJXwq';
 export const STRIPE_PRICE_ID = isLive ? stripePriceIdLive : stripePriceIdTest;
