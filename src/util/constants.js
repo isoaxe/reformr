@@ -15,6 +15,12 @@ export const STRIPE_SECRET_KEY = isLive
   ? stripeSecretKeyLive
   : stripeSecretKeyTest;
 
+const stripeSecretWebhookTest = process.env.STRIPE_SECRET_WEBHOOK_TEST;
+const stripeSecretWebhookLive = process.env.STRIPE_SECRET_WEBHOOK_LIVE;
+export const STRIPE_SECRET_WEBHOOK = isLive
+  ? stripeSecretWebhookLive
+  : stripeSecretWebhookTest;
+
 const stripePriceIdTest = 'price_1O9hv3FPKktQy8tphRMSlqgV';
 const stripePriceIdLive = 'price_1NlkQrFPKktQy8tpqjntJXwq';
 export const STRIPE_PRICE_ID = isLive ? stripePriceIdLive : stripePriceIdTest;
