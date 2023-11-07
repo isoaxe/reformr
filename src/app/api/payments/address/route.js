@@ -6,9 +6,7 @@ import { initializeAdmin } from '@/util/admin';
 /* Save address to Firestore if token is valid. */
 export async function POST(request) {
   const data = await request.json();
-  const { email, token } = data;
-  const addressAsString = data.address;
-  const address = JSON.parse(addressAsString); // address as JSON
+  const { email, token, address } = data;
 
   try {
     /* Get docId from Firestore. */
