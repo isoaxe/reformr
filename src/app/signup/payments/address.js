@@ -4,26 +4,22 @@ export default function Address({ address, setAddress }) {
   return (
     <div className="my-8 w-full">
       <AddressInput
-        label="Address 1"
-        placeholder="Street name and number"
+        label="Street*"
         text={address?.address1 || ''}
         setText={(input) => setAddress({ ...address, address1: input })}
       />
       <AddressInput
-        label="Address 2"
-        placeholder="Suburb"
+        label="Suburb"
         text={address?.address2 || ''}
         setText={(input) => setAddress({ ...address, address2: input })}
       />
       <AddressInput
-        label="Address 3"
-        placeholder="Town / city"
+        label="Town / City*"
         text={address?.address3 || ''}
         setText={(input) => setAddress({ ...address, address3: input })}
       />
       <AddressInput
-        label="Post Code"
-        placeholder="Post code"
+        label="Post Code*"
         text={address?.postcode || ''}
         setText={(input) => setAddress({ ...address, postcode: input })}
       />
