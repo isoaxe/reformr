@@ -27,7 +27,7 @@ export default function Payments() {
     const token = cookies.get('token');
     /* Fetch the client secret from the server and use to set options for Elements. */
     async function getElementsOptions() {
-      const response = await fetch('/api/payments/customer', {
+      const response = await fetch('/api/payments/initialise', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, token }),

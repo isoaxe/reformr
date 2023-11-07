@@ -4,7 +4,7 @@ import { createCustomer, createSubscription } from '@/util/stripe';
 import { getDocId, validateToken } from '@/util/helpers';
 import { initializeAdmin } from '@/util/admin';
 
-/* Sign up a new user and create a monthly subscription payment plan. */
+/* Sign up a new customer and create a subscription. Make the first payment. */
 export async function POST(request) {
   const data = await request.json();
   const { name, email, token } = data;
