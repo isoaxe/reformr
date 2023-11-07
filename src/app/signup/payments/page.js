@@ -33,7 +33,7 @@ export default function Payments() {
 
   return (
     <main className="mx-auto min-h-[calc(100vh-8rem)] w-full max-w-xl">
-      <h1 className="mb-4 text-center font-semibold text-sky-600">
+      <h1 className="mb-4 text-center text-2xl font-semibold text-sky-600 sm:text-3xl">
         Complete your payment
       </h1>
       {Object.keys(options).length ? (
