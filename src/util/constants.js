@@ -15,4 +15,7 @@ export const STRIPE_SECRET_KEY = isLive
   ? stripeSecretKeyLive
   : stripeSecretKeyTest;
 
-export const STRIPE_PRICE_ID = 'price_1O9hv3FPKktQy8tphRMSlqgV';
+const stripePriceIdTest = 'price_1O9hv3FPKktQy8tphRMSlqgV';
+const stripePriceIdLive = 'price_1NlkQrFPKktQy8tpqjntJXwq';
+
+export const STRIPE_PRICE_ID = isLive ? stripePriceIdLive : stripePriceIdTest;
