@@ -12,6 +12,7 @@ const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
 
 export default function Payments() {
   const [options, setOptions] = useState({});
+  const [address, setAddress] = useState();
   const cookies = useCookies();
 
   useEffect(() => {
@@ -37,7 +38,7 @@ export default function Payments() {
       <h1 className="mb-4 text-center text-2xl font-semibold text-sky-600 sm:text-3xl">
         Complete your payment
       </h1>
-      <Address />
+      <Address address={address} setAddress={setAddress} />
       {Object.keys(options).length ? (
         <Elements stripe={stripePromise} options={options}>
           <PaymentWrapper />

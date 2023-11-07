@@ -1,18 +1,28 @@
-import { useState } from 'react';
 import { AddressInput } from '@/components/quiz/address-input';
 
-export default function Address() {
-  const [address1, setAddress1] = useState('');
-  const [address2, setAddress2] = useState('');
-  const [address3, setAddress3] = useState('');
-  const [postcode, setPostcode] = useState('');
-
+export default function Address({ address, setAddress }) {
   return (
     <div className="my-8 w-full">
-      <AddressInput label="Address 1" text={address1} setText={setAddress1} />
-      <AddressInput label="Address 2" text={address2} setText={setAddress2} />
-      <AddressInput label="Address 3" text={address3} setText={setAddress3} />
-      <AddressInput label="Zip Code" text={postcode} setText={setPostcode} />
+      <AddressInput
+        label="Address 1"
+        text={address?.address1 || ''}
+        setText={(input) => setAddress({ ...address, address1: input })}
+      />
+      <AddressInput
+        label="Address 2"
+        text={address?.address2 || ''}
+        setText={(input) => setAddress({ ...address, address2: input })}
+      />
+      <AddressInput
+        label="Address 3"
+        text={address?.address3 || ''}
+        setText={(input) => setAddress({ ...address, address3: input })}
+      />
+      <AddressInput
+        label="Zip Code"
+        text={address?.postcode || ''}
+        setText={(input) => setAddress({ ...address, postcode: input })}
+      />
     </div>
   );
 }
