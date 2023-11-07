@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { PaymentElement } from '@stripe/react-stripe-js';
 import { useStripe, useElements } from '@stripe/react-stripe-js';
+import { useCookies } from 'next-client-cookies';
 import { Button } from '@mui/material';
 import Toast from '@/components/toast';
 import { getBaseUrl } from '@/util/helpers';
@@ -9,14 +10,33 @@ export default function PaymentWrapper({ address }) {
   const [message, setMessage] = useState('');
   const [showMessage, setShowMessage] = useState(false); // Snackbar toast message
   const [isLoading, setLoading] = useState(false);
+  const cookies = useCookies();
   const stripe = useStripe();
   const elements = useElements();
 
   async function handleSubmit(event) {
     event.preventDefault();
+    setLoading(true);
+
+    /* Save address to Firestore. */
+    const token = cookies.get('token');
+    const email = cookies.get('email');
+    const response = await fetch('/api/payments/address', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, token, address }),
+    });
+    const resJson = await response.json();
+    const { success } = resJson;
+    if (!success) {
+      setMessage('There was an issue saving your address.');
+      setShowMessage(true);
+      setLoading(false);
+      return;
+    }
+
     const baseUrl = getBaseUrl();
     if (!stripe || !elements) return;
-    setLoading(true);
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: { return_url: `${baseUrl}/signup/identity-verification` },
