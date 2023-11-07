@@ -38,7 +38,7 @@ export default function Payments() {
       const options = { clientSecret, appearance };
       setOptions(options);
     }
-    getElementsOptions();
+    if (firstName && email && token) getElementsOptions();
   }, [firstName, lastName, cookies]);
 
   return (
