@@ -14,4 +14,4 @@ export const STRIPE_PUBLIC_KEY = isLive
 export const STRIPE_SECRET_KEY = isLive
   ? STRIPE_SECRET_KEY_LIVE
   : STRIPE_SECRET_KEY_TEST;
-export const STRIPE_PRICE_ID = 'price_1O97lbFPKktQy8tprkDa7Ivm';
+export const STRIPE_PRICE_ID = 'price_1O9hv3FPKktQy8tphRMSlqgV';
