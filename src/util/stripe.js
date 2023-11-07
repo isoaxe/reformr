@@ -4,8 +4,8 @@ import { STRIPE_SECRET_KEY, STRIPE_PRICE_ID } from './constants';
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
 
 /* Create a new customer in Stripe. Required for subscription payments. */
-export async function createCustomer(email) {
-  const customer = await stripe.customers.create({ email });
+export async function createCustomer(name, email) {
+  const customer = await stripe.customers.create({ name, email });
   const stripe_uid = customer.id;
   return stripe_uid;
 }

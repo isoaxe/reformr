@@ -7,7 +7,7 @@ import { initializeAdmin } from '@/util/admin';
 /* Sign up a new user and create a monthly subscription payment plan. */
 export async function POST(request) {
   const data = await request.json();
-  const { email, token } = data;
+  const { name, email, token } = data;
 
   try {
     /* Get docId from Firestore. */
@@ -31,7 +31,7 @@ export async function POST(request) {
     }
 
     /* Create a new subscription if not in Firestore, */
-    const userId = await createCustomer(email);
+    const userId = await createCustomer(name, email);
     const subscription = await createSubscription(userId);
     await userRef.set({ payments: { subscription } }, { merge: true });
 

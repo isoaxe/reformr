@@ -6,16 +6,23 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import PaymentWrapper from './payment-wrapper';
 import { STRIPE_PUBLIC_KEY } from '@/util/constants';
+import { useCookieState } from '@/util/hooks';
 import Address from './address';
 
 const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
 
 export default function Payments() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [options, setOptions] = useState({});
   const [address, setAddress] = useState({});
   const cookies = useCookies();
 
+  useCookieState('screening', 'firstName', setFirstName);
+  useCookieState('screening', 'lastName', setLastName);
+
   useEffect(() => {
+    const name = `${firstName} ${lastName}`;
     const email = cookies.get('email');
     const token = cookies.get('token');
     /* Fetch the client secret from the server and use to set options for Elements. */
@@ -23,7 +30,7 @@ export default function Payments() {
       const response = await fetch('/api/payments/customer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, token }),
+        body: JSON.stringify({ name, email, token }),
       });
       const subscription = await response.json();
       const { clientSecret } = subscription;
@@ -32,7 +39,7 @@ export default function Payments() {
       setOptions(options);
     }
     getElementsOptions();
-  }, [cookies]);
+  }, [firstName, lastName, cookies]);
 
   return (
     <main className="mx-auto min-h-[calc(100vh-7rem)] w-full max-w-xl">
