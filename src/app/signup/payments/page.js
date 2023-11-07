@@ -19,7 +19,7 @@ export default function Payments() {
     const email = cookies.get('email');
     /* Fetch the client secret from the server and use to set options for Elements. */
     async function getElementsOptions() {
-      const response = await fetch('/api/payments', {
+      const response = await fetch('/api/payments/customer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
