@@ -17,12 +17,13 @@ export default function Payments() {
 
   useEffect(() => {
     const email = cookies.get('email');
+    const token = cookies.get('token');
     /* Fetch the client secret from the server and use to set options for Elements. */
     async function getElementsOptions() {
       const response = await fetch('/api/payments/customer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, token }),
       });
       const subscription = await response.json();
       const { clientSecret } = subscription;
