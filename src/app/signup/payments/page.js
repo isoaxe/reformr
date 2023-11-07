@@ -35,7 +35,7 @@ export default function Payments() {
   }, [cookies]);
 
   return (
-    <main className="mx-auto min-h-[calc(100vh-8rem)] w-full max-w-xl">
+    <main className="mx-auto min-h-[calc(100vh-7rem)] w-full max-w-xl">
       <h1 className="mb-4 text-center text-2xl font-semibold text-sky-600 sm:text-3xl">
         Complete your payment
       </h1>
