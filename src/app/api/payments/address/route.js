@@ -20,8 +20,8 @@ export async function POST(request) {
     /* Save address to Firestore. */
     await initializeAdmin();
     const db = admin.firestore();
-    const user = db.collection('users').doc(docId);
-    await user.set({ address }, { merge: true });
+    const userRef = db.collection('users').doc(docId);
+    await userRef.set({ address }, { merge: true });
   } catch (err) {
     console.error('Error saving address: ', err);
     return NextResponse.json({ success: false, error: err });

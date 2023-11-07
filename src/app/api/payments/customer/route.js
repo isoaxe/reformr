@@ -1,6 +1,8 @@
+import admin from 'firebase-admin';
 import { NextResponse } from 'next/server';
 import { createCustomer, createSubscription } from '@/util/stripe';
-import { getDocId } from '@/util/helpers';
+import { getDocId, validateToken } from '@/util/helpers';
+import { initializeAdmin } from '@/util/admin';
 
 /* Sign up a new user and create a monthly subscription payment plan. */
 export async function POST(request) {
@@ -16,8 +18,23 @@ export async function POST(request) {
     if (!isVerified)
       return NextResponse.json({ success: false, error: 'Invalid token.' });
 
+    /* Return subscription if already in Firestore. */
+    await initializeAdmin();
+    const db = admin.firestore();
+    const userRef = db.collection('users').doc(docId);
+    const user = await userRef.get();
+    const userData = user.data();
+    const { payments } = userData;
+    if (payments) {
+      const { subscription } = payments;
+      return NextResponse.json(subscription);
+    }
+
+    /* Create a new subscription if not in Firestore, */
     const userId = await createCustomer(email);
     const subscription = await createSubscription(userId);
+    await userRef.set({ payments: { subscription } }, { merge: true });
+
     return NextResponse.json(subscription);
   } catch (err) {
     console.error('Error creating subscription: ', err);
