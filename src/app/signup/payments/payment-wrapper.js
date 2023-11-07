@@ -8,7 +8,7 @@ import { getBaseUrl } from '@/util/helpers';
 
 export default function PaymentWrapper({ address }) {
   const [message, setMessage] = useState('');
-  const [showMessage, setShowMessage] = useState(false); // Snackbar toast message
+  const [showMessage, setShowMessage] = useState(false); // toast message
   const [isLoading, setLoading] = useState(false);
   const cookies = useCookies();
   const stripe = useStripe();
@@ -48,7 +48,7 @@ export default function PaymentWrapper({ address }) {
     if (!stripe || !elements) return;
     const { error } = await stripe.confirmPayment({
       elements,
-      confirmParams: { return_url: `${baseUrl}/signup/identity-verification` },
+      confirmParams: { return_url: `${baseUrl}/signup/verify-identity` },
     });
     /* The code below only executes on error as redirect occurs on success. */
     if (error.type === 'card_error' || error.type === 'validation_error')
