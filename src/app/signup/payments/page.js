@@ -41,7 +41,7 @@ export default function Payments() {
       <Address address={address} setAddress={setAddress} />
       {Object.keys(options).length ? (
         <Elements stripe={stripePromise} options={options}>
-          <PaymentWrapper />
+          <PaymentWrapper address={address} />
         </Elements>
       ) : null}
     </main>

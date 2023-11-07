@@ -5,7 +5,7 @@ import { Button } from '@mui/material';
 import Toast from '@/components/toast';
 import { getBaseUrl } from '@/util/helpers';
 
-export default function PaymentWrapper() {
+export default function PaymentWrapper({ address }) {
   const [message, setMessage] = useState('');
   const [showMessage, setShowMessage] = useState(false); // Snackbar toast message
   const [isLoading, setLoading] = useState(false);
