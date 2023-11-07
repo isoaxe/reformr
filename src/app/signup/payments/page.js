@@ -12,7 +12,7 @@ const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
 
 export default function Payments() {
   const [options, setOptions] = useState({});
-  const [address, setAddress] = useState();
+  const [address, setAddress] = useState({});
   const cookies = useCookies();
 
   useEffect(() => {

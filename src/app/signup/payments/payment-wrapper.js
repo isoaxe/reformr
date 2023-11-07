@@ -18,6 +18,15 @@ export default function PaymentWrapper({ address }) {
     event.preventDefault();
     setLoading(true);
 
+    /* Check that addresses are present. */
+    const { address1, address3, postcode } = address;
+    if (!address1 || !address3 || !postcode) {
+      setMessage('Please fill out all required address fields.');
+      setShowMessage(true);
+      setLoading(false);
+      return;
+    }
+
     /* Save address to Firestore. */
     const token = cookies.get('token');
     const email = cookies.get('email');
