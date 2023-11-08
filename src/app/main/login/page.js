@@ -70,7 +70,7 @@ export default function Login() {
           Login
         </Button>
         <p
-          className="mt-10 text-sm text-blue-600 hover:cursor-pointer hover:underline sm:text-base"
+          className="mt-10 w-fit text-sm text-blue-600 hover:cursor-pointer hover:underline sm:text-base"
           onClick={passwordReset}
         >
           Forgot Password?
