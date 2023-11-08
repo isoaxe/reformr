@@ -15,7 +15,12 @@ export default function Payments() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [options, setOptions] = useState({});
-  const [address, setAddress] = useState({});
+  const [address, setAddress] = useState({
+    address1: '',
+    address2: '',
+    address3: '',
+    postcode: '',
+  });
   const cookies = useCookies();
 
   useCookieState('screening', 'firstName', setFirstName);
