@@ -7,6 +7,7 @@ import { Button } from '@mui/material';
 import Toast from '@/components/toast';
 import { getBaseUrl } from '@/util/helpers';
 import { db } from '@/util/firebase';
+import { useAuth } from '@/util/hooks';
 
 export default function PaymentWrapper({ address }) {
   const [message, setMessage] = useState('');
@@ -15,6 +16,7 @@ export default function PaymentWrapper({ address }) {
   const cookies = useCookies();
   const stripe = useStripe();
   const elements = useElements();
+  const { user } = useAuth();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -22,6 +24,14 @@ export default function PaymentWrapper({ address }) {
 
     const token = cookies.get('token');
     const email = cookies.get('email');
+
+    /* Check that user is logged in. */
+    if (!user) {
+      setMessage('Please log in before making payment.');
+      setShowMessage(true);
+      setLoading(false);
+      return;
+    }
 
     /* Check that addresses are present. */
     const { address1, address3, postcode } = address;
