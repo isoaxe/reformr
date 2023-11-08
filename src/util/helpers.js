@@ -65,7 +65,7 @@ export async function validateToken(email, token) {
 export function setQuizCookie(quiz, state, cookies) {
   if (!state) return; // exit early as no state to add to cookie
 
-  const options = { expires: 7, sameSite: 'strict' }; // expires in one week
+  const options = { expires: 30, sameSite: 'strict' }; // expires in one week
   let quizCookieAsString = cookies.get(quiz) ?? '{}'; // cookie is stored as string
   const quizCookie = JSON.parse(quizCookieAsString); // cookie as JSON object
   const key = Object.keys(state)[0]; // get name of state, e.g. 'firstName'
