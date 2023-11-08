@@ -15,11 +15,11 @@ export const STRIPE_SECRET_KEY = isLive
   ? stripeSecretKeyLive
   : stripeSecretKeyTest;
 
-const stripeSecretWebhookTest = process.env.STRIPE_SECRET_WEBHOOK_TEST;
-const stripeSecretWebhookLive = process.env.STRIPE_SECRET_WEBHOOK_LIVE;
-export const STRIPE_SECRET_WEBHOOK = isLive
-  ? stripeSecretWebhookLive
-  : stripeSecretWebhookTest;
+const stripeWebhookSecretTest = process.env.STRIPE_WEBHOOK_SECRET_TEST;
+const stripeWebhookSecretLive = process.env.STRIPE_WEBHOOK_SECRET_LIVE;
+export const STRIPE_WEBHOOK_SECRET = isLive
+  ? stripeWebhookSecretLive
+  : stripeWebhookSecretTest;
 
 const stripePriceIdTest = 'price_1O9rYQFPKktQy8tpBuZCaJAw';
 const stripePriceIdLive = 'price_1NlkQrFPKktQy8tpqjntJXwq';
