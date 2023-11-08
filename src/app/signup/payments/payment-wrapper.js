@@ -18,6 +18,9 @@ export default function PaymentWrapper({ address }) {
     event.preventDefault();
     setLoading(true);
 
+    const token = cookies.get('token');
+    const email = cookies.get('email');
+
     /* Check that addresses are present. */
     const { address1, address3, postcode } = address;
     if (!address1 || !address3 || !postcode) {
@@ -27,9 +30,22 @@ export default function PaymentWrapper({ address }) {
       return;
     }
 
+    /* Get the users document ID from Firestore. */
+    let docId;
+    try {
+      const idRes = await fetch(`/api/doc-id?email=${email}&token=${token}`);
+      const idJson = await idRes.json();
+      if (!idJson.success) console.log(idJson.error);
+      docId = idJson.docId;
+    } catch (err) {
+      console.log('Error getting document ID: ', err);
+      setMessage('There was an issue getting the document ID.');
+      setShowMessage(true);
+      setLoading(false);
+      return;
+    }
+
     /* Save address to Firestore. */
-    const token = cookies.get('token');
-    const email = cookies.get('email');
     const response = await fetch('/api/payments/address', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
