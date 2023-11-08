@@ -2,8 +2,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, updateDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 import { getDocId, validateToken } from '@/util/helpers';
-import { auth } from '@/util/firebase';
-import { db } from '@/util/firebase';
+import { auth, db } from '@/util/firebase';
 
 /* Save screening data to Firestore if token is valid. */
 export async function POST(request) {
