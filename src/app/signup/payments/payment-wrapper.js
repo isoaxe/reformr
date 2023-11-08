@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { PaymentElement } from '@stripe/react-stripe-js';
 import { useStripe, useElements } from '@stripe/react-stripe-js';
+import { doc, updateDoc } from 'firebase/firestore';
 import { useCookies } from 'next-client-cookies';
 import { Button } from '@mui/material';
 import Toast from '@/components/toast';
 import { getBaseUrl } from '@/util/helpers';
+import { db } from '@/util/firebase';
 
 export default function PaymentWrapper({ address }) {
   const [message, setMessage] = useState('');
@@ -46,20 +48,17 @@ export default function PaymentWrapper({ address }) {
     }
 
     /* Save address to Firestore. */
-    const response = await fetch('/api/payments/address', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, token, address }),
-    });
-    const resJson = await response.json();
-    const { success } = resJson;
-    if (!success) {
+    try {
+      await updateDoc(doc(db, 'users', docId), { address });
+    } catch (err) {
+      console.log('Error saving address: ', err);
       setMessage('There was an issue saving your address.');
       setShowMessage(true);
       setLoading(false);
       return;
     }
 
+    /* Make a new card payment with Stripe. */
     const baseUrl = getBaseUrl();
     if (!stripe || !elements) return;
     const { error } = await stripe.confirmPayment({
