@@ -1,7 +1,9 @@
 /* Helper functions for the payments route to be used on the server only. */
 import Stripe from 'stripe';
 import { STRIPE_SECRET_KEY, STRIPE_PRICE_ID } from './constants';
-const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
+const version = { apiVersion: '2022-11-15' };
+
+export const stripe = new Stripe(STRIPE_SECRET_KEY, version);
 
 /* Create a new customer in Stripe. Required for subscription payments. */
 export async function createCustomer(name, email) {
