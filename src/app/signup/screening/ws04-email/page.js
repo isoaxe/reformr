@@ -50,7 +50,7 @@ export default function Email() {
       <p className="mb-8 text-lg text-slate-600 md:text-xl xl:text-2xl">
         (spam sucks)
       </p>
-      <TextInput text={email} setText={setEmail} isError={isInvalid} />
+      <TextInput text={email} setText={setEmail} isError={isInvalid && email} />
       <Button
         onClick={nextPage}
         variant="outlined"

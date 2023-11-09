@@ -65,13 +65,31 @@ export async function validateToken(email, token) {
 export function setQuizCookie(quiz, state, cookies) {
   if (!state) return; // exit early as no state to add to cookie
 
-  const options = { expires: 7, sameSite: 'strict' }; // expires in one week
+  const options = { expires: 30, sameSite: 'strict' }; // expires in one week
   let quizCookieAsString = cookies.get(quiz) ?? '{}'; // cookie is stored as string
   const quizCookie = JSON.parse(quizCookieAsString); // cookie as JSON object
   const key = Object.keys(state)[0]; // get name of state, e.g. 'firstName'
   quizCookie[key] = state[key]; // add state to cookie
   quizCookieAsString = JSON.stringify(quizCookie); // convert back to string
   cookies.set(quiz, quizCookieAsString, options); // cookie must be set as string
+}
+
+/* Check what URL is currently being used and return to caller. */
+export function getBaseUrl() {
+  let baseUrl;
+  const currentUrl = window.location.href;
+  if (currentUrl.includes('localhost')) baseUrl = 'http://localhost:3000';
+  else if (currentUrl.includes('.app')) baseUrl = 'https://reformr.vercel.app';
+  else if (currentUrl.includes('.nz')) baseUrl = 'https://reformr.nz';
+  else if (currentUrl.includes('.com')) baseUrl = 'https://reformr.com';
+  return baseUrl;
+}
+
+/* Checks if provided UNIX date was in last 24 hours. */
+export function wasRecent(date) {
+  const now = Math.floor(Date.now() / 1000);
+  const interval = now - date;
+  return interval < 24 * 60 * 60;
 }
 
 /*
