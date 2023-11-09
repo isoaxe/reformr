@@ -23,7 +23,11 @@ export async function POST(request) {
   } catch (err) {
     const failMessage = '⚠️  Webhook signature verification failed.';
     console.log(failMessage, err.message);
-    return NextResponse.json({ success: false, error: failMessage });
+    return NextResponse.json({
+      success: false,
+      status: 400,
+      error: failMessage,
+    });
   }
 
   /* Handle the event. Add payment data to Firestore if payment is made. */
@@ -77,7 +81,7 @@ export async function POST(request) {
     if (wasRecent(customer.created)) {
       console.log('ℹ️  Customer was created recently.');
       console.log('Payment data captured via client api call instead.');
-      return NextResponse.json({ success: true, status: 200 });
+      return NextResponse.json({ success: true, status: 204 });
     }
   }
   return NextResponse.json({ success: true, status: 200 });
