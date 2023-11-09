@@ -17,7 +17,7 @@ export async function POST(request) {
       signature,
       STRIPE_WEBHOOK_SECRET
     );
-    console.log('Webhook signature verified and event created.');
+    console.log('ℹ️  Webhook signature verified and event created.');
   } catch (err) {
     const failMessage = '⚠️  Webhook signature verification failed.';
     console.log(failMessage, err.message);
@@ -68,6 +68,9 @@ export async function POST(request) {
         await usersPath
           .doc(userId)
           .set({ payments: paymentData }, { merge: true });
+        console.log('✅  Payment made and data saved to Firestore.');
+      } else {
+        console.log('⚠️  Payment was not made.');
       }
 
       /* Skip if customer was just created since init is handled separately. */
