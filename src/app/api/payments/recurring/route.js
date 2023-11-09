@@ -3,7 +3,8 @@ import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET } from '@/util/constants';
-import { getDocId, wasRecent } from '@/util/helpers';
+import { wasRecent } from '@/util/helpers';
+import { getPaymentsData } from '@/util/server';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
 
@@ -49,18 +50,11 @@ export async function POST(request) {
     /* Save payments data to Firestore if invoice paid. */
     if (invoice.paid) {
       /* Get user data from Firestore. */
-      const db = admin.firestore();
-      const usersPath = db.collection('users');
-      const userRef = await usersPath
-        .where('payments.stripeUid', '==', customerId)
-        .get();
-      const userData = userRef.docs[0].data();
-      const { email } = userData.screening;
-      const docId = await getDocId(email);
-      const allPaymentData = userData.payments;
-      const { payments } = allPaymentData;
+      const { docId, payments } = await getPaymentsData(customerId);
 
       /* Save payments data to Firestore. */
+      const db = admin.firestore();
+      const usersPath = db.collection('users');
       const payment = {
         product: 'metabolic reset',
         paymentDate,
