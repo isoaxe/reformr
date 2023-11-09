@@ -56,7 +56,7 @@ export async function POST(request) {
         .get();
       const userData = userRef.docs[0].data();
       const { email } = userData.screening;
-      const userId = await getDocId(email);
+      const docId = await getDocId(email);
       const allPaymentData = userData.payments;
       const { payments } = allPaymentData;
 
@@ -69,7 +69,7 @@ export async function POST(request) {
       payments.push(payment);
       const paymentData = { isPaid: true, expiryDate, payments };
       await usersPath
-        .doc(userId)
+        .doc(docId)
         .set({ payments: paymentData }, { merge: true });
       console.log('✅ Payment made and data saved to Firestore.');
     } else {
