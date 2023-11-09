@@ -32,8 +32,8 @@ export async function POST(request) {
 
   /* Handle the event. Add payment data to Firestore if payment is made. */
   if (event.type === 'invoice.paid') {
-    const invoicePaid = event.data.object;
-    let customerId = invoicePaid.customer;
+    const invoice = event.data.object;
+    let customerId = invoice.customer;
     customerId = 'cus_OxvzdleqcuOYP6'; // TODO: remove this, for testing only.
     const subscription = await stripe.subscriptions.list({
       customer: customerId,
@@ -47,7 +47,7 @@ export async function POST(request) {
     }
 
     /* Save payments data to Firestore if invoice paid. */
-    if (invoicePaid.paid) {
+    if (invoice.paid) {
       /* Get user data from Firestore. */
       const db = admin.firestore();
       const usersPath = db.collection('users');
@@ -64,7 +64,7 @@ export async function POST(request) {
       const payment = {
         product: 'metabolic reset',
         paymentDate,
-        paymentAmount: invoicePaid.amount_paid / 100, // amount in NZD
+        paymentAmount: invoice.amount_paid / 100, // amount in NZD
       };
       payments.push(payment);
       const paymentData = { isPaid: true, expiryDate, payments };
