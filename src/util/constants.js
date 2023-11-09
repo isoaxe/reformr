@@ -1,5 +1,6 @@
 /* Stripe keys for the SquareSpace account. */
 const isLive = false;
+export const isDev = process.env.NODE_ENV === 'development';
 
 const stripePublicKeyTest =
   'pk_test_51MercyFPKktQy8tpfcK2JfsIQcXMMpvl04HKmGpsYXwEvSziRHaUvxPGKnBu7khVchuIBj2vzLHuaOj9I0xLxVJP00a1f3fm93';
@@ -20,7 +21,7 @@ const stripeWebhookSecretTest = process.env.STRIPE_WEBHOOK_SECRET_TEST;
 const stripeWebhookSecretLive = process.env.STRIPE_WEBHOOK_SECRET_LIVE;
 export const STRIPE_WEBHOOK_SECRET = isLive
   ? stripeWebhookSecretLive
-  : process.env.NODE_ENV === 'development'
+  : isDev
   ? stripeWebhookSecretLocal
   : stripeWebhookSecretTest;
 
