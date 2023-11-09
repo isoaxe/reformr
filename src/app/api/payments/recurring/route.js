@@ -34,17 +34,18 @@ export async function POST(request) {
       const subscription = await stripe.subscriptions.list({
         customer: customerId,
       });
-      let subStarts, subExpires;
+      let paymentDate, expiryDate;
       if (subscription) {
         /* Assumes only a single subscription active. */
         const { current_period_start, current_period_end } =
           subscription.data[0];
-        subStarts = new Date(current_period_start * 1000);
-        subExpires = new Date(current_period_end * 1000);
+        paymentDate = new Date(current_period_start * 1000);
+        expiryDate = new Date(current_period_end * 1000);
       }
 
       /* Save payments data to Firestore if invoice paid. */
       if (invoicePaid.paid) {
+        /* Get user data from Firestore. */
         const db = admin.firestore();
         const usersPath = db.collection('users');
         const userRef = await usersPath
@@ -55,13 +56,15 @@ export async function POST(request) {
         const userId = await getDocId(email);
         const allPaymentData = userData.payments;
         const { payments } = allPaymentData;
+
+        /* Save payments data to Firestore. */
         const payment = {
           product: 'metabolic reset',
-          subStarts,
-          amount: invoicePaid.amount_paid / 100, // amount in NZD
+          paymentDate,
+          paymentAmount: invoicePaid.amount_paid / 100, // amount in NZD
         };
         payments.push(payment);
-        const paymentData = { isPaid: true, subExpires, payments };
+        const paymentData = { isPaid: true, expiryDate, payments };
         await usersPath
           .doc(userId)
           .set({ payments: paymentData }, { merge: true });
