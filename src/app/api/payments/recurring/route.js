@@ -89,8 +89,7 @@ export async function POST(request) {
         invoice_settings: { default_payment_method: paymentMethod },
       });
       console.log(`✅ Payment method ${paymentMethod} set as default`);
-      return NextResponse.json({ success: true, status: 204 });
     }
+    return NextResponse.json({ success: true, status: 200 });
   }
-  return NextResponse.json({ success: true, status: 200 });
 }
