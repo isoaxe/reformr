@@ -1,5 +1,5 @@
 /* Stripe keys for the SquareSpace account. */
-const isLive = false;
+const isLive = false; // TODO: Update to true when ready to go live
 export const isDev = process.env.NODE_ENV === 'development';
 export const STRIPE_UID = 'cus_OxvzdleqcuOYP6'; // TODO: Update if test data reset
 
