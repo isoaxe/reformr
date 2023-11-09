@@ -1,3 +1,4 @@
+import admin from 'firebase-admin';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { STRIPE_WEBHOOK_SECRET } from '@/util/constants';
@@ -39,6 +40,15 @@ export async function POST(request) {
         const subExpiresAsInt = subscription.data[0].current_period_end;
         subExpires = new Date(subExpiresAsInt * 1000);
       }
+
+      /* Get user from Firestore. */
+      const db = admin.firestore();
+      const usersPath = db.collection('users');
+      const userRef = await usersPath
+        .where('payments.stripeUid', '==', customerId)
+        .get();
+      const userData = userRef.docs[0].data();
+
       /* Skip if customer was just created since init is handled separately. */
       const customer = await stripe.customers.retrieve(customerId);
       if (wasRecent(customer.created)) {
