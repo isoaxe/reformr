@@ -1,9 +1,11 @@
 import admin from 'firebase-admin';
+import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
-import { STRIPE_WEBHOOK_SECRET } from '@/util/constants';
+import { STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET } from '@/util/constants';
 import { getDocId, wasRecent } from '@/util/helpers';
-import { stripe } from '@/util/stripe';
+
+const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
 
 /* A webhook to listen for invoice events and update Firestore when heard. */
 export async function POST(request) {
