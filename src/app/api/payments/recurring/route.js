@@ -2,7 +2,7 @@ import admin from 'firebase-admin';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { STRIPE_WEBHOOK_SECRET } from '@/util/constants';
-import { wasRecent } from '@/util/helpers';
+import { getDocId, wasRecent } from '@/util/helpers';
 import { stripe } from '@/util/stripe';
 
 /* A webhook to listen for invoice events and update Firestore when heard. */
@@ -34,20 +34,38 @@ export async function POST(request) {
       const subscription = await stripe.subscriptions.list({
         customer: customerId,
       });
-      let subExpires;
+      let subStarts, subExpires;
       if (subscription) {
         /* Assumes only a single subscription active. */
-        const subExpiresAsInt = subscription.data[0].current_period_end;
-        subExpires = new Date(subExpiresAsInt * 1000);
+        const { current_period_start, current_period_end } =
+          subscription.data[0];
+        subStarts = new Date(current_period_start * 1000);
+        subExpires = new Date(current_period_end * 1000);
       }
 
-      /* Get user from Firestore. */
-      const db = admin.firestore();
-      const usersPath = db.collection('users');
-      const userRef = await usersPath
-        .where('payments.stripeUid', '==', customerId)
-        .get();
-      const userData = userRef.docs[0].data();
+      /* Save payments data to Firestore if invoice paid. */
+      if (invoicePaid.paid) {
+        const db = admin.firestore();
+        const usersPath = db.collection('users');
+        const userRef = await usersPath
+          .where('payments.stripeUid', '==', customerId)
+          .get();
+        const userData = userRef.docs[0].data();
+        const { email } = userData.screening;
+        const userId = await getDocId(email);
+        const allPaymentData = userData.payments;
+        const { payments } = allPaymentData;
+        const payment = {
+          product: 'metabolic reset',
+          subStarts,
+          amount: invoicePaid.amount_paid / 100, // amount in NZD
+        };
+        payments.push(payment);
+        const paymentData = { isPaid: true, subExpires, payments };
+        await usersPath
+          .doc(userId)
+          .set({ payments: paymentData }, { merge: true });
+      }
 
       /* Skip if customer was just created since init is handled separately. */
       const customer = await stripe.customers.retrieve(customerId);
