@@ -76,11 +76,19 @@ export async function POST(request) {
       console.log('⚠️  Payment was not made.');
     }
 
-    /* Skip if customer was just created since init is handled separately. */
+    /* Set default payment method for customer if recently created. */
     const customer = await stripe.customers.retrieve(customerId);
     if (wasRecent(customer.created)) {
       console.log('ℹ️  Customer was created recently.');
-      console.log('Payment data captured via client api call instead.');
+      const paymentIntentId = invoice.payment_intent;
+      const paymentIntent = await stripe.paymentIntents.retrieve(
+        paymentIntentId
+      );
+      const paymentMethod = paymentIntent.payment_method; // card ID in Stripe
+      await stripe.customers.update(customerId, {
+        invoice_settings: { default_payment_method: paymentMethod },
+      });
+      console.log(`✅ Payment method ${paymentMethod} set as default`);
       return NextResponse.json({ success: true, status: 204 });
     }
   }
