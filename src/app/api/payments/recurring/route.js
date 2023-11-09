@@ -43,8 +43,9 @@ export async function POST(request) {
     let paymentDate, expiryDate;
     if (subscription) {
       /* Assumes only a single subscription active. */
-      const { current_period_start, current_period_end } = subscription.data[0];
-      paymentDate = new Date(current_period_start * 1000);
+      const { current_period_end } = subscription.data[0];
+      const { created } = invoice;
+      paymentDate = new Date(created * 1000);
       expiryDate = new Date(current_period_end * 1000);
     }
 
