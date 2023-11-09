@@ -86,4 +86,23 @@ export async function POST(request) {
     }
     return NextResponse.json({ success: true, status: 200 });
   }
+
+  if (event.type === 'invoice.payment_failed') {
+    console.log('ℹ️  Invoice payment failed.');
+    const invoice = event.data.object;
+    let customerId = invoice.customer;
+    customerId = 'cus_OxvzdleqcuOYP6'; // TODO: remove this, for testing only.
+
+    /* Get user data from Firestore. */
+    const { docId } = await getPaymentsData(customerId);
+
+    /* Set user as unpaid in Firestore. */
+    const db = admin.firestore();
+    const usersPath = db.collection('users');
+    await usersPath
+      .doc(docId)
+      .set({ payments: { isPaid: false } }, { merge: true });
+    console.log('ℹ️  User set as unpaid in Firestore.');
+    return NextResponse.json({ success: true, status: 204 });
+  }
 }
