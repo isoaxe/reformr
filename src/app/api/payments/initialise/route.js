@@ -33,7 +33,10 @@ export async function POST(request) {
     /* Create a new subscription if not in Firestore, */
     const userId = await createCustomer(name, email);
     const subscription = await createSubscription(userId);
-    await userRef.set({ payments: { subscription } }, { merge: true });
+
+    /* Save Stripe payments data to Firestore if not already there. */
+    const paymentData = { subscription, stripeUid: userId, numBoxesSkipped: 0 };
+    await userRef.set({ payments: paymentData }, { merge: true });
 
     return NextResponse.json(subscription);
   } catch (err) {
