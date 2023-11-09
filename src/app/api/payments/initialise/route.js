@@ -35,7 +35,13 @@ export async function POST(request) {
     const subscription = await createSubscription(userId);
 
     /* Save Stripe payments data to Firestore if not already there. */
-    const paymentData = { subscription, stripeUid: userId, numBoxesSkipped: 0 };
+    const paymentData = {
+      subscription,
+      stripeUid: userId,
+      numBoxesSkipped: 0,
+      isPaid: false,
+      payments: [],
+    };
     await userRef.set({ payments: paymentData }, { merge: true });
 
     return NextResponse.json(subscription);
