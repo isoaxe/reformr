@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET } from '@/util/constants';
-import { isDev } from '@/util/constants';
+import { STRIPE_UID, isDev } from '@/util/constants';
 import { wasRecent } from '@/util/helpers';
 import { getPaymentsData } from '@/util/server';
 
@@ -36,7 +36,7 @@ export async function POST(request) {
   if (event.type === 'invoice.paid') {
     const invoice = event.data.object;
     let customerId = invoice.customer;
-    if (isDev) customerId = 'cus_OxvzdleqcuOYP6';
+    if (isDev) customerId = STRIPE_UID;
     const subscription = await stripe.subscriptions.list({
       customer: customerId,
     });
@@ -92,7 +92,7 @@ export async function POST(request) {
     console.log('ℹ️  Invoice payment failed.');
     const invoice = event.data.object;
     let customerId = invoice.customer;
-    if (isDev) customerId = 'cus_OxvzdleqcuOYP6';
+    if (isDev) customerId = STRIPE_UID;
 
     /* Get user data from Firestore. */
     const { docId } = await getPaymentsData(customerId);
