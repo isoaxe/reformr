@@ -1,6 +1,7 @@
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { STRIPE_WEBHOOK_SECRET } from '@/util/constants';
+import { wasRecent } from '@/util/helpers';
 import { stripe } from '@/util/stripe';
 
 /* A webhook to listen for invoice events and update Firestore when heard. */
@@ -28,7 +29,6 @@ export async function POST(request) {
     case 'invoice.paid':
       const invoicePaid = event.data.object;
       let customerId = invoicePaid.customer;
-      console.log({ customerId });
       customerId = 'cus_OxvzdleqcuOYP6'; // TODO: remove this, for testing only.
       const subscription = await stripe.subscriptions.list({
         customer: customerId,
@@ -36,8 +36,15 @@ export async function POST(request) {
       let subExpires;
       if (subscription) {
         /* Assumes only a single subscription active. */
-        let subExpiresAsInt = subscription.data[0].current_period_end;
-        subExpires = new Date(subExpiresAsInt * 1000).toISOString();
+        const subExpiresAsInt = subscription.data[0].current_period_end;
+        subExpires = new Date(subExpiresAsInt * 1000);
+      }
+      /* Skip if customer was just created since init is handled separately. */
+      const customer = await stripe.customers.retrieve(customerId);
+      if (wasRecent(customer.created)) {
+        console.log('ℹ️  Customer was created recently.');
+        console.log('Payment data captured via client api call instead.');
+        break;
       }
   }
   return NextResponse.json({ success: true, status: 200 });
