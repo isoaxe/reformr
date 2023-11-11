@@ -3,19 +3,21 @@
 import { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Button } from '@mui/material';
+import { useAuth } from '@/util/hooks';
 import { STRIPE_PUBLIC_KEY } from '@/util/constants';
 
 const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
 
 function VerifyButton({ stripePromise }) {
   const [stripe, setStripe] = useState(null);
+  const { user } = useAuth();
 
   async function handleClick(event) {
     event.preventDefault();
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId: '12345' }),
+      body: JSON.stringify({ email: user.email, userId: user.uid }),
     };
     const response = await fetch('/api/identity', options);
     const { clientSecret } = await response.json();
@@ -31,7 +33,7 @@ function VerifyButton({ stripePromise }) {
   return (
     <Button
       role="link"
-      disabled={!stripe}
+      disabled={!stripe || !user}
       onClick={handleClick}
       variant="outlined"
       className="w-fit text-lg md:text-xl"
