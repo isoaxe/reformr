@@ -23,7 +23,7 @@ function VerifyButton({ stripePromise }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: user.email, userId: user.uid }),
     };
-    const response = await fetch('/api/identity', options);
+    const response = await fetch('/api/identity/verification', options);
     const { clientSecret } = await response.json();
     const { error } = await stripe.verifyIdentity(clientSecret);
     if (error) {
