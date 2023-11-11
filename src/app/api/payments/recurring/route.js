@@ -69,7 +69,7 @@ export async function POST(request) {
         .set({ payments: paymentData }, { merge: true });
       console.log('✅ Payment made and data saved to Firestore.');
     } else {
-      console.log('⚠️  Payment was not made.');
+      console.log('❌ Payment was not made.');
     }
 
     /* Set default payment method for customer if recently created. */
