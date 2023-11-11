@@ -31,13 +31,13 @@ export async function POST(request) {
     }
 
     /* Create a new subscription if not in Firestore, */
-    const userId = await createCustomer(name, email);
-    const subscription = await createSubscription(userId);
+    const stripeUid = await createCustomer(name, email);
+    const subscription = await createSubscription(stripeUid);
 
     /* Save Stripe payments data to Firestore if not already there. */
     const paymentData = {
       subscription,
-      stripeUid: userId,
+      stripeUid,
       numBoxesSkipped: 0,
       isPaid: false,
       payments: [],
