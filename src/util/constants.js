@@ -17,14 +17,17 @@ export const STRIPE_SECRET_KEY = isLive
   ? stripeSecretKeyLive
   : stripeSecretKeyTest;
 
-const stripeWebhookSecretLocal = process.env.STRIPE_WEBHOOK_SECRET_LOCAL;
-const stripeWebhookSecretTest = process.env.STRIPE_WEBHOOK_SECRET_TEST;
-const stripeWebhookSecretLive = process.env.STRIPE_WEBHOOK_SECRET_LIVE;
-export const STRIPE_WEBHOOK_SECRET = isLive
-  ? stripeWebhookSecretLive
+const stripeInvoiceWebhookSecretLocal =
+  process.env.STRIPE_INVOICE_WEBHOOK_SECRET_LOCAL;
+const stripeInvoiceWebhookSecretTest =
+  process.env.STRIPE_INVOICE_WEBHOOK_SECRET_TEST;
+const stripeInvoiceWebhookSecretLive =
+  process.env.STRIPE_INVOICE_WEBHOOK_SECRET_LIVE;
+export const STRIPE_INVOICE_WEBHOOK_SECRET = isLive
+  ? stripeInvoiceWebhookSecretLive
   : isDev
-  ? stripeWebhookSecretLocal
-  : stripeWebhookSecretTest;
+  ? stripeInvoiceWebhookSecretLocal
+  : stripeInvoiceWebhookSecretTest;
 
 const stripePriceIdTest = 'price_1O9rYQFPKktQy8tpBuZCaJAw';
 const stripePriceIdLive = 'price_1NlkQrFPKktQy8tpqjntJXwq';
