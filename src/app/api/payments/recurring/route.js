@@ -2,7 +2,8 @@ import admin from 'firebase-admin';
 import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
-import { STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET } from '@/util/constants';
+import { STRIPE_SECRET_KEY } from '@/util/constants';
+import { STRIPE_INVOICE_WEBHOOK_SECRET } from '@/util/constants';
 import { STRIPE_UID, isDev } from '@/util/constants';
 import { wasRecent } from '@/util/helpers';
 import { getPaymentsData } from '@/util/server';
@@ -19,7 +20,7 @@ export async function POST(request) {
     event = stripe.webhooks.constructEvent(
       rawBody,
       signature,
-      STRIPE_WEBHOOK_SECRET
+      STRIPE_INVOICE_WEBHOOK_SECRET
     );
     console.log('ℹ️  Webhook signature verified and event created.');
   } catch (err) {
