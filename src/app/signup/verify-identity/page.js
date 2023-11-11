@@ -36,11 +36,9 @@ function VerifyButton({ stripePromise }) {
 
 export default function VerifyIdentity() {
   return (
-    <main className="min-h-[calc(100vh-7rem)]">
-      <h1 className="p-4 text-2xl md:p-8 md:text-4xl">
-        This is the
-        <span className="font-bold text-blue-600"> identity verification </span>
-        page
+    <main className="mx-auto min-h-[calc(100vh-7rem)] w-full max-w-xl">
+      <h1 className="mb-4 text-center text-2xl font-semibold text-sky-600 sm:text-3xl">
+        Verify your identity
       </h1>
       <VerifyButton stripePromise={stripePromise} />
     </main>
