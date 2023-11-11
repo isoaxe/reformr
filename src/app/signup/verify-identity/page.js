@@ -11,11 +11,13 @@ const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
 
 function VerifyButton({ stripePromise }) {
   const [stripe, setStripe] = useState(null);
+  const [isLoading, setLoading] = useState(false);
   const { user } = useAuth();
   const router = useRouter();
 
   async function handleClick(event) {
     event.preventDefault();
+    setLoading(true);
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -24,8 +26,10 @@ function VerifyButton({ stripePromise }) {
     const response = await fetch('/api/identity', options);
     const { clientSecret } = await response.json();
     const { error } = await stripe.verifyIdentity(clientSecret);
-    if (error) console.error('Error creating identity session: ', error);
-    else {
+    if (error) {
+      console.error('Error creating identity session: ', error);
+      setLoading(false);
+    } else {
       console.log('✅ Identity session created');
       router.push('/signup/medical/deep-dive');
     }
@@ -38,7 +42,7 @@ function VerifyButton({ stripePromise }) {
   return (
     <Button
       role="link"
-      disabled={!stripe || !user}
+      disabled={!stripe || !user || isLoading}
       onClick={handleClick}
       variant="outlined"
       className="w-fit text-lg md:text-xl"
