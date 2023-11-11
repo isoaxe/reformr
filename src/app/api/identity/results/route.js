@@ -28,4 +28,21 @@ export async function POST(request) {
       error: failMessage,
     });
   }
+
+  const verificationResult = event?.data?.object;
+
+  switch (event.type) {
+    case 'identity.verification_session.processing':
+      break;
+    case 'identity.verification_session.verified':
+      break;
+    case 'identity.verification_session.requires_input':
+      break;
+    case 'identity.verification_session.canceled':
+      break;
+    default:
+      console.log(`⚠️  Unhandled event type ${event.type}`);
+      return NextResponse.json({ success: false, status: 204 });
+  }
+  return NextResponse.json({ success: true, status: 200 });
 }
