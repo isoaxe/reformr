@@ -29,6 +29,18 @@ export const STRIPE_INVOICE_WEBHOOK_SECRET = isLive
   ? stripeInvoiceWebhookSecretLocal
   : stripeInvoiceWebhookSecretTest;
 
+const stripeIdentityWebhookSecretLocal =
+  process.env.STRIPE_IDENTITY_WEBHOOK_SECRET_LOCAL;
+const stripeIdentityWebhookSecretTest =
+  process.env.STRIPE_IDENTITY_WEBHOOK_SECRET_TEST;
+const stripeIdentityWebhookSecretLive =
+  process.env.STRIPE_IDENTITY_WEBHOOK_SECRET_LIVE;
+export const STRIPE_IDENTITY_WEBHOOK_SECRET = isLive
+  ? stripeIdentityWebhookSecretLive
+  : isDev
+  ? stripeIdentityWebhookSecretLocal
+  : stripeIdentityWebhookSecretTest;
+
 const stripePriceIdTest = 'price_1O9rYQFPKktQy8tpBuZCaJAw';
 const stripePriceIdLive = 'price_1NlkQrFPKktQy8tpqjntJXwq';
 export const STRIPE_PRICE_ID = isLive ? stripePriceIdLive : stripePriceIdTest;
