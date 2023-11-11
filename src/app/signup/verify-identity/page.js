@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { loadStripe } from '@stripe/stripe-js';
 import { Button } from '@mui/material';
 import { useAuth } from '@/util/hooks';
@@ -11,6 +12,7 @@ const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
 function VerifyButton({ stripePromise }) {
   const [stripe, setStripe] = useState(null);
   const { user } = useAuth();
+  const router = useRouter();
 
   async function handleClick(event) {
     event.preventDefault();
@@ -23,7 +25,10 @@ function VerifyButton({ stripePromise }) {
     const { clientSecret } = await response.json();
     const { error } = await stripe.verifyIdentity(clientSecret);
     if (error) console.error('Error creating identity session: ', error);
-    else console.log('✅ Identity session created');
+    else {
+      console.log('✅ Identity session created');
+      router.push('/signup/medical/deep-dive');
+    }
   }
 
   useEffect(() => {
