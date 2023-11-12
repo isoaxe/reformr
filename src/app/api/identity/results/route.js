@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { initialiseAdmin } from '@/util/admin';
-import { STRIPE_SECRET_KEY } from '@/util/constants';
+import { STRIPE_SECRET_KEY, FIRESTORE_DOC_ID } from '@/util/constants';
 import { STRIPE_IDENTITY_WEBHOOK_SECRET } from '@/util/constants';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
@@ -32,7 +32,8 @@ export async function POST(request) {
   }
 
   const verificationResult = event?.data?.object;
-  const docId = verificationResult?.metadata?.firestoreDocId;
+  const docId =
+    verificationResult?.metadata?.firestoreDocId || FIRESTORE_DOC_ID;
   const { status } = verificationResult;
 
   /* Access Firestore as required for all events. */
@@ -41,6 +42,7 @@ export async function POST(request) {
   const usersPath = db.collection('users');
   const userDoc = usersPath.doc(docId);
   userDoc.set({ identityStatus: status }, { merge: true });
+  console.log(`✅ Identity status updated to ${status}.`);
 
   switch (event.type) {
     case 'identity.verification_session.processing':

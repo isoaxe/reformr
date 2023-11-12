@@ -2,6 +2,7 @@
 const isLive = false; // TODO: Update to true when ready to go live
 export const isDev = process.env.NODE_ENV === 'development';
 export const STRIPE_UID = 'cus_OxvzdleqcuOYP6'; // TODO: Update if test data reset
+export const FIRESTORE_DOC_ID = 'Messi-895332'; // TODO: Update if test data reset
 
 const stripePublicKeyTest =
   'pk_test_51MercyFPKktQy8tpfcK2JfsIQcXMMpvl04HKmGpsYXwEvSziRHaUvxPGKnBu7khVchuIBj2vzLHuaOj9I0xLxVJP00a1f3fm93';
