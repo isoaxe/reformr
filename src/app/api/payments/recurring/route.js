@@ -109,4 +109,7 @@ export async function POST(request) {
     console.log('ℹ️  User set as unpaid in Firestore.');
     return NextResponse.json({ success: true, status: 204 });
   }
+
+  console.log(`⚠️  Unhandled event type. ${event.type}`);
+  return NextResponse.json({ success: false, status: 204 });
 }
