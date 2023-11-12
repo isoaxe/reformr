@@ -39,11 +39,13 @@ export async function POST(request) {
   const db = admin.firestore();
   const usersPath = db.collection('users');
 
+  /* Get customerId as required for all events. */
+  const invoice = event.data.object;
+  let customerId = invoice.customer;
+  if (isDev) customerId = STRIPE_UID;
+
   /* Handle the event. Add payment data to Firestore if payment is made. */
   if (event.type === 'invoice.paid') {
-    const invoice = event.data.object;
-    let customerId = invoice.customer;
-    if (isDev) customerId = STRIPE_UID;
     const subscription = await stripe.subscriptions.list({
       customer: customerId,
     });
@@ -96,9 +98,6 @@ export async function POST(request) {
 
   if (event.type === 'invoice.payment_failed') {
     console.log('ℹ️  Invoice payment failed.');
-    const invoice = event.data.object;
-    let customerId = invoice.customer;
-    if (isDev) customerId = STRIPE_UID;
 
     /* Get user data from Firestore. */
     const { docId } = await getPaymentsData(customerId);
