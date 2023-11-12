@@ -41,21 +41,24 @@ export async function POST(request) {
   const db = admin.firestore();
   const usersPath = db.collection('users');
   const userDoc = usersPath.doc(docId);
-  userDoc.set({ identityStatus: status }, { merge: true });
-  console.log(`✅ Identity status updated to ${status}.`);
 
   switch (event.type) {
     case 'identity.verification_session.processing':
+      userDoc.set({ identityStatus: status }, { merge: true });
       break;
     case 'identity.verification_session.verified':
+      userDoc.set({ identityStatus: status }, { merge: true });
       break;
     case 'identity.verification_session.requires_input':
+      userDoc.set({ identityStatus: status }, { merge: true });
       break;
     case 'identity.verification_session.canceled':
+      userDoc.set({ identityStatus: status }, { merge: true });
       break;
     default:
       console.log(`⚠️  Unhandled event type ${event.type}`);
       return NextResponse.json({ success: false, status: 204 });
   }
+  console.log(`✅ Identity status updated to ${status}.`);
   return NextResponse.json({ success: true, status: 200 });
 }
