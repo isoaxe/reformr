@@ -20,7 +20,7 @@ function createFirebaseAdminApp(params) {
   return admin.initializeApp({ credential: cert, projectId });
 }
 
-export async function initializeAdmin() {
+export async function initialiseAdmin() {
   const params = {
     projectId: 'reformr-health',
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL,

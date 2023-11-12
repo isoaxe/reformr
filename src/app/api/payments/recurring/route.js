@@ -2,7 +2,9 @@ import admin from 'firebase-admin';
 import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
-import { STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET } from '@/util/constants';
+import { initialiseAdmin } from '@/util/admin';
+import { STRIPE_SECRET_KEY } from '@/util/constants';
+import { STRIPE_INVOICE_WEBHOOK_SECRET } from '@/util/constants';
 import { STRIPE_UID, isDev } from '@/util/constants';
 import { wasRecent } from '@/util/helpers';
 import { getPaymentsData } from '@/util/server';
@@ -19,7 +21,7 @@ export async function POST(request) {
     event = stripe.webhooks.constructEvent(
       rawBody,
       signature,
-      STRIPE_WEBHOOK_SECRET
+      STRIPE_INVOICE_WEBHOOK_SECRET
     );
     console.log('ℹ️  Webhook signature verified and event created.');
   } catch (err) {
@@ -32,18 +34,25 @@ export async function POST(request) {
     });
   }
 
+  /* Access Firestore as required for all events. */
+  await initialiseAdmin();
+  const db = admin.firestore();
+  const usersPath = db.collection('users');
+
+  /* Get customerId as required for all events. */
+  const invoice = event?.data?.object;
+  let customerId = invoice?.customer;
+  if (isDev) customerId = STRIPE_UID;
+
   /* Handle the event. Add payment data to Firestore if payment is made. */
   if (event.type === 'invoice.paid') {
-    const invoice = event.data.object;
-    let customerId = invoice.customer;
-    if (isDev) customerId = STRIPE_UID;
     const subscription = await stripe.subscriptions.list({
       customer: customerId,
     });
     let paymentDate, expiryDate;
     if (subscription) {
       /* Assumes only a single subscription active. */
-      const { current_period_end } = subscription.data[0];
+      const { current_period_end } = subscription.data.pop();
       const { created } = invoice;
       paymentDate = new Date(created * 1000);
       expiryDate = new Date(current_period_end * 1000);
@@ -55,8 +64,6 @@ export async function POST(request) {
       const { docId, payments } = await getPaymentsData(customerId);
 
       /* Save payments data to Firestore. */
-      const db = admin.firestore();
-      const usersPath = db.collection('users');
       const payment = {
         product: 'metabolic reset',
         paymentDate,
@@ -69,7 +76,7 @@ export async function POST(request) {
         .set({ payments: paymentData }, { merge: true });
       console.log('✅ Payment made and data saved to Firestore.');
     } else {
-      console.log('⚠️  Payment was not made.');
+      console.log('❌ Payment was not made.');
     }
 
     /* Set default payment method for customer if recently created. */
@@ -91,20 +98,18 @@ export async function POST(request) {
 
   if (event.type === 'invoice.payment_failed') {
     console.log('ℹ️  Invoice payment failed.');
-    const invoice = event.data.object;
-    let customerId = invoice.customer;
-    if (isDev) customerId = STRIPE_UID;
 
     /* Get user data from Firestore. */
     const { docId } = await getPaymentsData(customerId);
 
     /* Set user as unpaid in Firestore. */
-    const db = admin.firestore();
-    const usersPath = db.collection('users');
     await usersPath
       .doc(docId)
       .set({ payments: { isPaid: false } }, { merge: true });
     console.log('ℹ️  User set as unpaid in Firestore.');
     return NextResponse.json({ success: true, status: 204 });
   }
+
+  console.log(`⚠️  Unhandled event type. ${event.type}`);
+  return NextResponse.json({ success: false, status: 204 });
 }

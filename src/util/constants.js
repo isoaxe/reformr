@@ -2,6 +2,7 @@
 const isLive = false; // TODO: Update to true when ready to go live
 export const isDev = process.env.NODE_ENV === 'development';
 export const STRIPE_UID = 'cus_OxvzdleqcuOYP6'; // TODO: Update if test data reset
+export const FIRESTORE_DOC_ID = 'Messi-895332'; // TODO: Update if test data reset
 
 const stripePublicKeyTest =
   'pk_test_51MercyFPKktQy8tpfcK2JfsIQcXMMpvl04HKmGpsYXwEvSziRHaUvxPGKnBu7khVchuIBj2vzLHuaOj9I0xLxVJP00a1f3fm93';
@@ -17,14 +18,29 @@ export const STRIPE_SECRET_KEY = isLive
   ? stripeSecretKeyLive
   : stripeSecretKeyTest;
 
-const stripeWebhookSecretLocal = process.env.STRIPE_WEBHOOK_SECRET_LOCAL;
-const stripeWebhookSecretTest = process.env.STRIPE_WEBHOOK_SECRET_TEST;
-const stripeWebhookSecretLive = process.env.STRIPE_WEBHOOK_SECRET_LIVE;
-export const STRIPE_WEBHOOK_SECRET = isLive
-  ? stripeWebhookSecretLive
+const stripeInvoiceWebhookSecretLocal =
+  process.env.STRIPE_INVOICE_WEBHOOK_SECRET_LOCAL;
+const stripeInvoiceWebhookSecretTest =
+  process.env.STRIPE_INVOICE_WEBHOOK_SECRET_TEST;
+const stripeInvoiceWebhookSecretLive =
+  process.env.STRIPE_INVOICE_WEBHOOK_SECRET_LIVE;
+export const STRIPE_INVOICE_WEBHOOK_SECRET = isLive
+  ? stripeInvoiceWebhookSecretLive
   : isDev
-  ? stripeWebhookSecretLocal
-  : stripeWebhookSecretTest;
+  ? stripeInvoiceWebhookSecretLocal
+  : stripeInvoiceWebhookSecretTest;
+
+const stripeIdentityWebhookSecretLocal =
+  process.env.STRIPE_IDENTITY_WEBHOOK_SECRET_LOCAL;
+const stripeIdentityWebhookSecretTest =
+  process.env.STRIPE_IDENTITY_WEBHOOK_SECRET_TEST;
+const stripeIdentityWebhookSecretLive =
+  process.env.STRIPE_IDENTITY_WEBHOOK_SECRET_LIVE;
+export const STRIPE_IDENTITY_WEBHOOK_SECRET = isLive
+  ? stripeIdentityWebhookSecretLive
+  : isDev
+  ? stripeIdentityWebhookSecretLocal
+  : stripeIdentityWebhookSecretTest;
 
 const stripePriceIdTest = 'price_1O9rYQFPKktQy8tpBuZCaJAw';
 const stripePriceIdLive = 'price_1NlkQrFPKktQy8tpqjntJXwq';

@@ -2,7 +2,7 @@ import admin from 'firebase-admin';
 import { NextResponse } from 'next/server';
 import { createCustomer, createSubscription } from '@/util/stripe';
 import { getDocId, validateToken } from '@/util/helpers';
-import { initializeAdmin } from '@/util/admin';
+import { initialiseAdmin } from '@/util/admin';
 
 /* Sign up a new customer and create a subscription. Make the first payment. */
 export async function POST(request) {
@@ -19,7 +19,7 @@ export async function POST(request) {
       return NextResponse.json({ success: false, error: 'Invalid token.' });
 
     /* Return subscription if already in Firestore. */
-    await initializeAdmin();
+    await initialiseAdmin();
     const db = admin.firestore();
     const userRef = db.collection('users').doc(docId);
     const user = await userRef.get();
@@ -31,13 +31,13 @@ export async function POST(request) {
     }
 
     /* Create a new subscription if not in Firestore, */
-    const userId = await createCustomer(name, email);
-    const subscription = await createSubscription(userId);
+    const stripeUid = await createCustomer(name, email);
+    const subscription = await createSubscription(stripeUid);
 
     /* Save Stripe payments data to Firestore if not already there. */
     const paymentData = {
       subscription,
-      stripeUid: userId,
+      stripeUid,
       numBoxesSkipped: 0,
       isPaid: false,
       payments: [],
