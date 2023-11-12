@@ -1,6 +1,7 @@
 import admin from 'firebase-admin';
 import Stripe from 'stripe';
 import { NextResponse } from 'next/server';
+import { initialiseAdmin } from '@/util/admin';
 import { getDocId } from '@/util/helpers';
 import { STRIPE_SECRET_KEY } from '@/util/constants';
 
@@ -14,6 +15,7 @@ export async function POST(request) {
   try {
     /* Get userId from Firestore. */
     const docId = await getDocId(email);
+    await initialiseAdmin();
     const db = admin.firestore();
     const user = await db.collection('users').doc(docId).get();
     const userData = user.data();

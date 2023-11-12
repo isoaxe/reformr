@@ -2,6 +2,7 @@ import admin from 'firebase-admin';
 import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
+import { initialiseAdmin } from '@/util/admin';
 import { STRIPE_SECRET_KEY } from '@/util/constants';
 import { STRIPE_INVOICE_WEBHOOK_SECRET } from '@/util/constants';
 import { STRIPE_UID, isDev } from '@/util/constants';
@@ -32,6 +33,8 @@ export async function POST(request) {
       error: failMessage,
     });
   }
+
+  await initialiseAdmin();
 
   /* Handle the event. Add payment data to Firestore if payment is made. */
   if (event.type === 'invoice.paid') {
