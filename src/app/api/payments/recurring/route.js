@@ -40,8 +40,8 @@ export async function POST(request) {
   const usersPath = db.collection('users');
 
   /* Get customerId as required for all events. */
-  const invoice = event.data.object;
-  let customerId = invoice.customer;
+  const invoice = event?.data?.object;
+  let customerId = invoice?.customer;
   if (isDev) customerId = STRIPE_UID;
 
   /* Handle the event. Add payment data to Firestore if payment is made. */
