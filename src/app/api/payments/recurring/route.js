@@ -34,7 +34,10 @@ export async function POST(request) {
     });
   }
 
+  /* Access Firestore as required for all events. */
   await initialiseAdmin();
+  const db = admin.firestore();
+  const usersPath = db.collection('users');
 
   /* Handle the event. Add payment data to Firestore if payment is made. */
   if (event.type === 'invoice.paid') {
@@ -59,8 +62,6 @@ export async function POST(request) {
       const { docId, payments } = await getPaymentsData(customerId);
 
       /* Save payments data to Firestore. */
-      const db = admin.firestore();
-      const usersPath = db.collection('users');
       const payment = {
         product: 'metabolic reset',
         paymentDate,
@@ -103,8 +104,6 @@ export async function POST(request) {
     const { docId } = await getPaymentsData(customerId);
 
     /* Set user as unpaid in Firestore. */
-    const db = admin.firestore();
-    const usersPath = db.collection('users');
     await usersPath
       .doc(docId)
       .set({ payments: { isPaid: false } }, { merge: true });
