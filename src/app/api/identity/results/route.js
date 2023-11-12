@@ -1,6 +1,7 @@
 import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
+import { initialiseAdmin } from '@/util/admin';
 import { STRIPE_SECRET_KEY } from '@/util/constants';
 import { STRIPE_IDENTITY_WEBHOOK_SECRET } from '@/util/constants';
 
@@ -30,6 +31,11 @@ export async function POST(request) {
   }
 
   const verificationResult = event?.data?.object;
+
+  /* Access Firestore as required for all events. */
+  await initialiseAdmin();
+  const db = admin.firestore();
+  const usersPath = db.collection('users');
 
   switch (event.type) {
     case 'identity.verification_session.processing':
