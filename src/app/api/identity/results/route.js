@@ -31,11 +31,15 @@ export async function POST(request) {
   }
 
   const verificationResult = event?.data?.object;
+  const docId = verificationResult?.metadata?.firestoreDocId;
+  const { status } = verificationResult;
 
   /* Access Firestore as required for all events. */
   await initialiseAdmin();
   const db = admin.firestore();
   const usersPath = db.collection('users');
+  const userDoc = usersPath.doc(docId);
+  userDoc.set({ identityStatus: status }, { merge: true });
 
   switch (event.type) {
     case 'identity.verification_session.processing':
