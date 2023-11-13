@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useCookies } from 'next-client-cookies';
 import Toast from '@/components/toast';
+import Calendly from './calendly';
 
 export default function BookTelehealth() {
   const [showSuccess, setShowSuccess] = useState(false);
@@ -40,6 +41,7 @@ export default function BookTelehealth() {
         <span className="font-bold text-blue-600"> Telehealth Booking </span>
         page
       </h1>
+      <Calendly />
       <Toast
         message="There was an issue saving medical data to the database."
         severity="error"
