@@ -63,18 +63,17 @@ export function useAuthProvider() {
     setUser(null);
   }
 
-  /* Subscribe to user on mount. */
+  /* Set the user when authenticated, remove when not. */
   useEffect(() => {
-    function unsubscribe() {
+    function setUserOnAuthChange() {
       onAuthStateChanged(auth, (user) => {
         if (user) setUser(user);
         else setUser(null);
       });
     }
 
-    /* Cleanup subscription on unmount. */
-    return () => unsubscribe();
-  }, [setUser]);
+    setUserOnAuthChange();
+  }, []);
 
   /* Return the user object and auth methods. */
   return {
