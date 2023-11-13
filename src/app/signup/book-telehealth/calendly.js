@@ -18,9 +18,8 @@ export default function Calendly() {
 
   return (
     <div
-      className="calendly-inline-widget"
+      className="calendly-inline-widget h-full"
       data-url="https://calendly.com/lucasoconnell/meet-your-doctor"
-      style={{ minWidth: '320px', height: '580px' }}
     />
   );
 }
