@@ -1,4 +1,9 @@
+import { BsFillPersonFill } from 'react-icons/bs';
 import DropdownItem from '../dropdown-item';
+
+/* Props for patient info section. */
+const patientInfoIcon = <BsFillPersonFill size={30} />;
+const patientInfoContent = <p>Some placeholder content for now</p>;
 
 export default function PatientDashboard() {
   return (
@@ -6,7 +11,11 @@ export default function PatientDashboard() {
       <h1 className="py-4 text-2xl text-sky-600 md:py-8 md:text-4xl">
         Patient Details
       </h1>
-      <DropdownItem />
+      <DropdownItem
+        text="Your Info"
+        icon={patientInfoIcon}
+        hidden={patientInfoContent}
+      />
     </main>
   );
 }
