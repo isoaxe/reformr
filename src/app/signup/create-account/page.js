@@ -45,6 +45,7 @@ export default function CreateAccount() {
 
     let user = null;
     if (json.success) user = await login(email, password);
+    // TODO: Find why the phoneNumber field below is not getting set.
     updateProfile(auth.currentUser, { displayName: name, phoneNumber: phone });
     if (user) router.push('/signup/payments');
     else {
