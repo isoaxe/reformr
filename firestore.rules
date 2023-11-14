@@ -16,7 +16,8 @@ service cloud.firestore {
     	return request.auth != null && request.auth.uid == userId;
     }
     match /users/{userId} {
-      allow read: if false;
+      allow get: if isSameUser();
+      allow list: if false; // don't allow fetching of all users
       allow create: if screeningDataVerified();
       allow update: if resource.data.dateAccountCreated == null || isSameUser();
     }
