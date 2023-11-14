@@ -22,7 +22,7 @@ export default function Login() {
   async function signIn() {
     try {
       const user = await login(email, password);
-      if (user) router.push('/signup/payments'); // TODO: redirect to dashboard
+      if (user) router.push('/main/dashboard/patient');
     } catch (error) {
       console.log(error);
       setShowFailure(true);
