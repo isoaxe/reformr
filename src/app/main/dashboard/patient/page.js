@@ -3,7 +3,22 @@ import DropdownItem from '../dropdown-item';
 
 /* Props for patient info section. */
 const patientInfoIcon = <BsFillPersonFill size={30} />;
-const patientInfoContent = <p>Some placeholder content for now</p>;
+const patientInfoContent = (
+  <>
+    <div className="flex flex-row">
+      <p className="w-20 font-medium">Name:</p>
+      <p>Your name</p>
+    </div>
+    <div className="my-1 flex flex-row">
+      <p className="w-20 font-medium">Email:</p>
+      <p>Your email</p>
+    </div>
+    <div className="flex flex-row">
+      <p className="w-20 font-medium">Phone:</p>
+      <p>Your phone</p>
+    </div>
+  </>
+);
 
 export default function PatientDashboard() {
   return (

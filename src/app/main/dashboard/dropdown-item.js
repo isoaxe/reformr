@@ -15,7 +15,7 @@ export default function DropdownItem({ text, icon, hidden }) {
       >
         {icon}
         <div className="flex w-full flex-row items-center justify-between">
-          <h2 className="ml-4">{text}</h2>
+          <h2 className="ml-4 font-medium">{text}</h2>
           <Hamburger
             size={25}
             distance="lg"
