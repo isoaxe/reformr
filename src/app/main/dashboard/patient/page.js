@@ -2,8 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs';
+import { doc, getDoc } from 'firebase/firestore';
 import DropdownItem from '../dropdown-item';
+import { getDocId } from '@/util/helpers';
 import { useAuth } from '@/util/hooks';
+import { db } from '@/util/firebase';
 
 export default function PatientDashboard() {
   const [name, setName] = useState('');
@@ -34,8 +37,17 @@ export default function PatientDashboard() {
     if (!user) return;
     setName(user.displayName);
     setEmail(user.email);
-    setPhone(user.phoneNumber);
-  }, [user]);
+
+    async function getPatientData() {
+      const docId = await getDocId(email);
+      const userRef = doc(db, 'users', docId);
+      const userSnap = await getDoc(userRef);
+      const userData = userSnap.data();
+      setPhone(userData?.screening?.phone);
+    }
+
+    if (email) getPatientData();
+  }, [user, email]);
 
   return (
     <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-full max-w-3xl flex-col px-4 xs:px-9">
