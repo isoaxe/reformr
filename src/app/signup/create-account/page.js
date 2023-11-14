@@ -18,6 +18,7 @@ export default function CreateAccount() {
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setLoading] = useState(false);
   const [helperText, setHelperText] = useState('');
   const [showFailure, setShowFailure] = useState(false);
   const cookies = useCookies();
@@ -30,6 +31,7 @@ export default function CreateAccount() {
   useCookieState('screening', 'phone', setPhone);
 
   async function createPatientAccount() {
+    setLoading(true);
     const name = `${firstName} ${lastName}`;
     if (!name || !phone || !email) return;
     const token = cookies.get('token');
@@ -45,7 +47,10 @@ export default function CreateAccount() {
     if (json.success) user = await login(email, password);
     updateProfile(auth.currentUser, { displayName: name, phoneNumber: phone });
     if (user) router.push('/signup/payments');
-    else setShowFailure(true);
+    else {
+      setShowFailure(true);
+      setLoading(false);
+    }
   }
 
   return (
@@ -68,7 +73,7 @@ export default function CreateAccount() {
           variant="outlined"
           className="mt-16 w-fit text-lg md:text-xl"
           onClick={createPatientAccount}
-          disabled={!password || !!helperText}
+          disabled={!password || !!helperText || isLoading}
         >
           Create Account
         </Button>
