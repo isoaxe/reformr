@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs';
+import { MdLocalShipping } from 'react-icons/md';
 import { doc, getDoc } from 'firebase/firestore';
 import DropdownItem from '../dropdown-item';
 import { getDocId } from '@/util/helpers';
@@ -12,6 +13,7 @@ export default function PatientDashboard() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState({});
   const { user } = useAuth();
 
   /* Props for patient info section. */
@@ -33,6 +35,17 @@ export default function PatientDashboard() {
     </>
   );
 
+  /* Props for delivery address section. */
+  const deliveryIcon = <MdLocalShipping size={30} />;
+  const deliveryContent = (
+    <>
+      <p>{address.address1}</p>
+      <p>{address?.address2}</p>
+      <p>{address?.address3}</p>
+      <p>{address?.postcode}</p>
+    </>
+  );
+
   useEffect(() => {
     if (!user) return;
     setName(user.displayName);
@@ -44,6 +57,7 @@ export default function PatientDashboard() {
       const userSnap = await getDoc(userRef);
       const userData = userSnap.data();
       setPhone(userData?.screening?.phone);
+      setAddress(userData?.address);
     }
 
     if (email) getPatientData();
@@ -58,6 +72,11 @@ export default function PatientDashboard() {
         text="Your Info"
         icon={patientInfoIcon}
         hidden={patientInfoContent}
+      />
+      <DropdownItem
+        text="Delivery Address"
+        icon={deliveryIcon}
+        hidden={deliveryContent}
       />
     </main>
   );

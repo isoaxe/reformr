@@ -8,7 +8,7 @@ export default function DropdownItem({ text, icon, hidden }) {
   const [isOpen, setOpen] = useState(false);
 
   return (
-    <section className="rounded border border-slate-400 px-4 py-3 text-lg md:text-xl lg:text-2xl">
+    <section className="mb-4 rounded border border-slate-400 px-4 py-3 text-lg md:text-xl lg:text-2xl">
       <div
         onClick={() => setOpen(!isOpen)}
         className="flex w-full flex-row items-center hover:cursor-pointer"
