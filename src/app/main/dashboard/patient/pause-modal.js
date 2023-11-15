@@ -15,7 +15,11 @@ export default function PauseModal({ open, setOpen }) {
           following month. You won&apos;t be charged for the skipped delivery.
         </p>
         <div className="mb-5 flex w-full flex-row justify-around">
-          <Button variant="outlined" className="w-40 text-lg md:text-xl">
+          <Button
+            variant="outlined"
+            className="w-40 text-lg md:text-xl"
+            onClick={() => setOpen(false)}
+          >
             Close
           </Button>
           <Button
