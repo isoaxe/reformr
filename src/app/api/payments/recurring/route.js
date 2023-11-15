@@ -81,21 +81,21 @@ export async function POST(request) {
     }
 
     /* Set default payment method for customer if recently created. */
-    let paymentMethod = allPaymentData?.paymentMethod;
-    if (!paymentMethod) {
+    let paymentMethodId = allPaymentData?.paymentMethodId;
+    if (!paymentMethodId) {
       console.log('ℹ️  Payment method not yet saved. Doing so now.');
       const paymentIntentId = invoice.payment_intent;
       const paymentIntent = await stripe.paymentIntents.retrieve(
         paymentIntentId
       );
-      paymentMethod = paymentIntent.payment_method; // card ID in Stripe
+      paymentMethodId = paymentIntent.payment_method; // card ID in Stripe
       await stripe.customers.update(customerId, {
-        invoice_settings: { default_payment_method: paymentMethod },
+        invoice_settings: { default_payment_method: paymentMethodId },
       });
       await usersPath
         .doc(docId)
-        .set({ payments: { paymentMethod } }, { merge: true });
-      console.log(`✅ Payment method ${paymentMethod} set as default`);
+        .set({ payments: { paymentMethodId } }, { merge: true });
+      console.log(`✅ Payment method ${paymentMethodId} set as default`);
     }
     return NextResponse.json({ success: true, status: 200 });
   }
