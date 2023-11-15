@@ -16,16 +16,17 @@ export default function CancelModal({ open, setOpen }) {
         </p>
         <div className="mb-5 flex w-full flex-row justify-around">
           <Button
-            variant="contained"
-            className="w-40 bg-red-400 text-lg hover:bg-red-500 md:text-xl"
+            variant="outlined"
+            className="w-40 text-lg md:text-xl"
+            onClick={() => setOpen(false)}
           >
-            Cancel
+            Close
           </Button>
           <Button
             variant="contained"
-            className="w-40 bg-blue-400 text-lg  hover:bg-blue-500 md:text-xl"
+            className="w-44 bg-red-400 text-lg hover:bg-red-500 md:text-xl"
           >
-            Keep
+            Cancel Sub
           </Button>
         </div>
       </section>
