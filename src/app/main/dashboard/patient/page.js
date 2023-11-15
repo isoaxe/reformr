@@ -3,7 +3,9 @@
 import { useState, useEffect } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { MdLocalShipping, MdOutlinePayment } from 'react-icons/md';
+import { MdSubscriptions } from 'react-icons/md';
 import { doc, getDoc } from 'firebase/firestore';
+import { Button } from '@mui/material';
 import DropdownItem from '../dropdown-item';
 import { getDocId } from '@/util/helpers';
 import { useAuth } from '@/util/hooks';
@@ -69,6 +71,25 @@ export default function PatientDashboard() {
     </>
   );
 
+  /* Props for the subscription management section. */
+  const subscriptionIcon = <MdSubscriptions size={30} />;
+  const subscriptionContent = (
+    <>
+      <div className="flex w-full flex-row justify-between">
+        <Button
+          variant="outlined"
+          className="w-fit text-lg md:text-xl"
+          color="error"
+        >
+          Cancel
+        </Button>
+        <Button variant="outlined" className="w-fit text-lg md:text-xl">
+          Pause
+        </Button>
+      </div>
+    </>
+  );
+
   useEffect(() => {
     if (!user) return;
     setName(user.displayName);
@@ -115,6 +136,11 @@ export default function PatientDashboard() {
         hidden={deliveryContent}
       />
       <DropdownItem text="Payment Card" icon={cardIcon} hidden={cardContent} />
+      <DropdownItem
+        text="Subscription Management"
+        icon={subscriptionIcon}
+        hidden={subscriptionContent}
+      />
     </main>
   );
 }
