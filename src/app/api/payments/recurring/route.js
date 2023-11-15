@@ -57,11 +57,11 @@ export async function POST(request) {
       expiryDate = new Date(current_period_end * 1000);
     }
 
+    /* Get payments data from Firestore. */
+    const { docId, allPaymentData } = await getPaymentsData(customerId);
+
     /* Save payments data to Firestore if invoice paid. */
-    let allPaymentData;
     if (invoice.paid) {
-      /* Get payments data from Firestore. */
-      const { docId, allPaymentData } = await getPaymentsData(customerId);
       const { payments } = allPaymentData;
 
       /* Save payments data to Firestore. */
@@ -81,7 +81,7 @@ export async function POST(request) {
     }
 
     /* Set default payment method for customer if recently created. */
-    let { paymentMethod } = allPaymentData;
+    let paymentMethod = allPaymentData?.paymentMethod;
     if (!paymentMethod) {
       console.log('ℹ️  Payment method not yet saved. Doing so now.');
       const paymentIntentId = invoice.payment_intent;
