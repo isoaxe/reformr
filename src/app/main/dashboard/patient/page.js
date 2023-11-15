@@ -8,6 +8,7 @@ import { MdLocalShipping, MdSubscriptions } from 'react-icons/md';
 import { FaCreditCard } from 'react-icons/fa6';
 import DropdownItem from '../dropdown-item';
 import CancelModal from './cancel-modal';
+import PauseModal from './pause-modal';
 import { getDocId } from '@/util/helpers';
 import { useAuth } from '@/util/hooks';
 import { db } from '@/util/firebase';
@@ -87,7 +88,11 @@ export default function PatientDashboard() {
         >
           Cancel
         </Button>
-        <Button variant="outlined" className="w-fit text-lg md:text-xl">
+        <Button
+          variant="outlined"
+          className="w-fit text-lg md:text-xl"
+          onClick={() => setPauseModalOpen(true)}
+        >
           Pause
         </Button>
       </div>
@@ -146,6 +151,7 @@ export default function PatientDashboard() {
         hidden={subscriptionContent}
       />
       <CancelModal open={cancelModalOpen} setOpen={setCancelModalOpen} />
+      <PauseModal open={pauseModalOpen} setOpen={setPauseModalOpen} />
     </main>
   );
 }
