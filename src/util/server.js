@@ -17,6 +17,5 @@ export async function getPaymentsData(customerId) {
   const { email } = userData.screening;
   const docId = await getDocId(email);
   const allPaymentData = userData.payments;
-  const { payments } = allPaymentData;
-  return { docId, payments };
+  return { docId, allPaymentData };
 }

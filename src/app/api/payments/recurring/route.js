@@ -61,7 +61,8 @@ export async function POST(request) {
     /* Save payments data to Firestore if invoice paid. */
     if (invoice.paid) {
       /* Get payments data from Firestore. */
-      const { docId, payments } = await getPaymentsData(customerId);
+      const { docId, allPaymentData } = await getPaymentsData(customerId);
+      const { payments } = allPaymentData;
 
       /* Save payments data to Firestore. */
       const payment = {
