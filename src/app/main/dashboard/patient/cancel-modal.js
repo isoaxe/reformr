@@ -9,9 +9,9 @@ export default function CancelModal({ open, setOpen }) {
         <h2 className="mt-5 text-center text-2xl font-semibold text-red-800 md:text-3xl">
           Warning!
         </h2>
-        <p className="mx-10 my-5 text-lg md:text-xl">
+        <p className="mx-10 mb-10 mt-5 text-lg md:text-xl">
           This action cancels your subscription to the Reformr metabolic reset
-          program. You will no longer be sent monthy deliveries and will lost
+          program. You will no longer be sent monthy deliveries and will lose
           access to the platform at the end of your current billing period.
         </p>
         <div className="mb-5 flex w-full flex-row justify-around">
