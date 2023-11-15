@@ -21,8 +21,10 @@ export async function GET(request) {
       stripeUid,
       paymentMethodId
     );
+    const { brand, exp_month, exp_year, last4 } = card;
+    const coreCard = { brand, exp_month, exp_year, last4 }; // just the essentials
 
-    return NextResponse.json({ success: true, card });
+    return NextResponse.json({ success: true, card: coreCard });
   } catch (err) {
     console.error('Error getting card details: ', err);
     return NextResponse.json({ success: false, error: err });
