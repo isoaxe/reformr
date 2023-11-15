@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
+import { Button } from '@mui/material';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { MdLocalShipping, MdSubscriptions } from 'react-icons/md';
 import { FaCreditCard } from 'react-icons/fa6';
-import { doc, getDoc } from 'firebase/firestore';
-import { Button } from '@mui/material';
 import DropdownItem from '../dropdown-item';
+import CancelModal from './cancel-modal';
 import { getDocId } from '@/util/helpers';
 import { useAuth } from '@/util/hooks';
 import { db } from '@/util/firebase';
@@ -18,6 +19,8 @@ export default function PatientDashboard() {
   const [address, setAddress] = useState({});
   const [stripeUid, setStripeUid] = useState('');
   const [card, setCard] = useState({});
+  const [cancelModalOpen, setCancelModalOpen] = useState(false);
+  const [pauseModalOpen, setPauseModalOpen] = useState(false);
   const { user } = useAuth();
 
   /* Props for patient info section. */
@@ -80,6 +83,7 @@ export default function PatientDashboard() {
           variant="outlined"
           className="w-fit text-lg md:text-xl"
           color="error"
+          onClick={() => setCancelModalOpen(true)}
         >
           Cancel
         </Button>
@@ -141,6 +145,7 @@ export default function PatientDashboard() {
         icon={subscriptionIcon}
         hidden={subscriptionContent}
       />
+      <CancelModal open={cancelModalOpen} setOpen={setCancelModalOpen} />
     </main>
   );
 }
