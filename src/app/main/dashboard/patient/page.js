@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs';
-import { MdLocalShipping } from 'react-icons/md';
+import { MdLocalShipping, MdOutlinePayment } from 'react-icons/md';
 import { doc, getDoc } from 'firebase/firestore';
 import DropdownItem from '../dropdown-item';
 import { getDocId } from '@/util/helpers';
@@ -45,6 +45,27 @@ export default function PatientDashboard() {
       <p>{address?.address2}</p>
       <p>{address?.address3}</p>
       <p>{address?.postcode}</p>
+    </>
+  );
+
+  /* Props for the payment card section. */
+  const cardIcon = <MdOutlinePayment size={30} />;
+  const cardContent = (
+    <>
+      <div className="flex flex-row">
+        <p className="w-28 font-medium">Brand:</p>
+        <p>{card?.brand}</p>
+      </div>
+      <div className="my-1 flex flex-row">
+        <p className="w-28 font-medium">Number:</p>
+        <p>**** **** **** {card?.last4}</p>
+      </div>
+      <div className="flex flex-row">
+        <p className="w-28 font-medium">Expiry:</p>
+        <p>
+          {card?.exp_month} / {card?.exp_year}
+        </p>
+      </div>
     </>
   );
 
@@ -93,6 +114,7 @@ export default function PatientDashboard() {
         icon={deliveryIcon}
         hidden={deliveryContent}
       />
+      <DropdownItem text="Payment Card" icon={cardIcon} hidden={cardContent} />
     </main>
   );
 }
