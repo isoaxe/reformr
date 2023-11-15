@@ -45,6 +45,7 @@ export default function PaymentWrapper({ address }) {
     /* Get the users document ID from Firestore. */
     let docId;
     try {
+      // TODO: Replace this token with a Firebase authentication token.
       const idRes = await fetch(`/api/doc-id?email=${email}&token=${token}`);
       const idJson = await idRes.json();
       if (!idJson.success) console.log(idJson.error);
