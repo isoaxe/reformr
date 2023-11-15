@@ -14,6 +14,8 @@ export default function PatientDashboard() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState({});
+  const [stripeUid, setStripeUid] = useState('');
+  const [card, setCard] = useState({});
   const { user } = useAuth();
 
   /* Props for patient info section. */
@@ -58,10 +60,23 @@ export default function PatientDashboard() {
       const userData = userSnap.data();
       setPhone(userData?.screening?.phone);
       setAddress(userData?.address);
+      setStripeUid(userData?.payments?.stripeUid);
     }
 
     if (email) getPatientData();
   }, [user, email]);
+
+  useEffect(() => {
+    async function getCardData() {
+      // TODO: Add token from firebase auth to request.
+      const res = await fetch(`/api/payments/card?stripeUid=${stripeUid}`);
+      const json = await res.json();
+      if (!json.success) console.log(json.error);
+      const { card } = json;
+      setCard(card);
+    }
+    if (stripeUid) getCardData();
+  }, [stripeUid]);
 
   return (
     <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-full max-w-3xl flex-col px-4 xs:px-9">
