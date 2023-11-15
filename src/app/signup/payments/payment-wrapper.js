@@ -46,10 +46,10 @@ export default function PaymentWrapper({ address }) {
     let docId;
     try {
       // TODO: Replace this token with a Firebase authentication token.
-      const idRes = await fetch(`/api/doc-id?email=${email}&token=${token}`);
-      const idJson = await idRes.json();
-      if (!idJson.success) console.log(idJson.error);
-      docId = idJson.docId;
+      const res = await fetch(`/api/doc-id?email=${email}&token=${token}`);
+      const json = await res.json();
+      if (!json.success) console.log(json.error);
+      docId = json.docId;
     } catch (err) {
       console.log('Error getting document ID: ', err);
       setMessage('There was an issue getting the document ID.');
