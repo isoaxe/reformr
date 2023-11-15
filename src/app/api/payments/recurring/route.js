@@ -6,7 +6,6 @@ import { initialiseAdmin } from '@/util/admin';
 import { STRIPE_SECRET_KEY } from '@/util/constants';
 import { STRIPE_INVOICE_WEBHOOK_SECRET } from '@/util/constants';
 import { STRIPE_UID, isDev } from '@/util/constants';
-import { wasRecent } from '@/util/helpers';
 import { getPaymentsData } from '@/util/server';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
@@ -59,6 +58,7 @@ export async function POST(request) {
     }
 
     /* Save payments data to Firestore if invoice paid. */
+    let allPaymentData;
     if (invoice.paid) {
       /* Get payments data from Firestore. */
       const { docId, allPaymentData } = await getPaymentsData(customerId);
@@ -81,17 +81,20 @@ export async function POST(request) {
     }
 
     /* Set default payment method for customer if recently created. */
-    const customer = await stripe.customers.retrieve(customerId);
-    if (wasRecent(customer.created)) {
-      console.log('ℹ️  Customer was created recently.');
+    let { paymentMethod } = allPaymentData;
+    if (!paymentMethod) {
+      console.log('ℹ️  Payment method not yet saved. Doing so now.');
       const paymentIntentId = invoice.payment_intent;
       const paymentIntent = await stripe.paymentIntents.retrieve(
         paymentIntentId
       );
-      const paymentMethod = paymentIntent.payment_method; // card ID in Stripe
+      paymentMethod = paymentIntent.payment_method; // card ID in Stripe
       await stripe.customers.update(customerId, {
         invoice_settings: { default_payment_method: paymentMethod },
       });
+      await usersPath
+        .doc(docId)
+        .set({ payments: { paymentMethod } }, { merge: true });
       console.log(`✅ Payment method ${paymentMethod} set as default`);
     }
     return NextResponse.json({ success: true, status: 200 });
