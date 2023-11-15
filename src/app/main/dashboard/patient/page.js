@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs';
-import { MdLocalShipping, MdOutlinePayment } from 'react-icons/md';
-import { MdSubscriptions } from 'react-icons/md';
+import { MdLocalShipping, MdSubscriptions } from 'react-icons/md';
+import { FaCreditCard } from 'react-icons/fa6';
 import { doc, getDoc } from 'firebase/firestore';
 import { Button } from '@mui/material';
 import DropdownItem from '../dropdown-item';
@@ -51,7 +51,7 @@ export default function PatientDashboard() {
   );
 
   /* Props for the payment card section. */
-  const cardIcon = <MdOutlinePayment size={30} />;
+  const cardIcon = <FaCreditCard size={30} />;
   const cardContent = (
     <>
       <div className="flex flex-row">
