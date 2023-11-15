@@ -18,7 +18,6 @@ export default function CancelModal({ open, setOpen }) {
           <Button
             variant="contained"
             className="w-40 bg-red-400 text-lg hover:bg-red-500 md:text-xl"
-            color="error"
           >
             Cancel
           </Button>
