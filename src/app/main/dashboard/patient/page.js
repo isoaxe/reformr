@@ -93,6 +93,7 @@ export default function PatientDashboard() {
           variant="outlined"
           className="w-fit text-lg md:text-xl"
           onClick={() => setPauseModalOpen(true)}
+          disabled={!isSubActive}
         >
           Pause
         </Button>
