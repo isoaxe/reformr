@@ -1,8 +1,10 @@
 'use client';
 
+import { useState } from 'react';
 import { Modal, Button } from '@mui/material';
 
 export default function CancelModal(props) {
+  const [isLoading, setLoading] = useState(false);
   const { open, setOpen, setSubActive, subId, email } = props;
 
   async function cancelSub() {
@@ -11,13 +13,16 @@ export default function CancelModal(props) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ subId, email }),
     };
+    setLoading(true);
     // TODO: Add token from firebase auth to request.
     const res = await fetch('/api/payments/cancel-sub', options);
     const data = await res.json();
     if (data.success) {
       console.log('Subscription cancelled.');
       setSubActive(false);
+      setOpen(false);
     } else console.log('Error cancelling subscription: ', data.error);
+    setLoading(false);
   }
 
   return (
@@ -36,6 +41,7 @@ export default function CancelModal(props) {
             variant="outlined"
             className="w-40 text-lg md:text-xl"
             onClick={() => setOpen(false)}
+            disabled={isLoading}
           >
             Close
           </Button>
@@ -43,6 +49,7 @@ export default function CancelModal(props) {
             variant="contained"
             className="w-44 bg-red-500 text-lg hover:bg-red-600 md:text-xl"
             onClick={cancelSub}
+            disabled={isLoading}
           >
             Cancel Sub
           </Button>
