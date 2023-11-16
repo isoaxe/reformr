@@ -158,14 +158,14 @@ export default function PatientDashboard() {
         icon={subscriptionIcon}
         hidden={subscriptionContent}
       />
-      <CancelModal
-        open={cancelModalOpen}
-        setOpen={setCancelModalOpen}
-        subId={subId}
-      />
       <PauseModal
         open={pauseModalOpen}
         setOpen={setPauseModalOpen}
+        subId={subId}
+      />
+      <CancelModal
+        open={cancelModalOpen}
+        setOpen={setCancelModalOpen}
         subId={subId}
       />
     </main>
