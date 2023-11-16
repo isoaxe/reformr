@@ -24,7 +24,7 @@ export default function CancelModal({ open, setOpen }) {
           </Button>
           <Button
             variant="contained"
-            className="w-44 bg-red-400 text-lg hover:bg-red-500 md:text-xl"
+            className="w-44 bg-red-500 text-lg hover:bg-red-600 md:text-xl"
           >
             Cancel Sub
           </Button>

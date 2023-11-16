@@ -24,9 +24,9 @@ export default function PauseModal({ open, setOpen }) {
           </Button>
           <Button
             variant="contained"
-            className="w-40 bg-blue-400 text-lg  hover:bg-blue-500 md:text-xl"
+            className="w-44 bg-blue-500 text-lg  hover:bg-blue-600 md:text-xl"
           >
-            Skip
+            Skip Month
           </Button>
         </div>
       </section>
