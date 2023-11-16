@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material';
 
 /* Just a standardised text input component for the screening and medical quizzes. */
-export default function TextInput({ text, setText, isError }) {
+export default function TextInput({ text, setText, isError = false }) {
   return (
     <TextField
       variant="standard"
