@@ -2,7 +2,20 @@
 
 import { Modal, Button } from '@mui/material';
 
-export default function CancelModal({ open, setOpen }) {
+export default function CancelModal({ open, setOpen, subId }) {
+  async function cancelSub() {
+    const options = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ subId }),
+    };
+    // TODO: Add token from firebase auth to request.
+    const res = await fetch('/api/payments/cancel-sub', options);
+    const data = await res.json();
+    if (data.success) console.log('Subscription cancelled.');
+    else console.log('Error cancelling subscription: ', data.error);
+  }
+
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
       <section className="mx-4 mt-20 flex max-w-lg flex-col justify-between rounded border-2 border-violet-700 bg-zinc-400 sm:mx-auto sm:w-full md:mt-40">
@@ -25,6 +38,7 @@ export default function CancelModal({ open, setOpen }) {
           <Button
             variant="contained"
             className="w-44 bg-red-500 text-lg hover:bg-red-600 md:text-xl"
+            onClick={cancelSub}
           >
             Cancel Sub
           </Button>
