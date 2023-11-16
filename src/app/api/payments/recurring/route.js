@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 import { initialiseAdmin } from '@/util/admin';
 import { STRIPE_SECRET_KEY } from '@/util/constants';
 import { STRIPE_INVOICE_WEBHOOK_SECRET } from '@/util/constants';
-import { STRIPE_UID, isDev } from '@/util/constants';
+import { STRIPE_UID, isCli } from '@/util/constants';
 import { getPaymentsData } from '@/util/server';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
@@ -41,7 +41,7 @@ export async function POST(request) {
   /* Get customerId as required for all events. */
   const invoice = event?.data?.object;
   let customerId = invoice?.customer;
-  if (isDev) customerId = STRIPE_UID;
+  if (isCli) customerId = STRIPE_UID;
 
   /* Handle the event. Add payment data to Firestore if payment is made. */
   if (event.type === 'invoice.paid') {

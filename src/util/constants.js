@@ -1,6 +1,6 @@
 /* Stripe keys for the SquareSpace account. */
 const isLive = false; // TODO: Update to true when ready to go live
-export const isDev = process.env.NODE_ENV === 'development';
+export const isCli = false;
 export const STRIPE_UID = 'cus_OxvzdleqcuOYP6'; // TODO: Update if test data reset
 export const FIRESTORE_DOC_ID = 'Messi-895332'; // TODO: Update if test data reset
 // TODO: Add a redirect to patient dashboard after Calendly booking is complete.
@@ -27,7 +27,7 @@ const stripeInvoiceWebhookSecretLive =
   process.env.STRIPE_INVOICE_WEBHOOK_SECRET_LIVE;
 export const STRIPE_INVOICE_WEBHOOK_SECRET = isLive
   ? stripeInvoiceWebhookSecretLive
-  : isDev
+  : isCli
   ? stripeInvoiceWebhookSecretLocal
   : stripeInvoiceWebhookSecretTest;
 
@@ -39,7 +39,7 @@ const stripeIdentityWebhookSecretLive =
   process.env.STRIPE_IDENTITY_WEBHOOK_SECRET_LIVE;
 export const STRIPE_IDENTITY_WEBHOOK_SECRET = isLive
   ? stripeIdentityWebhookSecretLive
-  : isDev
+  : isCli
   ? stripeIdentityWebhookSecretLocal
   : stripeIdentityWebhookSecretTest;
 
