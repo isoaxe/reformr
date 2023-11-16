@@ -178,6 +178,11 @@ export default function PatientDashboard() {
         icon={subscriptionIcon}
         hidden={subscriptionContent}
       />
+      <p className="text-center text-lg italic md:text-xl">
+        Need help? Call us on
+        <span className="text-violet-600"> 020 123 4567 </span>or email us at
+        <span className="text-violet-600"> info@reformr.co.nz</span>
+      </p>
       <PauseModal
         open={pauseModalOpen}
         setOpen={setPauseModalOpen}
