@@ -83,17 +83,17 @@ export default function PatientDashboard() {
         <Button
           variant="outlined"
           className="w-fit text-lg md:text-xl"
-          color="error"
-          onClick={() => setCancelModalOpen(true)}
+          onClick={() => setPauseModalOpen(true)}
         >
-          Cancel
+          Pause
         </Button>
         <Button
           variant="outlined"
           className="w-fit text-lg md:text-xl"
-          onClick={() => setPauseModalOpen(true)}
+          color="error"
+          onClick={() => setCancelModalOpen(true)}
         >
-          Pause
+          Cancel
         </Button>
       </div>
     </>
