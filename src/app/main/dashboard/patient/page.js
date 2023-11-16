@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { doc, getDoc } from 'firebase/firestore';
 import { Button } from '@mui/material';
 import { BsFillPersonFill } from 'react-icons/bs';
@@ -23,8 +24,10 @@ export default function PatientDashboard() {
   const [subId, setSubId] = useState('');
   const [isSubActive, setSubActive] = useState(true);
   const [card, setCard] = useState({});
+  const [isPageLoaded, setPageLoaded] = useState(false);
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
   const [pauseModalOpen, setPauseModalOpen] = useState(false);
+  const router = useRouter();
   const { user } = useAuth();
 
   /* Props for patient info section. */
@@ -143,9 +146,20 @@ export default function PatientDashboard() {
     if (stripeUid) getCardData();
   }, [stripeUid]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setPageLoaded(true); // assume user fetched within a second.
+    }, 1000);
+  }, [user, router]);
+
+  useEffect(() => {
+    if (!isPageLoaded) return;
+    if (!user) router.push('/main/login'); // redirect to login if no user.
+  }, [isPageLoaded, user, router]);
+
   return (
     <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-full max-w-3xl flex-col px-4 xs:px-9">
-      <h1 className="py-4 text-2xl text-sky-600 md:py-8 md:text-4xl">
+      <h1 className="py-4 text-2xl font-semibold text-sky-600 md:py-8 md:text-4xl">
         Patient Details
       </h1>
       <DropdownItem
