@@ -28,7 +28,7 @@ export default function PatientDashboard() {
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
   const [pauseModalOpen, setPauseModalOpen] = useState(false);
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   /* Props for patient info section. */
   const patientInfoIcon = <BsFillPersonFill size={30} />;
@@ -178,6 +178,13 @@ export default function PatientDashboard() {
         icon={subscriptionIcon}
         hidden={subscriptionContent}
       />
+      <Button
+        variant="outlined"
+        className="mx-auto mb-5 w-full max-w-xs text-lg md:text-xl"
+        onClick={logout}
+      >
+        Logout
+      </Button>
       <p className="text-center text-lg italic md:text-xl">
         Need help? Call us on
         <span className="text-violet-600"> 020 123 4567 </span>or email us at
