@@ -21,6 +21,7 @@ export default function PatientDashboard() {
   const [stripeUid, setStripeUid] = useState('');
   const [expiryDate, setExpiryDate] = useState(null);
   const [subId, setSubId] = useState('');
+  const [isSubActive, setSubActive] = useState(true);
   const [card, setCard] = useState({});
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
   const [pauseModalOpen, setPauseModalOpen] = useState(false);
@@ -78,12 +79,14 @@ export default function PatientDashboard() {
   );
 
   /* Props for the subscription management section. */
+  const textIfSubbed = `Your next scheduled payment is on ${expiryDate?.toDateString()}. You can
+  also pause or cancel your subscription below.`;
+  const textIfNotSubbed = `You have cancelled your subscription and will lose access to the platform on ${expiryDate?.toDateString()}. No further deliveries will be sent or charges made.`;
   const subscriptionIcon = <MdSubscriptions size={30} />;
   const subscriptionContent = (
     <>
       <p className="mb-5 text-lg md:text-xl">
-        Your next scheduled payment is on {expiryDate?.toDateString()}. You can
-        also pause or cancel your subscription below.
+        {isSubActive ? textIfSubbed : textIfNotSubbed}
       </p>
       <div className="flex w-full flex-row justify-between">
         <Button
@@ -98,6 +101,7 @@ export default function PatientDashboard() {
           className="w-fit text-lg md:text-xl"
           color="error"
           onClick={() => setCancelModalOpen(true)}
+          disabled={!isSubActive}
         >
           Cancel
         </Button>
@@ -120,6 +124,7 @@ export default function PatientDashboard() {
       setStripeUid(userData?.payments?.stripeUid);
       setExpiryDate(new Date(userData?.payments?.expiryDate?.seconds * 1000));
       setSubId(userData?.payments?.subscription?.subscriptionId);
+      setSubActive(userData?.payments?.subscription?.isActive);
     }
 
     if (email) getPatientData();
@@ -166,6 +171,7 @@ export default function PatientDashboard() {
       <CancelModal
         open={cancelModalOpen}
         setOpen={setCancelModalOpen}
+        setSubActive={setSubActive}
         subId={subId}
       />
     </main>

@@ -2,7 +2,9 @@
 
 import { Modal, Button } from '@mui/material';
 
-export default function CancelModal({ open, setOpen, subId }) {
+export default function CancelModal(props) {
+  const { open, setOpen, setSubActive, subId } = props;
+
   async function cancelSub() {
     const options = {
       method: 'POST',
@@ -12,8 +14,10 @@ export default function CancelModal({ open, setOpen, subId }) {
     // TODO: Add token from firebase auth to request.
     const res = await fetch('/api/payments/cancel-sub', options);
     const data = await res.json();
-    if (data.success) console.log('Subscription cancelled.');
-    else console.log('Error cancelling subscription: ', data.error);
+    if (data.success) {
+      console.log('Subscription cancelled.');
+      setSubActive(false);
+    } else console.log('Error cancelling subscription: ', data.error);
   }
 
   return (
