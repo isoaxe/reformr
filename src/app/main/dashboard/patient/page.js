@@ -19,8 +19,9 @@ export default function PatientDashboard() {
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState({});
   const [stripeUid, setStripeUid] = useState('');
-  const [card, setCard] = useState({});
   const [expiryDate, setExpiryDate] = useState(null);
+  const [subId, setSubId] = useState('');
+  const [card, setCard] = useState({});
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
   const [pauseModalOpen, setPauseModalOpen] = useState(false);
   const { user } = useAuth();
@@ -118,6 +119,7 @@ export default function PatientDashboard() {
       setAddress(userData?.address);
       setStripeUid(userData?.payments?.stripeUid);
       setExpiryDate(new Date(userData?.payments?.expiryDate?.seconds * 1000));
+      setSubId(userData?.payments?.subscription?.subscriptionId);
     }
 
     if (email) getPatientData();
@@ -156,8 +158,16 @@ export default function PatientDashboard() {
         icon={subscriptionIcon}
         hidden={subscriptionContent}
       />
-      <CancelModal open={cancelModalOpen} setOpen={setCancelModalOpen} />
-      <PauseModal open={pauseModalOpen} setOpen={setPauseModalOpen} />
+      <CancelModal
+        open={cancelModalOpen}
+        setOpen={setCancelModalOpen}
+        subId={subId}
+      />
+      <PauseModal
+        open={pauseModalOpen}
+        setOpen={setPauseModalOpen}
+        subId={subId}
+      />
     </main>
   );
 }
