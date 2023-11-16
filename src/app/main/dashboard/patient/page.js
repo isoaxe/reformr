@@ -20,6 +20,7 @@ export default function PatientDashboard() {
   const [address, setAddress] = useState({});
   const [stripeUid, setStripeUid] = useState('');
   const [card, setCard] = useState({});
+  const [expiryDate, setExpiryDate] = useState(null);
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
   const [pauseModalOpen, setPauseModalOpen] = useState(false);
   const { user } = useAuth();
@@ -79,6 +80,10 @@ export default function PatientDashboard() {
   const subscriptionIcon = <MdSubscriptions size={30} />;
   const subscriptionContent = (
     <>
+      <p className="mb-5 text-lg md:text-xl">
+        Your next scheduled payment is on {expiryDate?.toDateString()}. You can
+        also pause or cancel your subscription below.
+      </p>
       <div className="flex w-full flex-row justify-between">
         <Button
           variant="outlined"
@@ -112,6 +117,7 @@ export default function PatientDashboard() {
       setPhone(userData?.screening?.phone);
       setAddress(userData?.address);
       setStripeUid(userData?.payments?.stripeUid);
+      setExpiryDate(new Date(userData?.payments?.expiryDate?.seconds * 1000));
     }
 
     if (email) getPatientData();
