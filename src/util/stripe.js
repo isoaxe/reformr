@@ -26,3 +26,8 @@ export async function createSubscription(customerId) {
     paymentIntentId: subscription.latest_invoice.payment_intent.id,
   };
 }
+
+/* Cancel existing subscription with Stripe. */
+export async function cancelSubscription(subId) {
+  await stripe.subscriptions.update(subId, { cancel_at_period_end: true });
+}
