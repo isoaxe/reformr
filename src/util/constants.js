@@ -1,4 +1,5 @@
 const isLive = false; // TODO: Toggle to true when ready to go live
+const isDev = process.env.NODE_ENV === 'development';
 
 /* Stripe and Firestore details used when testing via the CLI. */
 export const isCli = false;
@@ -31,7 +32,7 @@ const stripeInvoiceWebhookSecretLive =
   process.env.STRIPE_INVOICE_WEBHOOK_SECRET_LIVE;
 export const STRIPE_INVOICE_WEBHOOK_SECRET = isLive
   ? stripeInvoiceWebhookSecretLive
-  : isCli
+  : isDev
   ? stripeInvoiceWebhookSecretLocal
   : stripeInvoiceWebhookSecretTest;
 
@@ -43,7 +44,7 @@ const stripeIdentityWebhookSecretLive =
   process.env.STRIPE_IDENTITY_WEBHOOK_SECRET_LIVE;
 export const STRIPE_IDENTITY_WEBHOOK_SECRET = isLive
   ? stripeIdentityWebhookSecretLive
-  : isCli
+  : isDev
   ? stripeIdentityWebhookSecretLocal
   : stripeIdentityWebhookSecretTest;
 
