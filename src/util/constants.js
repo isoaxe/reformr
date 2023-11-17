@@ -1,11 +1,14 @@
-/* Stripe keys for the SquareSpace account. */
-const isLive = false; // TODO: Update to true when ready to go live
+const isLive = false; // TODO: Toggle to true when ready to go live
+
+/* Stripe and Firestore details used when testing via the CLI. */
 export const isCli = false;
-export const STRIPE_UID = 'cus_P1AMbBflaavUqw'; // TODO: Update if test data reset
-export const FIRESTORE_DOC_ID = 'Carlsen-032832'; // TODO: Update if test data reset
-export const PAYMENT_METHOD_ID = 'pm_1OD82jFPKktQy8tpiInqo8d8'; // TODO: Update if test data reset
+/* Update the following values if test data reset */
+export const STRIPE_UID = 'cus_P1AMbBflaavUqw';
+export const FIRESTORE_DOC_ID = 'Carlsen-032832';
+export const PAYMENT_METHOD_ID = 'pm_1OD82jFPKktQy8tpiInqo8d8';
 // TODO: Add a redirect to patient dashboard after Calendly booking is complete.
 
+/* Stripe keys for the SquareSpace account. */
 const stripePublicKeyTest =
   'pk_test_51MercyFPKktQy8tpfcK2JfsIQcXMMpvl04HKmGpsYXwEvSziRHaUvxPGKnBu7khVchuIBj2vzLHuaOj9I0xLxVJP00a1f3fm93';
 const stripePublicKeyLive =
