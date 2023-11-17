@@ -5,7 +5,7 @@ import { Modal, Button } from '@mui/material';
 
 export default function PauseModal(props) {
   const [isLoading, setLoading] = useState(false);
-  const { open, setOpen, subId, email } = props;
+  const { open, setOpen, setSubPaused, subId, email } = props;
 
   async function pauseSub() {
     const options = {
@@ -19,6 +19,7 @@ export default function PauseModal(props) {
     const data = await res.json();
     if (data.success) {
       console.log('Subscription paused for one month.');
+      setSubPaused(true);
       setOpen(false);
     } else console.log('Error pausing subscription: ', data.error);
     setLoading(false);

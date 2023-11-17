@@ -23,6 +23,7 @@ export default function PatientDashboard() {
   const [expiryDate, setExpiryDate] = useState(null);
   const [subId, setSubId] = useState('');
   const [isSubCancelled, setSubCancelled] = useState(false);
+  const [isSubPaused, setSubPaused] = useState(false);
   const [card, setCard] = useState({});
   const [isPageLoaded, setPageLoaded] = useState(false);
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
@@ -96,7 +97,7 @@ export default function PatientDashboard() {
           variant="outlined"
           className="w-fit text-lg md:text-xl"
           onClick={() => setPauseModalOpen(true)}
-          disabled={isSubCancelled}
+          disabled={isSubCancelled || isSubPaused}
         >
           Pause
         </Button>
@@ -129,6 +130,7 @@ export default function PatientDashboard() {
       setExpiryDate(new Date(userData?.payments?.expiryDate?.seconds * 1000));
       setSubId(userData?.payments?.subscription?.subscriptionId);
       setSubCancelled(userData?.payments?.subscription?.isCancelled);
+      setSubPaused(userData?.payments?.subscription?.isPaused);
     }
 
     if (email) getPatientData();
@@ -193,6 +195,7 @@ export default function PatientDashboard() {
       <PauseModal
         open={pauseModalOpen}
         setOpen={setPauseModalOpen}
+        setSubPaused={setSubPaused}
         subId={subId}
         email={email}
       />
