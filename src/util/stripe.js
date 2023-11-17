@@ -31,3 +31,11 @@ export async function createSubscription(customerId) {
 export async function cancelSubscription(subId) {
   await stripe.subscriptions.update(subId, { cancel_at_period_end: true });
 }
+
+/* Pause subscription for one month with Stripe. */
+export async function pauseSubscription(subId) {
+  const oneMonth = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+  await stripe.subscriptions.update(subId, {
+    pause_collection: { behavior: 'void', resumes_at: Date.now() + oneMonth },
+  });
+}
