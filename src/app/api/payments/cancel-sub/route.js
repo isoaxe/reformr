@@ -13,13 +13,13 @@ export async function POST(request) {
     /* Cancel subscription with Stripe at end of billing period. */
     await cancelSubscription(subId);
 
-    /* Set isActive flag for subscription to false in Firestore. */
+    /* Set isCancelled flag for subscription to true in Firestore. */
     const docId = await getDocId(email);
     await initialiseAdmin();
     const db = admin.firestore();
     const userRef = db.collection('users').doc(docId);
     await userRef.set(
-      { payments: { subscription: { isActive: false } } },
+      { payments: { subscription: { isCancelled: true } } },
       { merge: true }
     );
 

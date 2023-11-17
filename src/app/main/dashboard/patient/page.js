@@ -22,7 +22,7 @@ export default function PatientDashboard() {
   const [stripeUid, setStripeUid] = useState('');
   const [expiryDate, setExpiryDate] = useState(null);
   const [subId, setSubId] = useState('');
-  const [isSubActive, setSubActive] = useState(true);
+  const [isSubCancelled, setSubCancelled] = useState(false);
   const [card, setCard] = useState({});
   const [isPageLoaded, setPageLoaded] = useState(false);
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
@@ -89,14 +89,14 @@ export default function PatientDashboard() {
   const subscriptionContent = (
     <>
       <p className="mb-5 text-lg md:text-xl">
-        {isSubActive ? textIfSubbed : textIfNotSubbed}
+        {isSubCancelled ? textIfNotSubbed : textIfSubbed}
       </p>
       <div className="flex w-full flex-row justify-between">
         <Button
           variant="outlined"
           className="w-fit text-lg md:text-xl"
           onClick={() => setPauseModalOpen(true)}
-          disabled={!isSubActive}
+          disabled={isSubCancelled}
         >
           Pause
         </Button>
@@ -105,7 +105,7 @@ export default function PatientDashboard() {
           className="w-fit text-lg md:text-xl"
           color="error"
           onClick={() => setCancelModalOpen(true)}
-          disabled={!isSubActive}
+          disabled={isSubCancelled}
         >
           Cancel
         </Button>
@@ -128,7 +128,7 @@ export default function PatientDashboard() {
       setStripeUid(userData?.payments?.stripeUid);
       setExpiryDate(new Date(userData?.payments?.expiryDate?.seconds * 1000));
       setSubId(userData?.payments?.subscription?.subscriptionId);
-      setSubActive(userData?.payments?.subscription?.isActive);
+      setSubCancelled(userData?.payments?.subscription?.isCancelled);
     }
 
     if (email) getPatientData();
@@ -199,7 +199,7 @@ export default function PatientDashboard() {
       <CancelModal
         open={cancelModalOpen}
         setOpen={setCancelModalOpen}
-        setSubActive={setSubActive}
+        setSubCancelled={setSubCancelled}
         subId={subId}
         email={email}
       />

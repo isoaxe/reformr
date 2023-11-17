@@ -5,7 +5,7 @@ import { Modal, Button } from '@mui/material';
 
 export default function CancelModal(props) {
   const [isLoading, setLoading] = useState(false);
-  const { open, setOpen, setSubActive, subId, email } = props;
+  const { open, setOpen, setSubCancelled, subId, email } = props;
 
   async function cancelSub() {
     const options = {
@@ -19,7 +19,7 @@ export default function CancelModal(props) {
     const data = await res.json();
     if (data.success) {
       console.log('Subscription cancelled.');
-      setSubActive(false);
+      setSubCancelled(true);
       setOpen(false);
     } else console.log('Error cancelling subscription: ', data.error);
     setLoading(false);
