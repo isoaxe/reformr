@@ -34,6 +34,7 @@ export async function POST(request) {
     const stripeUid = await createCustomer(name, email);
     const subscription = await createSubscription(stripeUid);
     subscription.isCancelled = false;
+    subscription.isPaused = false;
 
     /* Save Stripe payments data to Firestore if not already there. */
     const paymentData = {

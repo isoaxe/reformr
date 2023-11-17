@@ -13,7 +13,7 @@ export async function POST(request) {
     /* Pause subscription with Stripe for one month. */
     await pauseSubscription(subId);
 
-    /* Increment numBoxesSkipped and turn off isPaid flag in Firestore. */
+    /* Increment numBoxesSkipped and turn off isPaid and isPaused flags in Firestore. */
     const docId = await getDocId(email);
     await initialiseAdmin();
     const db = admin.firestore();
@@ -23,7 +23,7 @@ export async function POST(request) {
     let { numBoxesSkipped } = userData.payments;
     numBoxesSkipped++;
     await userRef.set(
-      { payments: { numBoxesSkipped, isPaid: false } },
+      { payments: { numBoxesSkipped, isPaid: false, isPaused: true } },
       { merge: true }
     );
 
