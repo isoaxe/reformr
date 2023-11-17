@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 import { initialiseAdmin } from '@/util/admin';
 import { STRIPE_SECRET_KEY } from '@/util/constants';
 import { STRIPE_INVOICE_WEBHOOK_SECRET } from '@/util/constants';
-import { STRIPE_UID, isCli } from '@/util/constants';
+import { STRIPE_UID, PAYMENT_METHOD_ID, isCli } from '@/util/constants';
 import { getPaymentsData } from '@/util/server';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
@@ -89,6 +89,7 @@ export async function POST(request) {
         paymentIntentId
       );
       paymentMethodId = paymentIntent.payment_method; // card ID in Stripe
+      if (isCli) paymentMethodId = PAYMENT_METHOD_ID;
       await stripe.customers.update(customerId, {
         invoice_settings: { default_payment_method: paymentMethodId },
       });
