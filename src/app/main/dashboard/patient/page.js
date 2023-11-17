@@ -83,7 +83,7 @@ export default function PatientDashboard() {
   );
 
   /* Props for the subscription management section. */
-  const textIfNotSubbed = `You have cancelled your subscription and will lose access to the platform on ${expiryDate?.toDateString()}. No further deliveries will be sent or charges made.`;
+  const textIfCancelled = `You have cancelled your subscription and will lose access to the platform on ${expiryDate?.toDateString()}. No further deliveries will be sent or charges made.`;
   const textIfPaused = `You have one more delivery on ${expiryDate?.toDateString()}. They will then be paused for a month and you won't be charged.`;
   const textIfSubbed = `Your next scheduled payment is on ${expiryDate?.toDateString()}. You can also pause or cancel your subscription below.`;
   const subscriptionIcon = <MdSubscriptions size={30} />;
@@ -91,7 +91,7 @@ export default function PatientDashboard() {
     <>
       <p className="mb-5 text-lg md:text-xl">
         {isSubCancelled
-          ? textIfNotSubbed
+          ? textIfCancelled
           : isSubPaused
           ? textIfPaused
           : textIfSubbed}
