@@ -13,7 +13,10 @@ export async function getPaymentsData(customerId) {
   const userRef = await usersPath
     .where('payments.stripeUid', '==', customerId)
     .get();
-  const userData = userRef.docs[0].data();
+  const userDoc = userRef.docs[0];
+  /* This will occur if user details in constants.js not updated when using CLI. */
+  if (!userDoc) console.log(`⚠️  No user found with customerId ${customerId}`);
+  const userData = userDoc.data();
   const { email } = userData.screening;
   const docId = await getDocId(email);
   const allPaymentData = userData.payments;
