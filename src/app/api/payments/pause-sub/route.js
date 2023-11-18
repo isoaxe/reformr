@@ -23,7 +23,13 @@ export async function POST(request) {
     let { numBoxesSkipped } = userData.payments;
     numBoxesSkipped++;
     await userRef.set(
-      { payments: { numBoxesSkipped, isPaid: false, isPaused: true } },
+      {
+        payments: {
+          numBoxesSkipped,
+          isPaid: false,
+          subscription: { isPaused: true },
+        },
+      },
       { merge: true }
     );
 
