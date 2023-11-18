@@ -13,6 +13,7 @@ import PauseModal from './pause-modal';
 import { getDocId } from '@/util/helpers';
 import { useAuth } from '@/util/hooks';
 import { db } from '@/util/firebase';
+import { ONE_MONTH } from '@/util/constants';
 
 export default function PatientDashboard() {
   const [name, setName] = useState('');
@@ -30,8 +31,6 @@ export default function PatientDashboard() {
   const [pauseModalOpen, setPauseModalOpen] = useState(false);
   const router = useRouter();
   const { user, logout } = useAuth();
-
-  const oneMonth = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
 
   /* Props for patient info section. */
   const patientInfoIcon = <BsFillPersonFill size={30} />;
@@ -87,7 +86,7 @@ export default function PatientDashboard() {
   /* Props for the subscription management section. */
   const textIfCancelled = `You have cancelled your subscription and will lose access to the platform on ${expiryDate?.toDateString()}. No further deliveries will be sent or charges made.`;
   const textIfPaused = `You have one more delivery on ${new Date(
-    expiryDate?.getTime() - oneMonth
+    expiryDate?.getTime() - ONE_MONTH
   )?.toDateString()}. They will then be paused for a month and you won't be charged.`;
   const textIfSubbed = `Your next scheduled payment is on ${expiryDate?.toDateString()}. You can also pause or cancel your subscription below.`;
   const subscriptionIcon = <MdSubscriptions size={30} />;

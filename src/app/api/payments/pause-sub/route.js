@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import { pauseSubscription } from '@/util/stripe';
 import { getDocId } from '@/util/helpers';
 import { initialiseAdmin } from '@/util/admin';
+import { ONE_MONTH } from '@/util/constants';
 
 /* Pause Stripe subscription and update Firestore data. */
 export async function POST(request) {
@@ -22,8 +23,7 @@ export async function POST(request) {
     const userData = userDoc.data();
     let { numBoxesSkipped, expiryDate } = userData.payments;
     numBoxesSkipped++;
-    const oneMonth = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
-    const newExpiryDate = new Date(expiryDate.seconds * 1000 + oneMonth);
+    const newExpiryDate = new Date(expiryDate.seconds * 1000 + ONE_MONTH);
     await userRef.set(
       {
         payments: {
