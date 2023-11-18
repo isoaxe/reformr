@@ -20,13 +20,16 @@ export async function POST(request) {
     const userRef = db.collection('users').doc(docId);
     const userDoc = await userRef.get();
     const userData = userDoc.data();
-    let { numBoxesSkipped } = userData.payments;
+    let { numBoxesSkipped, expiryDate } = userData.payments;
     numBoxesSkipped++;
+    const oneMonth = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+    const newExpiryDate = new Date(expiryDate.seconds * 1000 + oneMonth);
     await userRef.set(
       {
         payments: {
-          numBoxesSkipped,
+          expiryDate: newExpiryDate,
           isPaid: false,
+          numBoxesSkipped,
           subscription: { isPaused: true },
         },
       },
