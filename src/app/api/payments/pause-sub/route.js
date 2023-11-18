@@ -36,7 +36,7 @@ export async function POST(request) {
       { merge: true }
     );
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, newExpiryDate });
   } catch (err) {
     console.error('Error pausing subscription: ', err);
     return NextResponse.json({ success: false, error: err });
