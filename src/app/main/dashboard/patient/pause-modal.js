@@ -20,7 +20,7 @@ export default function PauseModal(props) {
     if (data.success) {
       console.log('Subscription paused for one month.');
       setSubPaused(true);
-      setExpiryDate(data.newExpiryDate);
+      setExpiryDate(new Date(data.newExpiryDate));
       setOpen(false);
     } else console.log('Error pausing subscription: ', data.error);
     setLoading(false);
