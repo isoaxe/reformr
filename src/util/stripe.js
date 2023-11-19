@@ -1,6 +1,6 @@
 /* Helper functions for the payments route to be used on the server only. */
 import Stripe from 'stripe';
-import { STRIPE_SECRET_KEY, STRIPE_PRICE_ID, ONE_MONTH } from './constants';
+import { STRIPE_SECRET_KEY, STRIPE_PRICE_ID } from './constants';
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
 
 /* Create a new customer in Stripe. Required for subscription payments. */
@@ -34,7 +34,8 @@ export async function cancelSubscription(subId) {
 
 /* Pause subscription for one month with Stripe. */
 export async function pauseSubscription(subId) {
+  const oneMonthFromNow = Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60; // UNIX timestamp in seconds
   await stripe.subscriptions.update(subId, {
-    pause_collection: { behavior: 'void', resumes_at: Date.now() + ONE_MONTH },
+    pause_collection: { behavior: 'void', resumes_at: oneMonthFromNow },
   });
 }
