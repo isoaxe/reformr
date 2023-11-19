@@ -36,6 +36,7 @@ export async function cancelSubscription(subId) {
 export async function pauseSubscription(subId) {
   const oneMonthFromNow = Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60; // UNIX timestamp in seconds
   await stripe.subscriptions.update(subId, {
+    /* The invoice issued during the paused period will be voided (i.e. collection will not be made). */
     pause_collection: { behavior: 'void', resumes_at: oneMonthFromNow },
   });
 }
