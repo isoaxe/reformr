@@ -72,7 +72,12 @@ export async function POST(request) {
       };
       // TODO: Why does this payment save to Firestore twice on first subscription payment?
       payments.push(payment);
-      const paymentData = { isPaid: true, expiryDate, payments };
+      const paymentData = {
+        isPaid: true,
+        expiryDate,
+        payments,
+        subscription: { isPaused: false },
+      };
       await usersPath
         .doc(docId)
         .set({ payments: paymentData }, { merge: true });
