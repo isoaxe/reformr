@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { TextField, Typography, RadioGroup } from '@mui/material';
-import { FormControlLabel, Radio } from '@mui/material';
+import { FormControlLabel, Radio, Button } from '@mui/material';
 import TextInput from '@/components/quiz/text-input';
 import Password from '@/components/quiz/password';
 
@@ -15,6 +15,10 @@ export default function AdminDashboard() {
   const [password, setPassword] = useState('');
   const [helperText, setHelperText] = useState('');
   const [isInvalidEmail, setInvalidEmail] = useState(false);
+
+  async function createUser() {
+    return null;
+  }
 
   const FormLabel = ({ label }) => (
     <Typography className="mr-10 mt-1 text-lg md:text-xl xl:text-2xl">
@@ -77,6 +81,21 @@ export default function AdminDashboard() {
           label={<FormLabel label="Pharmacist" />}
         />
       </RadioGroup>
+      <Button
+        variant="outlined"
+        className="mt-6 w-full text-lg md:text-xl"
+        onClick={createUser}
+        disabled={
+          !firstName ||
+          !lastName ||
+          !company ||
+          isInvalidEmail ||
+          !!helperText ||
+          !role
+        }
+      >
+        Create User
+      </Button>
     </main>
   );
 }
