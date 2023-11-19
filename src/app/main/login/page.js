@@ -12,6 +12,7 @@ import { auth } from '@/util/firebase';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setLoading] = useState(false);
   const [helperText, setHelperText] = useState('');
   const [isInvalidEmail, setInvalidEmail] = useState(false);
   const [showFailure, setShowFailure] = useState(false); // toast message for login failure
@@ -21,11 +22,13 @@ export default function Login() {
 
   async function signIn() {
     try {
+      setLoading(true);
       const user = await login(email, password);
-      if (user) router.push('/signup/payments'); // TODO: redirect to dashboard
+      if (user) router.push('/main/dashboard/patient');
     } catch (error) {
       console.log(error);
       setShowFailure(true);
+      setLoading(false);
     }
   }
 
@@ -65,7 +68,7 @@ export default function Login() {
           variant="outlined"
           className="mt-16 w-fit text-lg md:text-xl"
           onClick={signIn}
-          disabled={!password || !!helperText || isInvalidEmail}
+          disabled={!password || !!helperText || isInvalidEmail || isLoading}
         >
           Login
         </Button>

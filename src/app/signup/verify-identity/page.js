@@ -22,6 +22,8 @@ function VerifyButton({ stripePromise }) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: user.email, userId: user.uid }),
+      // TODO: Use token rather than uid when authentication.
+      // https://firebase.google.com/docs/auth/web/manage-users
     };
     const response = await fetch('/api/identity/verification', options);
     const { clientSecret } = await response.json();

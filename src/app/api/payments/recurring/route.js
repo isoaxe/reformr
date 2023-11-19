@@ -5,8 +5,7 @@ import { NextResponse } from 'next/server';
 import { initialiseAdmin } from '@/util/admin';
 import { STRIPE_SECRET_KEY } from '@/util/constants';
 import { STRIPE_INVOICE_WEBHOOK_SECRET } from '@/util/constants';
-import { STRIPE_UID, isDev } from '@/util/constants';
-import { wasRecent } from '@/util/helpers';
+import { STRIPE_UID, PAYMENT_METHOD_ID, isCli } from '@/util/constants';
 import { getPaymentsData } from '@/util/server';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
@@ -42,7 +41,7 @@ export async function POST(request) {
   /* Get customerId as required for all events. */
   const invoice = event?.data?.object;
   let customerId = invoice?.customer;
-  if (isDev) customerId = STRIPE_UID;
+  if (isCli) customerId = STRIPE_UID;
 
   /* Handle the event. Add payment data to Firestore if payment is made. */
   if (event.type === 'invoice.paid') {
@@ -58,10 +57,12 @@ export async function POST(request) {
       expiryDate = new Date(current_period_end * 1000);
     }
 
+    /* Get payments data from Firestore. */
+    const { docId, allPaymentData } = await getPaymentsData(customerId);
+
     /* Save payments data to Firestore if invoice paid. */
     if (invoice.paid) {
-      /* Get payments data from Firestore. */
-      const { docId, payments } = await getPaymentsData(customerId);
+      const { payments } = allPaymentData;
 
       /* Save payments data to Firestore. */
       const payment = {
@@ -69,8 +70,14 @@ export async function POST(request) {
         paymentDate,
         paymentAmount: invoice.amount_paid / 100, // amount in NZD
       };
+      // TODO: Why does this payment save to Firestore twice on first subscription payment?
       payments.push(payment);
-      const paymentData = { isPaid: true, expiryDate, payments };
+      const paymentData = {
+        isPaid: true,
+        expiryDate,
+        payments,
+        subscription: { isPaused: false },
+      };
       await usersPath
         .doc(docId)
         .set({ payments: paymentData }, { merge: true });
@@ -80,18 +87,22 @@ export async function POST(request) {
     }
 
     /* Set default payment method for customer if recently created. */
-    const customer = await stripe.customers.retrieve(customerId);
-    if (wasRecent(customer.created)) {
-      console.log('ℹ️  Customer was created recently.');
+    let paymentMethodId = allPaymentData?.paymentMethodId;
+    if (!paymentMethodId) {
+      console.log('ℹ️  Payment method not yet saved. Doing so now.');
       const paymentIntentId = invoice.payment_intent;
       const paymentIntent = await stripe.paymentIntents.retrieve(
         paymentIntentId
       );
-      const paymentMethod = paymentIntent.payment_method; // card ID in Stripe
+      paymentMethodId = paymentIntent.payment_method; // card ID in Stripe
+      if (isCli) paymentMethodId = PAYMENT_METHOD_ID;
       await stripe.customers.update(customerId, {
-        invoice_settings: { default_payment_method: paymentMethod },
+        invoice_settings: { default_payment_method: paymentMethodId },
       });
-      console.log(`✅ Payment method ${paymentMethod} set as default`);
+      await usersPath
+        .doc(docId)
+        .set({ payments: { paymentMethodId } }, { merge: true });
+      console.log(`✅ Payment method ${paymentMethodId} set as default`);
     }
     return NextResponse.json({ success: true, status: 200 });
   }

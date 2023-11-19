@@ -85,13 +85,6 @@ export function getBaseUrl() {
   return baseUrl;
 }
 
-/* Checks if provided UNIX date was in last 24 hours. */
-export function wasRecent(date) {
-  const now = Math.floor(Date.now() / 1000);
-  const interval = now - date;
-  return interval < 24 * 60 * 60;
-}
-
 /*
  * Helpers for the helper functions. Only used within helpers.js and not exported.
  */

@@ -26,3 +26,17 @@ export async function createSubscription(customerId) {
     paymentIntentId: subscription.latest_invoice.payment_intent.id,
   };
 }
+
+/* Cancel existing subscription with Stripe. */
+export async function cancelSubscription(subId) {
+  await stripe.subscriptions.update(subId, { cancel_at_period_end: true });
+}
+
+/* Pause subscription for one month with Stripe. */
+export async function pauseSubscription(subId) {
+  const oneMonthFromNow = Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60; // UNIX timestamp in seconds
+  await stripe.subscriptions.update(subId, {
+    /* The invoice issued during the paused period will be voided (i.e. collection will not be made). */
+    pause_collection: { behavior: 'void', resumes_at: oneMonthFromNow },
+  });
+}
