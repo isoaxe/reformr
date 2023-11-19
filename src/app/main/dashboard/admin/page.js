@@ -2,9 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { TextField, Typography } from '@mui/material';
+import Password from '@/components/quiz/password';
 
 export default function AdminDashboard() {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [helperText, setHelperText] = useState('');
   const [isInvalidEmail, setInvalidEmail] = useState(false);
 
   useEffect(() => {
@@ -29,6 +32,12 @@ export default function AdminDashboard() {
         onChange={(e) => setEmail(e.target.value)}
         sx={{ mb: 6 }}
         InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
+      />
+      <Password
+        password={password}
+        setPassword={setPassword}
+        helperText={helperText}
+        setHelperText={setHelperText}
       />
     </main>
   );
