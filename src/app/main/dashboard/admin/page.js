@@ -16,7 +16,7 @@ export default function AdminDashboard() {
   }, [email]);
 
   return (
-    <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-full max-w-3xl flex-col px-4 xs:px-9">
+    <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-full max-w-lg flex-col px-4 xs:px-9">
       <h1 className="py-4 text-center text-2xl font-semibold text-sky-600 md:py-8 md:text-4xl">
         Create a new user
       </h1>
@@ -30,7 +30,7 @@ export default function AdminDashboard() {
         value={email}
         error={isInvalidEmail && !!email}
         onChange={(e) => setEmail(e.target.value)}
-        sx={{ mb: 6 }}
+        sx={{ mb: 2 }}
         InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
       />
       <Password
