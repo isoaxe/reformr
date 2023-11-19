@@ -8,6 +8,7 @@ import Password from '@/components/quiz/password';
 export default function AdminDashboard() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [helperText, setHelperText] = useState('');
@@ -28,6 +29,7 @@ export default function AdminDashboard() {
         <div className="hidden w-10 xs:block"></div>
         <TextInput text={lastName} setText={setLastName} label="Last Name" />
       </div>
+      <TextInput text={company} setText={setCompany} label="Company" />
       <TextField
         variant="standard"
         label={
