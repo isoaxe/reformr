@@ -40,7 +40,7 @@ export default function CreateAccount() {
       body: JSON.stringify({ email, password, token }),
       headers: { 'content-type': 'application/json' },
     };
-    const res = await fetch('/api/user', options);
+    const res = await fetch('/api/users/patient', options);
     const json = await res.json();
 
     let user = null;
