@@ -1,11 +1,35 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+import { TextField, Typography } from '@mui/material';
+
 export default function AdminDashboard() {
+  const [email, setEmail] = useState('');
+  const [isInvalidEmail, setInvalidEmail] = useState(false);
+
+  useEffect(() => {
+    if (!/\S+@\S+\.\S+/.test(email)) setInvalidEmail(true);
+    else setInvalidEmail(false);
+  }, [email]);
+
   return (
     <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-full max-w-3xl flex-col px-4 xs:px-9">
       <h1 className="py-4 text-center text-2xl font-semibold text-sky-600 md:py-8 md:text-4xl">
         Create a new user
       </h1>
+      <TextField
+        variant="standard"
+        label={
+          <Typography className="text-lg md:text-xl xl:text-2xl">
+            Email
+          </Typography>
+        }
+        value={email}
+        error={isInvalidEmail && !!email}
+        onChange={(e) => setEmail(e.target.value)}
+        sx={{ mb: 6 }}
+        InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
+      />
     </main>
   );
 }
