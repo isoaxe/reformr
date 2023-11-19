@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { TextField, Typography } from '@mui/material';
+import { TextField, Typography, RadioGroup } from '@mui/material';
+import { FormControlLabel, Radio } from '@mui/material';
 import TextInput from '@/components/quiz/text-input';
 import Password from '@/components/quiz/password';
 
@@ -9,10 +10,17 @@ export default function AdminDashboard() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [company, setCompany] = useState('');
+  const [role, setRole] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [helperText, setHelperText] = useState('');
   const [isInvalidEmail, setInvalidEmail] = useState(false);
+
+  const FormLabel = ({ label }) => (
+    <Typography className="mr-10 mt-1 text-lg md:text-xl xl:text-2xl">
+      {label}
+    </Typography>
+  );
 
   useEffect(() => {
     if (!/\S+@\S+\.\S+/.test(email)) setInvalidEmail(true);
@@ -49,6 +57,26 @@ export default function AdminDashboard() {
         helperText={helperText}
         setHelperText={setHelperText}
       />
+      <p className="mb-4 mt-6 text-xl text-slate-700 md:text-2xl xl:text-3xl">
+        Select User Role:
+      </p>
+      <RadioGroup
+        name="select-user-role"
+        value={role}
+        onChange={(e) => setRole(e.target.value)}
+        className="flex w-full flex-row"
+      >
+        <FormControlLabel
+          value="doctor"
+          control={<Radio />}
+          label={<FormLabel label="Doctor" />}
+        />
+        <FormControlLabel
+          value="pharmacist"
+          control={<Radio />}
+          label={<FormLabel label="Pharmacist" />}
+        />
+      </RadioGroup>
     </main>
   );
 }
