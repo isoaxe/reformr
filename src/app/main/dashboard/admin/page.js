@@ -13,11 +13,24 @@ export default function AdminDashboard() {
   const [role, setRole] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setLoading] = useState(false);
   const [helperText, setHelperText] = useState('');
   const [isInvalidEmail, setInvalidEmail] = useState(false);
 
   async function createUser() {
-    return null;
+    const name = `${firstName} ${lastName}`;
+    const options = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, company, role, email, password }),
+    };
+    setLoading(true);
+    // TODO: Add token from firebase auth to request.
+    const res = await fetch('/api/users/professional', options);
+    const data = await res.json();
+    if (data.success) console.log('New user created successfully.');
+    else console.log('Error creating user: ', data.error);
+    setLoading(false);
   }
 
   const FormLabel = ({ label }) => (
@@ -91,7 +104,8 @@ export default function AdminDashboard() {
           !company ||
           isInvalidEmail ||
           !!helperText ||
-          !role
+          !role ||
+          isLoading
         }
       >
         Create User
