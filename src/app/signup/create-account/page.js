@@ -5,11 +5,9 @@ import { useCookies } from 'next-client-cookies';
 import { useRouter } from 'next/navigation';
 import { TextField } from '@mui/material';
 import { Button } from '@mui/material';
-import { updateProfile } from 'firebase/auth';
 import Password from '@/components/quiz/password';
 import Toast from '@/components/toast';
 import { useCookieState, useAuth } from '@/util/hooks';
-import { auth } from '@/util/firebase';
 
 /* Immutable email field and password field for account creation. */
 export default function CreateAccount() {
