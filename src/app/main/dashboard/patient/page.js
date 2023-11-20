@@ -54,7 +54,7 @@ export default function PatientDashboard() {
   const deliveryIcon = <MdLocalShipping size={30} />;
   const deliveryContent = (
     <>
-      <p>{address.address1}</p>
+      <p>{address?.address1}</p>
       <p>{address?.address2}</p>
       <p>{address?.address3}</p>
       <p>{address?.postcode}</p>
@@ -146,8 +146,10 @@ export default function PatientDashboard() {
       const res = await fetch(`/api/payments/card?stripeUid=${stripeUid}`);
       const json = await res.json();
       if (!json.success) console.log(json.error);
-      const { card } = json;
-      setCard(card);
+      else {
+        const { card } = json;
+        setCard(card);
+      }
     }
     if (stripeUid) getCardData();
   }, [stripeUid]);

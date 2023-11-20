@@ -15,6 +15,11 @@ export async function GET(request) {
     /* Get card ID from Firestore. */
     const { allPaymentData } = await getPaymentsData(stripeUid);
     const { paymentMethodId } = allPaymentData;
+    if (!paymentMethodId)
+      return NextResponse.json({
+        success: false,
+        error: '⚠️  Payment not yet made.',
+      });
 
     /* Get card details from Stripe. */
     const { card } = await stripe.customers.retrievePaymentMethod(
