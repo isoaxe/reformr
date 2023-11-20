@@ -27,9 +27,18 @@ export default function AdminDashboard() {
     // TODO: Add token from firebase auth to request.
     const res = await fetch('/api/users/professional', options);
     const data = await res.json();
-    if (data.success) console.log('New user created successfully.');
+    if (data.success) clearFields();
     else console.log('Error creating user: ', data.error);
     setLoading(false);
+  }
+
+  function clearFields() {
+    setFirstName('');
+    setLastName('');
+    setRole('');
+    setEmail('');
+    setPassword('');
+    setHelperText('');
   }
 
   const FormLabel = ({ label }) => (
