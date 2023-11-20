@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { NextResponse } from 'next/server';
 import { auth } from '@/util/firebase';
 
@@ -12,6 +12,7 @@ export async function POST(request) {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
     if (user) success = true;
+    updateProfile(auth.currentUser, { displayName: name });
   } catch (err) {
     console.error('Error creating new user: ', err);
   }
