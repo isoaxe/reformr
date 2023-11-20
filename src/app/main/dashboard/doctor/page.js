@@ -12,6 +12,16 @@ export default function DoctorDashboard() {
 
   useEffect(() => {
     if (!user) return;
+    const getPatients = async () => {
+      const res = await fetch('/api/users/patient');
+      const data = await res.json();
+      console.log(data);
+    };
+    getPatients();
+  }, [user]);
+
+  useEffect(() => {
+    if (!user) return;
     const getRole = async () =>
       await auth.currentUser
         .getIdTokenResult()
