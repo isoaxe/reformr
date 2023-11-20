@@ -25,7 +25,12 @@ export default function Login() {
     try {
       setLoading(true);
       const user = await login(email, password);
+      const role = await auth.currentUser
+        .getIdTokenResult()
+        .then((res) => res.claims.role);
       if (user?.email === ADMIN_EMAIL) router.push('/main/dashboard/admin');
+      else if (role === 'doctor') router.push('/main/dashboard/doctor');
+      else if (role === 'pharmacist') router.push('/main/dashboard/pharmacist');
       else if (user) router.push('/main/dashboard/patient');
     } catch (error) {
       console.log(error);
