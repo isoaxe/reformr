@@ -1,7 +1,9 @@
+import admin from 'firebase-admin';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, updateDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 import { getDocId, validateToken } from '@/util/helpers';
+import { initialiseAdmin } from '@/util/admin';
 import { auth, db } from '@/util/firebase';
 
 /* Create new patient user. Update creation date and uid on Firestore. */
@@ -39,4 +41,23 @@ export async function POST(request) {
   }
 
   return NextResponse.json({ success });
+}
+
+/* Get all patient user from Firestore. */
+export async function GET() {
+  // TODO: Add token from firebase auth to request.
+  try {
+    /* Get a list of all users from Firestore. */
+    await initialiseAdmin();
+    const db = admin.firestore();
+    const usersPath = db.collection('users');
+    const allUserSnapshot = await usersPath.get();
+    const allUsers = [];
+    allUserSnapshot.forEach((doc) => allUsers.push(doc.data()));
+
+    return NextResponse.json({ success: true, allUsers });
+  } catch (error) {
+    console.error('Error getting users: ', error);
+    return NextResponse.json({ success: false, error });
+  }
 }
