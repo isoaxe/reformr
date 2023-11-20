@@ -5,11 +5,9 @@ import { useCookies } from 'next-client-cookies';
 import { useRouter } from 'next/navigation';
 import { TextField } from '@mui/material';
 import { Button } from '@mui/material';
-import { updateProfile } from 'firebase/auth';
 import Password from '@/components/quiz/password';
 import Toast from '@/components/toast';
 import { useCookieState, useAuth } from '@/util/hooks';
-import { auth } from '@/util/firebase';
 
 /* Immutable email field and password field for account creation. */
 export default function CreateAccount() {
@@ -37,16 +35,14 @@ export default function CreateAccount() {
     const token = cookies.get('token');
     const options = {
       method: 'POST',
-      body: JSON.stringify({ email, password, token }),
+      body: JSON.stringify({ name, phone, email, password, token }),
       headers: { 'content-type': 'application/json' },
     };
-    const res = await fetch('/api/user', options);
+    const res = await fetch('/api/users/patient', options);
     const json = await res.json();
 
     let user = null;
     if (json.success) user = await login(email, password);
-    // TODO: Find why the phoneNumber field below is not getting set.
-    updateProfile(auth.currentUser, { displayName: name, phoneNumber: phone });
     if (user) router.push('/signup/payments');
     else {
       setShowFailure(true);

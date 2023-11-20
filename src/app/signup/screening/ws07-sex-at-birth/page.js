@@ -1,10 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Typography from '@mui/material/Typography';
+import { Typography, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import Button from '@/components/quiz/button';
 import { useCookieState } from '@/util/hooks';
 
