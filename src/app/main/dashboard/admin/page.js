@@ -9,7 +9,6 @@ import Password from '@/components/quiz/password';
 export default function AdminDashboard() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [company, setCompany] = useState('');
   const [role, setRole] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,7 +21,7 @@ export default function AdminDashboard() {
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, company, role, email, password }),
+      body: JSON.stringify({ name, role, email, password }),
     };
     setLoading(true);
     // TODO: Add token from firebase auth to request.
@@ -54,7 +53,6 @@ export default function AdminDashboard() {
         <div className="hidden w-10 xs:block"></div>
         <TextInput text={lastName} setText={setLastName} label="Last Name" />
       </div>
-      <TextInput text={company} setText={setCompany} label="Company" />
       <TextField
         variant="standard"
         label={
@@ -101,7 +99,6 @@ export default function AdminDashboard() {
         disabled={
           !firstName ||
           !lastName ||
-          !company ||
           isInvalidEmail ||
           !!helperText ||
           !role ||

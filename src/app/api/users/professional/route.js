@@ -2,10 +2,10 @@ import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { NextResponse } from 'next/server';
 import { auth } from '@/util/firebase';
 
-/* Create new professional user with role. */
+/* Create new professional user with role. Only accessible by admin. */
 export async function POST(request) {
   const data = await request.json();
-  const { name, company, role, email, password } = data;
+  const { name, role, email, password } = data;
 
   let success = false;
   try {
