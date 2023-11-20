@@ -15,6 +15,7 @@ export default function AdminDashboard() {
   const [isLoading, setLoading] = useState(false);
   const [helperText, setHelperText] = useState('');
   const [isInvalidEmail, setInvalidEmail] = useState(false);
+  const [isPageLoaded, setPageLoaded] = useState(false);
 
   async function createUser() {
     const name = `${firstName} ${lastName}`;
@@ -51,6 +52,12 @@ export default function AdminDashboard() {
     if (!/\S+@\S+\.\S+/.test(email)) setInvalidEmail(true);
     else setInvalidEmail(false);
   }, [email]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setPageLoaded(true); // assume user fetched within a second.
+    }, 1000);
+  }, []);
 
   return (
     <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-full max-w-xl flex-col px-4 xs:px-9">
