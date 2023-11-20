@@ -1,10 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { TextField, Typography, RadioGroup } from '@mui/material';
 import { FormControlLabel, Radio, Button } from '@mui/material';
 import TextInput from '@/components/quiz/text-input';
 import Password from '@/components/quiz/password';
+import { ADMIN_EMAIL } from '@/util/constants';
+import { useAuth } from '@/util/hooks';
 
 export default function AdminDashboard() {
   const [firstName, setFirstName] = useState('');
@@ -16,6 +19,8 @@ export default function AdminDashboard() {
   const [helperText, setHelperText] = useState('');
   const [isInvalidEmail, setInvalidEmail] = useState(false);
   const [isPageLoaded, setPageLoaded] = useState(false);
+  const router = useRouter();
+  const { user } = useAuth();
 
   async function createUser() {
     const name = `${firstName} ${lastName}`;
@@ -58,6 +63,11 @@ export default function AdminDashboard() {
       setPageLoaded(true); // assume user fetched within a second.
     }, 1000);
   }, []);
+
+  useEffect(() => {
+    if (!isPageLoaded) return;
+    if (user?.email !== ADMIN_EMAIL) router.push('/main/login'); // redirect to login if not admin.
+  }, [isPageLoaded, user, router]);
 
   return (
     <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-full max-w-xl flex-col px-4 xs:px-9">
