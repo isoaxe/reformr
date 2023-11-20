@@ -37,7 +37,7 @@ export default function CreateAccount() {
     const token = cookies.get('token');
     const options = {
       method: 'POST',
-      body: JSON.stringify({ email, password, token }),
+      body: JSON.stringify({ name, phone, email, password, token }),
       headers: { 'content-type': 'application/json' },
     };
     const res = await fetch('/api/users/patient', options);
@@ -45,8 +45,6 @@ export default function CreateAccount() {
 
     let user = null;
     if (json.success) user = await login(email, password);
-    // TODO: Find why the phoneNumber field below is not getting set.
-    updateProfile(auth.currentUser, { displayName: name, phoneNumber: phone });
     if (user) router.push('/signup/payments');
     else {
       setShowFailure(true);

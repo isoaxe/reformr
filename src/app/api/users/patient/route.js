@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, updateDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 import { getDocId, validateToken } from '@/util/helpers';
@@ -7,7 +7,7 @@ import { auth, db } from '@/util/firebase';
 /* Create new patient user. Update creation date and uid on Firestore. */
 export async function POST(request) {
   const data = await request.json();
-  const { email, password, token } = data;
+  const { name, phone, email, password, token } = data;
 
   let success = false;
   try {
@@ -19,6 +19,11 @@ export async function POST(request) {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
     if (user) success = true;
+    // TODO: Find why the phoneNumber field below is not getting set.
+    updateProfile(auth.currentUser, {
+      displayName: name,
+      phoneNumber: phone,
+    });
 
     /* Get docId from Firestore. */
     const docId = await getDocId(email);
