@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 import { getDocId, validateToken } from '@/util/helpers';
 import { auth, db } from '@/util/firebase';
 
-/* Save screening data to Firestore if token is valid. */
+/* Create new patient user. Update creation date and uid on Firestore. */
 export async function POST(request) {
   const data = await request.json();
   const { email, password, token } = data;
