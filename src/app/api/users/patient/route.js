@@ -53,7 +53,14 @@ export async function GET() {
     const usersPath = db.collection('users');
     const allUserSnapshot = await usersPath.get();
     const allUsers = [];
-    allUserSnapshot.forEach((doc) => allUsers.push(doc.data()));
+    allUserSnapshot.forEach((doc) => {
+      const { screening } = doc.data();
+      const user = {
+        name: `${screening.firstName} ${screening.lastName}`,
+        email: screening.email,
+      };
+      allUsers.push(user);
+    });
 
     return NextResponse.json({ success: true, allUsers });
   } catch (error) {
