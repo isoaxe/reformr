@@ -54,10 +54,11 @@ export async function GET() {
     const allUserSnapshot = await usersPath.get();
     const allUsers = [];
     allUserSnapshot.forEach((doc) => {
-      const { screening } = doc.data();
+      const { screening, status } = doc.data();
       const user = {
         name: `${screening.firstName} ${screening.lastName}`,
         email: screening.email,
+        status,
       };
       allUsers.push(user);
     });
