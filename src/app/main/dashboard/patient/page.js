@@ -158,7 +158,7 @@ export default function PatientDashboard() {
     setTimeout(() => {
       setPageLoaded(true); // assume user fetched within a second.
     }, 1000);
-  }, [user, router]);
+  }, []);
 
   useEffect(() => {
     if (!isPageLoaded) return;

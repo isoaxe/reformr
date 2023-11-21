@@ -2,13 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useForm } from '@formspree/react';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { TextField, Button, Box } from '@mui/material';
+import { InputLabel, MenuItem, FormControl, Select } from '@mui/material';
 import Toast from '@/components/toast';
 
 export default function Contact() {

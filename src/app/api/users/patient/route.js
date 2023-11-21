@@ -1,7 +1,9 @@
+import admin from 'firebase-admin';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, updateDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 import { getDocId, validateToken } from '@/util/helpers';
+import { initialiseAdmin } from '@/util/admin';
 import { auth, db } from '@/util/firebase';
 
 /* Create new patient user. Update creation date and uid on Firestore. */
@@ -39,4 +41,52 @@ export async function POST(request) {
   }
 
   return NextResponse.json({ success });
+}
+
+/* Change the status of the user. */
+export async function PUT(request) {
+  const data = await request.json();
+  const { email, status } = data;
+
+  try {
+    /* Get docId from Firestore. */
+    const docId = await getDocId(email);
+
+    /* Update status on Firestore. */
+    await initialiseAdmin();
+    const db = admin.firestore();
+    const user = db.collection('users').doc(docId);
+    await user.set({ status }, { merge: true });
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error('Error updating user status: ', err);
+    return NextResponse.json({ success: false, error: err });
+  }
+}
+
+/* Get all patient user from Firestore. */
+export async function GET() {
+  // TODO: Add token from firebase auth to request.
+  try {
+    /* Get a list of all users from Firestore. */
+    await initialiseAdmin();
+    const db = admin.firestore();
+    const usersPath = db.collection('users');
+    const allUserSnapshot = await usersPath.get();
+    const allUsers = [];
+    allUserSnapshot.forEach((doc) => {
+      const { screening, status } = doc.data();
+      const user = {
+        name: `${screening.firstName} ${screening.lastName}`,
+        email: screening.email,
+        status,
+      };
+      allUsers.push(user);
+    });
+
+    return NextResponse.json({ success: true, allUsers });
+  } catch (error) {
+    console.error('Error getting users: ', error);
+    return NextResponse.json({ success: false, error });
+  }
 }
