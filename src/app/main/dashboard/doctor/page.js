@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { FormControl, Select, MenuItem } from '@mui/material';
+import { FormControl, Select, MenuItem, Button } from '@mui/material';
 import { auth } from '@/util/firebase';
 import { useAuth } from '@/util/hooks';
 
@@ -11,7 +11,7 @@ export default function DoctorDashboard() {
   const [patients, setPatients] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   const statusOptions = [
     'pending',
@@ -107,6 +107,13 @@ export default function DoctorDashboard() {
       {patients?.map((patient, idx) => (
         <Patient patient={patient} key={idx} />
       ))}
+      <Button
+        variant="outlined"
+        className="mx-auto mt-5 w-full max-w-xs text-lg md:text-xl"
+        onClick={logout}
+      >
+        Logout
+      </Button>
     </main>
   );
 }
