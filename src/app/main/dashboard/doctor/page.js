@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { FormControl, Select, MenuItem } from '@mui/material';
 import { auth } from '@/util/firebase';
 import { useAuth } from '@/util/hooks';
 
@@ -11,14 +12,40 @@ export default function DoctorDashboard() {
   const router = useRouter();
   const { user } = useAuth();
 
+  const statusOptions = [
+    'pending',
+    'medically cleared',
+    'labs needed',
+    'medically failed',
+  ];
+
   function Patient({ patient }) {
-    const { name, email, status } = patient;
+    const { name, email } = patient;
     return (
       <div className="flex flex-row">
         <p className="w-40">{name}</p>
         <p className="w-64">{email}</p>
-        <p>{status}</p>
+        <Dropdown patient={patient} />
       </div>
+    );
+  }
+
+  function Dropdown({ patient }) {
+    return (
+      <FormControl>
+        <Select
+          value={patient.status}
+          onChange={(e) => {
+            setPatients([...patients], (patient.status = e.target.value));
+          }}
+        >
+          {statusOptions.map((option, index) => (
+            <MenuItem value={option} key={index}>
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     );
   }
 
@@ -56,8 +83,8 @@ export default function DoctorDashboard() {
         <p className="w-64">Email</p>
         <p>Status</p>
       </div>
-      {patients.map((patient, idx) => (
-        <Patient key={idx} patient={patient} />
+      {patients?.map((patient, idx) => (
+        <Patient patient={patient} key={idx} />
       ))}
     </main>
   );
