@@ -10,6 +10,7 @@ export default function DoctorDashboard() {
   const [role, setRole] = useState('');
   const [patients, setPatients] = useState([]);
   const [isLoading, setLoading] = useState(false);
+  const [isPageLoaded, setPageLoaded] = useState(false);
   const router = useRouter();
   const { user, logout } = useAuth();
 
@@ -90,9 +91,15 @@ export default function DoctorDashboard() {
   }, [user]);
 
   useEffect(() => {
-    if (role === '') return;
-    if (role !== 'doctor') router.push('/main/login'); // redirect to login if not doctor.
-  }, [role, router]);
+    setTimeout(() => {
+      setPageLoaded(true); // assume user fetched within a second.
+    }, 1000);
+  }, []);
+
+  useEffect(() => {
+    if (!isPageLoaded) return;
+    if (!user || role !== 'doctor') router.push('/main/login'); // redirect to login if not doctor.
+  }, [isPageLoaded, user, role, router]);
 
   return (
     <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-fit max-w-3xl flex-col px-4 xs:px-9">
