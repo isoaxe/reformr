@@ -20,18 +20,18 @@ export default function DoctorDashboard() {
     'medically failed',
   ];
 
-  async function storeStatus(email, status) {
+  async function storeStatus(email, patientStatus) {
     const options = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, status }),
+      body: JSON.stringify({ email, patientStatus }),
     };
     setLoading(true);
     // TODO: Add token from firebase auth to request.
     const res = await fetch('/api/users/patient', options);
     const data = await res.json();
-    if (data.success) console.log('Successfully updated status.');
-    else console.log('Error updating status: ', data.error);
+    if (data.success) console.log('Successfully updated patient status.');
+    else console.log('Error updating patient status: ', data.error);
     setLoading(false);
   }
 
@@ -51,12 +51,12 @@ export default function DoctorDashboard() {
       <FormControl>
         <Select
           variant="standard"
-          value={patient.status}
+          value={patient.patientStatus}
           className="w-40"
           disabled={isLoading}
           onChange={(e) => {
             const updatedStatus = e.target.value;
-            setPatients([...patients], (patient.status = updatedStatus));
+            setPatients([...patients], (patient.patientStatus = updatedStatus));
             storeStatus(patient.email, updatedStatus);
           }}
         >
@@ -102,7 +102,7 @@ export default function DoctorDashboard() {
       <div className="flex flex-row font-semibold">
         <p className="w-40">Name</p>
         <p className="w-64">Email</p>
-        <p>Status</p>
+        <p>Patient Status</p>
       </div>
       {patients?.map((patient, idx) => (
         <Patient patient={patient} key={idx} />

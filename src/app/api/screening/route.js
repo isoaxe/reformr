@@ -28,8 +28,8 @@ export async function POST(request) {
     /* Fine to overwrite data saved to Firestore before account creation. */
     await setDoc(doc(db, 'users', docId), {
       dateAccountCreated: null,
+      patientStatus: 'pending', // medical status that doctor will set
       screening,
-      status: 'pending', // medical status that doctor will set
     });
   } catch (err) {
     console.error('Error saving screening data: ', err);

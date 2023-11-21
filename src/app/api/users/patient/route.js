@@ -46,20 +46,20 @@ export async function POST(request) {
 /* Change the status of the user. */
 export async function PUT(request) {
   const data = await request.json();
-  const { email, status } = data;
+  const { email, patientStatus } = data;
 
   try {
     /* Get docId from Firestore. */
     const docId = await getDocId(email);
 
-    /* Update status on Firestore. */
+    /* Update patient status on Firestore. */
     await initialiseAdmin();
     const db = admin.firestore();
     const user = db.collection('users').doc(docId);
-    await user.set({ status }, { merge: true });
+    await user.set({ patientStatus }, { merge: true });
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error('Error updating user status: ', err);
+    console.error('Error updating patient status: ', err);
     return NextResponse.json({ success: false, error: err });
   }
 }
@@ -75,11 +75,11 @@ export async function GET() {
     const allUserSnapshot = await usersPath.get();
     const allUsers = [];
     allUserSnapshot.forEach((doc) => {
-      const { screening, status } = doc.data();
+      const { screening, patientStatus } = doc.data();
       const user = {
         name: `${screening.firstName} ${screening.lastName}`,
         email: screening.email,
-        status,
+        patientStatus,
       };
       allUsers.push(user);
     });
