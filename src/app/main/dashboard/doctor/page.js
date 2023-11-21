@@ -48,6 +48,11 @@ export default function DoctorDashboard() {
 
   return (
     <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-full max-w-3xl flex-col px-4 xs:px-9">
+      <div className="flex flex-row font-semibold">
+        <p className="w-40">Name</p>
+        <p className="w-64">Email</p>
+        <p>Status</p>
+      </div>
       {patients.map((patient, idx) => (
         <Patient key={idx} patient={patient} />
       ))}
