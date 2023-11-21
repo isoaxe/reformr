@@ -34,7 +34,9 @@ export default function DoctorDashboard() {
     return (
       <FormControl>
         <Select
+          variant="standard"
           value={patient.status}
+          className="w-40"
           onChange={(e) => {
             setPatients([...patients], (patient.status = e.target.value));
           }}
