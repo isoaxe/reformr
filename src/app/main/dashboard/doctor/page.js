@@ -25,12 +25,12 @@ export default function DoctorDashboard() {
       <div className="flex flex-row">
         <p className="w-40">{name}</p>
         <p className="w-64">{email}</p>
-        <Dropdown patient={patient} />
+        <StatusDropdown patient={patient} />
       </div>
     );
   }
 
-  function Dropdown({ patient }) {
+  function StatusDropdown({ patient }) {
     return (
       <FormControl>
         <Select
