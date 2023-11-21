@@ -19,6 +19,19 @@ export default function DoctorDashboard() {
     'medically failed',
   ];
 
+  async function storeStatus(email, status) {
+    const options = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, status }),
+    };
+    // TODO: Add token from firebase auth to request.
+    const res = await fetch('/api/users/patient', options);
+    const data = await res.json();
+    if (data.success) console.log('Successfully updated status.');
+    else console.log('Error updating status: ', data.error);
+  }
+
   function Patient({ patient }) {
     const { name, email } = patient;
     return (
@@ -38,7 +51,9 @@ export default function DoctorDashboard() {
           value={patient.status}
           className="w-40"
           onChange={(e) => {
-            setPatients([...patients], (patient.status = e.target.value));
+            const updatedStatus = e.target.value;
+            setPatients([...patients], (patient.status = updatedStatus));
+            storeStatus(patient.email, updatedStatus);
           }}
         >
           {statusOptions.map((option, index) => (
