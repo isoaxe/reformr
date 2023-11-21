@@ -7,6 +7,7 @@ import { useAuth } from '@/util/hooks';
 
 export default function DoctorDashboard() {
   const [role, setRole] = useState('');
+  const [patients, setPatients] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
 
@@ -14,8 +15,8 @@ export default function DoctorDashboard() {
     if (!user) return;
     const getPatients = async () => {
       const res = await fetch('/api/users/patient');
-      const data = await res.json();
-      console.log(data);
+      const { success, allUsers } = await res.json();
+      if (success) setPatients(allUsers);
     };
     getPatients();
   }, [user]);
