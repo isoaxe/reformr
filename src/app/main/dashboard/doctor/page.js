@@ -9,6 +9,7 @@ import { useAuth } from '@/util/hooks';
 export default function DoctorDashboard() {
   const [role, setRole] = useState('');
   const [patients, setPatients] = useState([]);
+  const [isLoading, setLoading] = useState(false);
   const router = useRouter();
   const { user } = useAuth();
 
@@ -25,11 +26,13 @@ export default function DoctorDashboard() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, status }),
     };
+    setLoading(true);
     // TODO: Add token from firebase auth to request.
     const res = await fetch('/api/users/patient', options);
     const data = await res.json();
     if (data.success) console.log('Successfully updated status.');
     else console.log('Error updating status: ', data.error);
+    setLoading(false);
   }
 
   function Patient({ patient }) {
@@ -50,6 +53,7 @@ export default function DoctorDashboard() {
           variant="standard"
           value={patient.status}
           className="w-40"
+          disabled={isLoading}
           onChange={(e) => {
             const updatedStatus = e.target.value;
             setPatients([...patients], (patient.status = updatedStatus));
