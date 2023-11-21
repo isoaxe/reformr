@@ -11,6 +11,17 @@ export default function DoctorDashboard() {
   const router = useRouter();
   const { user } = useAuth();
 
+  function Patient({ patient }) {
+    const { name, email, status } = patient;
+    return (
+      <div className="flex flex-row">
+        <p className="w-40">{name}</p>
+        <p className="w-64">{email}</p>
+        <p>{status}</p>
+      </div>
+    );
+  }
+
   useEffect(() => {
     if (!user) return;
     const getPatients = async () => {
@@ -36,6 +47,10 @@ export default function DoctorDashboard() {
   }, [role, router]);
 
   return (
-    <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-full max-w-3xl flex-col px-4 xs:px-9"></main>
+    <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-full max-w-3xl flex-col px-4 xs:px-9">
+      {patients.map((patient, idx) => (
+        <Patient key={idx} patient={patient} />
+      ))}
+    </main>
   );
 }
