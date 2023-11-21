@@ -43,6 +43,27 @@ export async function POST(request) {
   return NextResponse.json({ success });
 }
 
+/* Change the status of the user. */
+export async function PUT(request) {
+  const data = await request.json();
+  const { email, status } = data;
+
+  try {
+    /* Get docId from Firestore. */
+    const docId = await getDocId(email);
+
+    /* Update status on Firestore. */
+    await initialiseAdmin();
+    const db = admin.firestore();
+    const user = db.collection('users').doc(docId);
+    await user.set({ status }, { merge: true });
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error('Error updating user status: ', err);
+    return NextResponse.json({ success: false, error: err });
+  }
+}
+
 /* Get all patient user from Firestore. */
 export async function GET() {
   // TODO: Add token from firebase auth to request.
