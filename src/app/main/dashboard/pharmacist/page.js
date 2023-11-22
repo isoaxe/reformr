@@ -21,6 +21,19 @@ export default function PharmacistDashboard() {
     'collected by courier',
   ];
 
+  async function storeStatus(email, orderStatus) {
+    const options = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, orderStatus }),
+    };
+    // TODO: Add token from firebase auth to request.
+    const res = await fetch('/api/users/patient', options);
+    const data = await res.json();
+    if (data.success) console.log('Successfully updated order status.');
+    else console.log('Error updating order status: ', data.error);
+  }
+
   function Patient({ patient }) {
     const { name, email } = patient;
     return (
@@ -42,6 +55,7 @@ export default function PharmacistDashboard() {
           onChange={(e) => {
             const updatedStatus = e.target.value;
             setPatients([...patients], (patient.orderStatus = updatedStatus));
+            storeStatus(patient.email, updatedStatus);
           }}
         >
           {statusOptions.map((option, index) => (
