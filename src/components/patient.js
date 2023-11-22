@@ -1,6 +1,7 @@
 'use client';
 
-import { TextField } from '@mui/material';
+import { TextField, IconButton } from '@mui/material';
+import { CiSaveUp2 } from 'react-icons/ci';
 import StatusDropdown from './status-dropdown';
 
 export default function Patient({ patient, patients, setPatients }) {
@@ -23,7 +24,11 @@ export default function Patient({ patient, patients, setPatients }) {
         onChange={(e) => {
           setPatients([...patients], (patient.trackingNumber = e.target.value));
         }}
+        className="w-36"
       />
+      <IconButton>
+        <CiSaveUp2 />
+      </IconButton>
     </div>
   );
 }
