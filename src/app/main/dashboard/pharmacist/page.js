@@ -7,9 +7,20 @@ import { useAuth } from '@/util/hooks';
 
 export default function PharmacistDashboard() {
   const [role, setRole] = useState('');
+  const [patients, setPatients] = useState([]);
   const [isPageLoaded, setPageLoaded] = useState(false);
   const router = useRouter();
   const { user } = useAuth();
+
+  useEffect(() => {
+    if (!user) return;
+    const getPatients = async () => {
+      const res = await fetch('/api/users/patient');
+      const { success, allUsers } = await res.json();
+      if (success) setPatients(allUsers);
+    };
+    getPatients();
+  }, [user]);
 
   useEffect(() => {
     if (!user) return;
