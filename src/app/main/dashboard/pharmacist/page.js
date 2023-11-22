@@ -38,7 +38,7 @@ export default function PharmacistDashboard() {
   }
 
   function Patient({ patient }) {
-    const { name, email, lastPayment } = patient;
+    const { name, email, lastPayment, trackingNumber } = patient;
     const lastPaymentDate = new Date(lastPayment).toDateString().slice(4);
     return (
       <div className="flex flex-row">
@@ -46,6 +46,7 @@ export default function PharmacistDashboard() {
         <p className="w-64">{email}</p>
         <StatusDropdown patient={patient} />
         <p className="w-36 pl-6">{lastPaymentDate}</p>
+        <p className="w-32">{trackingNumber}</p>
       </div>
     );
   }
@@ -117,6 +118,7 @@ export default function PharmacistDashboard() {
         <p className="w-64">Email</p>
         <p className="w-48">Order Status</p>
         <p className="w-36 pl-6">Last Payment</p>
+        <p className="w-32">Tracking Number</p>
       </div>
       {patients?.map((patient, idx) => (
         <Patient patient={patient} key={idx} />
