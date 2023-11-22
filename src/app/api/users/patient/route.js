@@ -80,6 +80,7 @@ export async function GET() {
     const allUsers = [];
     allUserSnapshot.forEach((doc) => {
       const { screening, patientStatus, orderStatus, payments } = doc.data();
+      const { trackingNumber } = doc.data();
       const lastPayment = payments.payments.pop().paymentDate.seconds * 1000;
       const user = {
         name: `${screening.firstName} ${screening.lastName}`,
@@ -87,6 +88,7 @@ export async function GET() {
         patientStatus,
         orderStatus,
         lastPayment,
+        trackingNumber,
       };
       allUsers.push(user);
     });
