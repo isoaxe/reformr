@@ -1,9 +1,22 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { auth } from '@/util/firebase';
+import { useAuth } from '@/util/hooks';
 
 export default function PharmacistDashboard() {
+  const [role, setRole] = useState('');
   const [isPageLoaded, setPageLoaded] = useState(false);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (!user) return;
+    const getRole = async () =>
+      await auth.currentUser
+        .getIdTokenResult()
+        .then((res) => setRole(res.claims.role));
+    getRole();
+  }, [user]);
 
   useEffect(() => {
     setTimeout(() => {
