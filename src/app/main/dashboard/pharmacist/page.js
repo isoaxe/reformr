@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { FormControl, Select, MenuItem } from '@mui/material';
 import { auth } from '@/util/firebase';
 import { useAuth } from '@/util/hooks';
 
@@ -11,6 +12,47 @@ export default function PharmacistDashboard() {
   const [isPageLoaded, setPageLoaded] = useState(false);
   const router = useRouter();
   const { user } = useAuth();
+
+  const statusOptions = [
+    'pending',
+    'prescription printed',
+    'medication dispensed',
+    'order packed',
+    'collected by courier',
+  ];
+
+  function Patient({ patient }) {
+    const { name, email } = patient;
+    return (
+      <div className="flex flex-row">
+        <p className="w-40">{name}</p>
+        <p className="w-64">{email}</p>
+        <StatusDropdown patient={patient} />
+      </div>
+    );
+  }
+
+  function StatusDropdown({ patient }) {
+    return (
+      <FormControl>
+        <Select
+          variant="standard"
+          value={patient.orderStatus}
+          className="w-48"
+          onChange={(e) => {
+            const updatedStatus = e.target.value;
+            setPatients([...patients], (patient.orderStatus = updatedStatus));
+          }}
+        >
+          {statusOptions.map((option, index) => (
+            <MenuItem value={option} key={index}>
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    );
+  }
 
   useEffect(() => {
     if (!user) return;
@@ -52,6 +94,9 @@ export default function PharmacistDashboard() {
         <p className="w-64">Email</p>
         <p>Order Status</p>
       </div>
+      {patients?.map((patient, idx) => (
+        <Patient patient={patient} key={idx} />
+      ))}
     </main>
   );
 }
