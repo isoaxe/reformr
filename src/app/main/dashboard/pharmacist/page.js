@@ -38,12 +38,14 @@ export default function PharmacistDashboard() {
   }
 
   function Patient({ patient }) {
-    const { name, email } = patient;
+    const { name, email, lastPayment } = patient;
+    const lastPaymentDate = new Date(lastPayment).toDateString().slice(4);
     return (
       <div className="flex flex-row">
         <p className="w-40">{name}</p>
         <p className="w-64">{email}</p>
         <StatusDropdown patient={patient} />
+        <p className="w-36 pl-6">{lastPaymentDate}</p>
       </div>
     );
   }
@@ -106,14 +108,15 @@ export default function PharmacistDashboard() {
   }, [isPageLoaded, user, role, router]);
 
   return (
-    <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-fit max-w-3xl flex-col px-4 xs:px-9">
+    <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-fit flex-col px-4 xs:px-9">
       <h1 className="mb-2 pt-4 text-center text-xl font-semibold text-sky-600 md:pt-8 md:text-2xl">
-        Current Patients
+        Current Orders
       </h1>
       <div className="flex flex-row font-semibold">
         <p className="w-40">Name</p>
         <p className="w-64">Email</p>
-        <p>Order Status</p>
+        <p className="w-48">Order Status</p>
+        <p className="w-36 pl-6">Last Payment</p>
       </div>
       {patients?.map((patient, idx) => (
         <Patient patient={patient} key={idx} />
