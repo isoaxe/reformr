@@ -1,5 +1,6 @@
 'use client';
 
+import { TextField } from '@mui/material';
 import StatusDropdown from './status-dropdown';
 
 export default function Patient({ patient, patients, setPatients }) {
@@ -16,7 +17,13 @@ export default function Patient({ patient, patients, setPatients }) {
         setPatients={setPatients}
       />
       <p className="w-36 pl-6">{lastPaymentDate}</p>
-      <p className="w-32">{trackingNumber}</p>
+      <TextField
+        variant="standard"
+        value={trackingNumber}
+        onChange={(e) => {
+          setPatients([...patients], (patient.trackingNumber = e.target.value));
+        }}
+      />
     </div>
   );
 }
