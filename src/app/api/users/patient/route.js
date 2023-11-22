@@ -74,7 +74,9 @@ export async function GET() {
     await initialiseAdmin();
     const db = admin.firestore();
     const usersPath = db.collection('users');
-    const allUserSnapshot = await usersPath.get();
+    const allUserSnapshot = await usersPath
+      .where('payments.isPaid', '==', true)
+      .get();
     const allUsers = [];
     allUserSnapshot.forEach((doc) => {
       const { screening, patientStatus, orderStatus } = doc.data();
