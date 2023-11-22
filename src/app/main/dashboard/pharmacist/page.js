@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@mui/material';
-import StatusDropdown from '@/components/status-dropdown';
+import Patient from '@/components/patient';
 import { auth } from '@/util/firebase';
 import { useAuth } from '@/util/hooks';
 
@@ -13,24 +13,6 @@ export default function PharmacistDashboard() {
   const [isPageLoaded, setPageLoaded] = useState(false);
   const router = useRouter();
   const { user, logout } = useAuth();
-
-  function Patient({ patient }) {
-    const { name, email, lastPayment, trackingNumber } = patient;
-    const lastPaymentDate = new Date(lastPayment).toDateString().slice(4);
-    return (
-      <div className="flex flex-row">
-        <p className="w-40">{name}</p>
-        <p className="w-64">{email}</p>
-        <StatusDropdown
-          patient={patient}
-          patients={patients}
-          setPatients={setPatients}
-        />
-        <p className="w-36 pl-6">{lastPaymentDate}</p>
-        <p className="w-32">{trackingNumber}</p>
-      </div>
-    );
-  }
 
   useEffect(() => {
     if (!user) return;
@@ -78,7 +60,12 @@ export default function PharmacistDashboard() {
         <p className="w-32">Tracking Number</p>
       </div>
       {patients?.map((patient, idx) => (
-        <Patient patient={patient} key={idx} />
+        <Patient
+          patient={patient}
+          patients={patients}
+          setPatients={setPatients}
+          key={idx}
+        />
       ))}
       <Button
         variant="outlined"
