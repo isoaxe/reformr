@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { TextField, IconButton } from '@mui/material';
 import { CiSaveUp2 } from 'react-icons/ci';
 import StatusDropdown from './status-dropdown';
+import Toast from './toast';
 
 export default function Patient({ patient, patients, setPatients }) {
   const [isLoading, setLoading] = useState(false);
+  const [toastOpen, setToastOpen] = useState(false);
   const { name, email, lastPayment, trackingNumber } = patient;
   const lastPaymentDate = new Date(lastPayment).toDateString().slice(4);
 
@@ -20,7 +22,7 @@ export default function Patient({ patient, patients, setPatients }) {
     // TODO: Add token from firebase auth to request.
     const res = await fetch('/api/users/patient', options);
     const data = await res.json();
-    if (data.success) console.log('Successfully updated tracking number.');
+    if (data.success) setToastOpen(true);
     else console.log('Error updating tracking number: ', data.error);
     setLoading(false);
   }
@@ -47,6 +49,12 @@ export default function Patient({ patient, patients, setPatients }) {
       <IconButton onClick={storeTrackingNumber}>
         <CiSaveUp2 />
       </IconButton>
+      <Toast
+        message="Tracking number saved to database."
+        severity="success"
+        open={toastOpen}
+        setOpen={setToastOpen}
+      />
     </div>
   );
 }
