@@ -8,6 +8,19 @@ export default function Patient({ patient, patients, setPatients }) {
   const { name, email, lastPayment, trackingNumber } = patient;
   const lastPaymentDate = new Date(lastPayment).toDateString().slice(4);
 
+  async function storeTrackingNumber() {
+    const options = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, trackingNumber }),
+    };
+    // TODO: Add token from firebase auth to request.
+    const res = await fetch('/api/users/patient', options);
+    const data = await res.json();
+    if (data.success) console.log('Successfully updated tracking number.');
+    else console.log('Error updating tracking number: ', data.error);
+  }
+
   return (
     <div className="flex flex-row">
       <p className="w-40">{name}</p>
@@ -26,7 +39,7 @@ export default function Patient({ patient, patients, setPatients }) {
         }}
         className="w-36"
       />
-      <IconButton>
+      <IconButton onClick={storeTrackingNumber}>
         <CiSaveUp2 />
       </IconButton>
     </div>
