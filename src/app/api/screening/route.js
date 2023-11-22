@@ -31,6 +31,7 @@ export async function POST(request) {
       orderStatus: 'pending', // order status that pharmacist will set
       patientStatus: 'pending', // medical status that doctor will set
       screening,
+      trackingNumber: '', // set by pharmacist on per-order basis
     });
   } catch (err) {
     console.error('Error saving screening data: ', err);
