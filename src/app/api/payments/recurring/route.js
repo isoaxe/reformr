@@ -78,9 +78,10 @@ export async function POST(request) {
         payments,
         subscription: { isPaused: false },
       };
+      const orderStatus = 'pending'; // reset order status
       await usersPath
         .doc(docId)
-        .set({ payments: paymentData }, { merge: true });
+        .set({ payments: paymentData, orderStatus }, { merge: true });
       console.log('✅ Payment made and data saved to Firestore.');
     } else {
       console.log('❌ Payment was not made.');
