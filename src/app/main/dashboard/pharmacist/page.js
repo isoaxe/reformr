@@ -9,6 +9,7 @@ import { useAuth } from '@/util/hooks';
 export default function PharmacistDashboard() {
   const [role, setRole] = useState('');
   const [patients, setPatients] = useState([]);
+  const [isLoading, setLoading] = useState(false);
   const [isPageLoaded, setPageLoaded] = useState(false);
   const router = useRouter();
   const { user } = useAuth();
@@ -27,11 +28,13 @@ export default function PharmacistDashboard() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, orderStatus }),
     };
+    setLoading(true);
     // TODO: Add token from firebase auth to request.
     const res = await fetch('/api/users/patient', options);
     const data = await res.json();
     if (data.success) console.log('Successfully updated order status.');
     else console.log('Error updating order status: ', data.error);
+    setLoading(false);
   }
 
   function Patient({ patient }) {
@@ -52,6 +55,7 @@ export default function PharmacistDashboard() {
           variant="standard"
           value={patient.orderStatus}
           className="w-48"
+          disabled={isLoading}
           onChange={(e) => {
             const updatedStatus = e.target.value;
             setPatients([...patients], (patient.orderStatus = updatedStatus));
