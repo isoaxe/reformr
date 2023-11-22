@@ -10,7 +10,6 @@ import { useAuth } from '@/util/hooks';
 export default function PharmacistDashboard() {
   const [role, setRole] = useState('');
   const [patients, setPatients] = useState([]);
-  const [isLoading, setLoading] = useState(false);
   const [isPageLoaded, setPageLoaded] = useState(false);
   const router = useRouter();
   const { user, logout } = useAuth();
@@ -34,8 +33,6 @@ export default function PharmacistDashboard() {
           patient={patient}
           patients={patients}
           setPatients={setPatients}
-          isLoading={isLoading}
-          setLoading={setLoading}
           statusOptions={statusOptions}
         />
         <p className="w-36 pl-6">{lastPaymentDate}</p>

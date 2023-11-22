@@ -1,9 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import { FormControl, Select, MenuItem } from '@mui/material';
 
 export default function StatusDropdown(props) {
-  const { patient, patients, setPatients, isLoading, setLoading } = props;
+  const [isLoading, setLoading] = useState(false);
+  const { patient, patients, setPatients } = props;
   const { statusOptions } = props;
 
   async function storeStatus(email, orderStatus) {
