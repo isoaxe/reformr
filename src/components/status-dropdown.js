@@ -3,8 +3,23 @@
 import { FormControl, Select, MenuItem } from '@mui/material';
 
 export default function StatusDropdown(props) {
-  const { patient, patients, setPatients, isLoading, statusOptions } = props;
-  const { storeStatus } = props;
+  const { patient, patients, setPatients, isLoading, setLoading } = props;
+  const { statusOptions } = props;
+
+  async function storeStatus(email, orderStatus) {
+    const options = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, orderStatus }),
+    };
+    setLoading(true);
+    // TODO: Add token from firebase auth to request.
+    const res = await fetch('/api/users/patient', options);
+    const data = await res.json();
+    if (data.success) console.log('Successfully updated order status.');
+    else console.log('Error updating order status: ', data.error);
+    setLoading(false);
+  }
 
   return (
     <FormControl>
