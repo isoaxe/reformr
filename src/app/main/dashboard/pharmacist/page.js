@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { FormControl, Select, MenuItem, Button } from '@mui/material';
+import { Button } from '@mui/material';
+import StatusDropdown from '@/components/status-dropdown';
 import { auth } from '@/util/firebase';
 import { useAuth } from '@/util/hooks';
 
@@ -44,34 +45,17 @@ export default function PharmacistDashboard() {
       <div className="flex flex-row">
         <p className="w-40">{name}</p>
         <p className="w-64">{email}</p>
-        <StatusDropdown patient={patient} />
+        <StatusDropdown
+          patient={patient}
+          patients={patients}
+          setPatients={setPatients}
+          isLoading={isLoading}
+          storeStatus={storeStatus}
+          statusOptions={statusOptions}
+        />
         <p className="w-36 pl-6">{lastPaymentDate}</p>
         <p className="w-32">{trackingNumber}</p>
       </div>
-    );
-  }
-
-  function StatusDropdown({ patient }) {
-    return (
-      <FormControl>
-        <Select
-          variant="standard"
-          value={patient.orderStatus}
-          className="w-48"
-          disabled={isLoading}
-          onChange={(e) => {
-            const updatedStatus = e.target.value;
-            setPatients([...patients], (patient.orderStatus = updatedStatus));
-            storeStatus(patient.email, updatedStatus);
-          }}
-        >
-          {statusOptions.map((option, index) => (
-            <MenuItem value={option} key={index}>
-              {option}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
     );
   }
 
