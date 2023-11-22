@@ -46,7 +46,7 @@ export async function POST(request) {
 /* Change the status of the user. */
 export async function PUT(request) {
   const data = await request.json();
-  const { email, patientStatus } = data;
+  const { email, patientStatus, orderStatus } = data;
 
   try {
     /* Get docId from Firestore. */
@@ -56,10 +56,12 @@ export async function PUT(request) {
     await initialiseAdmin();
     const db = admin.firestore();
     const user = db.collection('users').doc(docId);
-    await user.set({ patientStatus }, { merge: true });
+    /* Only one of these conditionals will run. */
+    if (patientStatus) await user.set({ patientStatus }, { merge: true });
+    if (orderStatus) await user.set({ orderStatus }, { merge: true });
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error('Error updating patient status: ', err);
+    console.error('Error updating status: ', err);
     return NextResponse.json({ success: false, error: err });
   }
 }
