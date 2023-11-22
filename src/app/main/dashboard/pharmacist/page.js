@@ -14,14 +14,6 @@ export default function PharmacistDashboard() {
   const router = useRouter();
   const { user, logout } = useAuth();
 
-  const statusOptions = [
-    'pending',
-    'prescription printed',
-    'medication dispensed',
-    'order packed',
-    'collected by courier',
-  ];
-
   function Patient({ patient }) {
     const { name, email, lastPayment, trackingNumber } = patient;
     const lastPaymentDate = new Date(lastPayment).toDateString().slice(4);
@@ -33,7 +25,6 @@ export default function PharmacistDashboard() {
           patient={patient}
           patients={patients}
           setPatients={setPatients}
-          statusOptions={statusOptions}
         />
         <p className="w-36 pl-6">{lastPaymentDate}</p>
         <p className="w-32">{trackingNumber}</p>

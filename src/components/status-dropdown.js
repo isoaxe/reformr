@@ -6,7 +6,14 @@ import { FormControl, Select, MenuItem } from '@mui/material';
 export default function StatusDropdown(props) {
   const [isLoading, setLoading] = useState(false);
   const { patient, patients, setPatients } = props;
-  const { statusOptions } = props;
+
+  const statusOptions = [
+    'pending',
+    'prescription printed',
+    'medication dispensed',
+    'order packed',
+    'collected by courier',
+  ];
 
   async function storeStatus(email, orderStatus) {
     const options = {
