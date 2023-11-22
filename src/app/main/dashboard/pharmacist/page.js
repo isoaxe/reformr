@@ -1,12 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { auth } from '@/util/firebase';
 import { useAuth } from '@/util/hooks';
 
 export default function PharmacistDashboard() {
   const [role, setRole] = useState('');
   const [isPageLoaded, setPageLoaded] = useState(false);
+  const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
@@ -23,6 +25,11 @@ export default function PharmacistDashboard() {
       setPageLoaded(true); // assume user fetched within a second.
     }, 1000);
   }, []);
+
+  useEffect(() => {
+    if (!isPageLoaded) return;
+    if (!user || role !== 'pharmacist') router.push('/main/login'); // redirect to login if not pharmacist.
+  }, [isPageLoaded, user, role, router]);
 
   return (
     <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-fit max-w-3xl flex-col px-4 xs:px-9">
