@@ -1,10 +1,12 @@
 'use client';
 
+import { useState } from 'react';
 import { TextField, IconButton } from '@mui/material';
 import { CiSaveUp2 } from 'react-icons/ci';
 import StatusDropdown from './status-dropdown';
 
 export default function Patient({ patient, patients, setPatients }) {
+  const [isLoading, setLoading] = useState(false);
   const { name, email, lastPayment, trackingNumber } = patient;
   const lastPaymentDate = new Date(lastPayment).toDateString().slice(4);
 
@@ -14,11 +16,13 @@ export default function Patient({ patient, patients, setPatients }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, trackingNumber }),
     };
+    setLoading(true);
     // TODO: Add token from firebase auth to request.
     const res = await fetch('/api/users/patient', options);
     const data = await res.json();
     if (data.success) console.log('Successfully updated tracking number.');
     else console.log('Error updating tracking number: ', data.error);
+    setLoading(false);
   }
 
   return (
@@ -34,6 +38,7 @@ export default function Patient({ patient, patients, setPatients }) {
       <TextField
         variant="standard"
         value={trackingNumber}
+        disabled={isLoading}
         onChange={(e) => {
           setPatients([...patients], (patient.trackingNumber = e.target.value));
         }}
