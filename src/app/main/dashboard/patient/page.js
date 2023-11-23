@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { doc, getDoc } from 'firebase/firestore';
 import { Button } from '@mui/material';
 import { BsFillPersonFill } from 'react-icons/bs';
+import { GiPresent } from 'react-icons/gi';
 import { MdLocalShipping, MdSubscriptions } from 'react-icons/md';
 import { FaCreditCard } from 'react-icons/fa6';
 import DropdownItem from '../dropdown-item';
@@ -81,6 +82,9 @@ export default function PatientDashboard() {
       </div>
     </>
   );
+
+  /* Props for the order details section. */
+  const orderIcon = <GiPresent size={35} />;
 
   /* Props for the subscription management section. */
   const textIfCancelled = `You have cancelled your subscription and will lose access to the platform on ${expiryDate?.toDateString()}. No further deliveries will be sent or charges made.`;
@@ -181,6 +185,7 @@ export default function PatientDashboard() {
         hidden={deliveryContent}
       />
       <DropdownItem text="Payment Card" icon={cardIcon} hidden={cardContent} />
+      <DropdownItem text="Order Details" icon={orderIcon} />
       <DropdownItem
         text="Subscription Management"
         icon={subscriptionIcon}
