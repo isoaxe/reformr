@@ -3,39 +3,26 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@mui/material';
-import StatusDropdown from '@/components/status-dropdown';
+import Patient from '@/components/pharm-patient';
 import { auth } from '@/util/firebase';
 import { useAuth } from '@/util/hooks';
 
-export default function DoctorDashboard() {
+export default function PharmacistDashboard() {
   const [role, setRole] = useState('');
   const [patients, setPatients] = useState([]);
   const [isPageLoaded, setPageLoaded] = useState(false);
   const router = useRouter();
   const { user, logout } = useAuth();
 
-  function Patient({ patient }) {
-    const { name, email } = patient;
-    return (
-      <div className="flex flex-row">
-        <p className="w-40">{name}</p>
-        <p className="w-64">{email}</p>
-        <StatusDropdown
-          patient={patient}
-          patients={patients}
-          setPatients={setPatients}
-          isDoctor={true}
-        />
-      </div>
-    );
-  }
-
   useEffect(() => {
     if (!user) return;
     const getPatients = async () => {
       const res = await fetch('/api/users/patient');
       const { success, allUsers } = await res.json();
-      if (success) setPatients(allUsers);
+      if (success)
+        setPatients(
+          allUsers.filter((user) => user.patientStatus === 'medically cleared')
+        );
     };
     getPatients();
   }, [user]);
@@ -57,21 +44,28 @@ export default function DoctorDashboard() {
 
   useEffect(() => {
     if (!isPageLoaded) return;
-    if (!user || role !== 'doctor') router.push('/main/login'); // redirect to login if not doctor.
+    if (!user || role !== 'pharmacist') router.push('/main/login'); // redirect to login if not pharmacist.
   }, [isPageLoaded, user, role, router]);
 
   return (
-    <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-fit max-w-3xl flex-col px-4 xs:px-9">
+    <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-fit flex-col px-4 xs:px-9">
       <h1 className="mb-2 pt-4 text-center text-xl font-semibold text-sky-600 md:pt-8 md:text-2xl">
-        Current Patients
+        Current Orders
       </h1>
-      <div className="flex flex-row font-semibold">
+      <div className="mb-3 flex flex-row font-semibold">
         <p className="w-40">Name</p>
         <p className="w-64">Email</p>
-        <p>Patient Status</p>
+        <p className="w-48">Order Status</p>
+        <p className="w-36 pl-6">Last Payment</p>
+        <p className="w-32">Tracking Number</p>
       </div>
       {patients?.map((patient, idx) => (
-        <Patient patient={patient} key={idx} />
+        <Patient
+          patient={patient}
+          patients={patients}
+          setPatients={setPatients}
+          key={idx}
+        />
       ))}
       <Button
         variant="outlined"

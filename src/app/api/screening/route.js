@@ -28,8 +28,10 @@ export async function POST(request) {
     /* Fine to overwrite data saved to Firestore before account creation. */
     await setDoc(doc(db, 'users', docId), {
       dateAccountCreated: null,
+      orderStatus: 'pending', // order status that pharmacist will set
+      patientStatus: 'pending', // medical status that doctor will set
       screening,
-      status: 'pending', // medical status that doctor will set
+      trackingNumber: '', // set by pharmacist on per-order basis
     });
   } catch (err) {
     console.error('Error saving screening data: ', err);

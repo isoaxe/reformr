@@ -46,20 +46,23 @@ export async function POST(request) {
 /* Change the status of the user. */
 export async function PUT(request) {
   const data = await request.json();
-  const { email, status } = data;
+  const { email, patientStatus, orderStatus, trackingNumber } = data;
 
   try {
     /* Get docId from Firestore. */
     const docId = await getDocId(email);
 
-    /* Update status on Firestore. */
+    /* Update patient status on Firestore. */
     await initialiseAdmin();
     const db = admin.firestore();
     const user = db.collection('users').doc(docId);
-    await user.set({ status }, { merge: true });
+    /* Only one of these conditionals will run. */
+    if (patientStatus) await user.set({ patientStatus }, { merge: true });
+    if (orderStatus) await user.set({ orderStatus }, { merge: true });
+    if (trackingNumber) await user.set({ trackingNumber }, { merge: true });
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error('Error updating user status: ', err);
+    console.error('Error updating status: ', err);
     return NextResponse.json({ success: false, error: err });
   }
 }
@@ -72,14 +75,21 @@ export async function GET() {
     await initialiseAdmin();
     const db = admin.firestore();
     const usersPath = db.collection('users');
-    const allUserSnapshot = await usersPath.get();
+    const allUserSnapshot = await usersPath
+      .where('payments.isPaid', '==', true)
+      .get();
     const allUsers = [];
     allUserSnapshot.forEach((doc) => {
-      const { screening, status } = doc.data();
+      const { screening, patientStatus, orderStatus, payments } = doc.data();
+      const { trackingNumber } = doc.data();
+      const lastPayment = payments.payments.pop().paymentDate.seconds * 1000;
       const user = {
         name: `${screening.firstName} ${screening.lastName}`,
         email: screening.email,
-        status,
+        patientStatus,
+        orderStatus,
+        lastPayment,
+        trackingNumber,
       };
       allUsers.push(user);
     });
