@@ -52,7 +52,7 @@ export default function PharmacistDashboard() {
       <h1 className="mb-2 pt-4 text-center text-xl font-semibold text-sky-600 md:pt-8 md:text-2xl">
         Current Orders
       </h1>
-      <div className="flex flex-row font-semibold">
+      <div className="mb-3 flex flex-row font-semibold">
         <p className="w-40">Name</p>
         <p className="w-64">Email</p>
         <p className="w-48">Order Status</p>
