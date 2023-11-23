@@ -52,6 +52,10 @@ export default function PatientDashboard() {
         <p className="w-20 font-medium">Phone:</p>
         <p>{phone}</p>
       </div>
+      <div className="flex flex-row">
+        <p className="w-20 font-medium">Status:</p>
+        <p>{medicalStatus}</p>
+      </div>
     </>
   );
 
@@ -91,10 +95,6 @@ export default function PatientDashboard() {
   const orderIcon = <GiPresent size={35} />;
   const orderContent = (
     <>
-      <div className="flex flex-row">
-        <p className="w-44 font-medium">Patient Status:</p>
-        <p>{medicalStatus}</p>
-      </div>
       <div className="my-1 flex flex-row">
         <p className="w-44 font-medium">Order Status:</p>
         <p>{orderStatus}</p>
