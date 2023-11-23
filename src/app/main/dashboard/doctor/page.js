@@ -2,39 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { FormControl, Select, MenuItem, Button } from '@mui/material';
+import { Button } from '@mui/material';
+import StatusDropdown from '@/components/status-dropdown';
 import { auth } from '@/util/firebase';
 import { useAuth } from '@/util/hooks';
 
 export default function DoctorDashboard() {
   const [role, setRole] = useState('');
   const [patients, setPatients] = useState([]);
-  const [isLoading, setLoading] = useState(false);
   const [isPageLoaded, setPageLoaded] = useState(false);
   const router = useRouter();
   const { user, logout } = useAuth();
-
-  const statusOptions = [
-    'pending',
-    'medically cleared',
-    'labs needed',
-    'medically failed',
-  ];
-
-  async function storeStatus(email, patientStatus) {
-    const options = {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, patientStatus }),
-    };
-    setLoading(true);
-    // TODO: Add token from firebase auth to request.
-    const res = await fetch('/api/users/patient', options);
-    const data = await res.json();
-    if (data.success) console.log('Successfully updated patient status.');
-    else console.log('Error updating patient status: ', data.error);
-    setLoading(false);
-  }
 
   function Patient({ patient }) {
     const { name, email } = patient;
@@ -42,32 +20,13 @@ export default function DoctorDashboard() {
       <div className="flex flex-row">
         <p className="w-40">{name}</p>
         <p className="w-64">{email}</p>
-        <StatusDropdown patient={patient} />
+        <StatusDropdown
+          patient={patient}
+          patients={patients}
+          setPatients={setPatients}
+          isDoctor={true}
+        />
       </div>
-    );
-  }
-
-  function StatusDropdown({ patient }) {
-    return (
-      <FormControl>
-        <Select
-          variant="standard"
-          value={patient.patientStatus}
-          className="w-40"
-          disabled={isLoading}
-          onChange={(e) => {
-            const updatedStatus = e.target.value;
-            setPatients([...patients], (patient.patientStatus = updatedStatus));
-            storeStatus(patient.email, updatedStatus);
-          }}
-        >
-          {statusOptions.map((option, index) => (
-            <MenuItem value={option} key={index}>
-              {option}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
     );
   }
 
