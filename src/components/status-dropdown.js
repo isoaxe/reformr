@@ -23,14 +23,15 @@ export default function StatusDropdown(props) {
     'medically failed',
   ];
 
+  const statusKey = isDoctor ? 'patientStatus' : 'orderStatus';
   const statusOptions = isDoctor ? patientStatusOptions : orderStatusOptions;
   const statusType = isDoctor ? 'patient' : 'order';
 
-  async function storeStatus(email, orderStatus) {
+  async function storeStatus(email, updatedStatus) {
     const options = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, orderStatus }),
+      body: JSON.stringify({ email, [statusKey]: updatedStatus }),
     };
     setLoading(true);
     // TODO: Add token from firebase auth to request.
@@ -45,12 +46,12 @@ export default function StatusDropdown(props) {
     <FormControl>
       <Select
         variant="standard"
-        value={patient.orderStatus}
+        value={patient[statusKey]}
         className="w-48"
         disabled={isLoading}
         onChange={(e) => {
           const updatedStatus = e.target.value;
-          setPatients([...patients], (patient.orderStatus = updatedStatus));
+          setPatients([...patients], (patient[statusKey] = updatedStatus));
           storeStatus(patient.email, updatedStatus);
         }}
       >
