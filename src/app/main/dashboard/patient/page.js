@@ -41,19 +41,19 @@ export default function PatientDashboard() {
   const patientInfoContent = (
     <>
       <div className="flex flex-row">
-        <p className="w-20 font-medium">Name:</p>
+        <p className="w-24 font-medium">Name:</p>
         <p>{name}</p>
       </div>
       <div className="my-1 flex flex-row">
-        <p className="w-20 font-medium">Email:</p>
+        <p className="w-24 font-medium">Email:</p>
         <p>{email}</p>
       </div>
       <div className="flex flex-row">
-        <p className="w-20 font-medium">Phone:</p>
+        <p className="w-24 font-medium">Phone:</p>
         <p>{phone}</p>
       </div>
       <div className="flex flex-row">
-        <p className="w-20 font-medium">Status:</p>
+        <p className="w-24 font-medium">Status:</p>
         <p>{medicalStatus}</p>
       </div>
     </>
