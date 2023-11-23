@@ -21,6 +21,10 @@ export default function PatientDashboard() {
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState({});
   const [stripeUid, setStripeUid] = useState('');
+  const [medicalStatus, setMedicalStatus] = useState('');
+  const [orderStatus, setOrderStatus] = useState('');
+  const [trackingNumber, setTrackingNumber] = useState('');
+  const [lastPayment, setLastPayment] = useState('');
   const [expiryDate, setExpiryDate] = useState(null);
   const [subId, setSubId] = useState('');
   const [isSubCancelled, setSubCancelled] = useState(false);
@@ -88,20 +92,20 @@ export default function PatientDashboard() {
   const orderContent = (
     <>
       <div className="flex flex-row">
-        <p className="w-44 font-medium">Medical Status:</p>
-        <p>medically cleared</p>
+        <p className="w-44 font-medium">Patient Status:</p>
+        <p>{medicalStatus}</p>
       </div>
       <div className="my-1 flex flex-row">
         <p className="w-44 font-medium">Order Status:</p>
-        <p>prescription printed</p>
+        <p>{orderStatus}</p>
       </div>
       <div className="flex flex-row">
         <p className="w-44 font-medium">Tracking No:</p>
-        <p>us3214124-huk</p>
+        <p>{trackingNumber}</p>
       </div>
       <div className="flex flex-row">
         <p className="w-44 font-medium">Last Payment:</p>
-        <p>23rd May 2023</p>
+        <p>{lastPayment}</p>
       </div>
     </>
   );
@@ -152,13 +156,19 @@ export default function PatientDashboard() {
       const userRef = doc(db, 'users', docId);
       const userSnap = await getDoc(userRef);
       const userData = userSnap.data();
+      const { payments } = userData;
+      const lastPaymentUnix = payments?.payments?.pop()?.paymentDate?.seconds;
       setPhone(userData?.screening?.phone);
       setAddress(userData?.address);
-      setStripeUid(userData?.payments?.stripeUid);
-      setExpiryDate(new Date(userData?.payments?.expiryDate?.seconds * 1000));
-      setSubId(userData?.payments?.subscription?.subscriptionId);
-      setSubCancelled(userData?.payments?.subscription?.isCancelled);
-      setSubPaused(userData?.payments?.subscription?.isPaused);
+      setStripeUid(payments?.stripeUid);
+      setMedicalStatus(userData?.patientStatus);
+      setOrderStatus(userData?.orderStatus);
+      setTrackingNumber(userData?.trackingNumber);
+      setLastPayment(new Date(lastPaymentUnix * 1000).toDateString());
+      setExpiryDate(new Date(payments?.expiryDate?.seconds * 1000));
+      setSubId(payments?.subscription?.subscriptionId);
+      setSubCancelled(payments?.subscription?.isCancelled);
+      setSubPaused(payments?.subscription?.isPaused);
     }
 
     if (email) getPatientData();
