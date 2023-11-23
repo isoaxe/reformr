@@ -24,6 +24,7 @@ export default function StatusDropdown(props) {
   ];
 
   const statusOptions = isDoctor ? patientStatusOptions : orderStatusOptions;
+  const statusType = isDoctor ? 'patient' : 'order';
 
   async function storeStatus(email, orderStatus) {
     const options = {
@@ -35,8 +36,8 @@ export default function StatusDropdown(props) {
     // TODO: Add token from firebase auth to request.
     const res = await fetch('/api/users/patient', options);
     const data = await res.json();
-    if (data.success) console.log('Successfully updated order status.');
-    else console.log('Error updating order status: ', data.error);
+    if (data.success) console.log(`Successfully updated ${statusType} status.`);
+    else console.log(`Error updating ${statusType} status: `, data.error);
     setLoading(false);
   }
 
