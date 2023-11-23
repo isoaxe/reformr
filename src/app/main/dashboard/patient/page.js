@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { doc, getDoc } from 'firebase/firestore';
 import { Button } from '@mui/material';
 import { BsFillPersonFill } from 'react-icons/bs';
+import { GiPresent } from 'react-icons/gi';
 import { MdLocalShipping, MdSubscriptions } from 'react-icons/md';
 import { FaCreditCard } from 'react-icons/fa6';
 import DropdownItem from '../dropdown-item';
@@ -20,6 +21,10 @@ export default function PatientDashboard() {
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState({});
   const [stripeUid, setStripeUid] = useState('');
+  const [medicalStatus, setMedicalStatus] = useState('');
+  const [orderStatus, setOrderStatus] = useState('');
+  const [trackingNumber, setTrackingNumber] = useState('');
+  const [lastPayment, setLastPayment] = useState('');
   const [expiryDate, setExpiryDate] = useState(null);
   const [subId, setSubId] = useState('');
   const [isSubCancelled, setSubCancelled] = useState(false);
@@ -36,16 +41,20 @@ export default function PatientDashboard() {
   const patientInfoContent = (
     <>
       <div className="flex flex-row">
-        <p className="w-20 font-medium">Name:</p>
+        <p className="w-24 font-medium">Name:</p>
         <p>{name}</p>
       </div>
       <div className="my-1 flex flex-row">
-        <p className="w-20 font-medium">Email:</p>
+        <p className="w-24 font-medium">Email:</p>
         <p>{email}</p>
       </div>
       <div className="flex flex-row">
-        <p className="w-20 font-medium">Phone:</p>
+        <p className="w-24 font-medium">Phone:</p>
         <p>{phone}</p>
+      </div>
+      <div className="flex flex-row">
+        <p className="w-24 font-medium">Status:</p>
+        <p>{medicalStatus}</p>
       </div>
     </>
   );
@@ -78,6 +87,25 @@ export default function PatientDashboard() {
         <p>
           {card?.exp_month} / {card?.exp_year}
         </p>
+      </div>
+    </>
+  );
+
+  /* Props for the order details section. */
+  const orderIcon = <GiPresent size={35} />;
+  const orderContent = (
+    <>
+      <div className="my-1 flex flex-row">
+        <p className="w-44 font-medium">Order Status:</p>
+        <p>{orderStatus}</p>
+      </div>
+      <div className="flex flex-row">
+        <p className="w-44 font-medium">Tracking No:</p>
+        <p>{trackingNumber}</p>
+      </div>
+      <div className="flex flex-row">
+        <p className="w-44 font-medium">Last Payment:</p>
+        <p>{lastPayment}</p>
       </div>
     </>
   );
@@ -128,13 +156,19 @@ export default function PatientDashboard() {
       const userRef = doc(db, 'users', docId);
       const userSnap = await getDoc(userRef);
       const userData = userSnap.data();
+      const { payments } = userData;
+      const lastPaymentUnix = payments?.payments?.pop()?.paymentDate?.seconds;
       setPhone(userData?.screening?.phone);
       setAddress(userData?.address);
-      setStripeUid(userData?.payments?.stripeUid);
-      setExpiryDate(new Date(userData?.payments?.expiryDate?.seconds * 1000));
-      setSubId(userData?.payments?.subscription?.subscriptionId);
-      setSubCancelled(userData?.payments?.subscription?.isCancelled);
-      setSubPaused(userData?.payments?.subscription?.isPaused);
+      setStripeUid(payments?.stripeUid);
+      setMedicalStatus(userData?.patientStatus);
+      setOrderStatus(userData?.orderStatus);
+      setTrackingNumber(userData?.trackingNumber);
+      setLastPayment(new Date(lastPaymentUnix * 1000).toDateString());
+      setExpiryDate(new Date(payments?.expiryDate?.seconds * 1000));
+      setSubId(payments?.subscription?.subscriptionId);
+      setSubCancelled(payments?.subscription?.isCancelled);
+      setSubPaused(payments?.subscription?.isPaused);
     }
 
     if (email) getPatientData();
@@ -181,6 +215,11 @@ export default function PatientDashboard() {
         hidden={deliveryContent}
       />
       <DropdownItem text="Payment Card" icon={cardIcon} hidden={cardContent} />
+      <DropdownItem
+        text="Order Details"
+        icon={orderIcon}
+        hidden={orderContent}
+      />
       <DropdownItem
         text="Subscription Management"
         icon={subscriptionIcon}
