@@ -6,7 +6,8 @@ import { CiSaveUp2 } from 'react-icons/ci';
 import StatusDropdown from './status-dropdown';
 import Toast from './toast';
 
-export default function Patient({ patient, patients, setPatients }) {
+/* This is a single patient as displayed on the pharmacist dashboard. */
+export default function PharmacistPatient({ patient, patients, setPatients }) {
   const [isLoading, setLoading] = useState(false);
   const [toastOpen, setToastOpen] = useState(false);
   const { name, email, lastPayment, trackingNumber } = patient;
