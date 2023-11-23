@@ -6,15 +6,24 @@ import { FormControl, Select, MenuItem } from '@mui/material';
 /* Dropdown menu that allows the pharmacist to select order status. */
 export default function StatusDropdown(props) {
   const [isLoading, setLoading] = useState(false);
-  const { patient, patients, setPatients } = props;
+  const { patient, patients, setPatients, isDoctor } = props;
 
-  const statusOptions = [
+  const orderStatusOptions = [
     'pending',
     'prescription printed',
     'medication dispensed',
     'order packed',
     'collected by courier',
   ];
+
+  const patientStatusOptions = [
+    'pending',
+    'medically cleared',
+    'labs needed',
+    'medically failed',
+  ];
+
+  const statusOptions = isDoctor ? patientStatusOptions : orderStatusOptions;
 
   async function storeStatus(email, orderStatus) {
     const options = {

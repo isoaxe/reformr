@@ -36,6 +36,7 @@ export default function PharmacistPatient({ patient, patients, setPatients }) {
         patient={patient}
         patients={patients}
         setPatients={setPatients}
+        isDoctor={false}
       />
       <p className="w-36 pl-6">{lastPaymentDate}</p>
       <TextField
