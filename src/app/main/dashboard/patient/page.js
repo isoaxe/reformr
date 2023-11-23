@@ -85,6 +85,26 @@ export default function PatientDashboard() {
 
   /* Props for the order details section. */
   const orderIcon = <GiPresent size={35} />;
+  const orderContent = (
+    <>
+      <div className="flex flex-row">
+        <p className="w-44 font-medium">Medical Status:</p>
+        <p>medically cleared</p>
+      </div>
+      <div className="my-1 flex flex-row">
+        <p className="w-44 font-medium">Order Status:</p>
+        <p>prescription printed</p>
+      </div>
+      <div className="flex flex-row">
+        <p className="w-44 font-medium">Tracking No:</p>
+        <p>us3214124-huk</p>
+      </div>
+      <div className="flex flex-row">
+        <p className="w-44 font-medium">Last Payment:</p>
+        <p>23rd May 2023</p>
+      </div>
+    </>
+  );
 
   /* Props for the subscription management section. */
   const textIfCancelled = `You have cancelled your subscription and will lose access to the platform on ${expiryDate?.toDateString()}. No further deliveries will be sent or charges made.`;
@@ -185,7 +205,11 @@ export default function PatientDashboard() {
         hidden={deliveryContent}
       />
       <DropdownItem text="Payment Card" icon={cardIcon} hidden={cardContent} />
-      <DropdownItem text="Order Details" icon={orderIcon} />
+      <DropdownItem
+        text="Order Details"
+        icon={orderIcon}
+        hidden={orderContent}
+      />
       <DropdownItem
         text="Subscription Management"
         icon={subscriptionIcon}
