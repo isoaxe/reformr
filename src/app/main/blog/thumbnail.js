@@ -10,7 +10,7 @@ export default function Thumbnail(props) {
   });
 
   return (
-    <div className="relative flex aspect-video w-1/4 flex-col">
+    <div className="relative flex aspect-video w-1/4 flex-col hover:cursor-pointer">
       <div className="absolute h-full w-full overflow-hidden rounded">
         <Image
           src={image}
@@ -19,11 +19,12 @@ export default function Thumbnail(props) {
           className="z-0 object-cover"
           sizes="100vw"
         />
+        <div className="absolute h-full w-full bg-gradient-to-b from-transparent to-zinc-600 md:border-none"></div>
       </div>
-      <div className="relative">
+      <div className="relative m-auto p-6 font-medium">
         <p>{formattedDate}</p>
-        <h1>{title}</h1>
-        <h2>{description}</h2>
+        <h1 className="my-2 text-2xl">{title}</h1>
+        <h2 className="text-xl">{description}</h2>
       </div>
     </div>
   );
