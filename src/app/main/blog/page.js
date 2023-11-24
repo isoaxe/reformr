@@ -37,7 +37,7 @@ export default function Blog() {
           />
         </div>
       </section>
-      <section className="mx-5 flex flex-wrap lg:mx-10">
+      <section className="mx-5 flex flex-wrap justify-center">
         {blogTileData.map((tileData, index) => (
           <Tile data={tileData} key={index} />
         ))}
