@@ -200,6 +200,9 @@ export const manyRangeLabels = {
 };
 
 import saxendaPenOpen from '/public/images/blog/saxenda-pen-open.jpg';
+import saxendaPenClosed from '/public/images/blog/saxenda-pen-closed.jpg';
+import ozempicPenOpen from '/public/images/blog/ozempic-pen-open.jpg';
+import saxendaNeedleCoin from '/public/images/blog/saxenda-needle-with-coin.jpg';
 
 /* The article details as appear on the blog page. */
 export const blogTileData = [
@@ -209,5 +212,23 @@ export const blogTileData = [
       'What is Saxenda? Everything you need to know about this weight loss injection.',
     image: saxendaPenOpen,
     date: 1680749845000,
+  },
+  {
+    title: 'Tips for injecting your first dose of Saxenda',
+    description: "Administering your medicine doesn't have to be scary.",
+    image: saxendaPenClosed,
+    date: 1679713045000,
+  },
+  {
+    title: 'Ozempic 101',
+    description: '',
+    image: ozempicPenOpen,
+    date: 1679367445000,
+  },
+  {
+    title: 'Breaking down the fear factor of Saxenda injections',
+    description: '',
+    image: saxendaNeedleCoin,
+    date: 1679281045000,
   },
 ];
