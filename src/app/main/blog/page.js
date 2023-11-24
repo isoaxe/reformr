@@ -1,6 +1,16 @@
 import Image from 'next/image';
 import Button from '@/components/button';
+import Thumbnail from './thumbnail';
 import doctor from '/public/images/cartoon-doctor.jpg';
+import saxendaPenOpen from '/public/images/blog/saxenda-pen-open.jpg';
+
+const thumbnailData = {
+  title: 'Saxenda 101',
+  description:
+    'What is Saxenda? Everything you need to know about this weight loss injection.',
+  image: saxendaPenOpen,
+  date: 1680749845000,
+};
 
 export default function Blog() {
   return (
@@ -34,6 +44,9 @@ export default function Blog() {
             haloShade="light"
           />
         </div>
+      </section>
+      <section>
+        <Thumbnail data={thumbnailData} />
       </section>
     </main>
   );
