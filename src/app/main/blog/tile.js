@@ -10,7 +10,7 @@ export default function Tile(props) {
   });
 
   return (
-    <div className="group relative flex aspect-video w-1/4 flex-col transition hover:scale-[.98] hover:cursor-pointer">
+    <div className="group relative m-2 flex aspect-video w-1/4 flex-col transition hover:scale-[.98] hover:cursor-pointer">
       <div className="absolute h-full w-full overflow-hidden rounded">
         <Image
           src={image}
@@ -21,7 +21,7 @@ export default function Tile(props) {
         />
         <div className="absolute h-full w-full bg-gradient-to-b from-transparent to-zinc-600 md:border-none"></div>
       </div>
-      <div className="relative m-auto p-6 font-medium">
+      <div className="relative my-auto p-6 font-medium">
         <p>{formattedDate}</p>
         <h1 className="my-2 text-2xl">{title}</h1>
         <h2 className="text-xl">{description}</h2>

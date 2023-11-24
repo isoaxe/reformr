@@ -37,7 +37,7 @@ export default function Blog() {
           />
         </div>
       </section>
-      <section>
+      <section className="mx-5 flex lg:mx-10">
         {blogTileData.map((tileData, index) => (
           <Tile data={tileData} key={index} />
         ))}
