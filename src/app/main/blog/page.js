@@ -1,16 +1,8 @@
 import Image from 'next/image';
 import Button from '@/components/button';
 import Tile from './tile';
+import { blogTileData } from '@/util/data';
 import doctor from '/public/images/cartoon-doctor.jpg';
-import saxendaPenOpen from '/public/images/blog/saxenda-pen-open.jpg';
-
-const tileData = {
-  title: 'Saxenda 101',
-  description:
-    'What is Saxenda? Everything you need to know about this weight loss injection.',
-  image: saxendaPenOpen,
-  date: 1680749845000,
-};
 
 export default function Blog() {
   return (
@@ -46,7 +38,9 @@ export default function Blog() {
         </div>
       </section>
       <section>
-        <Tile data={tileData} />
+        {blogTileData.map((tileData, index) => (
+          <Tile data={tileData} key={index} />
+        ))}
       </section>
     </main>
   );

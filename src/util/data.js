@@ -198,3 +198,16 @@ export const manyRangeLabels = {
     'Exercise',
   ],
 };
+
+import saxendaPenOpen from '/public/images/blog/saxenda-pen-open.jpg';
+
+/* The article details as appear on the blog page. */
+export const blogTileData = [
+  {
+    title: 'Saxenda 101',
+    description:
+      'What is Saxenda? Everything you need to know about this weight loss injection.',
+    image: saxendaPenOpen,
+    date: 1680749845000,
+  },
+];
