@@ -10,8 +10,8 @@ export default function Thumbnail(props) {
   });
 
   return (
-    <div className="relative flex aspect-video w-1/4 flex-col rounded">
-      <div className="absolute h-full w-full">
+    <div className="relative flex aspect-video w-1/4 flex-col">
+      <div className="absolute h-full w-full overflow-hidden rounded">
         <Image
           src={image}
           alt="A thumbnail image relating to the blog article."
