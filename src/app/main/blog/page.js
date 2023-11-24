@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import Button from '@/components/button';
-import Thumbnail from './thumbnail';
+import Tile from './tile';
 import doctor from '/public/images/cartoon-doctor.jpg';
 import saxendaPenOpen from '/public/images/blog/saxenda-pen-open.jpg';
 
-const thumbnailData = {
+const tileData = {
   title: 'Saxenda 101',
   description:
     'What is Saxenda? Everything you need to know about this weight loss injection.',
@@ -46,7 +46,7 @@ export default function Blog() {
         </div>
       </section>
       <section>
-        <Thumbnail data={thumbnailData} />
+        <Tile data={tileData} />
       </section>
     </main>
   );

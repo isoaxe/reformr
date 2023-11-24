@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 /* This is the tile that represents an blog post. Article opened when clicked. */
-export default function Thumbnail(props) {
+export default function Tile(props) {
   const { title, description, image, date } = props.data;
   const formattedDate = new Date(date).toLocaleDateString('en-US', {
     month: 'long',
