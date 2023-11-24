@@ -212,23 +212,27 @@ export const blogTileData = [
       'What is Saxenda? Everything you need to know about this weight loss injection.',
     image: saxendaPenOpen,
     date: 1680749845000,
+    slug: 'saxenda-101',
   },
   {
     title: 'Tips for injecting your first dose of Saxenda',
     description: "Administering your medicine doesn't have to be scary.",
     image: saxendaPenClosed,
     date: 1679713045000,
+    slug: 'tips-for-injecting',
   },
   {
     title: 'Ozempic 101',
     description: '',
     image: ozempicPenOpen,
     date: 1679367445000,
+    slug: 'ozempic-101',
   },
   {
     title: 'Breaking down the fear factor of Saxenda injections',
     description: '',
     image: saxendaNeedleCoin,
     date: 1679281045000,
+    slug: 'fear-of-injections',
   },
 ];
