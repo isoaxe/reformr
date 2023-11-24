@@ -10,13 +10,13 @@ export default function Thumbnail(props) {
   });
 
   return (
-    <div className="relative flex aspect-video w-1/4 flex-col hover:cursor-pointer">
+    <div className="group relative flex aspect-video w-1/4 flex-col transition hover:scale-[.98] hover:cursor-pointer">
       <div className="absolute h-full w-full overflow-hidden rounded">
         <Image
           src={image}
           alt="A thumbnail image relating to the blog article."
           fill
-          className="z-0 object-cover"
+          className="z-0 object-cover transition-all group-hover:scale-[1.15]"
           sizes="100vw"
         />
         <div className="absolute h-full w-full bg-gradient-to-b from-transparent to-zinc-600 md:border-none"></div>
