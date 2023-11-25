@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
 import saxendaPenClosed from '/public/images/blog/saxenda-pen-closed.jpg';
+import scaleStudyArticle from '/public/images/blog/scale-study-article.png';
 
 export default function Saxenda101() {
   const { date } = blogTileData[0];
@@ -21,7 +22,7 @@ export default function Saxenda101() {
             alt="A Saxenda pen with the lid on."
             fill
             className="z-0 object-cover"
-            sizes="100vw"
+            sizes="(max-width: 767px) 100vw, 50vw"
           />
         </div>
         <div className="my-auto mt-5 flex h-full flex-col md:ml-5 md:mt-0">
@@ -136,6 +137,13 @@ export default function Saxenda101() {
         The results of this study were published in the prestigious publication
         New England Journal of Medicine (NEJM).
       </p>
+      <div className="relative w-full">
+        <Image
+          src={scaleStudyArticle}
+          alt="The medical study document relating to Saxenda."
+          sizes="100vw"
+        />
+      </div>
     </main>
   );
 }
