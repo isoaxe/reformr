@@ -43,6 +43,31 @@ export default function Saxenda101() {
           haloShade="light"
         />
       </div>
+      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+        What actually is Saxenda?
+      </h2>
+      <p className="my-8">
+        <a href="https://www.saxenda.com" className="text-sky-700 underline">
+          Saxenda
+        </a>{' '}
+        is a once-daily injectable Glucagon-Like Peptide-1 Receptor Agonist, or
+        GLP-1 for short.
+      </p>
+      <p>
+        GLP-1s are a class of medications that first hit the market in 2005, and
+        now there are a number of GLP-1 medications on the market, including{' '}
+        <a href="https://www.ozempic.com" className="text-sky-700 underline">
+          Ozempic
+        </a>
+        ,{' '}
+        <a href="https://www.trulicity.com" className="text-sky-700 underline">
+          Trulicity
+        </a>
+        , and Saxenda. GLP-1’s were initially and still are being used for
+        managing Type 2 Diabetes. Interestingly, it was found that all these
+        people with diabetes were not only succeeding with better blood sugar
+        control, but they were also losing weight.
+      </p>
     </main>
   );
 }
