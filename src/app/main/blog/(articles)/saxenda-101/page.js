@@ -7,13 +7,13 @@ export default function Saxenda101() {
   const { date } = blogTileData[0];
 
   return (
-    <main className="flex flex-col items-center">
+    <main className="mx-5 flex flex-col items-center md:mx-10">
       <p className="text:lg py-8 sm:text-xl md:py-16">
         {date} | Written by Luke Perry
       </p>
       <h1 className="mb-8 text-5xl font-semibold md:text-6xl">Saxenda 101</h1>
       <div className="mb-8 flex w-full flex-col md:mb-16 md:flex-row">
-        <div className="relative mx-5 aspect-video md:mx-10 md:w-1/2">
+        <div className="relative aspect-video md:w-1/2">
           <Image
             src={saxendaPenClosed}
             alt="A Saxenda pen with the lid on."
@@ -22,7 +22,7 @@ export default function Saxenda101() {
             sizes="100vw"
           />
         </div>
-        <div className="my-auto ml-5 mt-5 flex h-full flex-col text-xl md:ml-0 md:mr-5 lg:text-2xl xl:text-3xl">
+        <div className="my-auto mt-5 flex h-full flex-col text-xl md:ml-5 md:mt-0 lg:text-2xl xl:text-3xl">
           <p>What is Saxenda?</p>
           <p className="my-3 lg:my-6 xl:my-8">
             Perhaps you’ve heard about it in the media?
