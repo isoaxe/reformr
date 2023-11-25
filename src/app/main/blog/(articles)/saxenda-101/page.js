@@ -68,6 +68,74 @@ export default function Saxenda101() {
         people with diabetes were not only succeeding with better blood sugar
         control, but they were also losing weight.
       </p>
+      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+        How does Saxenda work?
+      </h2>
+      <p className="mt-8">
+        GLP-1 is a hormone that is naturally created by the body. When Saxenda
+        is used, we essentially increase the amount of GLP-1 hormone that is in
+        the body in order to boost the effects of what GLP-1 does in the body.
+        Very broadly, GLP-1 reduces blood sugars and acts in the brain to reduce
+        your craving of food and your food-seeking behaviours. This in turn,
+        helps us to manage our weight.
+      </p>
+      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+        Does Saxenda have side effects?
+      </h2>
+      <p className="my-8">
+        Saxenda is safe, but like all medications, there are common side effects
+        that one might encounter. The most common are: nausea, vomiting,
+        diarrhoea or constipation. For managing these, check out our other
+        articles- link.
+      </p>
+      <p className="mb-8">
+        There are less common side effects to be aware of and look out for.
+        These include: low blood sugar, pancreatitis, gallbladder problems,
+        thyroid problems, kidney impairment, depression & suicidal thoughts.
+      </p>
+      <p>
+        Anyone taking these medications should speak with their doctor to ensure
+        the treatment is correct for you.
+      </p>
+      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+        How is Saxenda administered?
+      </h2>
+      <p className="mt-8">
+        The injection can be placed under the skin in various locations. Often,
+        people choose the waist, thigh or upper arm.
+      </p>
+      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+        Why all the excitement?
+      </h2>
+      <p className="my-8">
+        <a
+          href="https://www.nejm.org/doi/full/10.1056/nejmoa1411892"
+          className="text-sky-700 underline"
+        >
+          The SCALE Study
+        </a>{' '}
+        was a large double-blind, randomised controlled study that looked at the
+        evidence for Saxenda in weight loss in individuals with Obesity.
+      </p>
+      <p>
+        All patients received counselling on lifestyle modifications which
+        included following a diet that was 500 calories less than they burnt
+        each day.
+      </p>
+      <p className="my-8">
+        Amazingly, the group that took Saxenda lost weight and kept the weight
+        off over the year long study. Staggeringly, they lost, on average, 8% of
+        their total body weight!
+      </p>
+      <p>
+        And if it couldn’t get any better, participants also experienced
+        reductions in blood sugars, lipids (cholesterol), insulin resistance,
+        and blood pressure. All key factors in overall health!{' '}
+      </p>
+      <p className="my-8">
+        The results of this study were published in the prestigious publication
+        New England Journal of Medicine (NEJM).
+      </p>
     </main>
   );
 }
