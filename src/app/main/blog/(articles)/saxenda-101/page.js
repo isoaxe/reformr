@@ -7,11 +7,13 @@ export default function Saxenda101() {
   const { date } = blogTileData[0];
 
   return (
-    <main className="mx-5 flex flex-col items-center md:mx-10">
-      <p className="text:lg py-8 sm:text-xl md:py-16">
+    <main className="mx-auto flex max-w-7xl flex-col px-5 text-xl md:px-10 lg:text-2xl">
+      <p className="text:lg py-8 text-center sm:text-xl md:py-16">
         {date} | Written by Luke Perry
       </p>
-      <h1 className="mb-8 text-5xl font-semibold md:text-6xl">Saxenda 101</h1>
+      <h1 className="mb-8 text-center text-5xl font-semibold md:mb-16 md:text-6xl">
+        Saxenda 101
+      </h1>
       <div className="mb-8 flex w-full flex-col md:mb-16 md:flex-row">
         <div className="relative aspect-video md:w-1/2">
           <Image
@@ -22,7 +24,7 @@ export default function Saxenda101() {
             sizes="100vw"
           />
         </div>
-        <div className="my-auto mt-5 flex h-full flex-col text-xl md:ml-5 md:mt-0 lg:text-2xl xl:text-3xl">
+        <div className="my-auto mt-5 flex h-full flex-col md:ml-5 md:mt-0">
           <p>What is Saxenda?</p>
           <p className="my-3 lg:my-6 xl:my-8">
             Perhaps you’ve heard about it in the media?
@@ -34,11 +36,13 @@ export default function Saxenda101() {
           <p>So, lets get into it.</p>
         </div>
       </div>
-      <Button
-        text="Find out if you're eligible"
-        link="/signup/screening"
-        haloShade="light"
-      />
+      <div className="text-center">
+        <Button
+          text="Find out if you're eligible"
+          link="/signup/screening"
+          haloShade="light"
+        />
+      </div>
     </main>
   );
 }
