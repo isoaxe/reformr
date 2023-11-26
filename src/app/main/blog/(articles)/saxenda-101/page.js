@@ -255,11 +255,7 @@ export default function Saxenda101() {
         to find out today.
       </p>
       <div className="my-12 text-center">
-        <Button
-          text="Get Started!"
-          link="/signup/screening"
-          haloShade="light"
-        />
+        <Button text="Get Started!" link="/signup/screening" haloShade="dark" />
       </div>
     </main>
   );

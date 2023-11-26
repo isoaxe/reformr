@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
 import penClosed from '/public/images/blog/tiles/saxenda-pen-closed.jpg';
 import penClosed2 from '/public/images/blog/posts/12/saxenda-pen-closed-2.png';
@@ -187,6 +188,51 @@ export default function TipsForInjecting() {
             sizes="(max-width: 767px) 100vw, 50vw"
           />
         </div>
+      </div>
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
+        How can a friend help me to administer Saxenda?
+      </h2>
+      <p className="mt-8">
+        Incorporating friends and family into your weight loss journey has been
+        shown to increase the likelihood of success, and if you’re feeling
+        apprehensive about your first Saxenda injection, consider having a
+        trusted loved one accompany you. Having a friendly and supportive
+        presence nearby is a powerful way to alleviate nerves and worry.
+        Additionally, you could print out the injection steps and have your
+        friend prompt you as you become more accustomed to the process. However,
+        it is essential to ensure that your Saxenda, needles, and sharps box are
+        always kept out of sight and reach of children.
+      </p>
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
+        How should I store Saxenda?
+      </h2>
+      <p className="my-8">
+        Saxenda is best kept in the refrigerator until you are using a pen. Once
+        a pen is in use, it may be stored at room temperature (below 30 degrees
+        Celsius) until it is fully used. While it is safe to use Saxenda
+        straight from the fridge, we recommend avoiding it, as doing so may
+        result in a more uncomfortable stinging sensation due to the difference
+        in temperature between the medication and your body. To avoid this
+        discomfort, we recommend you wait for the medication to reach room
+        temperature before administering it.
+      </p>
+      <p>
+        If you live in New Zealand and you’re interested in discovering how{' '}
+        <a href="https://reformr.co.nz" className="text-sky-700 underline">
+          Reformr
+        </a>{' '}
+        can assist you in your weight-loss journey, start by{' '}
+        <a href="/signup/screening" className="text-sky-700 underline">
+          taking our free quiz
+        </a>
+        .
+      </p>
+      <div className="my-12 text-center">
+        <Button
+          text="Take Our Quiz"
+          link="/signup/screening"
+          haloShade="dark"
+        />
       </div>
     </main>
   );
