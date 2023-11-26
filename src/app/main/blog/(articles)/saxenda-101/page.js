@@ -3,6 +3,7 @@ import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
 import saxendaPenClosed from '/public/images/blog/saxenda-pen-closed.jpg';
 import scaleStudyArticle from '/public/images/blog/scale-study-article.png';
+import weightLossGraph from '/public/images/blog/weight-loss-graph.png';
 
 export default function Saxenda101() {
   const { date } = blogTileData[0];
@@ -199,6 +200,36 @@ export default function Saxenda101() {
         In general, a diet that is low in unhealthy fats and sugars and
         processed foods is recommended. Instead a diet with plenty of grains,
         fresh fruits and vegetables is best.
+      </p>
+      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+        How long until I see results?
+      </h2>
+      <div className="my-12 flex w-full flex-col items-center md:flex-row">
+        <div className="relative aspect-video md:w-1/2">
+          <Image
+            src={weightLossGraph}
+            alt="A graph showing weight loss progress against a control over 56 weeks."
+            className="z-0 object-cover"
+            sizes="(max-width: 767px) 100vw, 50vw"
+          />
+        </div>
+        <p className="mt-5 md:mb-10 md:ml-12 md:w-1/2">
+          Typically, patients start to see weight loss within the first couple
+          of weeks. As you can see from{' '}
+          <a
+            href="https://www.nejm.org/doi/full/10.1056/nejmoa1411892"
+            className="text-sky-700 underline"
+          >
+            the SCALE study
+          </a>
+          , weight loss was most pronounced in the first 8 weeks but continued
+          steadily for the duration of the study.
+        </p>
+      </div>
+      <p>
+        Ultimately each person’s situation is unique and by chatting to your
+        doctor you can get a better if idea of what results you can expect to
+        see.
       </p>
     </main>
   );
