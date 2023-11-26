@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
-import saxendaPenClosed from '/public/images/blog/saxenda-pen-closed.jpg';
+import saxendaPenClosed from '/public/images/blog/tiles/saxenda-pen-closed.jpg';
 import scaleStudyArticle from '/public/images/blog/scale-study-article.png';
 import weightLossGraph from '/public/images/blog/weight-loss-graph.png';
 

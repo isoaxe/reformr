@@ -199,10 +199,10 @@ export const manyRangeLabels = {
   ],
 };
 
-import saxendaPenOpen from '/public/images/blog/saxenda-pen-open.jpg';
-import saxendaPenClosed from '/public/images/blog/saxenda-pen-closed.jpg';
-import ozempicPenOpen from '/public/images/blog/ozempic-pen-open.jpg';
-import saxendaNeedleCoin from '/public/images/blog/saxenda-needle-with-coin.jpg';
+import saxendaPenOpen from '/public/images/blog/tiles/saxenda-pen-open.jpg';
+import saxendaPenClosed from '/public/images/blog/tiles/saxenda-pen-closed.jpg';
+import ozempicPenOpen from '/public/images/blog/tiles/ozempic-pen-open.jpg';
+import saxendaNeedleCoin from '/public/images/blog/tiles/saxenda-needle-with-coin.jpg';
 
 /* The article details as appear on the blog page. */
 export const blogTileData = [
