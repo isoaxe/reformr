@@ -1,6 +1,11 @@
 import Image from 'next/image';
 import { blogTileData } from '@/util/data';
-import saxendaPenClosed from '/public/images/blog/posts/12/saxenda-pen-closed-2.png';
+import penClosed from '/public/images/blog/tiles/saxenda-pen-closed.jpg';
+import penClosed2 from '/public/images/blog/posts/12/saxenda-pen-closed-2.png';
+import penOpen from '/public/images/blog/posts/12/saxenda-pen-open-2.jpg';
+import newNeedle from '/public/images/blog/posts/12/saxenda-new-needle.jpg';
+import checkFlow from '/public/images/blog/posts/12/saxenda-check-flow.jpg';
+import selectDose from '/public/images/blog/posts/12/saxenda-select-dose.jpg';
 
 export default function TipsForInjecting() {
   const { date, title } = blogTileData[1];
@@ -15,7 +20,7 @@ export default function TipsForInjecting() {
       </h1>
       <div className="relative my-8 w-full max-w-lg self-center text-center">
         <Image
-          src={saxendaPenClosed}
+          src={penClosed2}
           alt="A Saxenda pen with the lid on."
           className="z-0 object-cover"
           sizes="(max-width: 767px) 100vw, 50vw"
