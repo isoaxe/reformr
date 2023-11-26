@@ -6,7 +6,7 @@ import scaleStudyArticle from '/public/images/blog/scale-study-article.png';
 import weightLossGraph from '/public/images/blog/weight-loss-graph.png';
 
 export default function Saxenda101() {
-  const { date } = blogTileData[0];
+  const { date, title } = blogTileData[0];
 
   return (
     <main className="mx-auto flex max-w-7xl flex-col px-5 text-xl md:px-10 lg:text-2xl">
@@ -14,7 +14,7 @@ export default function Saxenda101() {
         {date} | Written by Luke Perry
       </p>
       <h1 className="mb-8 text-center text-5xl font-semibold md:mb-16 md:text-6xl">
-        Saxenda 101
+        {title}
       </h1>
       <div className="mb-8 flex w-full flex-col md:mb-16 md:flex-row">
         <div className="relative aspect-video md:w-1/2">
