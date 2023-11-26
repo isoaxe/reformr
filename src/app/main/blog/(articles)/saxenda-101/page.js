@@ -144,6 +144,62 @@ export default function Saxenda101() {
           sizes="100vw"
         />
       </div>
+      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+        How much does it cost?
+      </h2>
+      <p className="my-8">
+        Reformr’s metabolic reset program is a comprehensive package that
+        includes medication, doctor & pharmacist support and coaching.
+      </p>
+      <p>The total costs for most patients is close to $16 a day.</p>
+      <p className="mt-8">
+        With the prices of food, especially compared to take-outs, many patients
+        report significant savings from their reduction in appetite.
+      </p>
+      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+        Who can use Saxenda?
+      </h2>
+      <p className="my-8">
+        Eligibility is determined through a consult with your doctor,
+        alternatively{' '}
+        <a href="https://reformr.co.nz" className="text-sky-700 underline">
+          Reformr
+        </a>{' '}
+        offers free online consultations to help discover if Saxenda might be
+        right for you.
+      </p>
+      <p>
+        In essence, anyone who is clinically obese may be able to access this
+        treatment. If you’re overweight and have weight-related medical
+        problems, you may be eligible.
+      </p>
+      <p className="mt-8">
+        Your doctor will ensure there are no other medical conditions or
+        medications you are taking which might impact upon the suitability for
+        Saxenda.
+      </p>
+      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+        How long does the treatment last?
+      </h2>
+      <p className="my-8">
+        Your clinician will keep track of your progress over the first 12 weeks.
+        Treatment continues on if you’ve experienced a five percent weight loss
+        of your initial weight.
+      </p>
+      <p>On average, the programme lasts between nine and twelve months.</p>
+      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+        What role does diet play?
+      </h2>
+      <p className="my-8">
+        Diet as part of an overall healthy lifestyle remains integral to healthy
+        weight loss. Many patients find adherence to a healthy diet easier as a
+        consequence of their reduction in appetite.
+      </p>
+      <p>
+        In general, a diet that is low in unhealthy fats and sugars and
+        processed foods is recommended. Instead a diet with plenty of grains,
+        fresh fruits and vegetables is best.
+      </p>
     </main>
   );
 }
