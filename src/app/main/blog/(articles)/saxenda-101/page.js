@@ -205,7 +205,7 @@ export default function Saxenda101() {
         How long until I see results?
       </h2>
       <div className="my-12 flex w-full flex-col items-center md:flex-row">
-        <div className="relative aspect-video md:w-1/2">
+        <div className="relative mx-5 aspect-video md:w-1/2">
           <Image
             src={weightLossGraph}
             alt="A graph showing weight loss progress against a control over 56 weeks."
@@ -213,7 +213,7 @@ export default function Saxenda101() {
             sizes="(max-width: 767px) 100vw, 50vw"
           />
         </div>
-        <p className="mt-5 md:mb-10 md:ml-12 md:w-1/2">
+        <p className="mt-12 md:mb-10 md:ml-12 md:w-1/2">
           Typically, patients start to see weight loss within the first couple
           of weeks. As you can see from{' '}
           <a
