@@ -78,6 +78,25 @@ export default function TipsForInjecting() {
         into a relaxed position, you are ready to administer your dose of
         Saxenda. Always wash your hands before administering your dose.
       </p>
+      <div className="mb-8 flex w-full flex-col items-center md:flex-row-reverse">
+        <div className="mb-8 md:ml-8 md:mt-0 md:w-1/2">
+          <h3 className="text-2xl font-medium xs:text-3xl md:text-4xl">
+            Prepare Your Pen
+          </h3>
+          <p className="mt-8">
+            1. Check the label to ensure that your pen contains Saxenda. Remove
+            the pen cap.
+          </p>
+        </div>
+        <div className="md:w-1/2">
+          <Image
+            src={penOpen}
+            alt="An open Saxenda pen."
+            className="z-0 object-cover"
+            sizes="(max-width: 767px) 100vw, 50vw"
+          />
+        </div>
+      </div>
     </main>
   );
 }

@@ -205,7 +205,7 @@ export default function Saxenda101() {
         How long until I see results?
       </h2>
       <div className="my-12 flex w-full flex-col items-center md:flex-row">
-        <div className="relative mx-5 aspect-video md:w-1/2">
+        <div className="relative md:w-1/2">
           <Image
             src={weightLossGraph}
             alt="A graph showing weight loss progress against a control over 56 weeks."
