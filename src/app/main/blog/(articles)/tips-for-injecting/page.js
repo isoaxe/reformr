@@ -6,6 +6,7 @@ import penOpen from '/public/images/blog/posts/12/saxenda-pen-open-2.jpg';
 import newNeedle from '/public/images/blog/posts/12/saxenda-new-needle.jpg';
 import checkFlow from '/public/images/blog/posts/12/saxenda-check-flow.jpg';
 import selectDose from '/public/images/blog/posts/12/saxenda-select-dose.jpg';
+import injectionSites from '/public/images/blog/posts/12/injection-sites.jpg';
 
 export default function TipsForInjecting() {
   const { date, title } = blogTileData[1];
@@ -146,6 +147,42 @@ export default function TipsForInjecting() {
           <Image
             src={selectDose}
             alt="A close-up of the Saxenda pen showing current dose."
+            className="z-0 object-cover"
+            sizes="(max-width: 767px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+      <div className="mb-8 flex w-full flex-col items-center md:flex-row-reverse">
+        <div className="mb-8 md:mb-0 md:ml-8 md:mt-0 md:w-1/2">
+          <p className="my-8 font-medium">Inject Your Dose</p>
+          <p>
+            5. Insert the needle into your chosen injection site and press the
+            button on the end of your pen. Hold the pen against your skin until
+            it has ceased clicking and the dose counter has returned to 0.
+          </p>
+        </div>
+        <div className="md:w-1/2">
+          <Image
+            src={injectionSites}
+            alt="Outline of a human body with lines pointing to arm, thigh and abdomen."
+            className="z-0 object-cover"
+            sizes="(max-width: 767px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+      <div className="mb-8 flex w-full flex-col items-center md:flex-row">
+        <div className="mb-8 md:mb-0 md:mr-8 md:mt-0 md:w-1/2">
+          <p className="my-8 font-medium">Remove the needle</p>
+          <p>
+            6. Carefully twist to remove the needle from the pen. Immediately
+            discard the needle into your provided sharps box. Return the cap to
+            the pen.
+          </p>
+        </div>
+        <div className="md:w-1/2">
+          <Image
+            src={penClosed}
+            alt="A closed Saxenda pen."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
           />
