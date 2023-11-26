@@ -2,8 +2,8 @@ import Image from 'next/image';
 import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
 import saxendaPenClosed from '/public/images/blog/tiles/saxenda-pen-closed.jpg';
-import scaleStudyArticle from '/public/images/blog/scale-study-article.png';
-import weightLossGraph from '/public/images/blog/weight-loss-graph.png';
+import scaleStudyArticle from '/public/images/blog/posts/13/scale-study-article.png';
+import weightLossGraph from '/public/images/blog/posts/13/weight-loss-graph.png';
 
 export default function Saxenda101() {
   const { date, title } = blogTileData[0];

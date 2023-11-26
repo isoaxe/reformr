@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { blogTileData } from '@/util/data';
-import saxendaPenClosed from '/public/images/blog/saxenda-pen-closed.png';
+import saxendaPenClosed from '/public/images/blog/posts/12/saxenda-pen-closed-2.png';
 
 export default function TipsForInjecting() {
   const { date, title } = blogTileData[1];
