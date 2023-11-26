@@ -9,11 +9,11 @@ export default function Saxenda101() {
   const { date, title } = blogTileData[0];
 
   return (
-    <main className="mx-auto flex max-w-7xl flex-col px-5 text-xl md:px-10 lg:text-2xl">
+    <main className="mx-auto flex max-w-7xl flex-col px-4 text-xl md:px-10 lg:text-2xl">
       <p className="text:lg py-8 text-center sm:text-xl md:py-16">
         {date} | Written by Luke Perry
       </p>
-      <h1 className="mb-8 text-center text-5xl font-semibold md:mb-16 md:text-6xl">
+      <h1 className="mb-8 text-center text-4xl font-semibold md:mb-16 md:text-6xl xl:text-5xl">
         {title}
       </h1>
       <div className="mb-8 flex w-full flex-col md:mb-16 md:flex-row">
@@ -45,7 +45,7 @@ export default function Saxenda101() {
           haloShade="light"
         />
       </div>
-      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         What actually is Saxenda?
       </h2>
       <p className="my-8">
@@ -70,7 +70,7 @@ export default function Saxenda101() {
         people with diabetes were not only succeeding with better blood sugar
         control, but they were also losing weight.
       </p>
-      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         How does Saxenda work?
       </h2>
       <p className="mt-8">
@@ -81,7 +81,7 @@ export default function Saxenda101() {
         your craving of food and your food-seeking behaviours. This in turn,
         helps us to manage our weight.
       </p>
-      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         Does Saxenda have side effects?
       </h2>
       <p className="my-8">
@@ -99,14 +99,14 @@ export default function Saxenda101() {
         Anyone taking these medications should speak with their doctor to ensure
         the treatment is correct for you.
       </p>
-      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         How is Saxenda administered?
       </h2>
       <p className="mt-8">
         The injection can be placed under the skin in various locations. Often,
         people choose the waist, thigh or upper arm.
       </p>
-      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         Why all the excitement?
       </h2>
       <p className="my-8">
@@ -145,7 +145,7 @@ export default function Saxenda101() {
           sizes="100vw"
         />
       </div>
-      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         How much does it cost?
       </h2>
       <p className="my-8">
@@ -157,7 +157,7 @@ export default function Saxenda101() {
         With the prices of food, especially compared to take-outs, many patients
         report significant savings from their reduction in appetite.
       </p>
-      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         Who can use Saxenda?
       </h2>
       <p className="my-8">
@@ -179,7 +179,7 @@ export default function Saxenda101() {
         medications you are taking which might impact upon the suitability for
         Saxenda.
       </p>
-      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         How long does the treatment last?
       </h2>
       <p className="my-8">
@@ -188,7 +188,7 @@ export default function Saxenda101() {
         of your initial weight.
       </p>
       <p>On average, the programme lasts between nine and twelve months.</p>
-      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         What role does diet play?
       </h2>
       <p className="my-8">
@@ -201,7 +201,7 @@ export default function Saxenda101() {
         processed foods is recommended. Instead a diet with plenty of grains,
         fresh fruits and vegetables is best.
       </p>
-      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         How long until I see results?
       </h2>
       <div className="my-12 flex w-full flex-col items-center md:flex-row">
@@ -231,7 +231,7 @@ export default function Saxenda101() {
         doctor you can get a better if idea of what results you can expect to
         see.
       </p>
-      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         I&apos;m interested! What next?
       </h2>
       <p className="my-8">

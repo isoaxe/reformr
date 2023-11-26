@@ -6,11 +6,11 @@ export default function TipsForInjecting() {
   const { date, title } = blogTileData[1];
 
   return (
-    <main className="mx-auto flex max-w-7xl flex-col px-5 text-xl md:px-10 lg:text-2xl">
+    <main className="mx-auto flex max-w-7xl flex-col px-4 text-xl md:px-10 lg:text-2xl">
       <p className="text:lg py-8 text-center sm:text-xl md:py-16">
         {date} | Written by Greta Perry-Brooks
       </p>
-      <h1 className="mb-8 text-center text-5xl font-semibold md:mb-16 md:text-6xl">
+      <h1 className="mb-8 text-center text-4xl font-semibold xs:text-5xl md:mb-16 md:text-6xl">
         {title}
       </h1>
       <div className="relative my-8 w-full max-w-lg self-center text-center">
@@ -33,7 +33,7 @@ export default function TipsForInjecting() {
         </a>
         .
       </p>
-      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         Where should I inject Saxenda?
       </h2>
       <p className="mt-8">
@@ -48,7 +48,7 @@ export default function TipsForInjecting() {
         switch up locations for your own comfort. If you discover a site that is
         more suitable for you, feel free to continue using it.
       </p>
-      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         How should I position myself?
       </h2>
       <p className="my-8">
@@ -65,7 +65,7 @@ export default function TipsForInjecting() {
         yourself time to calm down before congratulating yourself for
         successfully overcoming a daunting task.
       </p>
-      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         How do I administer Saxenda?
       </h2>
       <p className="my-8">
