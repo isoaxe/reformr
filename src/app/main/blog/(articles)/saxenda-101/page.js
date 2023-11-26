@@ -231,6 +231,36 @@ export default function Saxenda101() {
         doctor you can get a better if idea of what results you can expect to
         see.
       </p>
+      <h2 className="mt-16 text-4xl font-medium md:text-5xl">
+        I&apos;m interested! What next?
+      </h2>
+      <p className="my-8">
+        If you are interested in losing weight, Saxenda may be able to help as
+        part of an programme that focuses on a healthy lifestyle.
+      </p>
+      <p>
+        Saxenda is a safe, effective and evidence-based treatment which is why
+        at{' '}
+        <a href="https://reformr.co.nz" className="text-sky-700 underline">
+          Reformr
+        </a>{' '}
+        we are excited to include it as part of our metabolic reset programme. A
+        company and 100% owned by doctor clinical-scientists.
+      </p>
+      <p className="mt-8">
+        Want to see if you&apos;re eligible?{' '}
+        <a href="/signup/screening" className="text-sky-700 underline">
+          Take our quiz
+        </a>{' '}
+        to find out today.
+      </p>
+      <div className="my-12 text-center">
+        <Button
+          text="Get Started!"
+          link="/signup/screening"
+          haloShade="light"
+        />
+      </div>
     </main>
   );
 }
