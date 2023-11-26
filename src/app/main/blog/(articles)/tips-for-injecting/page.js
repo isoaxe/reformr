@@ -35,7 +35,7 @@ export default function TipsForInjecting() {
       </p>
       <p>
         If you’re after a prescription for Saxenda,{' '}
-        <a href="/signup/screening" className="text-sky-700 underline">
+        <a href="/signup/screening" className="text-sky-700">
           take our eligibility quiz now
         </a>
         .
@@ -44,7 +44,7 @@ export default function TipsForInjecting() {
         Where should I inject Saxenda?
       </h2>
       <p className="mt-8">
-        <a href="https://www.saxenda.com" className="text-sky-700 underline">
+        <a href="https://www.saxenda.com" className="text-sky-700">
           Saxenda
         </a>{' '}
         injections can be administered in the upper arm, abdomen, or front of
@@ -218,11 +218,11 @@ export default function TipsForInjecting() {
       </p>
       <p>
         If you live in New Zealand and you’re interested in discovering how{' '}
-        <a href="https://reformr.co.nz" className="text-sky-700 underline">
+        <a href="https://reformr.co.nz" className="text-sky-700">
           Reformr
         </a>{' '}
         can assist you in your weight-loss journey, start by{' '}
-        <a href="/signup/screening" className="text-sky-700 underline">
+        <a href="/signup/screening" className="text-sky-700">
           taking our free quiz
         </a>
         .

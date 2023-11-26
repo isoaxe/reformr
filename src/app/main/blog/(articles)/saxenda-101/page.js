@@ -49,7 +49,7 @@ export default function Saxenda101() {
         What actually is Saxenda?
       </h2>
       <p className="my-8">
-        <a href="https://www.saxenda.com" className="text-sky-700 underline">
+        <a href="https://www.saxenda.com" className="text-sky-700">
           Saxenda
         </a>{' '}
         is a once-daily injectable Glucagon-Like Peptide-1 Receptor Agonist, or
@@ -58,11 +58,11 @@ export default function Saxenda101() {
       <p>
         GLP-1s are a class of medications that first hit the market in 2005, and
         now there are a number of GLP-1 medications on the market, including{' '}
-        <a href="https://www.ozempic.com" className="text-sky-700 underline">
+        <a href="https://www.ozempic.com" className="text-sky-700">
           Ozempic
         </a>
         ,{' '}
-        <a href="https://www.trulicity.com" className="text-sky-700 underline">
+        <a href="https://www.trulicity.com" className="text-sky-700">
           Trulicity
         </a>
         , and Saxenda. GLP-1’s were initially and still are being used for
@@ -112,7 +112,7 @@ export default function Saxenda101() {
       <p className="my-8">
         <a
           href="https://www.nejm.org/doi/full/10.1056/nejmoa1411892"
-          className="text-sky-700 underline"
+          className="text-sky-700"
         >
           The SCALE Study
         </a>{' '}
@@ -163,7 +163,7 @@ export default function Saxenda101() {
       <p className="my-8">
         Eligibility is determined through a consult with your doctor,
         alternatively{' '}
-        <a href="https://reformr.co.nz" className="text-sky-700 underline">
+        <a href="https://reformr.co.nz" className="text-sky-700">
           Reformr
         </a>{' '}
         offers free online consultations to help discover if Saxenda might be
@@ -218,7 +218,7 @@ export default function Saxenda101() {
           of weeks. As you can see from{' '}
           <a
             href="https://www.nejm.org/doi/full/10.1056/nejmoa1411892"
-            className="text-sky-700 underline"
+            className="text-sky-700"
           >
             the SCALE study
           </a>
@@ -241,7 +241,7 @@ export default function Saxenda101() {
       <p>
         Saxenda is a safe, effective and evidence-based treatment which is why
         at{' '}
-        <a href="https://reformr.co.nz" className="text-sky-700 underline">
+        <a href="https://reformr.co.nz" className="text-sky-700">
           Reformr
         </a>{' '}
         we are excited to include it as part of our metabolic reset programme. A
@@ -249,7 +249,7 @@ export default function Saxenda101() {
       </p>
       <p className="mt-8">
         Want to see if you&apos;re eligible?{' '}
-        <a href="/signup/screening" className="text-sky-700 underline">
+        <a href="/signup/screening" className="text-sky-700">
           Take our quiz
         </a>{' '}
         to find out today.
