@@ -97,6 +97,60 @@ export default function TipsForInjecting() {
           />
         </div>
       </div>
+      <div className="mb-8 flex w-full flex-col items-center md:flex-row">
+        <div className="mb-8 md:mr-8 md:mt-0 md:w-1/2">
+          <p className="mb-8 font-medium">Attach a New Needle</p>
+          <p>
+            2. Remove the paper tab from the needle. Push and turn the needle
+            onto the pen until it is tight. Then remove both needle caps.
+          </p>
+        </div>
+        <div className="md:w-1/2">
+          <Image
+            src={newNeedle}
+            alt="An open Saxenda pen showing needle with cover."
+            className="z-0 object-cover"
+            sizes="(max-width: 767px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+      <div className="mb-8 flex w-full flex-col items-center md:flex-row-reverse">
+        <div className="mb-8 md:mb-0 md:ml-8 md:mt-0 md:w-1/2">
+          <p className="mb-8 font-medium">
+            Check the medicine flow of each new pen
+          </p>
+          <p>3. Turn the dose selector until the flow check symbol shows.</p>
+        </div>
+        <div className="md:w-1/2">
+          <Image
+            src={checkFlow}
+            alt="A close-up of the Saxenda pen showing how to adjust dose."
+            className="z-0 object-cover"
+            sizes="(max-width: 767px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+      <div className="mb-8 flex w-full flex-col items-center md:flex-row">
+        <div className="mb-8 md:mb-0 md:mr-8 md:mt-0 md:w-1/2">
+          <h3 className="text-2xl font-medium xs:text-3xl md:text-4xl">
+            Administer your dose
+          </h3>
+          <p className="my-8 font-medium">Select your dose</p>
+          <p>
+            4. Turn the dose selector until the dose counter displays your dose
+            (shown here with a 0.6mg example dose). If you turn the dose
+            selector past your dose, you can dial it back if needed.
+          </p>
+        </div>
+        <div className="md:w-1/2">
+          <Image
+            src={selectDose}
+            alt="A close-up of the Saxenda pen showing current dose."
+            className="z-0 object-cover"
+            sizes="(max-width: 767px) 100vw, 50vw"
+          />
+        </div>
+      </div>
     </main>
   );
 }
