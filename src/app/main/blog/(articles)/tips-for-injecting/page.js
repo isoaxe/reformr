@@ -13,7 +13,7 @@ export default function TipsForInjecting() {
   const { date, title } = blogTileData[1];
 
   return (
-    <main className="mx-auto flex max-w-7xl flex-col px-4 text-xl md:px-10 lg:text-2xl">
+    <main className="mx-auto flex max-w-lg flex-col px-4 text-xl md:max-w-7xl md:px-10 lg:text-2xl">
       <p className="text:lg py-8 text-center sm:text-xl md:py-16">
         {date} | Written by Greta Perry-Brooks
       </p>
