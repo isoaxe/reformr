@@ -4,7 +4,7 @@ import { blogTileData } from '@/util/data';
 import womanSleeping from '/public/images/blog/tiles/woman-sleeping.jpg';
 import babyYawning from '/public/images/blog/posts/8/baby-yawning.jpg';
 
-export default function TipsForInjecting() {
+export default function SleepingEnough() {
   const { date, title } = blogTileData[5];
 
   return (

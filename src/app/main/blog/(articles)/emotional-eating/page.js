@@ -3,7 +3,7 @@ import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
 import vegBaskets from '/public/images/blog/tiles/baskets-of-veg.jpg';
 
-export default function TipsForInjecting() {
+export default function EmotionalEating() {
   const { date, title } = blogTileData[4];
 
   return (
