@@ -19,7 +19,7 @@ export default function Calendly() {
   return (
     <div
       className="calendly-inline-widget h-[92%]"
-      data-url="https://calendly.com/lucasoconnell/meet-your-doctor"
+      data-url="https://calendly.com/d/yph-zkt-qxv/reformr-videochat-telehealth-appointment"
     />
   );
 }

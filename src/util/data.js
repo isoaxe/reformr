@@ -198,3 +198,41 @@ export const manyRangeLabels = {
     'Exercise',
   ],
 };
+
+import saxendaPenOpen from '/public/images/blog/tiles/saxenda-pen-open.jpg';
+import saxendaPenClosed from '/public/images/blog/tiles/saxenda-pen-closed.jpg';
+import ozempicPenOpen from '/public/images/blog/tiles/ozempic-pen-open.jpg';
+import saxendaNeedleCoin from '/public/images/blog/tiles/saxenda-needle-with-coin.jpg';
+
+/* The article details as appear on the blog page. */
+export const blogTileData = [
+  {
+    title: 'Saxenda 101',
+    description:
+      'What is Saxenda? Everything you need to know about this weight loss injection.',
+    image: saxendaPenOpen,
+    date: 'April 6, 2023',
+    slug: 'saxenda-101',
+  },
+  {
+    title: 'Tips for injecting your first dose of Saxenda',
+    description: "Administering your medicine doesn't have to be scary.",
+    image: saxendaPenClosed,
+    date: 'March 25, 2023',
+    slug: 'tips-for-injecting',
+  },
+  {
+    title: 'Ozempic 101',
+    description: '',
+    image: ozempicPenOpen,
+    date: 'March 21, 2023',
+    slug: 'ozempic-101',
+  },
+  {
+    title: 'Breaking down the fear factor of Saxenda injections',
+    description: '',
+    image: saxendaNeedleCoin,
+    date: 'March 20, 2023',
+    slug: 'fear-of-injections',
+  },
+];
