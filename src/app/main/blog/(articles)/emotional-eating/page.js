@@ -27,7 +27,7 @@ export default function TipsForInjecting() {
         <div className="md:w-1/2">
           <Image
             src={vegBaskets}
-            alt="A close-up of the Saxenda pen showing how to adjust dose."
+            alt="Several baskets of vegatables including carrots, cucumbers and chillis."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
           />
