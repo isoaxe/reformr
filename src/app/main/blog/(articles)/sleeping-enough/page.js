@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
 import womanSleeping from '/public/images/blog/tiles/woman-sleeping.jpg';
+import babyYawning from '/public/images/blog/posts/8/baby-yawning.jpg';
 
 export default function TipsForInjecting() {
   const { date, title } = blogTileData[5];
@@ -73,6 +74,93 @@ export default function TipsForInjecting() {
         sugary or high-calorie foods to give us a quick energy boost, leading to
         weight gain.
       </p>
+      <div className="mt-16 flex w-full flex-col items-center md:flex-row-reverse">
+        <div className="mb-8 md:mb-0 md:ml-8 md:w-1/2">
+          <h3 className="text-2xl font-semibold xs:text-3xl md:text-4xl">
+            5 Tips for Improving Sleep Habits for Weight Loss
+          </h3>
+          <p className="mt-8">
+            Now that we understand the importance of sleep for weight loss, here
+            are some tips on how to improve your sleep habits to promote weight
+            loss:
+          </p>
+        </div>
+        <div className="md:w-1/2">
+          <Image
+            src={babyYawning}
+            alt="A baby wearing a hat and yawning beside a teddy in a bed."
+            className="z-0 object-cover"
+            sizes="(max-width: 767px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+      <h3 className="mt-12 text-2xl font-medium xs:text-3xl md:text-4xl">
+        1. Aim for 7-8 hours of sleep per night
+      </h3>
+      <p className="mt-8">
+        Most adults require 7-8 hours of sleep per night to function optimally.
+        Make sleep a priority by setting a regular bedtime and waking up time,
+        and try to stick to it even on weekends.
+      </p>
+      <h3 className="mt-12 text-2xl font-medium xs:text-3xl md:text-4xl">
+        2. Create a relaxing sleep environment
+      </h3>
+      <p className="mt-8">
+        Create a peaceful sleep environment by keeping your bedroom cool, dark,
+        and quiet. Use comfortable bedding and pillows, and remove any
+        distractions such as TVs or computers.
+      </p>
+      <h3 className="mt-12 text-2xl font-medium xs:text-3xl md:text-4xl">
+        3. Avoid caffeine and alcohol
+      </h3>
+      <p className="mt-8">
+        Avoid consuming caffeine and alcohol before bedtime, as they can disrupt
+        sleep and affect hormone levels.
+      </p>
+      <h3 className="mt-12 text-2xl font-medium xs:text-3xl md:text-4xl">
+        4. Establish a bedtime routine
+      </h3>
+      <p className="mt-8">
+        Establish a relaxing bedtime routine to signal your body that it&apos;s
+        time for sleep. This could include taking a warm bath, reading a book,
+        or listening to calming music.
+      </p>
+      <h3 className="mt-12 text-2xl font-medium xs:text-3xl md:text-4xl">
+        5. Limit screen time before bed
+      </h3>
+      <p className="mt-8">
+        Avoid using electronic devices such as phones or computers before bed,
+        as the blue light can interfere with sleep and disrupt hormone
+        production.
+      </p>
+      <p className="mb-8 mt-16">
+        Getting adequate sleep is crucial for weight loss, as it affects our
+        hormones, metabolism, and appetite. By prioritising sleep and making
+        simple changes to improve sleep habits, we can promote weight loss and
+        improve our overall health and well-being. Remember to aim for 7-8 hours
+        of sleep per night, create a relaxing sleep environment, avoid caffeine
+        and alcohol, establish a bedtime routine, and limit screen time before
+        bed. With these tips, you&apos;ll be on your way to better sleep and
+        better weight loss results.
+      </p>
+      <p>
+        If you’re interested to see if{' '}
+        <a href="https://reformr.co.nz" className="text-sky-700">
+          Reformr
+        </a>
+        ’s metabolic reset programme can help you in your weight loss journey,{' '}
+        <a href="/signup/screening" className="text-sky-700">
+          take our free eligibility quiz
+        </a>
+        .
+      </p>
+      <div className="my-12 text-center">
+        <Button
+          text="See if you're eligible"
+          link="/signup/screening"
+          haloShade="dark"
+        />
+      </div>
     </main>
   );
 }
