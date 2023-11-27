@@ -33,6 +33,46 @@ export default function TipsForInjecting() {
           />
         </div>
       </div>
+      <h2 className="mt-16 text-3xl font-semibold xs:text-4xl md:text-5xl">
+        How Sleep Affects Weight Loss
+      </h2>
+      <p className="mt-8">
+        Sleep plays a crucial role in regulating our hormones, metabolism, and
+        appetite. When we don&apos;t get enough sleep, it can disrupt these
+        processes, leading to changes in our hunger hormones and energy balance,
+        which can ultimately affect our weight. Here are some ways sleep affects
+        weight loss:
+      </p>
+      <h3 className="mt-12 text-2xl font-medium xs:text-3xl md:text-4xl">
+        Hormone regulation
+      </h3>
+      <p className="mt-8">
+        Sleep helps regulate the production of key hormones that play a role in
+        weight loss, including leptin and ghrelin. Leptin is responsible for
+        signaling the brain when we&apos;ve had enough to eat, while ghrelin
+        stimulates hunger. When we don&apos;t get enough sleep, our leptin
+        levels drop, and our ghrelin levels increase, leading to an increase in
+        appetite and a tendency to overeat.
+      </p>
+      <h3 className="mt-12 text-2xl font-medium xs:text-3xl md:text-4xl">
+        Metabolism
+      </h3>
+      <p className="mt-8">
+        Sleep is essential for a healthy metabolism, which is the process by
+        which our bodies convert food into energy. When we don&apos;t get enough
+        sleep, our metabolism slows down, which can make it more difficult to
+        burn calories and lose weight.
+      </p>
+      <h3 className="mt-12 text-2xl font-medium xs:text-3xl md:text-4xl">
+        Energy levels
+      </h3>
+      <p className="mt-8">
+        Lack of sleep can lead to decreased energy levels, making it more
+        challenging to engage in physical activity and burn calories.
+        Additionally, when we&apos;re tired, we&apos;re more likely to reach for
+        sugary or high-calorie foods to give us a quick energy boost, leading to
+        weight gain.
+      </p>
     </main>
   );
 }
