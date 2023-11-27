@@ -203,6 +203,15 @@ import saxendaPenOpen from '/public/images/blog/tiles/saxenda-pen-open.jpg';
 import saxendaPenClosed from '/public/images/blog/tiles/saxenda-pen-closed.jpg';
 import ozempicPenOpen from '/public/images/blog/tiles/ozempic-pen-open.jpg';
 import saxendaNeedleCoin from '/public/images/blog/tiles/saxenda-needle-with-coin.jpg';
+import vegBaskets from '/public/images/blog/tiles/baskets-of-veg.jpg';
+import womanSleeping from '/public/images/blog/tiles/woman-sleeping.jpg';
+import cyclists from '/public/images/blog/tiles/smiling-cyclists.jpg';
+import nutsAndDates from '/public/images/blog/tiles/nuts-and-dates.jpg';
+import sunflowers from '/public/images/blog/tiles/woman-with-sunflowers.jpg';
+import pharmacist from '/public/images/blog/tiles/pharmacist-with-packet.jpg';
+import measuringWaist from '/public/images/blog/tiles/woman-measuring-waist.jpg';
+import tapeAndFork from '/public/images/blog/tiles/tape-measure-with-fork.jpg';
+import spoonWithSugar from '/public/images/blog/tiles/spoon-with-sugar.jpg';
 
 /* The article details as appear on the blog page. */
 export const blogTileData = [
@@ -234,5 +243,69 @@ export const blogTileData = [
     image: saxendaNeedleCoin,
     date: 'March 20, 2023',
     slug: 'fear-of-injections',
+  },
+  {
+    title:
+      '5 Strategies to break free from emotional eating and establish a healthier relationship with food ',
+    description: '',
+    image: vegBaskets,
+    date: 'March 19, 2023',
+    slug: 'emotional-eating',
+  },
+  {
+    title: 'Is sleep the missing link in your weight loss journey?',
+    description: '',
+    image: womanSleeping,
+    date: 'March 18, 2023',
+    slug: 'sleeping-enough',
+  },
+  {
+    title: '10 ways losing weight can change your life',
+    description: '',
+    image: cyclists,
+    date: 'March 17, 2023',
+    slug: 'weight-loss-benefits',
+  },
+  {
+    title: 'Everything you need to know about intermittent fasting',
+    description: '',
+    image: nutsAndDates,
+    date: 'March 16, 2023',
+    slug: 'intermittent-fasting',
+  },
+  {
+    title: 'Unlock the power of incidental exercise',
+    description: '',
+    image: sunflowers,
+    date: 'March 13, 2023',
+    slug: 'incidental-exercise',
+  },
+  {
+    title: 'Emerging weight loss medications',
+    description: '',
+    image: pharmacist,
+    date: 'February 27, 2023',
+    slug: 'emerging-medications',
+  },
+  {
+    title: '8 reasons you’re not losing weight',
+    description: '',
+    image: measuringWaist,
+    date: 'March 12, 2019',
+    slug: 'not-losing-weight',
+  },
+  {
+    title: "Calorie restriction: 5 reasons why you're not losing weight",
+    description: '',
+    image: tapeAndFork,
+    date: 'March 10, 2019',
+    slug: 'calorie-restriction',
+  },
+  {
+    title: 'Can sugar-free drinks help you lose weight?',
+    description: '',
+    image: spoonWithSugar,
+    date: 'March 8, 2019',
+    slug: 'sugar-free-drinks',
   },
 ];
