@@ -30,6 +30,91 @@ export default function IntermittentFasting() {
           />
         </div>
       </div>
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
+        The Science Behind Intermittent Fasting
+      </h2>
+      <p className="my-8">
+        Intermittent fasting works by limiting the time frame in which one
+        consumes food, which can lead to a reduction in overall calorie intake.
+        This can result in weight loss and improvements in metabolic health
+        markers such as blood sugar levels and insulin sensitivity.
+      </p>
+      <p>
+        There are several different types of intermittent fasting, including
+        alternate-day fasting, where one alternates between days of normal
+        eating and days of consuming fewer calories, and time-restricted eating,
+        where one eats during a limited time window each day, typically 8-10
+        hours.
+      </p>
+      <p className="mt-8">
+        During a period of fasting, the body begins to rely on stored energy
+        sources such as fat for fuel instead of glucose. This can result in a
+        state of ketosis, where the body produces ketones, which are a type of
+        molecule that can be used as an energy source for the brain and body.
+      </p>
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
+        4 Potential Benefits of Intermittent Fasting
+      </h2>
+      <h3 className="mt-12 text-2xl font-medium xs:text-3xl md:text-4xl">
+        1. Weight Loss
+      </h3>
+      <p className="mt-8">
+        Intermittent fasting can lead to weight loss due to a reduction in
+        overall calorie intake.{' '}
+        <a
+          href="https://pubmed.ncbi.nlm.nih.gov/28537332"
+          className="text-sky-700"
+        >
+          Studies
+        </a>{' '}
+        have shown that intermittent fasting can be effective just like
+        traditional calorie restriction for weight loss, with{' '}
+        <a
+          href="https://www.ahajournals.org/doi/10.1161/JAHA.122.026484"
+          className="text-sky-700"
+        >
+          some studies
+        </a>{' '}
+        even suggesting that it may be more effective.
+      </p>
+      <h3 className="mt-12 text-2xl font-medium xs:text-3xl md:text-4xl">
+        2. Improved Metabolic Health
+      </h3>
+      <p className="mt-8">
+        Intermittent fasting{' '}
+        <a
+          href="https://www.nia.nih.gov/news/research-intermittent-fasting-shows-health-benefits"
+          className="text-sky-700"
+        >
+          has been shown
+        </a>{' '}
+        to improve blood sugar control and insulin sensitivity, which can help
+        prevent and manage type 2 diabetes. It may also lead to improvements in
+        other markers of metabolic health, such as cholesterol levels and blood
+        pressure.
+      </p>
+      <h3 className="mt-12 text-2xl font-medium xs:text-3xl md:text-4xl">
+        3. Reduced Inflammation
+      </h3>
+      <p className="mt-8">
+        Intermittent fasting has been shown to reduce inflammation in the body,
+        which can be beneficial for a variety of health conditions, including
+        arthritis and autoimmune diseases.
+      </p>
+      <h3 className="mt-12 text-2xl font-medium xs:text-3xl md:text-4xl">
+        4. Longevity
+      </h3>
+      <p className="mt-8">
+        <a
+          href="https://onlinelibrary.wiley.com/doi/full/10.1111/joim.13530"
+          className="text-sky-700"
+        >
+          Some animal studies
+        </a>{' '}
+        have suggested that intermittent fasting may increase lifespan and
+        improve age-related health outcomes, though more research is needed in
+        humans to confirm these findings.
+      </p>
     </main>
   );
 }
