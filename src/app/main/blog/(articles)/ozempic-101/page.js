@@ -14,8 +14,8 @@ export default function Ozempic101() {
       <h1 className="mb-8 text-center text-4xl font-semibold xs:text-5xl md:mb-16 md:text-6xl">
         {title}
       </h1>
-      <div className="mb-8 flex w-full flex-col items-center md:flex-row">
-        <p className="mb-8 md:mb-0 md:mr-8 md:mt-0 md:w-1/2 lg:mr-16">
+      <div className="flex w-full flex-col items-center md:flex-row">
+        <p className="mb-8 text-2xl md:mb-0 md:mr-8 md:mt-0 md:w-1/2 lg:mr-16 lg:text-3xl">
           A Beginner&apos;s Guide to Ozempic (Semaglutide): Understanding its
           Role in Weight Loss Treatment and Administration
         </p>
@@ -83,7 +83,7 @@ export default function Ozempic101() {
       <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         How much weight will I lose?
       </h2>
-      <p className="my-8">
+      <p className="mt-8">
         Research indicates that Ozempic can result in significant weight loss.{' '}
         <a
           href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2796491"
