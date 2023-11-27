@@ -115,6 +115,64 @@ export default function IntermittentFasting() {
         improve age-related health outcomes, though more research is needed in
         humans to confirm these findings.
       </p>
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
+        Considerations When Trying Intermittent Fasting
+      </h2>
+      <p className="my-8">
+        While intermittent fasting can be an effective and healthy approach to
+        eating, there are some considerations to keep in mind when trying this
+        approach.
+      </p>
+      <p>
+        <span className="font-semibold underline">Individual Variability:</span>{' '}
+        Intermittent fasting may not be suitable for everyone, as individual
+        responses to fasting can vary. It is important to consult with a
+        healthcare professional before starting intermittent fasting, especially
+        if you have a history of disordered eating or any medical conditions.
+      </p>
+      <p className="my-8">
+        <span className="font-semibold underline">Hunger and Cravings:</span>{' '}
+        Fasting can lead to feelings of hunger and cravings, which may be
+        challenging to manage, especially in the beginning stages. It is
+        important to listen to your body and eat when you feel hungry to avoid
+        overeating during your feeding periods.
+      </p>
+      <p>
+        <span className="font-semibold underline">Nutrient Deficiencies:</span>{' '}
+        If not done correctly, intermittent fasting can lead to nutrient
+        deficiencies, especially if one is not consuming a balanced diet during
+        their feeding periods. It is important to ensure that you are getting
+        adequate nutrition and consuming a variety of nutrient-dense foods.
+      </p>
+      <p className="my-8">
+        Intermittent fasting is a dietary approach that involves alternating
+        periods of fasting and non-fasting. This approach can lead to weight
+        loss, improved metabolic health, reduced inflammation, and potentially
+        even increased lifespan. However, it is important to consider individual
+        variability, hunger and cravings, and nutrient deficiencies when trying
+        intermittent fasting. Consulting with a healthcare professional and
+        listening to your body can help ensure a safe and effective approach to
+        this eating pattern.
+      </p>
+      <p>
+        If you’re interested to find out if{' '}
+        <a href="https://reformr.co.nz" className="text-sky-700">
+          Reformr
+        </a>
+        ’s metabolic reset programme can help you to achieve, healthy, sustained
+        weight loss,{' '}
+        <a href="/signup/screening" className="text-sky-700">
+          take our eligibility quiz today
+        </a>
+        .
+      </p>
+      <div className="my-12 text-center">
+        <Button
+          text="Find out if you're eligible"
+          link="/signup/screening"
+          haloShade="dark"
+        />
+      </div>
     </main>
   );
 }
