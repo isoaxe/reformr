@@ -81,7 +81,7 @@ export default function TipsForInjecting() {
         Saxenda. Always wash your hands before administering your dose.
       </p>
       <div className="mb-8 flex w-full flex-col items-center md:flex-row-reverse">
-        <div className="mb-8 md:ml-8 md:mt-0 md:w-1/2">
+        <div className="mb-8 md:ml-8 md:w-1/2">
           <h3 className="text-2xl font-medium xs:text-3xl md:text-4xl">
             Prepare Your Pen
           </h3>
@@ -100,7 +100,7 @@ export default function TipsForInjecting() {
         </div>
       </div>
       <div className="mb-8 flex w-full flex-col items-center md:flex-row">
-        <div className="mb-8 md:mr-8 md:mt-0 md:w-1/2">
+        <div className="mb-8 md:mr-8 md:w-1/2">
           <p className="mb-8 font-medium">Attach a New Needle</p>
           <p>
             2. Remove the paper tab from the needle. Push and turn the needle
@@ -117,7 +117,7 @@ export default function TipsForInjecting() {
         </div>
       </div>
       <div className="mb-8 flex w-full flex-col items-center md:flex-row-reverse">
-        <div className="mb-8 md:mb-0 md:ml-8 md:mt-0 md:w-1/2">
+        <div className="mb-8 md:mb-0 md:ml-8 md:w-1/2">
           <p className="mb-8 font-medium">
             Check the medicine flow of each new pen
           </p>
@@ -133,7 +133,7 @@ export default function TipsForInjecting() {
         </div>
       </div>
       <div className="mb-8 flex w-full flex-col items-center md:flex-row">
-        <div className="mb-8 md:mb-0 md:mr-8 md:mt-0 md:w-1/2">
+        <div className="mb-8 md:mb-0 md:mr-8 md:w-1/2">
           <h3 className="text-2xl font-medium xs:text-3xl md:text-4xl">
             Administer your dose
           </h3>
@@ -154,7 +154,7 @@ export default function TipsForInjecting() {
         </div>
       </div>
       <div className="mb-8 flex w-full flex-col items-center md:flex-row-reverse">
-        <div className="mb-8 md:mb-0 md:ml-8 md:mt-0 md:w-1/2">
+        <div className="mb-8 md:mb-0 md:ml-8 md:w-1/2">
           <p className="my-8 font-medium">Inject Your Dose</p>
           <p>
             5. Insert the needle into your chosen injection site and press the
@@ -172,7 +172,7 @@ export default function TipsForInjecting() {
         </div>
       </div>
       <div className="mb-8 flex w-full flex-col items-center md:flex-row">
-        <div className="mb-8 md:mb-0 md:mr-8 md:mt-0 md:w-1/2">
+        <div className="mb-8 md:mb-0 md:mr-8 md:w-1/2">
           <p className="my-8 font-medium">Remove the needle</p>
           <p>
             6. Carefully twist to remove the needle from the pen. Immediately
