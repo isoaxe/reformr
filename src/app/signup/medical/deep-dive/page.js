@@ -17,7 +17,7 @@ export default function DeepDive() {
       </div>
       <div className="flex aspect-square flex-col justify-center sm:w-1/2 sm:px-9">
         <p className="my-6">
-          Let&apos;s dive a bit deeper into your weight loss journey.
+          Let’s dive a bit deeper into your weight loss journey.
         </p>
         <Button text="Continue" link="./wm01-what-motivates-you" />
       </div>

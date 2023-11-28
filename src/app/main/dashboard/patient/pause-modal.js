@@ -35,7 +35,7 @@ export default function PauseModal(props) {
         <p className="mx-8 mb-10 mt-5 text-lg md:text-xl">
           This action pauses your subscription to the Reformr metabolic reset
           program for one month. We will skip your next delivery and resume the
-          following month. You won&apos;t be charged for the skipped delivery.
+          following month. You won’t be charged for the skipped delivery.
         </p>
         <div className="mb-5 flex w-full flex-row justify-around">
           <Button

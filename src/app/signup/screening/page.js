@@ -18,7 +18,7 @@ export default function Screening() {
       <div className="flex aspect-square flex-col justify-center sm:w-1/2 sm:px-9">
         <p>Kia Ora!</p>
         <p className="my-6">
-          Answer a few simple questions to see if you&apos;re eligible for the
+          Answer a few simple questions to see if you’re eligible for the
           <span className="font-semibold"> Metabolic Reset Program.</span>
         </p>
         <Button text="Start" link="./screening/ws01-accept-terms" />

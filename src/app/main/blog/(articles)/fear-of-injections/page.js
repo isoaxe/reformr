@@ -12,7 +12,7 @@ export default function FearOfInjections() {
         {date} | Written by Benji
       </p>
       <h1 className="mb-8 text-center text-4xl font-semibold xs:text-5xl md:mb-16 md:text-6xl">
-        {title}: why It&apos;s not as scary as you think
+        {title}: why It’s not as scary as you think
       </h1>
       <div className="flex w-full flex-col items-center md:flex-row-reverse">
         <p className="mb-8 md:ml-12 md:w-1/2">

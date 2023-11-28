@@ -17,9 +17,9 @@ export default function IncidentalExercise() {
           Calorie restriction is a common method used for weight loss. However,
           many people find themselves hitting a plateau where they no longer see
           results, despite continuing to restrict their calorie intake. If
-          you&apos;re in this situation, it can be frustrating and discouraging.
-          In this article, we will explore five reasons why calorie restriction
-          may not be working for your weight loss goals.
+          you’re in this situation, it can be frustrating and discouraging. In
+          this article, we will explore five reasons why calorie restriction may
+          not be working for your weight loss goals.
         </p>
         <div className="md:w-1/2">
           <Image

@@ -16,9 +16,9 @@ export default function IncidentalExercise() {
       </h1>
       <div className="flex w-full flex-col items-center md:flex-row-reverse">
         <p className="mb-8 md:ml-8 md:w-1/2">
-          In today&apos;s sedentary lifestyle, where we spend most of our day
-          sitting in front of screens, incorporating exercise into our daily
-          routine has become more critical than ever.
+          In today’s sedentary lifestyle, where we spend most of our day sitting
+          in front of screens, incorporating exercise into our daily routine has
+          become more critical than ever.
         </p>
         <div className="md:w-1/2">
           <Image
@@ -171,10 +171,10 @@ export default function IncidentalExercise() {
         activity levels and improve overall health.
       </p>
       <p className="mb-8 mt-16">
-        Starting an exercise routine can be challenging, and it&apos;s essential
-        to be kind to yourself. Don&apos;t beat yourself up if you miss a
-        workout or if it takes longer than expected to see progress. Celebrate
-        the small victories and remember that any exercise is better than none.
+        Starting an exercise routine can be challenging, and it’s essential to
+        be kind to yourself. Don’t beat yourself up if you miss a workout or if
+        it takes longer than expected to see progress. Celebrate the small
+        victories and remember that any exercise is better than none.
       </p>
       <p>
         If you are looking for innovative ways to augment your weight loss

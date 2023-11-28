@@ -17,12 +17,12 @@ export default function SleepingEnough() {
       <div className="flex w-full flex-col items-center md:flex-row-reverse">
         <p className="mb-8 md:mb-0 md:ml-8 md:w-1/2">
           Emotional eating is a common issue that many people struggle with.
-          It&apos;s the act of eating to cope with emotions such as stress,
-          anxiety, boredom, or sadness. Emotional eating can lead to weight
-          gain, guilt, and shame, and can often feel like a never-ending cycle.
-          In this blog post, we&apos;ll explore five strategies for managing
-          emotional eating so you can break free from this harmful cycle and
-          find a healthier relationship with food.
+          It’s the act of eating to cope with emotions such as stress, anxiety,
+          boredom, or sadness. Emotional eating can lead to weight gain, guilt,
+          and shame, and can often feel like a never-ending cycle. In this blog
+          post, we’ll explore five strategies for managing emotional eating so
+          you can break free from this harmful cycle and find a healthier
+          relationship with food.
         </p>
         <div className="md:w-1/2">
           <Image
@@ -38,7 +38,7 @@ export default function SleepingEnough() {
       </h2>
       <p className="mt-8">
         Sleep plays a crucial role in regulating our hormones, metabolism, and
-        appetite. When we don&apos;t get enough sleep, it can disrupt these
+        appetite. When we don’t get enough sleep, it can disrupt these
         processes, leading to changes in our hunger hormones and energy balance,
         which can ultimately affect our weight. Here are some ways sleep affects
         weight loss:
@@ -49,9 +49,9 @@ export default function SleepingEnough() {
       <p className="mt-8">
         Sleep helps regulate the production of key hormones that play a role in
         weight loss, including leptin and ghrelin. Leptin is responsible for
-        signaling the brain when we&apos;ve had enough to eat, while ghrelin
-        stimulates hunger. When we don&apos;t get enough sleep, our leptin
-        levels drop, and our ghrelin levels increase, leading to an increase in
+        signaling the brain when we’ve had enough to eat, while ghrelin
+        stimulates hunger. When we don’t get enough sleep, our leptin levels
+        drop, and our ghrelin levels increase, leading to an increase in
         appetite and a tendency to overeat.
       </p>
       <h3 className="mt-12 text-2xl font-medium xs:text-3xl md:text-4xl">
@@ -59,7 +59,7 @@ export default function SleepingEnough() {
       </h3>
       <p className="mt-8">
         Sleep is essential for a healthy metabolism, which is the process by
-        which our bodies convert food into energy. When we don&apos;t get enough
+        which our bodies convert food into energy. When we don’t get enough
         sleep, our metabolism slows down, which can make it more difficult to
         burn calories and lose weight.
       </p>
@@ -69,9 +69,9 @@ export default function SleepingEnough() {
       <p className="mt-8">
         Lack of sleep can lead to decreased energy levels, making it more
         challenging to engage in physical activity and burn calories.
-        Additionally, when we&apos;re tired, we&apos;re more likely to reach for
-        sugary or high-calorie foods to give us a quick energy boost, leading to
-        weight gain.
+        Additionally, when we’re tired, we’re more likely to reach for sugary or
+        high-calorie foods to give us a quick energy boost, leading to weight
+        gain.
       </p>
       <div className="mt-16 flex w-full flex-col items-center md:flex-row-reverse">
         <div className="mb-8 md:mb-0 md:ml-8 md:w-1/2">
@@ -120,9 +120,9 @@ export default function SleepingEnough() {
         4. Establish a bedtime routine
       </h3>
       <p className="mt-8">
-        Establish a relaxing bedtime routine to signal your body that it&apos;s
-        time for sleep. This could include taking a warm bath, reading a book,
-        or listening to calming music.
+        Establish a relaxing bedtime routine to signal your body that it’s time
+        for sleep. This could include taking a warm bath, reading a book, or
+        listening to calming music.
       </p>
       <h3 className="mt-12 text-2xl font-medium xs:text-3xl md:text-4xl">
         5. Limit screen time before bed
@@ -139,8 +139,8 @@ export default function SleepingEnough() {
         improve our overall health and well-being. Remember to aim for 7-8 hours
         of sleep per night, create a relaxing sleep environment, avoid caffeine
         and alcohol, establish a bedtime routine, and limit screen time before
-        bed. With these tips, you&apos;ll be on your way to better sleep and
-        better weight loss results.
+        bed. With these tips, you’ll be on your way to better sleep and better
+        weight loss results.
       </p>
       <p>
         If you’re interested to see if{' '}

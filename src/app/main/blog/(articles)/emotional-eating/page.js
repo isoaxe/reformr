@@ -16,12 +16,12 @@ export default function EmotionalEating() {
       <div className="flex w-full flex-col items-center md:flex-row-reverse">
         <p className="mb-8 md:mb-0 md:ml-8 md:w-1/2">
           Emotional eating is a common issue that many people struggle with.
-          It&apos;s the act of eating to cope with emotions such as stress,
-          anxiety, boredom, or sadness. Emotional eating can lead to weight
-          gain, guilt, and shame, and can often feel like a never-ending cycle.
-          In this blog post, we&apos;ll explore five strategies for managing
-          emotional eating so you can break free from this harmful cycle and
-          find a healthier relationship with food.
+          It’s the act of eating to cope with emotions such as stress, anxiety,
+          boredom, or sadness. Emotional eating can lead to weight gain, guilt,
+          and shame, and can often feel like a never-ending cycle. In this blog
+          post, we’ll explore five strategies for managing emotional eating so
+          you can break free from this harmful cycle and find a healthier
+          relationship with food.
         </p>
         <div className="md:w-1/2">
           <Image
@@ -50,10 +50,9 @@ export default function EmotionalEating() {
         involves being present and fully engaged in the act of eating, paying
         attention to the colors, textures, and tastes of the food. When you eat
         mindfully, you become more aware of your hunger and fullness cues,
-        making it easier to stop eating when you&apos;re satisfied.
-        Additionally, practicing mindfulness in other areas of your life, such
-        as through meditation or yoga, can help you manage your emotions and
-        reduce stress.
+        making it easier to stop eating when you’re satisfied. Additionally,
+        practicing mindfulness in other areas of your life, such as through
+        meditation or yoga, can help you manage your emotions and reduce stress.
       </p>
       <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         3. Find Other Ways to Cope
@@ -61,20 +60,20 @@ export default function EmotionalEating() {
       <p className="mt-8">
         One of the most effective ways to manage emotional eating is to find
         alternative coping mechanisms. For example, instead of reaching for a
-        bag of chips when you&apos;re feeling stressed, try going for a walk,
-        calling a friend, or practicing deep breathing exercises. By finding
-        healthier ways to cope with your emotions, you&apos;ll be less likely to
-        turn to food for comfort.
+        bag of chips when you’re feeling stressed, try going for a walk, calling
+        a friend, or practicing deep breathing exercises. By finding healthier
+        ways to cope with your emotions, you’ll be less likely to turn to food
+        for comfort.
       </p>
       <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         4. Plan Ahead
       </h2>
       <p className="mt-8">
         Another strategy for managing emotional eating is to plan ahead. If you
-        know you tend to overeat when you&apos;re feeling anxious or bored, make
-        sure to have healthy snacks on hand, such as fruit, vegetables, or nuts.
-        By having healthy options readily available, you&apos;ll be less likely
-        to reach for junk food or sweets.
+        know you tend to overeat when you’re feeling anxious or bored, make sure
+        to have healthy snacks on hand, such as fruit, vegetables, or nuts. By
+        having healthy options readily available, you’ll be less likely to reach
+        for junk food or sweets.
       </p>
       <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         5. Seek Support

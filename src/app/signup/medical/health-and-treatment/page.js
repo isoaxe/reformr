@@ -17,8 +17,8 @@ export default function HealthAndTreatment() {
       </div>
       <div className="flex aspect-square flex-col justify-center sm:w-1/2 sm:px-9">
         <p className="my-6">
-          Next, we&apos;ll ask some questions about your physical and mental
-          health so that our doctors can recommend the
+          Next, we’ll ask some questions about your physical and mental health
+          so that our doctors can recommend the
           <span className="font-semibold"> best treatment possible</span>.
         </p>
         <Button text="Continue" link="./wm13-thyroid-activity" />

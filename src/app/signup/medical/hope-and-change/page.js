@@ -19,7 +19,7 @@ export default function HopeAndChange() {
         <p className="my-6">
           Less than 1% of people with obesity will achieve a normal BMI.
         </p>
-        <p className="mb-8 font-semibold">We&apos;re changing this.</p>
+        <p className="mb-8 font-semibold">We’re changing this.</p>
         <Button text="Continue" link="./wm08-how-healthy" />
       </div>
     </main>
