@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 const TrustBox = () => {
   // Create a reference to the <div> element which will represent the TrustBox
