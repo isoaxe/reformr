@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
 
 export default function IncidentalExercise() {
@@ -36,6 +37,99 @@ export default function IncidentalExercise() {
             sizes="(max-width: 767px) 100vw, 50vw"
           />
         </div>
+      </div>
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
+        What are sugar-free drinks?
+      </h2>
+      <p className="my-8">
+        Sugar-free drinks are beverages that are sweetened with artificial
+        sweeteners instead of sugar. These sweeteners, which include aspartame,
+        sucralose, and stevia, are much lower in calories than sugar, which
+        makes them a popular choice for people who are trying to reduce their
+        sugar intake.
+      </p>
+      <p>
+        Common examples of sugar-free drinks include diet sodas, sugar-free
+        energy drinks, and sugar-free sports drinks.
+      </p>
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
+        How do sugar-free drinks help with weight loss?
+      </h2>
+      <p className="my-8">
+        Sugar-free drinks can help with weight loss in a few different ways. For
+        one, they are lower in calories than their sugary counterparts. For
+        example, a regular can of soda can contain upwards of 150 calories,
+        while a diet soda has virtually no calories.
+      </p>
+      <p>
+        Drinking sugar-free drinks can also help you avoid consuming excess
+        sugar, which can lead to weight gain. When you consume sugar, your body
+        releases insulin to help regulate your blood sugar levels. Over time,
+        consuming too much sugar can lead to insulin resistance, which can make
+        it more difficult for your body to lose weight.
+      </p>
+      <p className="mt-8">
+        Finally, sugar-free drinks can also help you stay hydrated, which is
+        important for weight loss. Drinking enough water can help you feel full,
+        which can help you avoid overeating.
+      </p>
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
+        Are there any downsides to drinking sugar-free drinks?
+      </h2>
+      <p className="my-8">
+        While sugar-free drinks can be a helpful tool for weight loss, they are
+        not without their downsides. For one, some people find that drinking
+        artificial sweeteners can cause them to crave more sugar. This can lead
+        to overeating and weight gain.
+      </p>
+      <p>
+        Additionally,{' '}
+        <a
+          href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4846275/"
+          className="text-sky-700"
+        >
+          some studies
+        </a>{' '}
+        have suggested that consuming artificial sweeteners may be linked to
+        negative health outcomes, such as an increased risk of type 2 diabetes
+        and heart disease. However, more research is needed to fully understand
+        these potential risks.
+      </p>
+      <p className="mt-8">
+        Finally, it’s worth noting that some sugar-free drinks can still be high
+        in calories. For example, some sugar-free energy drinks contain added
+        calories from ingredients like caffeine and amino acids. Be sure to read
+        nutrition labels carefully to avoid inadvertently consuming excess
+        calories.
+      </p>
+      <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
+        The bottom line
+      </h2>
+      <p className="my-8">
+        Sugar-free drinks can be a helpful tool for weight loss, but they should
+        be consumed in moderation. While they can help you reduce your sugar
+        intake and cut calories, it’s important to remember that they are not a
+        magic solution for weight loss. A healthy diet and regular exercise are
+        still the most effective ways to shed pounds and improve your overall
+        health.
+      </p>
+      <p>
+        If you’re interested to find out if{' '}
+        <a href="https://reformr.co.nz" className="text-sky-700">
+          Reformr
+        </a>
+        ’s metabolic reset programme might help augment your weight loss,{' '}
+        <a href="/signup/screening" className="text-sky-700">
+          take our eligibility quiz
+        </a>
+        .
+      </p>
+      <div className="my-12 text-center">
+        <Button
+          text="Find out if you're eligible"
+          link="/signup/screening"
+          haloShade="dark"
+        />
       </div>
     </main>
   );
