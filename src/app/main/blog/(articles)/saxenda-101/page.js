@@ -232,7 +232,7 @@ export default function Saxenda101() {
         see.
       </p>
       <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
-        I&apos;m interested! What next?
+        I’m interested! What next?
       </h2>
       <p className="my-8">
         If you are interested in losing weight, Saxenda may be able to help as
@@ -248,7 +248,7 @@ export default function Saxenda101() {
         company and 100% owned by doctor clinical-scientists.
       </p>
       <p className="mt-8">
-        Want to see if you&apos;re eligible?{' '}
+        Want to see if you’re eligible?{' '}
         <a href="/signup/screening" className="text-sky-700">
           Take our quiz
         </a>{' '}

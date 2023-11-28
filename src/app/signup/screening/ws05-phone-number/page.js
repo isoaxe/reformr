@@ -39,7 +39,7 @@ export default function PhoneNumber() {
   return (
     <main className="mx-auto flex flex-col">
       <p className="mb-8">
-        What&apos;s your <span className="font-semibold">mobile number</span>?
+        What’s your <span className="font-semibold">mobile number</span>?
       </p>
       <MuiTelInput
         value={phone}

@@ -14,8 +14,7 @@ export default function FirstName() {
   return (
     <main className="mx-auto flex flex-col">
       <p className="mb-6">
-        Let&apos;s start with your{' '}
-        <span className="font-semibold">first name</span>.
+        Let’s start with your <span className="font-semibold">first name</span>.
       </p>
       <TextInput text={firstName} setText={setFirstName} />
       <Button

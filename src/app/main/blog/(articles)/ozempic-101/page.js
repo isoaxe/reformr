@@ -16,8 +16,8 @@ export default function Ozempic101() {
       </h1>
       <div className="flex w-full flex-col items-center md:flex-row">
         <p className="mb-8 text-2xl md:mb-0 md:mr-8 md:w-1/2 lg:mr-16 lg:text-3xl">
-          A Beginner&apos;s Guide to Ozempic (Semaglutide): Understanding its
-          Role in Weight Loss Treatment and Administration
+          A Beginner’s Guide to Ozempic (Semaglutide): Understanding its Role in
+          Weight Loss Treatment and Administration
         </p>
         <div className="md:w-1/2">
           <Image

@@ -203,36 +203,95 @@ import saxendaPenOpen from '/public/images/blog/tiles/saxenda-pen-open.jpg';
 import saxendaPenClosed from '/public/images/blog/tiles/saxenda-pen-closed.jpg';
 import ozempicPenOpen from '/public/images/blog/tiles/ozempic-pen-open.jpg';
 import saxendaNeedleCoin from '/public/images/blog/tiles/saxenda-needle-with-coin.jpg';
+import vegBaskets from '/public/images/blog/tiles/baskets-of-veg.jpg';
+import womanSleeping from '/public/images/blog/tiles/woman-sleeping.jpg';
+import cyclists from '/public/images/blog/tiles/smiling-cyclists.jpg';
+import nutsAndDates from '/public/images/blog/tiles/nuts-and-dates.jpg';
+import sunflowers from '/public/images/blog/tiles/woman-with-sunflowers.jpg';
+import pharmacist from '/public/images/blog/tiles/pharmacist-with-packet.jpg';
+import measuringWaist from '/public/images/blog/tiles/woman-measuring-waist.jpg';
+import tapeAndFork from '/public/images/blog/tiles/tape-measure-with-fork.jpg';
+import spoonWithSugar from '/public/images/blog/tiles/spoon-with-sugar.jpg';
 
 /* The article details as appear on the blog page. */
 export const blogTileData = [
   {
     title: 'Saxenda 101',
-    description:
-      'What is Saxenda? Everything you need to know about this weight loss injection.',
     image: saxendaPenOpen,
     date: 'April 6, 2023',
     slug: 'saxenda-101',
   },
   {
     title: 'Tips for injecting your first dose of Saxenda',
-    description: "Administering your medicine doesn't have to be scary.",
     image: saxendaPenClosed,
     date: 'March 25, 2023',
     slug: 'tips-for-injecting',
   },
   {
     title: 'Ozempic 101',
-    description: '',
     image: ozempicPenOpen,
     date: 'March 21, 2023',
     slug: 'ozempic-101',
   },
   {
     title: 'Breaking down the fear factor of Saxenda injections',
-    description: '',
     image: saxendaNeedleCoin,
     date: 'March 20, 2023',
     slug: 'fear-of-injections',
+  },
+  {
+    title:
+      '5 Strategies to break free from emotional eating and establish a healthier relationship with food ',
+    image: vegBaskets,
+    date: 'March 19, 2023',
+    slug: 'emotional-eating',
+  },
+  {
+    title: 'Is sleep the missing link in your weight loss journey?',
+    image: womanSleeping,
+    date: 'March 18, 2023',
+    slug: 'sleeping-enough',
+  },
+  {
+    title: '10 ways losing weight can change your life',
+    image: cyclists,
+    date: 'March 17, 2023',
+    slug: 'weight-loss-benefits',
+  },
+  {
+    title: 'Everything you need to know about intermittent fasting',
+    image: nutsAndDates,
+    date: 'March 16, 2023',
+    slug: 'intermittent-fasting',
+  },
+  {
+    title: 'Unlock the power of incidental exercise',
+    image: sunflowers,
+    date: 'March 13, 2023',
+    slug: 'incidental-exercise',
+  },
+  {
+    title: 'Emerging weight loss medications',
+    image: pharmacist,
+    date: 'February 27, 2023',
+    slug: 'emerging-medications',
+  },
+  {
+    title: '8 reasons you’re not losing weight',
+    image: measuringWaist,
+    date: 'March 12, 2019',
+    slug: 'not-losing-weight',
+  },
+  {
+    title: "Calorie restriction: 5 reasons why you're not losing weight",
+    image: tapeAndFork,
+    date: 'March 10, 2019',
+    slug: 'calorie-restriction',
+  },
+  {
+    title: 'Can sugar-free drinks help you lose weight?',
+    image: spoonWithSugar,
+    date: 'March 8, 2019',
+    slug: 'sugar-free-drinks',
   },
 ];

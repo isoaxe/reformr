@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
-import penClosed from '/public/images/blog/tiles/saxenda-pen-closed.jpg';
-import penClosed2 from '/public/images/blog/posts/12/saxenda-pen-closed-2.png';
+import penClosed from '/public/images/blog/posts/12/saxenda-pen-closed-2.png';
 import penOpen from '/public/images/blog/posts/12/saxenda-pen-open-2.jpg';
 import newNeedle from '/public/images/blog/posts/12/saxenda-new-needle.jpg';
 import checkFlow from '/public/images/blog/posts/12/saxenda-check-flow.jpg';
@@ -10,7 +9,7 @@ import selectDose from '/public/images/blog/posts/12/saxenda-select-dose.jpg';
 import injectionSites from '/public/images/blog/posts/12/injection-sites.jpg';
 
 export default function TipsForInjecting() {
-  const { date, title } = blogTileData[1];
+  const { date, title, image } = blogTileData[1];
 
   return (
     <main className="mx-auto flex max-w-lg flex-col px-4 text-xl md:max-w-7xl md:px-10 lg:text-2xl">
@@ -22,7 +21,7 @@ export default function TipsForInjecting() {
       </h1>
       <div className="relative my-8 w-full max-w-lg self-center text-center">
         <Image
-          src={penClosed2}
+          src={penClosed}
           alt="A Saxenda pen with the lid on."
           className="z-0 object-cover"
           sizes="(max-width: 767px) 100vw, 50vw"
@@ -182,7 +181,7 @@ export default function TipsForInjecting() {
         </div>
         <div className="md:w-1/2">
           <Image
-            src={penClosed}
+            src={image}
             alt="A closed Saxenda pen."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
