@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
-import vegBaskets from '/public/images/blog/tiles/baskets-of-veg.jpg';
 
 export default function EmotionalEating() {
-  const { date, title } = blogTileData[4];
+  const { date, title, image } = blogTileData[4];
 
   return (
     <main className="mx-auto flex max-w-lg flex-col px-4 text-xl md:max-w-7xl md:px-10 lg:text-2xl">
@@ -26,7 +25,7 @@ export default function EmotionalEating() {
         </p>
         <div className="md:w-1/2">
           <Image
-            src={vegBaskets}
+            src={image}
             alt="Several baskets of vegatables including carrots, cucumbers and chillis."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"

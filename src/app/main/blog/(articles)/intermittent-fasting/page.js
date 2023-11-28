@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
-import nutsAndDates from '/public/images/blog/tiles/nuts-and-dates.jpg';
 
 export default function IntermittentFasting() {
-  const { date, title } = blogTileData[7];
+  const { date, title, image } = blogTileData[7];
 
   return (
     <main className="mx-auto flex max-w-lg flex-col px-4 text-xl md:max-w-7xl md:px-10 lg:text-2xl">
@@ -23,7 +22,7 @@ export default function IntermittentFasting() {
         </p>
         <div className="md:w-1/2">
           <Image
-            src={nutsAndDates}
+            src={image}
             alt="A plan view of three small bowls of nuts and dates."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"

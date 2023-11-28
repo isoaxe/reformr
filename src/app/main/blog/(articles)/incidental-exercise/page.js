@@ -1,11 +1,10 @@
 import Image from 'next/image';
 import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
-import sunflower from '/public/images/blog/tiles/woman-with-sunflowers.jpg';
 import exerciseClass from '/public/images/blog/posts/5/exercise-class.jpg';
 
 export default function IncidentalExercise() {
-  const { date, title } = blogTileData[8];
+  const { date, title, image } = blogTileData[8];
 
   return (
     <main className="mx-auto flex max-w-lg flex-col px-4 text-xl md:max-w-7xl md:px-10 lg:text-2xl">
@@ -23,7 +22,7 @@ export default function IncidentalExercise() {
         </p>
         <div className="md:w-1/2">
           <Image
-            src={sunflower}
+            src={image}
             alt="A smiling woman with arms outstretched by a field of sunflowers."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"

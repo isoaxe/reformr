@@ -1,11 +1,10 @@
 import Image from 'next/image';
 import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
-import womanSleeping from '/public/images/blog/tiles/woman-sleeping.jpg';
 import babyYawning from '/public/images/blog/posts/8/baby-yawning.jpg';
 
 export default function SleepingEnough() {
-  const { date, title } = blogTileData[5];
+  const { date, title, image } = blogTileData[5];
 
   return (
     <main className="mx-auto flex max-w-lg flex-col px-4 text-xl md:max-w-7xl md:px-10 lg:text-2xl">
@@ -27,7 +26,7 @@ export default function SleepingEnough() {
         </p>
         <div className="md:w-1/2">
           <Image
-            src={womanSleeping}
+            src={image}
             alt="A woman in full makeup pretending to sleep on a bed."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"

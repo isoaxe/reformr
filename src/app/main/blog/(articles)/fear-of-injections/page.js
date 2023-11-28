@@ -1,11 +1,10 @@
 import Image from 'next/image';
 import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
-import needleCoin1 from '/public/images/blog/tiles/saxenda-needle-with-coin.jpg';
-import needleCoin2 from '/public/images/blog/posts/10/saxenda-needle-with-coin-2.jpg';
+import needleCoin from '/public/images/blog/posts/10/saxenda-needle-with-coin-2.jpg';
 
 export default function FearOfInjections() {
-  const { date, title } = blogTileData[3];
+  const { date, title, image } = blogTileData[3];
 
   return (
     <main className="mx-auto flex max-w-lg flex-col px-4 text-xl md:max-w-7xl md:px-10 lg:text-2xl">
@@ -26,7 +25,7 @@ export default function FearOfInjections() {
         </p>
         <div className="md:w-1/2">
           <Image
-            src={needleCoin2}
+            src={needleCoin}
             alt="A Saxenda pen showing it's tiny needle with a coin for scale"
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
@@ -61,7 +60,7 @@ export default function FearOfInjections() {
         </p>
         <div className="md:w-1/2">
           <Image
-            src={needleCoin1}
+            src={image}
             alt="A Saxenda pen showing it's tiny needle with a coin for scale"
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"

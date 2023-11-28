@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
-import cyclists from '/public/images/blog/tiles/smiling-cyclists.jpg';
 
 export default function WeightLossBenefits() {
-  const { date, title } = blogTileData[6];
+  const { date, title, image } = blogTileData[6];
 
   return (
     <main className="mx-auto flex max-w-lg flex-col px-4 text-xl md:max-w-7xl md:px-10 lg:text-2xl">
@@ -22,7 +21,7 @@ export default function WeightLossBenefits() {
         </p>
         <div className="md:w-1/2">
           <Image
-            src={cyclists}
+            src={image}
             alt="A group of smiling women cycling along a tree-lined road."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
