@@ -3,6 +3,7 @@
 import { AiOutlineInstagram as Instagram } from 'react-icons/ai';
 import Image from 'next/image';
 import Link from 'next/link';
+import TrustBox from '../trustpilot';
 import { INSTAGRAM } from '@/util/urls';
 import logo from 'public/images/text-logo-coloured.png';
 
@@ -20,17 +21,20 @@ export default function Footer() {
               sizes="(max-width: 639px) 16rem, 20rem"
             />
           </div>
-          <a
-            href={INSTAGRAM}
-            aria-label="Instagram"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Instagram
-              size={50}
-              className="fill-slate-700 transition hover:fill-violet-600"
-            />
-          </a>
+          <div className="flex flex-col items-center">
+            <a
+              href={INSTAGRAM}
+              aria-label="Instagram"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Instagram
+                size={50}
+                className="mb-4 fill-slate-700 transition hover:fill-violet-600"
+              />
+            </a>
+            <TrustBox />
+          </div>
         </section>
         <section className="flex flex-col justify-between xs:flex-row md:ml-8 md:justify-start">
           <div className="mr-8 flex flex-col md:mr-12 lg:mr-28">
