@@ -16,10 +16,15 @@ const TrustBox = () => {
     <div
       ref={ref} // We need a reference to this element to load the TrustBox in the effect.
       className="trustpilot-widget" // Renamed this to className.
+      data-locale="en-US"
+      data-template-id="56278e9abfbbba0bdcd568bc"
+      data-businessunit-id="6433b1b7e705ec822175d2c1"
+      data-style-height="52px"
+      data-style-width="100%"
       // [ long list of data attributes...]
     >
       <a
-        href="https://www.trustpilot.com/review/example.com"
+        href="https://www.trustpilot.com/review/reformr.co.nz"
         target="_blank"
         rel="noopener"
       >
