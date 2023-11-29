@@ -14,6 +14,7 @@ export default function PhoneNumber() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [isInvalid, setInvalid] = useState(true);
+  const [isTokenFetched, setTokenFetched] = useState(false);
   const [token, setToken] = useState(null);
   const cookies = useCookies();
 
@@ -35,6 +36,13 @@ export default function PhoneNumber() {
       cookies.set('email', email, { expires: 90, sameSite: 'strict' });
     }
   }, [cookies, token, email]);
+
+  /* Avoids re-challenging the user on page reload. */
+  useEffect(() => {
+    const tokenFromCookie = cookies.get('token');
+    if (tokenFromCookie) setToken(tokenFromCookie);
+    setTokenFetched(true);
+  }, [cookies]);
 
   return (
     <main className="mx-auto flex flex-col">
@@ -62,7 +70,7 @@ export default function PhoneNumber() {
         isDisabled={isInvalid || !token}
         quiz="screening"
       />
-      {email && (
+      {email && isTokenFetched && !token && (
         <Captcha
           firstName={firstName}
           lastName={lastName}
