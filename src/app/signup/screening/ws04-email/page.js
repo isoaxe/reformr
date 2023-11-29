@@ -7,7 +7,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { Button } from '@mui/material';
 import TextInput from '@/components/quiz/text-input';
 import Toast from '@/components/toast';
-import { useCookieState } from '@/util/hooks';
+import { useCookieState, useKeyPress } from '@/util/hooks';
 import { setQuizCookie } from '@/util/helpers';
 import { db } from '@/util/firebase';
 
@@ -16,12 +16,14 @@ export default function Email() {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [isInvalid, setInvalid] = useState(true);
+  const [isLoading, setLoading] = useState(false);
   const [showFailureToast, setShowFailureToast] = useState(false);
   const cookies = useCookies();
   const router = useRouter();
 
   useCookieState('screening', 'email', setEmail);
   useCookieState('screening', 'firstName', setFirstName);
+  useKeyPress(nextPage);
 
   useEffect(() => {
     if (!/\S+@\S+\.\S+/.test(email)) setInvalid(true);
@@ -30,6 +32,7 @@ export default function Email() {
 
   /* Show error toast if account exists already, navigate to next page if not. */
   async function nextPage() {
+    setLoading(true);
     setQuizCookie('screening', { email }, cookies);
     const emailsRef = doc(db, 'emails', email);
     const emailSnap = await getDoc(emailsRef);
@@ -38,6 +41,7 @@ export default function Email() {
       isAccountCreated = emailSnap.data().isAccountCreated;
     if (isAccountCreated) setShowFailureToast(true);
     else router.push('./ws05-phone-number');
+    setLoading(false);
   }
 
   return (
@@ -59,7 +63,7 @@ export default function Email() {
         onClick={nextPage}
         variant="outlined"
         className="w-fit text-lg md:text-xl"
-        disabled={isInvalid}
+        disabled={isInvalid || isLoading}
       >
         Ok
       </Button>

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Button from '@/components/quiz/button';
+import KeyPrompt from '@/components/quiz/key-prompt';
 import womanOnRock from '/public/images/woman-on-rock.jpg';
 
 /* This is the intro to the first of three sections for the medical quiz. */
@@ -20,6 +21,7 @@ export default function DeepDive() {
           Let’s dive a bit deeper into your weight loss journey.
         </p>
         <Button text="Continue" link="./wm01-what-motivates-you" />
+        <KeyPrompt />
       </div>
     </main>
   );

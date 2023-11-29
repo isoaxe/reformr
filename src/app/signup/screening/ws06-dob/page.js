@@ -44,6 +44,7 @@ export default function DateOfBirth() {
       </p>
       <LocalizationProvider dateAdapter={AdapterMoment}>
         <DatePicker
+          autoFocus
           value={birthday}
           onChange={(newValue) => setBirthday(newValue)}
           onError={(err) => setError(err)}

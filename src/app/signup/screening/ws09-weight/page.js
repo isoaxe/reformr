@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@mui/material';
 import NumberInput from '@/components/quiz/number-input';
 import Toast from '@/components/toast';
-import { useCookieState } from '@/util/hooks';
+import { useCookieState, useKeyPress } from '@/util/hooks';
 import { setQuizCookie } from '@/util/helpers';
 
 /* Collect weight of the user in kg as an integer. */
@@ -14,6 +14,7 @@ export default function Weight() {
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [nextPage, setNextPage] = useState('/');
+  const [isLoading, setLoading] = useState(false);
   const [isInvalid, setInvalid] = useState(true);
   const [bmi, setBmi] = useState(null);
   const [showFailure, setShowFailure] = useState(false);
@@ -22,8 +23,10 @@ export default function Weight() {
 
   useCookieState('screening', 'weight', setWeight);
   useCookieState('screening', 'height', setHeight);
+  useKeyPress(saveScreeningData);
 
   async function saveScreeningData() {
+    setLoading(true);
     setQuizCookie('screening', { weight }, cookies);
     const screening = cookies.get('screening');
     const token = cookies.get('token');
@@ -43,6 +46,7 @@ export default function Weight() {
     } catch (err) {
       console.error('Error saving screening data: ', err);
     }
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -77,7 +81,7 @@ export default function Weight() {
         onClick={saveScreeningData}
         variant="outlined"
         className="w-fit text-lg md:text-xl"
-        disabled={isInvalid || !weight} // enabled if weight is 50-500kg
+        disabled={isInvalid || !weight || isLoading} // enabled if weight is 50-500kg
       >
         Ok
       </Button>

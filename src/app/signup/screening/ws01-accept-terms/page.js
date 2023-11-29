@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Button from '@/components/quiz/button';
+import KeyPrompt from '@/components/quiz/key-prompt';
 
 /* Accept Reformr terms and conditions. */
 export default function AcceptTerms() {
@@ -21,6 +22,7 @@ export default function AcceptTerms() {
         .
       </p>
       <Button text="Ok" link="./ws02-first-name" />
+      <KeyPrompt />
     </main>
   );
 }

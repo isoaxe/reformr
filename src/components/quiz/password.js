@@ -5,6 +5,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 export default function Password(props) {
   const { password, setPassword, helperText, setHelperText } = props;
+  const { isFocused = false } = props;
   const [isVisible, setVisible] = useState(false);
 
   /* Display password validation in DOM as user types. */
@@ -17,6 +18,7 @@ export default function Password(props) {
   return (
     <>
       <TextField
+        autoFocus={isFocused}
         id="password-field"
         variant="standard"
         label={
