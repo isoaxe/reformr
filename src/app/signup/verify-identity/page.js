@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { loadStripe } from '@stripe/stripe-js';
 import { Button } from '@mui/material';
-import { useAuth } from '@/util/hooks';
+import { useAuth, useKeyPress } from '@/util/hooks';
 import { STRIPE_PUBLIC_KEY } from '@/util/constants';
 
 const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
@@ -15,8 +15,10 @@ function VerifyButton({ stripePromise }) {
   const { user } = useAuth();
   const router = useRouter();
 
+  useKeyPress(handleClick);
+
   async function handleClick(event) {
-    event.preventDefault();
+    event?.preventDefault();
     setLoading(true);
     const options = {
       method: 'POST',
