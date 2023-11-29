@@ -42,6 +42,7 @@ export default function PhoneNumber() {
         What’s your <span className="font-semibold">mobile number</span>?
       </p>
       <MuiTelInput
+        autoFocus
         value={phone}
         onChange={handleChange}
         placeholder="020 123 4567"

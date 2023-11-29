@@ -6,6 +6,7 @@ export default function TextInput(props) {
 
   return (
     <TextField
+      autoFocus
       variant="standard"
       label={
         <Typography className="text-lg md:text-xl xl:text-2xl">
