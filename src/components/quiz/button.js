@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button as MuiButton } from '@mui/material';
 import { useCookies } from 'next-client-cookies';
@@ -18,6 +19,18 @@ export default function Button(props) {
     setQuizCookie(quiz, state, cookies);
     router.push(link);
   }
+
+  useEffect(() => {
+    const handleKey = (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        handleClick();
+      }
+    };
+
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  });
 
   return (
     <MuiButton
