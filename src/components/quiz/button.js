@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button as MuiButton } from '@mui/material';
 import { useCookies } from 'next-client-cookies';
 import { setQuizCookie } from '@/util/helpers';
+import { useKeyPress } from '@/util/hooks';
 
 /* Material UI button used in the screening and medical quizzes. */
 export default function Button(props) {
@@ -20,17 +21,7 @@ export default function Button(props) {
     router.push(link);
   }, [link, state, cookies, isDisabled, quiz, router]);
 
-  useEffect(() => {
-    const handleKey = (event) => {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        handleClick();
-      }
-    };
-
-    document.addEventListener('keydown', handleKey);
-    return () => document.removeEventListener('keydown', handleKey);
-  }, [handleClick]);
+  useKeyPress(handleClick);
 
   return (
     <MuiButton
