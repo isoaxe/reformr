@@ -4,6 +4,7 @@ export default function Address({ address, setAddress }) {
   return (
     <div className="my-8 w-full">
       <AddressInput
+        isFocused={true}
         label="Street*"
         text={address?.address1}
         setText={(input) => setAddress({ ...address, address1: input })}
