@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useCookies } from 'next-client-cookies';
 import { useRouter } from 'next/navigation';
-import { Button } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import NumberInput from '@/components/quiz/number-input';
 import Toast from '@/components/toast';
 import { useCookieState, useKeyPress } from '@/util/hooks';
@@ -77,14 +77,15 @@ export default function Weight() {
         isError={isInvalid}
         placeholder={'85'}
       />
-      <Button
+      <LoadingButton
         onClick={saveScreeningData}
         variant="outlined"
         className="w-fit text-lg md:text-xl"
-        disabled={isInvalid || !weight || isLoading} // enabled if weight is 50-500kg
+        disabled={isInvalid || !weight} // enabled if weight is 50-500kg
+        loading={isLoading}
       >
         Ok
-      </Button>
+      </LoadingButton>
       <Toast
         message="There was an issue saving data from the screening quiz. Please send us a message via the contact page."
         severity="error"
