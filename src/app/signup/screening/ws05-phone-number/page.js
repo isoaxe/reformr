@@ -14,6 +14,7 @@ export default function PhoneNumber() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [isInvalid, setInvalid] = useState(true);
+  const [isLoading, setLoading] = useState(false);
   const [token, setToken] = useState(null);
   const cookies = useCookies();
 
@@ -60,6 +61,7 @@ export default function PhoneNumber() {
         link="./ws06-dob"
         state={{ phone }}
         isDisabled={isInvalid || !token}
+        isLoading={isLoading}
         quiz="screening"
       />
       {email && (
@@ -68,6 +70,7 @@ export default function PhoneNumber() {
           lastName={lastName}
           email={email}
           setToken={setToken}
+          setLoading={setLoading}
         />
       )}
     </main>
