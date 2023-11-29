@@ -7,7 +7,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { Button } from '@mui/material';
 import TextInput from '@/components/quiz/text-input';
 import Toast from '@/components/toast';
-import { useCookieState } from '@/util/hooks';
+import { useCookieState, useKeyPress } from '@/util/hooks';
 import { setQuizCookie } from '@/util/helpers';
 import { db } from '@/util/firebase';
 
@@ -39,6 +39,8 @@ export default function Email() {
     if (isAccountCreated) setShowFailureToast(true);
     else router.push('./ws05-phone-number');
   }
+
+  useKeyPress(nextPage);
 
   return (
     <main className="mx-auto flex max-w-4xl flex-col">
