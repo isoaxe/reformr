@@ -16,6 +16,7 @@ export default function Email() {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [isInvalid, setInvalid] = useState(true);
+  const [isLoading, setLoading] = useState(false);
   const [showFailureToast, setShowFailureToast] = useState(false);
   const cookies = useCookies();
   const router = useRouter();
@@ -30,6 +31,7 @@ export default function Email() {
 
   /* Show error toast if account exists already, navigate to next page if not. */
   async function nextPage() {
+    setLoading(true);
     setQuizCookie('screening', { email }, cookies);
     const emailsRef = doc(db, 'emails', email);
     const emailSnap = await getDoc(emailsRef);
@@ -38,6 +40,7 @@ export default function Email() {
       isAccountCreated = emailSnap.data().isAccountCreated;
     if (isAccountCreated) setShowFailureToast(true);
     else router.push('./ws05-phone-number');
+    setLoading(false);
   }
 
   useKeyPress(nextPage);
@@ -61,7 +64,7 @@ export default function Email() {
         onClick={nextPage}
         variant="outlined"
         className="w-fit text-lg md:text-xl"
-        disabled={isInvalid}
+        disabled={isInvalid || isLoading}
       >
         Ok
       </Button>
