@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Button from '@/components/quiz/button';
+import KeyPrompt from '@/components/quiz/key-prompt';
 import peaceSign from '/public/images/hand-peace-sign.png';
 
 /* This is just the first intro page of the quiz and doen't contain questions. */
@@ -22,6 +23,7 @@ export default function Screening() {
           <span className="font-semibold"> Metabolic Reset Program.</span>
         </p>
         <Button text="Start" link="./screening/ws01-accept-terms" />
+        <KeyPrompt />
       </div>
     </main>
   );
