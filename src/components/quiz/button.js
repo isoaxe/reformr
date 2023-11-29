@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button as MuiButton } from '@mui/material';
 import { useCookies } from 'next-client-cookies';
@@ -13,12 +13,12 @@ export default function Button(props) {
   const router = useRouter();
 
   /* Sets cookie and navigates to next page if input is valid. */
-  function handleClick() {
+  const handleClick = useCallback(() => {
     if (isDisabled) return; // don't set cookie if button is disabled
 
     setQuizCookie(quiz, state, cookies);
     router.push(link);
-  }
+  }, [link, state, cookies, isDisabled, quiz, router]);
 
   useEffect(() => {
     const handleKey = (event) => {
@@ -30,7 +30,7 @@ export default function Button(props) {
 
     document.addEventListener('keydown', handleKey);
     return () => document.removeEventListener('keydown', handleKey);
-  });
+  }, [handleClick]);
 
   return (
     <MuiButton
