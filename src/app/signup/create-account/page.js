@@ -65,6 +65,7 @@ export default function CreateAccount() {
           setPassword={setPassword}
           helperText={helperText}
           setHelperText={setHelperText}
+          isFocused={true}
         />
         <Button
           variant="outlined"
