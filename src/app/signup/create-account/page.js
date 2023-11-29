@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useCookies } from 'next-client-cookies';
 import { useRouter } from 'next/navigation';
 import { TextField } from '@mui/material';
-import { Button } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import Password from '@/components/quiz/password';
 import Toast from '@/components/toast';
 import { useCookieState, useAuth } from '@/util/hooks';
@@ -67,14 +67,15 @@ export default function CreateAccount() {
           setHelperText={setHelperText}
           isFocused={true}
         />
-        <Button
+        <LoadingButton
           variant="outlined"
           className="mt-16 w-fit text-lg md:text-xl"
           onClick={createPatientAccount}
-          disabled={!password || !!helperText || isLoading}
+          disabled={!password || !!helperText}
+          loading={isLoading}
         >
           Create Account
-        </Button>
+        </LoadingButton>
         <Toast
           message="There was an issue when creating your account. Please try again or send a message via the contact page."
           severity="error"
