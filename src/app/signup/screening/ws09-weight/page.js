@@ -14,6 +14,7 @@ export default function Weight() {
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [nextPage, setNextPage] = useState('/');
+  const [isLoading, setLoading] = useState(false);
   const [isInvalid, setInvalid] = useState(true);
   const [bmi, setBmi] = useState(null);
   const [showFailure, setShowFailure] = useState(false);
@@ -25,6 +26,7 @@ export default function Weight() {
   useKeyPress(saveScreeningData);
 
   async function saveScreeningData() {
+    setLoading(true);
     setQuizCookie('screening', { weight }, cookies);
     const screening = cookies.get('screening');
     const token = cookies.get('token');
@@ -44,6 +46,7 @@ export default function Weight() {
     } catch (err) {
       console.error('Error saving screening data: ', err);
     }
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -78,7 +81,7 @@ export default function Weight() {
         onClick={saveScreeningData}
         variant="outlined"
         className="w-fit text-lg md:text-xl"
-        disabled={isInvalid || !weight} // enabled if weight is 50-500kg
+        disabled={isInvalid || !weight || isLoading} // enabled if weight is 50-500kg
       >
         Ok
       </Button>
