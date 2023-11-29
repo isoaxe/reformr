@@ -82,3 +82,18 @@ export function useAuthProvider() {
     logout,
   };
 }
+
+/* Runs callback function when Enter key is pressed. */
+export function useKeyPress(callback) {
+  useEffect(() => {
+    const handleKey = (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        callback();
+      }
+    };
+
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [callback]);
+}
