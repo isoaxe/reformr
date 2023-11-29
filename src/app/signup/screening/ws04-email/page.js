@@ -23,6 +23,7 @@ export default function Email() {
 
   useCookieState('screening', 'email', setEmail);
   useCookieState('screening', 'firstName', setFirstName);
+  useKeyPress(nextPage);
 
   useEffect(() => {
     if (!/\S+@\S+\.\S+/.test(email)) setInvalid(true);
@@ -42,8 +43,6 @@ export default function Email() {
     else router.push('./ws05-phone-number');
     setLoading(false);
   }
-
-  useKeyPress(nextPage);
 
   return (
     <main className="mx-auto flex max-w-4xl flex-col">

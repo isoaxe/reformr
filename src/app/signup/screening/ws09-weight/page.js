@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@mui/material';
 import NumberInput from '@/components/quiz/number-input';
 import Toast from '@/components/toast';
-import { useCookieState } from '@/util/hooks';
+import { useCookieState, useKeyPress } from '@/util/hooks';
 import { setQuizCookie } from '@/util/helpers';
 
 /* Collect weight of the user in kg as an integer. */
@@ -22,6 +22,7 @@ export default function Weight() {
 
   useCookieState('screening', 'weight', setWeight);
   useCookieState('screening', 'height', setHeight);
+  useKeyPress(saveScreeningData);
 
   async function saveScreeningData() {
     setQuizCookie('screening', { weight }, cookies);

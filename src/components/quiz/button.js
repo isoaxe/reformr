@@ -14,6 +14,8 @@ export default function Button(props) {
   const cookies = useCookies();
   const router = useRouter();
 
+  useKeyPress(handleClick);
+
   /* Sets cookie and navigates to next page if input is valid. */
   function handleClick() {
     if (isDisabled) return; // don't set cookie if button is disabled
@@ -23,8 +25,6 @@ export default function Button(props) {
     router.push(link);
     setLoading(false);
   }
-
-  useKeyPress(handleClick);
 
   return (
     <MuiButton
