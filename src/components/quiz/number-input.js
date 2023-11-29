@@ -14,6 +14,7 @@ export default function NumberInput(props) {
 
   return (
     <TextField
+      autoFocus
       variant="standard"
       placeholder={placeholder}
       value={number}
