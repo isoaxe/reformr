@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useAuth } from '@/util/hooks';
 
 export default function NavLinks({ setOpen }) {
   const pathname = usePathname();
+  const { user } = useAuth();
 
   const close = () => setOpen(false);
 
@@ -39,7 +41,7 @@ export default function NavLinks({ setOpen }) {
       </div>
       <h6 className={pathname === '/main/login' ? active : dormant}>
         <Link href="/main/login" onClick={close}>
-          Login
+          {user ? 'Greetings, ' + user.displayName.split(' ')[0] : 'Login'}
         </Link>
       </h6>
     </div>
