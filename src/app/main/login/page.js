@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { TextField, Typography } from '@mui/material';
+import { TextField, Typography, Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useRouter } from 'next/navigation';
 import { sendPasswordResetEmail } from 'firebase/auth';
@@ -19,7 +19,7 @@ export default function Login() {
   const [isInvalidEmail, setInvalidEmail] = useState(false);
   const [showFailure, setShowFailure] = useState(false); // toast message for login failure
   const [showSuccess, setShowSuccess] = useState(false); // toast message for password reset
-  const { login } = useAuth();
+  const { user, login, logout } = useAuth();
   const router = useRouter();
 
   async function signIn() {
@@ -72,15 +72,25 @@ export default function Login() {
           helperText={helperText}
           setHelperText={setHelperText}
         />
-        <LoadingButton
-          variant="outlined"
-          className="mt-16 w-fit text-lg md:text-xl"
-          onClick={signIn}
-          disabled={!password || !!helperText || isInvalidEmail}
-          loading={isLoading}
-        >
-          Login
-        </LoadingButton>
+        <div className="flex flex-row justify-between">
+          <LoadingButton
+            variant="outlined"
+            className="mt-16 w-fit text-lg md:text-xl"
+            onClick={signIn}
+            disabled={!password || !!helperText || isInvalidEmail}
+            loading={isLoading}
+          >
+            Login
+          </LoadingButton>
+          <Button
+            variant="outlined"
+            className="mt-16 w-fit text-lg md:text-xl"
+            onClick={logout}
+            disabled={!user}
+          >
+            Logout
+          </Button>
+        </div>
         <p
           className="mt-10 w-fit text-sm text-blue-600 hover:cursor-pointer hover:underline sm:text-base"
           onClick={passwordReset}
