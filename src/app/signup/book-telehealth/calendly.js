@@ -10,10 +10,8 @@ export default function Calendly() {
     script.async = true;
     document.body.appendChild(script);
 
-    return () => {
-      /* Clean up the script when the component unmounts. */
-      document.body.removeChild(script);
-    };
+    /* Clean up the script when the component unmounts. */
+    return () => document.body.removeChild(script);
   }, []);
 
   return (
