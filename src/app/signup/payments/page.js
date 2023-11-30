@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useCookies } from 'next-client-cookies';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { CircularProgress } from '@mui/material';
 import PaymentWrapper from './payment-wrapper';
 import { STRIPE_PUBLIC_KEY } from '@/util/constants';
 import { useCookieState } from '@/util/hooks';
@@ -57,7 +58,11 @@ export default function Payments() {
         <Elements stripe={stripePromise} options={options}>
           <PaymentWrapper address={address} />
         </Elements>
-      ) : null}
+      ) : (
+        <div className="mt-24 flex w-full flex-row justify-center">
+          <CircularProgress color="secondary" />
+        </div>
+      )}
     </main>
   );
 }
