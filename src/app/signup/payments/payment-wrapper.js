@@ -7,7 +7,7 @@ import { LoadingButton } from '@mui/lab';
 import Toast from '@/components/toast';
 import { getBaseUrl } from '@/util/helpers';
 import { db } from '@/util/firebase';
-import { useAuth } from '@/util/hooks';
+import { useAuth, useKeyPress } from '@/util/hooks';
 
 export default function PaymentWrapper({ address }) {
   const [message, setMessage] = useState('');
@@ -18,8 +18,10 @@ export default function PaymentWrapper({ address }) {
   const elements = useElements();
   const { user } = useAuth();
 
+  useKeyPress(handleSubmit);
+
   async function handleSubmit(event) {
-    event.preventDefault();
+    event?.preventDefault();
     setLoading(true);
 
     const token = cookies.get('token');
