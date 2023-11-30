@@ -3,7 +3,7 @@ import { PaymentElement } from '@stripe/react-stripe-js';
 import { useStripe, useElements } from '@stripe/react-stripe-js';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useCookies } from 'next-client-cookies';
-import { Button } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import Toast from '@/components/toast';
 import { getBaseUrl } from '@/util/helpers';
 import { db } from '@/util/firebase';
@@ -76,6 +76,7 @@ export default function PaymentWrapper({ address }) {
       elements,
       confirmParams: { return_url: `${baseUrl}/signup/verify-identity` },
     });
+
     /* The code below only executes on error as redirect occurs on success. */
     if (error.type === 'card_error' || error.type === 'validation_error')
       setMessage(error.message);
@@ -87,14 +88,15 @@ export default function PaymentWrapper({ address }) {
   return (
     <section>
       <PaymentElement />
-      <Button
+      <LoadingButton
         onClick={handleSubmit}
         variant="outlined"
         className="mt-4 w-full md:text-lg"
-        disabled={isLoading || !stripe || !elements}
+        disabled={!stripe || !elements}
+        loading={isLoading}
       >
         Submit
-      </Button>
+      </LoadingButton>
       <Toast
         message={message}
         severity="error"
