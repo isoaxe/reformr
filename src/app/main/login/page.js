@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { TextField, Typography, Button } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { useRouter } from 'next/navigation';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import Password from '@/components/quiz/password';
@@ -71,14 +72,15 @@ export default function Login() {
           helperText={helperText}
           setHelperText={setHelperText}
         />
-        <Button
+        <LoadingButton
           variant="outlined"
           className="mt-16 w-fit text-lg md:text-xl"
           onClick={signIn}
-          disabled={!password || !!helperText || isInvalidEmail || isLoading}
+          disabled={!password || !!helperText || isInvalidEmail}
+          loading={isLoading}
         >
           Login
-        </Button>
+        </LoadingButton>
         <p
           className="mt-10 w-fit text-sm text-blue-600 hover:cursor-pointer hover:underline sm:text-base"
           onClick={passwordReset}
