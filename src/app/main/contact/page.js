@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useForm } from '@formspree/react';
-import { TextField, Button, Box } from '@mui/material';
+import { TextField, Box } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { InputLabel, MenuItem, FormControl, Select } from '@mui/material';
 import Toast from '@/components/toast';
 
@@ -109,14 +110,14 @@ export default function Contact() {
             multiline
             rows={6}
           />
-          <Button
+          <LoadingButton
             variant="contained"
             type="submit"
-            disabled={state.submitting}
+            loading={state.submitting}
             className="w-32 bg-blue-600 py-2 hover:bg-blue-500"
           >
             Submit
-          </Button>
+          </LoadingButton>
         </form>
         <Toast
           message="Message sent!"
