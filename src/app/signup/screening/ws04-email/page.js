@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCookies } from 'next-client-cookies';
 import { doc, getDoc } from 'firebase/firestore';
-import { Button } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import TextInput from '@/components/quiz/text-input';
 import Toast from '@/components/toast';
 import { useCookieState, useKeyPress } from '@/util/hooks';
@@ -59,14 +59,15 @@ export default function Email() {
         setText={setEmail}
         isError={isInvalid && !!email}
       />
-      <Button
+      <LoadingButton
         onClick={nextPage}
         variant="outlined"
         className="w-fit text-lg md:text-xl"
-        disabled={isInvalid || isLoading}
+        disabled={isInvalid}
+        loading={isLoading}
       >
         Ok
-      </Button>
+      </LoadingButton>
       <Toast
         message="An account for this email has already been created. Please login or use a different email."
         severity="warning"

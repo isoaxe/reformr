@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { loadStripe } from '@stripe/stripe-js';
-import { Button } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { useAuth, useKeyPress } from '@/util/hooks';
 import { STRIPE_PUBLIC_KEY } from '@/util/constants';
 
@@ -44,15 +44,16 @@ function VerifyButton({ stripePromise }) {
   }, [stripePromise]);
 
   return (
-    <Button
+    <LoadingButton
       role="link"
-      disabled={!stripe || !user || isLoading}
+      disabled={!stripe || !user}
+      loading={isLoading}
       onClick={handleClick}
       variant="outlined"
       className="w-fit text-lg md:text-xl"
     >
       Verify Identity
-    </Button>
+    </LoadingButton>
   );
 }
 

@@ -1,9 +1,11 @@
 import { TextField } from '@mui/material';
 
-export function AddressInput({ text, setText, label, placeholder }) {
+export function AddressInput(props) {
+  const { text, setText, label, placeholder, isFocused = false } = props;
+
   return (
     <TextField
-      autoFocus
+      autoFocus={isFocused}
       variant="standard"
       value={text}
       onChange={(e) => setText(e.target.value)}
