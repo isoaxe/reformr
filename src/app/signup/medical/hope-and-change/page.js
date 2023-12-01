@@ -1,9 +1,15 @@
+'use client';
+
 import Image from 'next/image';
 import Button from '@/components/quiz/button';
+import { useAuth, useRedirectNoUser } from '@/util/hooks';
 import lightbulbInHand from '/public/images/hand-holding-lightbulb.jpg';
 
 /* This is the intro to the second of three sections for the medical quiz. */
 export default function HopeAndChange() {
+  const { user } = useAuth();
+  useRedirectNoUser(user);
+
   return (
     <main className="flex w-full max-w-5xl flex-col sm:flex-row">
       <div className="relative aspect-square sm:w-1/2">

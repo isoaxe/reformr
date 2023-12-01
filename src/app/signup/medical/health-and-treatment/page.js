@@ -1,9 +1,15 @@
+'use client';
+
 import Image from 'next/image';
 import Button from '@/components/quiz/button';
+import { useAuth, useRedirectNoUser } from '@/util/hooks';
 import twoThumbsUp from '/public/images/two-thumbs-up.jpg';
 
 /* This is the intro to the third and last section for the medical quiz. */
 export default function HealthAndTreatment() {
+  const { user } = useAuth();
+  useRedirectNoUser(user);
+
   return (
     <main className="flex w-full max-w-5xl flex-col sm:flex-row">
       <div className="relative aspect-square sm:w-1/2">

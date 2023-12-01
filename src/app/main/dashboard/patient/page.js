@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { doc, getDoc } from 'firebase/firestore';
 import { Button } from '@mui/material';
 import { BsFillPersonFill } from 'react-icons/bs';
@@ -12,7 +11,7 @@ import DropdownItem from '../dropdown-item';
 import CancelModal from './cancel-modal';
 import PauseModal from './pause-modal';
 import { getDocId } from '@/util/helpers';
-import { useAuth } from '@/util/hooks';
+import { useAuth, useRedirectNoUser } from '@/util/hooks';
 import { db } from '@/util/firebase';
 
 export default function PatientDashboard() {
@@ -30,11 +29,11 @@ export default function PatientDashboard() {
   const [isSubCancelled, setSubCancelled] = useState(false);
   const [isSubPaused, setSubPaused] = useState(false);
   const [card, setCard] = useState({});
-  const [isPageLoaded, setPageLoaded] = useState(false);
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
   const [pauseModalOpen, setPauseModalOpen] = useState(false);
-  const router = useRouter();
   const { user, logout } = useAuth();
+
+  useRedirectNoUser(user);
 
   /* Props for patient info section. */
   const patientInfoIcon = <BsFillPersonFill size={30} />;
@@ -187,17 +186,6 @@ export default function PatientDashboard() {
     }
     if (stripeUid) getCardData();
   }, [stripeUid]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setPageLoaded(true); // assume user fetched within a second.
-    }, 1000);
-  }, []);
-
-  useEffect(() => {
-    if (!isPageLoaded) return;
-    if (!user) router.push('/main/login'); // redirect to login if no user.
-  }, [isPageLoaded, user, router]);
 
   return (
     <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-full max-w-3xl flex-col px-4 xs:px-9">

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@mui/material';
 import Patient from '@/components/pharm-patient';
+import Spinner from '@/components/spinner';
 import { auth } from '@/util/firebase';
 import { useAuth } from '@/util/hooks';
 
@@ -59,14 +60,18 @@ export default function PharmacistDashboard() {
         <p className="w-36 pl-6">Last Payment</p>
         <p className="w-32">Tracking Number</p>
       </div>
-      {patients?.map((patient, idx) => (
-        <Patient
-          patient={patient}
-          patients={patients}
-          setPatients={setPatients}
-          key={idx}
-        />
-      ))}
+      {patients.length ? (
+        patients?.map((patient, idx) => (
+          <Patient
+            patient={patient}
+            patients={patients}
+            setPatients={setPatients}
+            key={idx}
+          />
+        ))
+      ) : (
+        <Spinner />
+      )}
       <Button
         variant="outlined"
         className="mx-auto mt-5 w-full max-w-xs text-lg md:text-xl"

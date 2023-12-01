@@ -17,8 +17,9 @@ export default function Login() {
   const [isLoading, setLoading] = useState(false);
   const [helperText, setHelperText] = useState('');
   const [isInvalidEmail, setInvalidEmail] = useState(false);
-  const [showFailure, setShowFailure] = useState(false); // toast message for login failure
-  const [showSuccess, setShowSuccess] = useState(false); // toast message for password reset
+  const [showLoginFailure, setShowLoginFailure] = useState(false); // toast
+  const [showResetSuccess, setShowResetSuccess] = useState(false); // toast
+  const [showResetFailure, setShowResetFailure] = useState(false); // toast
   const { login } = useAuth();
   const router = useRouter();
 
@@ -30,19 +31,19 @@ export default function Login() {
         .getIdTokenResult()
         .then((res) => res.claims.role);
       if (user?.email === ADMIN_EMAIL) router.push('/main/dashboard/admin');
-      else if (role === 'doctor') router.push('/main/dashboard/doctor');
-      else if (role === 'pharmacist') router.push('/main/dashboard/pharmacist');
+      else if (role) router.push(`/main/dashboard/${role}`); // doc or pharm
       else if (user) router.push('/main/dashboard/patient');
     } catch (error) {
       console.log(error);
-      setShowFailure(true);
+      setShowLoginFailure(true);
       setLoading(false);
     }
   }
 
   function passwordReset() {
+    if (isInvalidEmail) return setShowResetFailure(true);
     sendPasswordResetEmail(auth, email);
-    setShowSuccess(true);
+    setShowResetSuccess(true);
   }
 
   useEffect(() => {
@@ -91,15 +92,21 @@ export default function Login() {
       <Toast
         message="There was an error logging in. Please check that your email and password are correct."
         severity="error"
-        open={showFailure}
-        setOpen={setShowFailure}
+        open={showLoginFailure}
+        setOpen={setShowLoginFailure}
         duration={6}
       />
       <Toast
         message="Password reset email sent."
         severity="success"
-        open={showSuccess}
-        setOpen={setShowSuccess}
+        open={showResetSuccess}
+        setOpen={setShowResetSuccess}
+      />
+      <Toast
+        message="Enter valid email to reset password."
+        severity="warning"
+        open={showResetFailure}
+        setOpen={setShowResetFailure}
       />
     </main>
   );
