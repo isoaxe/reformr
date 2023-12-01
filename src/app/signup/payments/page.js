@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { useCookies } from 'next-client-cookies';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { CircularProgress } from '@mui/material';
 import PaymentWrapper from './payment-wrapper';
+import Spinner from '@/components/spinner';
 import { STRIPE_PUBLIC_KEY } from '@/util/constants';
 import { useCookieState } from '@/util/hooks';
 import Address from './address';
@@ -59,9 +59,7 @@ export default function Payments() {
           <PaymentWrapper address={address} />
         </Elements>
       ) : (
-        <div className="mt-24 flex w-full flex-row justify-center">
-          <CircularProgress color="secondary" />
-        </div>
+        <Spinner />
       )}
     </main>
   );
