@@ -42,8 +42,8 @@ export default function NavLinks({ setOpen }) {
     async function getUserType() {
       const tokenRes = await auth.currentUser.getIdTokenResult();
       const role = await tokenRes.claims.role;
-      if (role) setUserType(role);
       if (user.email === ADMIN_EMAIL) setUserType('admin');
+      else if (role) setUserType(role);
       else setUserType('patient');
     }
 
