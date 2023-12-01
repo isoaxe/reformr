@@ -8,6 +8,7 @@ import { auth } from '@/util/firebase';
 import { ADMIN_EMAIL } from '@/util/constants';
 
 export default function NavLinks({ setOpen }) {
+  const [navPath, setNavPath] = useState('/main/login');
   const [navText, setNavText] = useState('Login');
   const [userType, setUserType] = useState('patient');
   const pathname = usePathname();
@@ -23,11 +24,17 @@ export default function NavLinks({ setOpen }) {
     constant;
 
   useEffect(() => {
-    if (!user) return setNavText('Login');
+    if (!user) {
+      setNavText('Login');
+      setNavPath('/main/login');
+      return;
+    }
+
     if (pathname.includes('dashboard'))
       setNavText('Greetings, ' + user.displayName.split(' ')[0]);
     else setNavText('Dashboard');
-  }, [user, pathname]);
+    setNavPath(`/main/dashboard/${userType}`);
+  }, [user, pathname, userType]);
 
   useEffect(() => {
     if (!user) return;
@@ -68,7 +75,7 @@ export default function NavLinks({ setOpen }) {
         </h6>
       </div>
       <h6 className={pathname === '/main/login' ? active : dormant}>
-        <Link href="/main/login" onClick={close}>
+        <Link href={navPath} onClick={close}>
           {navText}
         </Link>
       </h6>
