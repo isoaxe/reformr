@@ -31,8 +31,7 @@ export default function Login() {
         .getIdTokenResult()
         .then((res) => res.claims.role);
       if (user?.email === ADMIN_EMAIL) router.push('/main/dashboard/admin');
-      else if (role === 'doctor') router.push('/main/dashboard/doctor');
-      else if (role === 'pharmacist') router.push('/main/dashboard/pharmacist');
+      else if (role) router.push(`/main/dashboard/${role}`); // doc or pharm
       else if (user) router.push('/main/dashboard/patient');
     } catch (error) {
       console.log(error);
