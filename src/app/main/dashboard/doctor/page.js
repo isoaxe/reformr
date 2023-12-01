@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@mui/material';
 import StatusDropdown from '@/components/status-dropdown';
+import Spinner from '@/components/spinner';
 import { auth } from '@/util/firebase';
 import { useAuth } from '@/util/hooks';
 
@@ -70,9 +71,11 @@ export default function DoctorDashboard() {
         <p className="w-64">Email</p>
         <p>Patient Status</p>
       </div>
-      {patients?.map((patient, idx) => (
-        <Patient patient={patient} key={idx} />
-      ))}
+      {patients.length ? (
+        patients?.map((patient, idx) => <Patient patient={patient} key={idx} />)
+      ) : (
+        <Spinner />
+      )}
       <Button
         variant="outlined"
         className="mx-auto mt-5 w-full max-w-xs text-lg md:text-xl"
