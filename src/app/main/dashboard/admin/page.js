@@ -20,7 +20,7 @@ export default function AdminDashboard() {
   const [isInvalidEmail, setInvalidEmail] = useState(false);
   const [isPageLoaded, setPageLoaded] = useState(false);
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   async function createUser() {
     const name = `${firstName} ${lastName}`;
@@ -132,6 +132,14 @@ export default function AdminDashboard() {
         }
       >
         Create User
+      </Button>
+      <Button
+        variant="outlined"
+        className="mx-auto mb-5 w-full text-lg md:text-xl"
+        onClick={logout}
+        sx={{ mt: 3 }}
+      >
+        Logout
       </Button>
     </main>
   );
