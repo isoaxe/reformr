@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useCookies } from 'next-client-cookies';
+import { useRouter } from 'next/navigation';
 import {
   signInWithEmailAndPassword,
   signOut,
@@ -96,4 +97,21 @@ export function useKeyPress(callback) {
     document.addEventListener('keydown', handleKey);
     return () => document.removeEventListener('keydown', handleKey);
   }, [callback]);
+}
+
+/* Redirect to login if user not detected after state has loaded. */
+export function useRedirectNoUser(user) {
+  const [isPageLoaded, setPageLoaded] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setPageLoaded(true); // assume user fetched within a second.
+    }, 1000);
+  }, []);
+
+  useEffect(() => {
+    if (!isPageLoaded) return;
+    if (!user) router.push('/main/login'); // redirect to login if no user.
+  }, [isPageLoaded, user, router]);
 }
