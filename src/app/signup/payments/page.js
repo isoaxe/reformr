@@ -7,7 +7,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import PaymentWrapper from './payment-wrapper';
 import Spinner from '@/components/spinner';
 import { STRIPE_PUBLIC_KEY } from '@/util/constants';
-import { useCookieState } from '@/util/hooks';
+import { useCookieState, useAuth, useRedirectNoUser } from '@/util/hooks';
 import Address from './address';
 
 const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
@@ -23,9 +23,11 @@ export default function Payments() {
     postcode: '',
   });
   const cookies = useCookies();
+  const { user } = useAuth();
 
   useCookieState('screening', 'firstName', setFirstName);
   useCookieState('screening', 'lastName', setLastName);
+  useRedirectNoUser(user);
 
   useEffect(() => {
     const name = `${firstName} ${lastName}`;
