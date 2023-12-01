@@ -4,9 +4,12 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/util/hooks';
+import { auth } from '@/util/firebase';
+import { ADMIN_EMAIL } from '@/util/constants';
 
 export default function NavLinks({ setOpen }) {
   const [navText, setNavText] = useState('Login');
+  const [userType, setUserType] = useState('patient');
   const pathname = usePathname();
   const { user } = useAuth();
 
@@ -25,6 +28,20 @@ export default function NavLinks({ setOpen }) {
       setNavText('Greetings, ' + user.displayName.split(' ')[0]);
     else setNavText('Dashboard');
   }, [user, pathname]);
+
+  useEffect(() => {
+    if (!user) return;
+
+    async function getUserType() {
+      const tokenRes = await auth.currentUser.getIdTokenResult();
+      const role = await tokenRes.claims.role;
+      if (role) setUserType(role);
+      if (user.email === ADMIN_EMAIL) setUserType('admin');
+      else setUserType('patient');
+    }
+
+    getUserType();
+  }, [user]);
 
   return (
     <div className="flex h-40 w-full flex-col justify-between pb-1 pt-6 text-xl text-white md:h-full md:flex-row">
