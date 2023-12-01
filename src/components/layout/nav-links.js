@@ -74,7 +74,13 @@ export default function NavLinks({ setOpen }) {
           </Link>
         </h6>
       </div>
-      <h6 className={pathname === '/main/login' ? active : dormant}>
+      <h6
+        className={
+          pathname === '/main/login' || pathname.includes('dashboard')
+            ? active
+            : dormant
+        }
+      >
         <Link href={navPath} onClick={close}>
           {navText}
         </Link>
