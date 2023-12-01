@@ -1,8 +1,12 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/util/hooks';
 
 export default function NavLinks({ setOpen }) {
+  const [navText, setNavText] = useState('Login');
   const pathname = usePathname();
   const { user } = useAuth();
 
@@ -14,6 +18,13 @@ export default function NavLinks({ setOpen }) {
   const dormant =
     'font-normal hover:drop-shadow-light md:hover:pb-2 transition-all' +
     constant;
+
+  useEffect(() => {
+    if (!user) return setNavText('Login');
+    if (pathname.includes('dashboard'))
+      setNavText('Greetings, ' + user.displayName.split(' ')[0]);
+    else setNavText('Dashboard');
+  }, [user, pathname]);
 
   return (
     <div className="flex h-40 w-full flex-col justify-between pb-1 pt-6 text-xl text-white md:h-full md:flex-row">
@@ -41,7 +52,7 @@ export default function NavLinks({ setOpen }) {
       </div>
       <h6 className={pathname === '/main/login' ? active : dormant}>
         <Link href="/main/login" onClick={close}>
-          {user ? 'Greetings, ' + user.displayName.split(' ')[0] : 'Login'}
+          {navText}
         </Link>
       </h6>
     </div>
