@@ -43,7 +43,7 @@ export async function POST(request) {
   return NextResponse.json({ success });
 }
 
-/* Change the status of the user. */
+/* Change patient status or order status or order tracking number. */
 export async function PUT(request) {
   const data = await request.json();
   const { email, patientStatus, orderStatus, trackingNumber } = data;
