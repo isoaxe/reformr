@@ -65,7 +65,7 @@ export async function POST(request) {
       const allPaymentData = userData.payments;
       const { payments } = allPaymentData;
 
-      /* Save payments data to Firestore. */
+      /* Update payments data and add new item to array. */
       const payment = {
         product: 'metabolic reset',
         paymentDate,
@@ -78,6 +78,8 @@ export async function POST(request) {
         payments,
         subscription: { isPaused: false },
       };
+
+      /* Save payment and order data to Firestore. */
       await usersPath
         .doc(docId)
         .set(
