@@ -91,14 +91,14 @@ export async function GET() {
       .get();
     const allUsers = [];
     allUserSnapshot.forEach((doc) => {
-      const { screening, patientStatus, orderStatus, payments } = doc.data();
-      const { trackingNumber } = doc.data();
+      const { screening, patientStatus, orders, payments } = doc.data();
+      const { status, trackingNumber } = orders.pop();
       const lastPayment = payments.payments.pop().paymentDate.seconds * 1000;
       const user = {
         name: `${screening.firstName} ${screening.lastName}`,
         email: screening.email,
         patientStatus,
-        orderStatus,
+        orderStatus: status,
         lastPayment,
         trackingNumber,
       };
