@@ -85,6 +85,17 @@ export function getBaseUrl() {
   return baseUrl;
 }
 
+/* Make ordinary sentence into camelCase. */
+export function makeCamelCase(sentence) {
+  const words = sentence.split(' ');
+  const firstWord = words.shift().toLowerCase();
+  const remainingWords = words
+    .map((word) => word[0].toUpperCase() + word.slice(1))
+    .join('');
+  const camelCase = firstWord + remainingWords;
+  return camelCase;
+}
+
 /*
  * Helpers for the helper functions. Only used within helpers.js and not exported.
  */

@@ -5,8 +5,8 @@ import admin from 'firebase-admin';
 import { initialiseAdmin } from '@/util/admin';
 import { getDocId } from './helpers';
 
-/* Get payments data from Firestore. */
-export async function getPaymentsData(customerId) {
+/* Get patient data from Firestore. */
+export async function getUserData(customerId) {
   await initialiseAdmin();
   const db = admin.firestore();
   const usersPath = db.collection('users');
@@ -19,6 +19,5 @@ export async function getPaymentsData(customerId) {
   const userData = userDoc.data();
   const { email } = userData.screening;
   const docId = await getDocId(email);
-  const allPaymentData = userData.payments;
-  return { docId, allPaymentData };
+  return { docId, userData };
 }

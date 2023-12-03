@@ -2,7 +2,7 @@ import admin from 'firebase-admin';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, updateDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
-import { getDocId, validateToken } from '@/util/helpers';
+import { getDocId, validateToken, makeCamelCase } from '@/util/helpers';
 import { initialiseAdmin } from '@/util/admin';
 import { auth, db } from '@/util/firebase';
 
@@ -43,7 +43,7 @@ export async function POST(request) {
   return NextResponse.json({ success });
 }
 
-/* Change the status of the user. */
+/* Change patient status or order status or order tracking number. */
 export async function PUT(request) {
   const data = await request.json();
   const { email, patientStatus, orderStatus, trackingNumber } = data;
@@ -55,11 +55,22 @@ export async function PUT(request) {
     /* Update patient status on Firestore. */
     await initialiseAdmin();
     const db = admin.firestore();
-    const user = db.collection('users').doc(docId);
+    const userRef = db.collection('users').doc(docId);
     /* Only one of these conditionals will run. */
-    if (patientStatus) await user.set({ patientStatus }, { merge: true });
-    if (orderStatus) await user.set({ orderStatus }, { merge: true });
-    if (trackingNumber) await user.set({ trackingNumber }, { merge: true });
+    if (patientStatus) await userRef.set({ patientStatus }, { merge: true });
+    if (orderStatus || trackingNumber) {
+      const user = await userRef.get();
+      const { orders } = user.data();
+      const order = orders.pop();
+      if (trackingNumber) order.trackingNumber = trackingNumber;
+      if (orderStatus) {
+        order.status = orderStatus;
+        const statusKey = makeCamelCase(orderStatus);
+        order.statusDates[statusKey] = new Date();
+      }
+      orders.push(order);
+      await userRef.set({ orders }, { merge: true });
+    }
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error('Error updating status: ', err);
@@ -80,14 +91,14 @@ export async function GET() {
       .get();
     const allUsers = [];
     allUserSnapshot.forEach((doc) => {
-      const { screening, patientStatus, orderStatus, payments } = doc.data();
-      const { trackingNumber } = doc.data();
+      const { screening, patientStatus, orders, payments } = doc.data();
+      const { status, trackingNumber } = orders.pop();
       const lastPayment = payments.payments.pop().paymentDate.seconds * 1000;
       const user = {
         name: `${screening.firstName} ${screening.lastName}`,
         email: screening.email,
         patientStatus,
-        orderStatus,
+        orderStatus: status,
         lastPayment,
         trackingNumber,
       };

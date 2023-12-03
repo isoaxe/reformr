@@ -6,7 +6,7 @@ import { initialiseAdmin } from '@/util/admin';
 import { STRIPE_SECRET_KEY } from '@/util/constants';
 import { STRIPE_INVOICE_WEBHOOK_SECRET } from '@/util/constants';
 import { STRIPE_UID, PAYMENT_METHOD_ID, isCli } from '@/util/constants';
-import { getPaymentsData } from '@/util/server';
+import { getUserData } from '@/util/server';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
 
@@ -58,19 +58,18 @@ export async function POST(request) {
     }
 
     /* Get payments data from Firestore. */
-    const { docId, allPaymentData } = await getPaymentsData(customerId);
+    const { docId, userData } = await getUserData(customerId);
+    const allPaymentData = userData.payments;
 
     /* Save payments data to Firestore if invoice paid. */
     if (invoice.paid) {
+      /* Update payments data and add new item to array. */
       const { payments } = allPaymentData;
-
-      /* Save payments data to Firestore. */
       const payment = {
         product: 'metabolic reset',
         paymentDate,
         paymentAmount: invoice.amount_paid / 100, // amount in NZD
       };
-      // TODO: Why does this payment save to Firestore twice on first subscription payment?
       payments.push(payment);
       const paymentData = {
         isPaid: true,
@@ -78,12 +77,20 @@ export async function POST(request) {
         payments,
         subscription: { isPaused: false },
       };
+
+      /* Update orders data and add new item to array. */
+      const { orders } = userData;
+      const order = {
+        trackingNumber: '',
+        status: 'pending',
+        statusDates: { pending: new Date() },
+      };
+      orders.push(order);
+
+      /* Save payment and order data to Firestore. */
       await usersPath
         .doc(docId)
-        .set(
-          { payments: paymentData, orderStatus: 'pending', trackingNumber: '' },
-          { merge: true }
-        );
+        .set({ payments: paymentData, orders }, { merge: true });
       console.log('✅ Payment made and data saved to Firestore.');
     } else {
       console.log('❌ Payment was not made.');
@@ -114,7 +121,7 @@ export async function POST(request) {
     console.log('ℹ️  Invoice payment failed.');
 
     /* Get user data from Firestore. */
-    const { docId } = await getPaymentsData(customerId);
+    const { docId } = await getUserData(customerId);
 
     /* Set user as unpaid in Firestore. */
     await usersPath
