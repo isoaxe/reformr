@@ -58,8 +58,14 @@ export async function PUT(request) {
     const userRef = db.collection('users').doc(docId);
     /* Only one of these conditionals will run. */
     if (patientStatus) await userRef.set({ patientStatus }, { merge: true });
-    if (orderStatus) await userRef.set({ orderStatus }, { merge: true });
-    if (trackingNumber) await userRef.set({ trackingNumber }, { merge: true });
+    if (orderStatus || trackingNumber) {
+      const user = await userRef.get();
+      const { orders } = user.data();
+      const order = orders.pop();
+      if (trackingNumber) order.trackingNumber = trackingNumber;
+      orders.push(order);
+      await userRef.set({ orders }, { merge: true });
+    }
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error('Error updating status: ', err);
