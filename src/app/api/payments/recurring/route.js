@@ -6,7 +6,7 @@ import { initialiseAdmin } from '@/util/admin';
 import { STRIPE_SECRET_KEY } from '@/util/constants';
 import { STRIPE_INVOICE_WEBHOOK_SECRET } from '@/util/constants';
 import { STRIPE_UID, PAYMENT_METHOD_ID, isCli } from '@/util/constants';
-import { getPaymentsData } from '@/util/server';
+import { getUserData } from '@/util/server';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
 
@@ -58,10 +58,11 @@ export async function POST(request) {
     }
 
     /* Get payments data from Firestore. */
-    const { docId, allPaymentData } = await getPaymentsData(customerId);
+    const { docId, userData } = await getUserData(customerId);
 
     /* Save payments data to Firestore if invoice paid. */
     if (invoice.paid) {
+      const allPaymentData = userData.payments;
       const { payments } = allPaymentData;
 
       /* Save payments data to Firestore. */
@@ -114,7 +115,7 @@ export async function POST(request) {
     console.log('ℹ️  Invoice payment failed.');
 
     /* Get user data from Firestore. */
-    const { docId } = await getPaymentsData(customerId);
+    const { docId } = await getUserData(customerId);
 
     /* Set user as unpaid in Firestore. */
     await usersPath

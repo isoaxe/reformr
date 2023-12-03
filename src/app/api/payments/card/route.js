@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { getPaymentsData } from '@/util/server';
+import { getUserData } from '@/util/server';
 import { STRIPE_SECRET_KEY } from '@/util/constants';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
@@ -13,8 +13,8 @@ export async function GET(request) {
 
   try {
     /* Get card ID from Firestore. */
-    const { allPaymentData } = await getPaymentsData(stripeUid);
-    const { paymentMethodId } = allPaymentData;
+    const { userData } = await getUserData(stripeUid);
+    const { paymentMethodId } = userData.payments;
     if (!paymentMethodId)
       return NextResponse.json({
         success: false,
