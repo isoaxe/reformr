@@ -62,10 +62,9 @@ export async function POST(request) {
 
     /* Save payments data to Firestore if invoice paid. */
     if (invoice.paid) {
+      /* Update payments data and add new item to array. */
       const allPaymentData = userData.payments;
       const { payments } = allPaymentData;
-
-      /* Update payments data and add new item to array. */
       const payment = {
         product: 'metabolic reset',
         paymentDate,
