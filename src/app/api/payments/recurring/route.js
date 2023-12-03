@@ -82,8 +82,8 @@ export async function POST(request) {
       const { orders } = userData;
       const order = {
         trackingNumber: '',
-        orderStatus: 'pending',
-        orderStatusDates: { pending: new Date() },
+        status: 'pending',
+        statusDates: { pending: new Date() },
       };
       orders.push(order);
 

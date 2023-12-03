@@ -64,9 +64,9 @@ export async function PUT(request) {
       const order = orders.pop();
       if (trackingNumber) order.trackingNumber = trackingNumber;
       if (orderStatus) {
-        order.orderStatus = orderStatus;
+        order.status = orderStatus;
         const statusKey = makeCamelCase(orderStatus);
-        order.orderStatusDates[statusKey] = new Date();
+        order.statusDates[statusKey] = new Date();
       }
       orders.push(order);
       await userRef.set({ orders }, { merge: true });
