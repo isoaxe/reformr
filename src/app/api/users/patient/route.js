@@ -55,11 +55,11 @@ export async function PUT(request) {
     /* Update patient status on Firestore. */
     await initialiseAdmin();
     const db = admin.firestore();
-    const user = db.collection('users').doc(docId);
+    const userRef = db.collection('users').doc(docId);
     /* Only one of these conditionals will run. */
-    if (patientStatus) await user.set({ patientStatus }, { merge: true });
-    if (orderStatus) await user.set({ orderStatus }, { merge: true });
-    if (trackingNumber) await user.set({ trackingNumber }, { merge: true });
+    if (patientStatus) await userRef.set({ patientStatus }, { merge: true });
+    if (orderStatus) await userRef.set({ orderStatus }, { merge: true });
+    if (trackingNumber) await userRef.set({ trackingNumber }, { merge: true });
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error('Error updating status: ', err);
