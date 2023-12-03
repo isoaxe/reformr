@@ -59,11 +59,11 @@ export async function POST(request) {
 
     /* Get payments data from Firestore. */
     const { docId, userData } = await getUserData(customerId);
+    const allPaymentData = userData.payments;
 
     /* Save payments data to Firestore if invoice paid. */
     if (invoice.paid) {
       /* Update payments data and add new item to array. */
-      const allPaymentData = userData.payments;
       const { payments } = allPaymentData;
       const payment = {
         product: 'metabolic reset',
