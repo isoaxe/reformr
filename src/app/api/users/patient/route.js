@@ -2,7 +2,7 @@ import admin from 'firebase-admin';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, updateDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
-import { getDocId, validateToken } from '@/util/helpers';
+import { getDocId, validateToken, makeCamelCase } from '@/util/helpers';
 import { initialiseAdmin } from '@/util/admin';
 import { auth, db } from '@/util/firebase';
 
@@ -63,6 +63,11 @@ export async function PUT(request) {
       const { orders } = user.data();
       const order = orders.pop();
       if (trackingNumber) order.trackingNumber = trackingNumber;
+      if (orderStatus) {
+        order.orderStatus = orderStatus;
+        const statusKey = makeCamelCase(orderStatus);
+        order.orderStatusDates[statusKey] = new Date();
+      }
       orders.push(order);
       await userRef.set({ orders }, { merge: true });
     }
