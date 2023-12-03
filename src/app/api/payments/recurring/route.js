@@ -71,7 +71,6 @@ export async function POST(request) {
         paymentDate,
         paymentAmount: invoice.amount_paid / 100, // amount in NZD
       };
-      // TODO: Why does this payment save to Firestore twice on first subscription payment?
       payments.push(payment);
       const paymentData = {
         isPaid: true,
