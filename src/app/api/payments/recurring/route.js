@@ -79,13 +79,19 @@ export async function POST(request) {
         subscription: { isPaused: false },
       };
 
+      /* Update orders data and add new item to array. */
+      const { orders } = userData;
+      const order = {
+        trackingNumber: '',
+        orderStatus: 'pending',
+        orderStatusDates: { pending: new Date() },
+      };
+      orders.push(order);
+
       /* Save payment and order data to Firestore. */
       await usersPath
         .doc(docId)
-        .set(
-          { payments: paymentData, orderStatus: 'pending', trackingNumber: '' },
-          { merge: true }
-        );
+        .set({ payments: paymentData, orders }, { merge: true });
       console.log('✅ Payment made and data saved to Firestore.');
     } else {
       console.log('❌ Payment was not made.');
