@@ -4,7 +4,19 @@ import { useState, useEffect } from 'react';
 import { Modal } from '@mui/material';
 
 /* Presents patient screening and medical data to the doctor. */
-export default function PatientRecord({ open, setOpen }) {
+export default function PatientRecord({ open, setOpen, fireDocId }) {
+  const [patientRecord, setPatientRecord] = useState({});
+
+  useEffect(() => {
+    async function getPatientRecord() {
+      // TODO: Add token from firebase auth to request.
+      const res = await fetch(`/api/medical?docId=${fireDocId}`);
+      const data = await res.json();
+      if (data.success) setPatientRecord(data.patientRecord);
+    }
+    if (fireDocId) getPatientRecord();
+  }, [fireDocId]);
+
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
       <section className="mx-auto mt-12 h-[90vh] w-full max-w-5xl rounded bg-slate-300">
