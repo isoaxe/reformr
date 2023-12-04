@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
+import { PiNotepadLight } from 'react-icons/pi';
 import StatusDropdown from '@/components/status-dropdown';
 import Spinner from '@/components/spinner';
 import { auth } from '@/util/firebase';
@@ -27,6 +28,9 @@ export default function DoctorDashboard() {
           setPatients={setPatients}
           isDoctor={true}
         />
+        <IconButton onClick={null} className="m-auto">
+          <PiNotepadLight />
+        </IconButton>
       </div>
     );
   }
@@ -63,14 +67,15 @@ export default function DoctorDashboard() {
   }, [isPageLoaded, user, role, router]);
 
   return (
-    <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-fit max-w-3xl flex-col px-4 xs:px-9">
+    <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-fit max-w-4xl flex-col px-4 xs:px-9">
       <h1 className="mb-2 pt-4 text-center text-xl font-semibold text-sky-600 md:pt-8 md:text-2xl">
         Current Patients
       </h1>
       <div className="flex flex-row font-semibold">
         <p className="w-40">Name</p>
         <p className="w-64">Email</p>
-        <p>Patient Status</p>
+        <p className="w-52">Patient Status</p>
+        <p className="w-20">Med Rec</p>
       </div>
       {patients.length ? (
         patients?.map((patient, idx) => <Patient patient={patient} key={idx} />)
