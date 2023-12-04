@@ -4,7 +4,7 @@ import { getDocId, validateToken } from '@/util/helpers';
 import { chooseManyLabels, manyRangeLabels } from '@/util/data';
 import { initialiseAdmin } from '@/util/admin';
 
-/* Save screening data to Firestore if token is valid. */
+/* Save medical data to Firestore if token is valid. */
 export async function POST(request) {
   const data = await request.json();
   const { email, token } = data;
@@ -63,4 +63,12 @@ export async function POST(request) {
   }
 
   return NextResponse.json({ success: true });
+}
+
+/* Get screening and medical data for the patient. */
+export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const docId = searchParams.get('docId');
+
+  return NextResponse.json({ success: true, patientRecord: { docId } });
 }
