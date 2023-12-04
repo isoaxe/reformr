@@ -54,7 +54,7 @@ export default function CreateNewUser() {
   }, [email]);
 
   return (
-    <section className="mx-auto flex w-full max-w-xl flex-col">
+    <section className="mx-auto flex w-full max-w-lg flex-col">
       <h1 className="py-4 text-center text-2xl font-semibold text-sky-600 md:py-8 md:text-4xl">
         Create a new user
       </h1>

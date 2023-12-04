@@ -32,7 +32,7 @@ export default function AdminPatients({ user }) {
   }, [user]);
 
   return (
-    <section className="mx-auto w-fit flex-col">
+    <section className="mx-auto mb-20 mt-10 flex-col">
       <h1 className="mb-2 pt-4 text-center text-xl font-semibold text-sky-600 md:pt-8 md:text-2xl">
         Patients with Failed Identity Verification
       </h1>

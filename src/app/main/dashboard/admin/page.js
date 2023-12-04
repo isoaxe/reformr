@@ -30,7 +30,7 @@ export default function AdminDashboard() {
       <Patients user={user} />
       <Button
         variant="outlined"
-        className="mx-auto mb-5 w-full max-w-xl text-lg md:text-xl"
+        className="mx-auto mb-5 w-full max-w-lg text-lg md:text-xl"
         onClick={logout}
         sx={{ mt: 3 }}
       >
