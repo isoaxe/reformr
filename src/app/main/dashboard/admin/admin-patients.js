@@ -16,7 +16,7 @@ export default function AdminPatients({ user }) {
       <div className="flex flex-row">
         <p className="w-40">{name}</p>
         <p className="w-64">{email}</p>
-        <p className="w-40">{lastPaymentDate}</p>
+        <p className="w-28">{lastPaymentDate}</p>
       </div>
     );
   }
@@ -49,7 +49,7 @@ export default function AdminPatients({ user }) {
         <div className="flex flex-row font-semibold">
           <p className="w-40">Name</p>
           <p className="w-64">Email</p>
-          <p className="w-40">Last Payment</p>
+          <p className="w-28">Last Payment</p>
         </div>
       )}
       {isFetched ? (
