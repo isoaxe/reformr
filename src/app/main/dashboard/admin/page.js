@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { TextField, Typography, RadioGroup } from '@mui/material';
 import { FormControlLabel, Radio, Button } from '@mui/material';
+import Patients from './admin-patients';
 import TextInput from '@/components/quiz/text-input';
 import Password from '@/components/quiz/password';
 import { ADMIN_EMAIL } from '@/util/constants';
@@ -133,6 +134,7 @@ export default function AdminDashboard() {
       >
         Create User
       </Button>
+      <Patients user={user} />
       <Button
         variant="outlined"
         className="mx-auto mb-5 w-full text-lg md:text-xl"
