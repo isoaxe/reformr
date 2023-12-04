@@ -26,7 +26,10 @@ export default function AdminPatients({ user }) {
     const getPatients = async () => {
       const res = await fetch('/api/users/patient');
       const { success, allUsers } = await res.json();
-      if (success) setPatients(allUsers);
+      if (success)
+        setPatients(
+          allUsers.filter((user) => user.identityStatus === 'failed')
+        );
     };
     getPatients();
   }, [user]);
