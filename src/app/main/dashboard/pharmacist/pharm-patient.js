@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { TextField, IconButton } from '@mui/material';
 import { CiSaveUp2 } from 'react-icons/ci';
-import StatusDropdown from './status-dropdown';
-import Toast from './toast';
+import StatusDropdown from '@/components/status-dropdown';
+import Toast from '@/components/toast';
 
 /* This is a single patient as displayed on the pharmacist dashboard. */
 export default function PharmacistPatient({ patient, patients, setPatients }) {

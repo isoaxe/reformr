@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@mui/material';
-import Patient from '@/components/pharm-patient';
+import Patient from './pharm-patient';
 import Spinner from '@/components/spinner';
 import { auth } from '@/util/firebase';
 import { useAuth } from '@/util/hooks';
