@@ -8,7 +8,7 @@ export default function AdminPatients({ user }) {
   const [patients, setPatients] = useState([]);
 
   function Patient({ patient }) {
-    const { name, email, lastPayment, identityStatus } = patient;
+    const { name, email, lastPayment } = patient;
     const lastPaymentDate = new Date(lastPayment).toDateString().slice(4);
 
     return (
@@ -16,7 +16,6 @@ export default function AdminPatients({ user }) {
         <p className="w-40">{name}</p>
         <p className="w-64">{email}</p>
         <p className="w-40">{lastPaymentDate}</p>
-        <p className="w-40">{identityStatus}</p>
       </div>
     );
   }
@@ -44,7 +43,6 @@ export default function AdminPatients({ user }) {
         <p className="w-40">Name</p>
         <p className="w-64">Email</p>
         <p className="w-40">Last Payment</p>
-        <p className="w-40">Identity Status</p>
       </div>
       {patients.length ? (
         patients?.map((patient, idx) => <Patient patient={patient} key={idx} />)
