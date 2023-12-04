@@ -70,5 +70,15 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const docId = searchParams.get('docId');
 
-  return NextResponse.json({ success: true, patientRecord: { docId } });
+  try {
+    await initialiseAdmin();
+    const db = admin.firestore();
+    const userRef = await db.collection('users').doc(docId).get();
+    const userData = userRef.data();
+    const { screening, medical } = userData;
+    return NextResponse.json({ success: true, screening, medical });
+  } catch (err) {
+    console.error('Error getting patient data: ', err);
+    return NextResponse.json({ success: false, error: err });
+  }
 }
