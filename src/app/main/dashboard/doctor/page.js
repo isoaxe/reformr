@@ -14,12 +14,18 @@ export default function DoctorDashboard() {
   const [role, setRole] = useState('');
   const [patients, setPatients] = useState([]);
   const [open, setOpen] = useState(false); // for patient record modal.
+  const [fireDocId, setFireDocId] = useState('');
   const [isPageLoaded, setPageLoaded] = useState(false);
   const router = useRouter();
   const { user, logout } = useAuth();
 
+  function openMedicalRecord(id) {
+    setOpen(true);
+    setFireDocId(id);
+  }
+
   function Patient({ patient }) {
-    const { name, email } = patient;
+    const { name, email, docId } = patient;
     return (
       <div className="flex flex-row">
         <p className="w-40">{name}</p>
@@ -30,7 +36,7 @@ export default function DoctorDashboard() {
           setPatients={setPatients}
           isDoctor={true}
         />
-        <IconButton onClick={() => setOpen(true)} className="m-auto">
+        <IconButton onClick={() => openMedicalRecord(docId)} className="m-auto">
           <PiNotepadLight />
         </IconButton>
       </div>
@@ -91,7 +97,7 @@ export default function DoctorDashboard() {
       >
         Logout
       </Button>
-      <PatientRecord open={open} setOpen={setOpen} />
+      <PatientRecord open={open} setOpen={setOpen} fireDocId={fireDocId} />
     </main>
   );
 }
