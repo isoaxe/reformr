@@ -98,6 +98,7 @@ export async function GET() {
       const user = {
         name: `${screening.firstName} ${screening.lastName}`,
         email: screening.email,
+        docId: doc.id,
         patientStatus,
         identityStatus,
         orderStatus: status,
