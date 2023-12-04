@@ -6,6 +6,7 @@ import Spinner from '@/components/spinner';
 /* Displays a list of patients whose identity verification has failed to the admin user. */
 export default function AdminPatients({ user }) {
   const [patients, setPatients] = useState([]);
+  const [isFetched, setFetched] = useState(false);
 
   function Patient({ patient }) {
     const { name, email, lastPayment } = patient;
@@ -30,6 +31,7 @@ export default function AdminPatients({ user }) {
         setPatients(
           allUsers.filter((user) => user.identityStatus === 'failed')
         );
+      setFetched(true);
     };
     getPatients();
   }, [user]);
@@ -44,7 +46,7 @@ export default function AdminPatients({ user }) {
         <p className="w-64">Email</p>
         <p className="w-40">Last Payment</p>
       </div>
-      {patients.length ? (
+      {isFetched ? (
         patients?.map((patient, idx) => <Patient patient={patient} key={idx} />)
       ) : (
         <Spinner />
