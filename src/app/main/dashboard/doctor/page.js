@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, IconButton } from '@mui/material';
 import { PiNotepadLight } from 'react-icons/pi';
+import PatientRecord from './patient-record';
 import StatusDropdown from '@/components/status-dropdown';
 import Spinner from '@/components/spinner';
 import { auth } from '@/util/firebase';
@@ -12,6 +13,7 @@ import { useAuth } from '@/util/hooks';
 export default function DoctorDashboard() {
   const [role, setRole] = useState('');
   const [patients, setPatients] = useState([]);
+  const [open, setOpen] = useState(false); // for patient record modal.
   const [isPageLoaded, setPageLoaded] = useState(false);
   const router = useRouter();
   const { user, logout } = useAuth();
@@ -28,7 +30,7 @@ export default function DoctorDashboard() {
           setPatients={setPatients}
           isDoctor={true}
         />
-        <IconButton onClick={null} className="m-auto">
+        <IconButton onClick={() => setOpen(true)} className="m-auto">
           <PiNotepadLight />
         </IconButton>
       </div>
@@ -89,6 +91,7 @@ export default function DoctorDashboard() {
       >
         Logout
       </Button>
+      <PatientRecord open={open} setOpen={setOpen} />
     </main>
   );
 }
