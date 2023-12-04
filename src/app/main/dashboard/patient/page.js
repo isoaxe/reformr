@@ -157,12 +157,13 @@ export default function PatientDashboard() {
       const userData = userSnap.data();
       const { payments } = userData;
       const lastPaymentUnix = payments?.payments?.pop()?.paymentDate?.seconds;
+      const lastOrder = userData?.orders?.pop();
       setPhone(userData?.screening?.phone);
       setAddress(userData?.address);
       setStripeUid(payments?.stripeUid);
       setMedicalStatus(userData?.patientStatus);
-      setOrderStatus(userData?.orderStatus);
-      setTrackingNumber(userData?.trackingNumber);
+      setOrderStatus(lastOrder.status);
+      setTrackingNumber(lastOrder.trackingNumber);
       setLastPayment(new Date(lastPaymentUnix * 1000).toDateString());
       setExpiryDate(new Date(payments?.expiryDate?.seconds * 1000));
       setSubId(payments?.subscription?.subscriptionId);
