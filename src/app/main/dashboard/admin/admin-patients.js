@@ -23,6 +23,7 @@ export default function AdminPatients({ user }) {
 
   useEffect(() => {
     if (!user) return;
+    // TODO: Add token from firebase auth to request.
     const getPatients = async () => {
       const res = await fetch('/api/users/patient');
       const { success, allUsers } = await res.json();
