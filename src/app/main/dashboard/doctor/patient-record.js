@@ -5,14 +5,18 @@ import { Modal } from '@mui/material';
 
 /* Presents patient screening and medical data to the doctor. */
 export default function PatientRecord({ open, setOpen, fireDocId }) {
-  const [patientRecord, setPatientRecord] = useState({});
+  const [screening, setScreening] = useState({});
+  const [medical, setMedical] = useState({});
 
   useEffect(() => {
     async function getPatientRecord() {
       // TODO: Add token from firebase auth to request.
       const res = await fetch(`/api/medical?docId=${fireDocId}`);
       const data = await res.json();
-      if (data.success) setPatientRecord(data.patientRecord);
+      if (data.success) {
+        setScreening(data.screening);
+        setMedical(data.medical);
+      } else console.log('Error getting patient record: ', data.error);
     }
     if (fireDocId) getPatientRecord();
   }, [fireDocId]);
