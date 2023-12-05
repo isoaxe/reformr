@@ -76,6 +76,7 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
               {`${weight}kg`}
             </p>
           </div>
+          <p className="max-w-md">{`${firstName} ${lastName} is a ${age} year old ${sex} who is attending for medical weight management. They have a BMI of ${bmi}. ${firstName}’s motivation for losing weight includes ${medical.wm01_what_motivates_you}.`}</p>
         </div>
       </section>
     </Modal>
