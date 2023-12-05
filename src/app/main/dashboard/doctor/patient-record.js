@@ -54,7 +54,7 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
 
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
-      <div className="mx-auto mt-12 h-[90vh] w-full max-w-5xl rounded bg-slate-300 px-9 md:text-lg">
+      <div className="mx-auto mt-12 h-[90vh] w-full max-w-5xl overflow-y-auto rounded bg-slate-300 px-9 md:text-lg">
         <h1 className="mb-2 pt-4 text-center text-2xl font-semibold text-sky-600 md:text-3xl">
           Patient Record
         </h1>
