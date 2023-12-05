@@ -95,6 +95,15 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
           </div>
           <p className="max-w-md">{`${firstName} ${lastName} is a ${age} year old ${sex} who is attending for medical weight management. They have a BMI of ${bmi}. ${firstName}’s motivation for losing weight includes ${medical.wm01_what_motivates_you}.`}</p>
         </div>
+        <div className="mt-10">
+          <h2 className="text-xl font-semibold text-sky-600 md:text-2xl">
+            Medical Records
+          </h2>
+          <div className="flex flex-row">
+            <Question question="What motivates the patient?" />
+            <AnswerList answers={medical.wm01_what_motivates_you} />
+          </div>
+        </div>
       </section>
     </Modal>
   );
