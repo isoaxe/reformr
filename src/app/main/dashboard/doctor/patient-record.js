@@ -54,11 +54,11 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
 
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
-      <section className="mx-auto mt-12 h-[90vh] w-full max-w-5xl rounded bg-slate-300 px-9 md:text-lg">
+      <div className="mx-auto mt-12 h-[90vh] w-full max-w-5xl rounded bg-slate-300 px-9 md:text-lg">
         <h1 className="mb-2 pt-4 text-center text-2xl font-semibold text-sky-600 md:text-3xl">
           Patient Record
         </h1>
-        <div className="flex flex-row">
+        <section className="flex flex-row">
           <div className="flex flex-col">
             <p>
               <span className="font-semibold">Name: </span>
@@ -96,8 +96,8 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
             </p>
           </div>
           <p className="max-w-md">{`${firstName} ${lastName} is a ${age} year old ${sex} who is attending for medical weight management. They have a BMI of ${bmi}. ${firstName}’s motivation for losing weight includes ${medical.wm01_what_motivates_you}.`}</p>
-        </div>
-        <div className="mt-10">
+        </section>
+        <section className="mt-10">
           <h2 className="text-xl font-semibold text-sky-600 md:text-2xl">
             Medical Records
           </h2>
@@ -123,8 +123,8 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
               )}
             </ul>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </Modal>
   );
 }
