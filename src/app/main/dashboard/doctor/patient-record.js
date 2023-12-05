@@ -11,10 +11,11 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
   const { firstName, lastName, email, phone, dob, sex, height, weight, bmi } =
     screening;
 
-  const wrapperStyle = 'my-2 flex flex-row'; // standard question and answer wrapper style
+  const wrapperStyle =
+    'flex flex-row items-center border-b border-slate-400 py-2'; // standard question and answer wrapper style
 
   function Question({ text }) {
-    return <p className="mr-10 w-72 font-medium">{text}</p>;
+    return <p className="mr-10 w-72 italic">{text}</p>;
   }
 
   function AnswerList({ answers }) {
@@ -97,7 +98,7 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
           </div>
           <p className="max-w-md">{`${firstName} ${lastName} is a ${age} year old ${sex} who is attending for medical weight management. They have a BMI of ${bmi}. ${firstName}’s motivation for losing weight includes ${medical.wm01_what_motivates_you}.`}</p>
         </section>
-        <section className="mt-10">
+        <section className="my-10 w-fit">
           <h2 className="text-xl font-semibold text-sky-600 md:text-2xl">
             Medical Records
           </h2>
