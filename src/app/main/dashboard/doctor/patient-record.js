@@ -194,8 +194,8 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
           </div>
           <div className={wrapperStyle}>
             <Question text="Has the patient ever been diagnosed with any other medical conditions? If so, what were they?" />
-            <p>{medical.wm19_other_medical.response}</p>
-            {medical.wm19_other_medical.response === 'Yes' && (
+            <p>{medical.wm19_other_medical?.response}</p>
+            {medical.wm19_other_medical?.response === 'Yes' && (
               <p className="ml-1.5">- {medical.wm19_other_medical.moreInfo}</p>
             )}
           </div>
@@ -205,8 +205,8 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
           </div>
           <div className={wrapperStyle}>
             <Question text="Does the patient have any allergies? If so, what were they?" />
-            <p>{medical.wm21_allergies.response}</p>
-            {medical.wm21_allergies.response === 'Yes' && (
+            <p>{medical.wm21_allergies?.response}</p>
+            {medical.wm21_allergies?.response === 'Yes' && (
               <p className="ml-1.5">- {medical.wm21_allergies.moreInfo}</p>
             )}
           </div>
