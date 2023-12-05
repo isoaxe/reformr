@@ -13,14 +13,14 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
 
   const wrapperStyle = 'my-2 flex flex-row'; // standard question and answer wrapper style
 
-  function Question({ question }) {
-    return <p className="mr-10 w-72 font-medium">{question}</p>;
+  function Question({ text }) {
+    return <p className="mr-10 w-72 font-medium">{text}</p>;
   }
 
   function AnswerList({ answers }) {
     return (
       <ul>
-        {answers.map((answer, index) => (
+        {answers?.map((answer, index) => (
           <li key={index} className="flex flex-row items-center">
             <div className="mr-2 h-1.5 w-1.5 rounded bg-sky-600"></div>
             <p>{answer}</p>
@@ -102,12 +102,26 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
             Medical Records
           </h2>
           <div className={wrapperStyle}>
-            <Question question="What motivates the patient?" />
+            <Question text="What motivates the patient?" />
             <AnswerList answers={medical.wm01_what_motivates_you} />
           </div>
           <div className={wrapperStyle}>
-            <Question question="When was the patient last at their ideal weight?" />
-            <p className="ml-3">{medical.wm02_when_last_ideal_weight}</p>
+            <Question text="When was the patient last at their ideal weight?" />
+            <p>{medical.wm02_when_last_ideal_weight}</p>
+          </div>
+          <div className={wrapperStyle}>
+            <Question text="How does weight affect the patient?" />
+            <ul>
+              {Object.keys(medical.wm03_how_weight_affects ?? {}).map(
+                (aspect, index) => (
+                  <li key={index} className="flex flex-row items-center">
+                    <div className="mr-2 h-1.5 w-1.5 rounded bg-sky-600"></div>
+                    <p className="w-36">{aspect.split('_').join(' ')}:</p>
+                    <p>{medical.wm03_how_weight_affects[aspect]} / 5</p>
+                  </li>
+                )
+              )}
+            </ul>
           </div>
         </div>
       </section>
