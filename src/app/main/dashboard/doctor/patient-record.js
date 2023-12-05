@@ -11,6 +11,10 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
   const { firstName, lastName, email, phone, dob, sex, height, weight, bmi } =
     screening;
 
+  function Question({ question }) {
+    return <p className="mr-10 w-72 font-medium">{question}</p>;
+  }
+
   function AnswerList({ answers }) {
     return (
       <ul>
