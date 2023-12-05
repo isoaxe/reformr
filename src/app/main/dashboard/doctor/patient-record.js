@@ -176,6 +176,36 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
             <Question text="The patient has been diagnosed with the following that relate to blood sugar levels:" />
             <AnswerList answers={medical.wm16_sugar_ailments} />
           </div>
+          <div className={wrapperStyle}>
+            <Question text="What other ailments has the patient been diagnosed with?" />
+            <AnswerList answers={medical.wm17_other_ailments} />
+          </div>
+          <div className={wrapperStyle}>
+            <Question text="What mental health issues is the patient suffering from?" />
+            <AnswerList answers={medical.wm18_mental_health} />
+          </div>
+          <div className={wrapperStyle}>
+            <Question text="Has the patient ever been diagnosed with any other medical conditions? If so, what were they?" />
+            <p>{medical.wm19_other_medical.response}</p>
+            {medical.wm19_other_medical.response === 'Yes' && (
+              <p className="ml-1.5">- {medical.wm19_other_medical.moreInfo}</p>
+            )}
+          </div>
+          <div className={wrapperStyle}>
+            <Question text="Does the patient currently take any medications or suppliments?" />
+            <AnswerList answers={medical.wm20_medications} />
+          </div>
+          <div className={wrapperStyle}>
+            <Question text="Does the patient have any allergies? If so, what were they?" />
+            <p>{medical.wm21_allergies.response}</p>
+            {medical.wm21_allergies.response === 'Yes' && (
+              <p className="ml-1.5">- {medical.wm21_allergies.moreInfo}</p>
+            )}
+          </div>
+          <div className={wrapperStyle}>
+            <Question text="What weight loss procedures has the patient had in the past?" />
+            <AnswerList answers={medical.wm22_past_procedures} />
+          </div>
         </section>
       </div>
     </Modal>
