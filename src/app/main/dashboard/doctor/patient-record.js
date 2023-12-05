@@ -11,6 +11,19 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
   const { firstName, lastName, email, phone, dob, sex, height, weight, bmi } =
     screening;
 
+  function AnswerList({ answers }) {
+    return (
+      <ul>
+        {answers.map((answer, index) => (
+          <li key={index} className="flex flex-row items-center">
+            <div className="mr-2 h-1.5 w-1.5 rounded bg-sky-600"></div>
+            <p>{answer}</p>
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   useEffect(() => {
     async function getPatientRecord() {
       // TODO: Add token from firebase auth to request.
