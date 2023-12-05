@@ -156,6 +156,26 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
             <Question text="How many hours of moderate physical activity does the patient do per week?" />
             <p>{medical.wm11_amount_of_exercise}</p>
           </div>
+          <div className={wrapperStyle}>
+            <Question text="What health vices does the patient have?" />
+            <AnswerList answers={medical.wm12_health_vices} />
+          </div>
+          <div className={wrapperStyle}>
+            <Question text="Has the patient ever been diagnosed with a thyroid condition?" />
+            <AnswerList answers={medical.wm13_thyroid_activity} />
+          </div>
+          <div className={wrapperStyle}>
+            <Question text="Has the patient or someone in their family ever been diagnosed with a thyroid tumor?" />
+            <AnswerList answers={medical.wm14_thyroid_tumor} />
+          </div>
+          <div className={wrapperStyle}>
+            <Question text="The patient has been diagnosed with the following that relate to conditions of the liver, pancreas gallstones and kidneys:" />
+            <AnswerList answers={medical.wm15_health_ailments} />
+          </div>
+          <div className={wrapperStyle}>
+            <Question text="The patient has been diagnosed with the following that relate to blood sugar levels:" />
+            <AnswerList answers={medical.wm16_sugar_ailments} />
+          </div>
         </section>
       </div>
     </Modal>
