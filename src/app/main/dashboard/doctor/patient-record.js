@@ -11,6 +11,8 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
   const { firstName, lastName, email, phone, dob, sex, height, weight, bmi } =
     screening;
 
+  const wrapperStyle = 'my-2 flex flex-row'; // standard question and answer wrapper style
+
   function Question({ question }) {
     return <p className="mr-10 w-72 font-medium">{question}</p>;
   }
@@ -99,9 +101,13 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
           <h2 className="text-xl font-semibold text-sky-600 md:text-2xl">
             Medical Records
           </h2>
-          <div className="flex flex-row">
+          <div className={wrapperStyle}>
             <Question question="What motivates the patient?" />
             <AnswerList answers={medical.wm01_what_motivates_you} />
+          </div>
+          <div className={wrapperStyle}>
+            <Question question="When was the patient last at their ideal weight?" />
+            <p className="ml-3">{medical.wm02_when_last_ideal_weight}</p>
           </div>
         </div>
       </section>
