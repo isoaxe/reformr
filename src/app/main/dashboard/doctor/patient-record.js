@@ -123,6 +123,38 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
               )}
             </ul>
           </div>
+          <div className={wrapperStyle}>
+            <Question text="How often does the patient lose control over what they eat?" />
+            <p>{medical.wm04_freq_loss_of_control}</p>
+          </div>
+          <div className={wrapperStyle}>
+            <Question text="To what extent does food dominate the patients life?" />
+            <p>{medical.wm05_extent_food_dominates} / 10</p>
+          </div>
+          <div className={wrapperStyle}>
+            <Question text="What weight loss techniques has the patient tried previously?" />
+            <AnswerList answers={medical.wm06_weight_loss_techniques} />
+          </div>
+          <div className={wrapperStyle}>
+            <Question text="Did the patient see lasting results?" />
+            <p>{medical.wm07_lasting_results}</p>
+          </div>
+          <div className={wrapperStyle}>
+            <Question text="How healthy is the patients diet?" />
+            <p>{medical.wm08_how_healthy} / 10</p>
+          </div>
+          <div className={wrapperStyle}>
+            <Question text="How many times a week does the patient eat out or order in?" />
+            <p>{medical.wm09_freq_eat_out}</p>
+          </div>
+          <div className={wrapperStyle}>
+            <Question text="How fit is the patient?" />
+            <p>{medical.wm10_physical_fitness} / 10</p>
+          </div>
+          <div className={wrapperStyle}>
+            <Question text="How many hours of moderate physical activity does the patient do per week?" />
+            <p>{medical.wm11_amount_of_exercise}</p>
+          </div>
         </section>
       </div>
     </Modal>
