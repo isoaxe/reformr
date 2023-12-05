@@ -55,53 +55,55 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
 
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
-      <div className="mx-auto mt-12 h-[90vh] w-full max-w-5xl overflow-y-auto rounded bg-slate-300 px-9 md:text-lg">
+      <div className="mx-auto mt-12 h-[90vh] w-full max-w-3xl overflow-y-auto rounded bg-slate-300 px-9 md:text-lg">
         <h1 className="mb-2 pt-4 text-center text-2xl font-semibold text-sky-600 md:text-3xl">
           Patient Record
         </h1>
-        <section className="flex flex-row">
+        <section className="flex flex-row justify-between">
           <div className="flex flex-col">
-            <p>
-              <span className="font-semibold">Name: </span>
-              {`${firstName} ${lastName}`}
-            </p>
-            <p>
-              <span className="font-semibold">Phone: </span>
-              {phone}
-            </p>
-            <p>
-              <span className="font-semibold">DoB: </span>
-              {dob}
-            </p>
-            <p>
-              <span className="font-semibold">Email: </span>
-              {email}
-            </p>
+            <div className="flex flex-row">
+              <p className="w-16 font-semibold">Name: </p>
+              <p>{`${firstName} ${lastName}`}</p>
+            </div>
+            <div className="flex flex-row">
+              <p className="w-16 font-semibold">Phone: </p>
+              <p>{phone}</p>
+            </div>
+            <div className="flex flex-row">
+              <p className="w-16 font-semibold">Email: </p>
+              <p>{email}</p>
+            </div>
           </div>
-          <div className="mx-10 flex flex-col">
-            <p>
-              <span className="font-semibold">Age: </span>
-              {age} years
-            </p>
-            <p>
-              <span className="font-semibold">Sex: </span>
-              {sex}
-            </p>
-            <p>
-              <span className="font-semibold">Height: </span>
-              {`${height}cm`}
-            </p>
-            <p>
-              <span className="font-semibold">Weight: </span>
-              {`${weight}kg`}
-            </p>
-            <p>
-              <span className="font-semibold">BMI: </span>
-              {`${bmi}`}
-            </p>
+          <div className="mx-8 flex flex-col">
+            <div className="flex flex-row">
+              <p className="w-12 font-semibold">DoB: </p>
+              <p>{dob}</p>
+            </div>
+            <div className="flex flex-row">
+              <p className="w-12 font-semibold">Age: </p>
+              <p>{age} years</p>
+            </div>
+            <div className="flex flex-row">
+              <p className="w-12 font-semibold">Sex: </p>
+              <p>{sex}</p>
+            </div>
+          </div>
+          <div className="flex flex-col">
+            <div className="flex flex-row">
+              <p className="w-20 font-semibold">Height: </p>
+              <p>{`${height}cm`}</p>
+            </div>
+            <div className="flex flex-row">
+              <p className="w-20 font-semibold">Weight: </p>
+              <p>{`${weight}kg`}</p>
+            </div>
+            <div className="flex flex-row">
+              <p className="w-20 font-semibold">BMI: </p>
+              <p>{bmi}</p>
+            </div>
           </div>
         </section>
-        <section className="my-10 w-fit">
+        <section className="my-10">
           <h2 className="text-xl font-semibold text-sky-600 md:text-2xl">
             Medical Records
           </h2>
