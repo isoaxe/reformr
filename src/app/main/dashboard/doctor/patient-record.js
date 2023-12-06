@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Modal } from '@mui/material';
+import { Modal, TextField, Button } from '@mui/material';
 
 /* Presents patient screening and medical data to the doctor. */
 export default function PatientRecord({ open, setOpen, fireDocId }) {
   const [screening, setScreening] = useState({});
   const [medical, setMedical] = useState({});
+  const [note, setNote] = useState('');
   const [age, setAge] = useState(0);
   const { firstName, lastName, email, phone, dob, sex, height, weight, bmi } =
     screening;
@@ -214,6 +215,21 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
             <Question text="What weight loss procedures has the patient had in the past?" />
             <AnswerList answers={medical.wm22_past_procedures} />
           </div>
+        </section>
+        <h2 className="mt-10 text-xl font-semibold text-sky-600 md:text-2xl">
+          Doctors Notes
+        </h2>
+        <section className="mb-10 flex flex-col">
+          <TextField
+            multiline
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            minRows={5}
+            className="my-5 w-full max-w-lg"
+          />
+          <Button variant="outlined" className="w-36">
+            Save Note
+          </Button>
         </section>
       </div>
     </Modal>
