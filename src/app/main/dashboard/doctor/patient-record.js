@@ -85,7 +85,7 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
       if (data.success) {
         setScreening(data.screening);
         setMedical(data.medical);
-        setNotes(data.notes);
+        setNotes(data.notes ?? []);
       } else console.log('Error getting patient record: ', data.error);
     }
     if (fireDocId) getPatientRecord();
