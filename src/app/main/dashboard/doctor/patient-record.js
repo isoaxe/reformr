@@ -31,8 +31,10 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
     // TODO: Add token from firebase auth to request.
     const res = await fetch('/api/users/patient/notes', options);
     const data = await res.json();
-    if (data.success) setNote('');
-    else console.log('Error saving note: ', data.error);
+    if (data.success) {
+      setNotes([...notes, { noteText: note, doctor }]);
+      setNote('');
+    } else console.log('Error saving note: ', data.error);
     setLoading(false);
   }
 
@@ -58,7 +60,7 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
       <ul className="max-w-lg">
         {notes?.map((noteData, index) => {
           const { noteText, doctor, dateCreated } = noteData;
-          const dateObject = new Date(dateCreated._seconds * 1000);
+          const dateObject = new Date(dateCreated?._seconds * 1000);
           const date = dateObject.toDateString().slice(4);
           const time = dateObject.toLocaleTimeString().slice(0, 5);
           return (
@@ -66,9 +68,7 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
               <p>{noteText}</p>
               <div className="flex flex-row justify-between text-sm text-slate-500">
                 <p className="mr-5">Dr. {doctor}</p>
-                <p>
-                  {date} at {time}
-                </p>
+                <p>{dateCreated ? `${date} at ${time}` : 'Just now'}</p>
               </div>
             </li>
           );
