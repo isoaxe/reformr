@@ -156,112 +156,118 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
         <h2 className="mt-10 text-xl font-semibold text-sky-600 md:text-2xl">
           Medical Records
         </h2>
-        <section>
-          <div className={wrapperStyle}>
-            <Question text="What motivates the patient?" />
-            <AnswerList answers={medical.wm01_what_motivates_you} />
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="When was the patient last at their ideal weight?" />
-            <p>{medical.wm02_when_last_ideal_weight}</p>
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="How does weight affect the patient?" />
-            <ul>
-              {Object.keys(medical.wm03_how_weight_affects ?? {}).map(
-                (aspect, index) => (
-                  <li key={index} className="flex flex-row items-center">
-                    <div className="mr-2 h-1.5 w-1.5 rounded bg-sky-600"></div>
-                    <p className="w-36">{aspect.split('_').join(' ')}:</p>
-                    <p>{medical.wm03_how_weight_affects[aspect]} / 5</p>
-                  </li>
-                )
+        {medical ? (
+          <section>
+            <div className={wrapperStyle}>
+              <Question text="What motivates the patient?" />
+              <AnswerList answers={medical.wm01_what_motivates_you} />
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="When was the patient last at their ideal weight?" />
+              <p>{medical.wm02_when_last_ideal_weight}</p>
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="How does weight affect the patient?" />
+              <ul>
+                {Object.keys(medical.wm03_how_weight_affects ?? {}).map(
+                  (aspect, index) => (
+                    <li key={index} className="flex flex-row items-center">
+                      <div className="mr-2 h-1.5 w-1.5 rounded bg-sky-600"></div>
+                      <p className="w-36">{aspect.split('_').join(' ')}:</p>
+                      <p>{medical.wm03_how_weight_affects[aspect]} / 5</p>
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="How often does the patient lose control over what they eat?" />
+              <p>{medical.wm04_freq_loss_of_control}</p>
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="To what extent does food dominate the patients life?" />
+              <p>{medical.wm05_extent_food_dominates} / 10</p>
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="What weight loss techniques has the patient tried previously?" />
+              <AnswerList answers={medical.wm06_weight_loss_techniques} />
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="Did the patient see lasting results?" />
+              <p>{medical.wm07_lasting_results}</p>
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="How healthy is the patients diet?" />
+              <p>{medical.wm08_how_healthy} / 10</p>
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="How many times a week does the patient eat out or order in?" />
+              <p>{medical.wm09_freq_eat_out}</p>
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="How fit is the patient?" />
+              <p>{medical.wm10_physical_fitness} / 10</p>
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="How many hours of moderate physical activity does the patient do per week?" />
+              <p>{medical.wm11_amount_of_exercise}</p>
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="What health vices does the patient have?" />
+              <AnswerList answers={medical.wm12_health_vices} />
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="Has the patient ever been diagnosed with a thyroid condition?" />
+              <AnswerList answers={medical.wm13_thyroid_activity} />
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="Has the patient or someone in their family ever been diagnosed with a thyroid tumor?" />
+              <AnswerList answers={medical.wm14_thyroid_tumor} />
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="The patient has been diagnosed with the following that relate to conditions of the liver, pancreas gallstones and kidneys:" />
+              <AnswerList answers={medical.wm15_health_ailments} />
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="The patient has been diagnosed with the following that relate to blood sugar levels:" />
+              <AnswerList answers={medical.wm16_sugar_ailments} />
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="What other ailments has the patient been diagnosed with?" />
+              <AnswerList answers={medical.wm17_other_ailments} />
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="What mental health issues is the patient suffering from?" />
+              <AnswerList answers={medical.wm18_mental_health} />
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="Has the patient ever been diagnosed with any other medical conditions? If so, what were they?" />
+              <p>{medical.wm19_other_medical?.response}</p>
+              {medical.wm19_other_medical?.response === 'Yes' && (
+                <p className="ml-1.5">
+                  - {medical.wm19_other_medical.moreInfo}
+                </p>
               )}
-            </ul>
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="How often does the patient lose control over what they eat?" />
-            <p>{medical.wm04_freq_loss_of_control}</p>
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="To what extent does food dominate the patients life?" />
-            <p>{medical.wm05_extent_food_dominates} / 10</p>
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="What weight loss techniques has the patient tried previously?" />
-            <AnswerList answers={medical.wm06_weight_loss_techniques} />
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="Did the patient see lasting results?" />
-            <p>{medical.wm07_lasting_results}</p>
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="How healthy is the patients diet?" />
-            <p>{medical.wm08_how_healthy} / 10</p>
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="How many times a week does the patient eat out or order in?" />
-            <p>{medical.wm09_freq_eat_out}</p>
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="How fit is the patient?" />
-            <p>{medical.wm10_physical_fitness} / 10</p>
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="How many hours of moderate physical activity does the patient do per week?" />
-            <p>{medical.wm11_amount_of_exercise}</p>
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="What health vices does the patient have?" />
-            <AnswerList answers={medical.wm12_health_vices} />
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="Has the patient ever been diagnosed with a thyroid condition?" />
-            <AnswerList answers={medical.wm13_thyroid_activity} />
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="Has the patient or someone in their family ever been diagnosed with a thyroid tumor?" />
-            <AnswerList answers={medical.wm14_thyroid_tumor} />
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="The patient has been diagnosed with the following that relate to conditions of the liver, pancreas gallstones and kidneys:" />
-            <AnswerList answers={medical.wm15_health_ailments} />
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="The patient has been diagnosed with the following that relate to blood sugar levels:" />
-            <AnswerList answers={medical.wm16_sugar_ailments} />
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="What other ailments has the patient been diagnosed with?" />
-            <AnswerList answers={medical.wm17_other_ailments} />
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="What mental health issues is the patient suffering from?" />
-            <AnswerList answers={medical.wm18_mental_health} />
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="Has the patient ever been diagnosed with any other medical conditions? If so, what were they?" />
-            <p>{medical.wm19_other_medical?.response}</p>
-            {medical.wm19_other_medical?.response === 'Yes' && (
-              <p className="ml-1.5">- {medical.wm19_other_medical.moreInfo}</p>
-            )}
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="Does the patient currently take any medications or suppliments?" />
-            <AnswerList answers={medical.wm20_medications} />
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="Does the patient have any allergies? If so, what are they?" />
-            <p>{medical.wm21_allergies?.response}</p>
-            {medical.wm21_allergies?.response === 'Yes' && (
-              <p className="ml-1.5">- {medical.wm21_allergies.moreInfo}</p>
-            )}
-          </div>
-          <div className={wrapperStyle}>
-            <Question text="What weight loss procedures has the patient had in the past?" />
-            <AnswerList answers={medical.wm22_past_procedures} />
-          </div>
-        </section>
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="Does the patient currently take any medications or suppliments?" />
+              <AnswerList answers={medical.wm20_medications} />
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="Does the patient have any allergies? If so, what are they?" />
+              <p>{medical.wm21_allergies?.response}</p>
+              {medical.wm21_allergies?.response === 'Yes' && (
+                <p className="ml-1.5">- {medical.wm21_allergies.moreInfo}</p>
+              )}
+            </div>
+            <div className={wrapperStyle}>
+              <Question text="What weight loss procedures has the patient had in the past?" />
+              <AnswerList answers={medical.wm22_past_procedures} />
+            </div>
+          </section>
+        ) : (
+          <p className="mt-3 text-slate-700">Medical records not added yet.</p>
+        )}
         <h2 className="mt-10 text-xl font-semibold text-sky-600 md:text-2xl">
           Doctors Notes
         </h2>
