@@ -9,6 +9,7 @@ import { useAuth } from '@/util/hooks';
 export default function PatientRecord({ open, setOpen, fireDocId }) {
   const [screening, setScreening] = useState({});
   const [medical, setMedical] = useState({});
+  const [notes, setNotes] = useState([]);
   const [note, setNote] = useState('');
   const [age, setAge] = useState(0);
   const [isLoading, setLoading] = useState(false);
@@ -52,6 +53,30 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
     );
   }
 
+  function NoteList({ notes }) {
+    return (
+      <ul className="max-w-lg">
+        {notes?.map((noteData, index) => {
+          const { noteText, doctor, dateCreated } = noteData;
+          const dateObject = new Date(dateCreated._seconds * 1000);
+          const date = dateObject.toDateString().slice(4);
+          const time = dateObject.toLocaleTimeString().slice(0, 5);
+          return (
+            <li key={index} className="my-5">
+              <p>{noteText}</p>
+              <div className="flex flex-row justify-between text-sm text-slate-500">
+                <p className="mr-5">Dr. {doctor}</p>
+                <p>
+                  {date} at {time}
+                </p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
+
   useEffect(() => {
     async function getPatientRecord() {
       // TODO: Add token from firebase auth to request.
@@ -60,6 +85,7 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
       if (data.success) {
         setScreening(data.screening);
         setMedical(data.medical);
+        setNotes(data.notes);
       } else console.log('Error getting patient record: ', data.error);
     }
     if (fireDocId) getPatientRecord();
@@ -239,6 +265,7 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
         <h2 className="mt-10 text-xl font-semibold text-sky-600 md:text-2xl">
           Doctors Notes
         </h2>
+        <NoteList notes={notes} />
         <section className="mb-10 flex flex-col">
           <TextField
             multiline
