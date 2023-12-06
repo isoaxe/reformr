@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
+import { PiNotepadLight } from 'react-icons/pi';
+import PatientRecord from './patient-record';
 import StatusDropdown from '@/components/status-dropdown';
 import Spinner from '@/components/spinner';
 import { auth } from '@/util/firebase';
@@ -11,12 +13,19 @@ import { useAuth } from '@/util/hooks';
 export default function DoctorDashboard() {
   const [role, setRole] = useState('');
   const [patients, setPatients] = useState([]);
+  const [open, setOpen] = useState(false); // for patient record modal.
+  const [fireDocId, setFireDocId] = useState('');
   const [isPageLoaded, setPageLoaded] = useState(false);
   const router = useRouter();
   const { user, logout } = useAuth();
 
+  function openMedicalRecord(id) {
+    setOpen(true);
+    setFireDocId(id);
+  }
+
   function Patient({ patient }) {
-    const { name, email } = patient;
+    const { name, email, docId } = patient;
     return (
       <div className="flex flex-row">
         <p className="w-40">{name}</p>
@@ -27,6 +36,9 @@ export default function DoctorDashboard() {
           setPatients={setPatients}
           isDoctor={true}
         />
+        <IconButton onClick={() => openMedicalRecord(docId)} className="m-auto">
+          <PiNotepadLight />
+        </IconButton>
       </div>
     );
   }
@@ -63,14 +75,15 @@ export default function DoctorDashboard() {
   }, [isPageLoaded, user, role, router]);
 
   return (
-    <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-fit max-w-3xl flex-col px-4 xs:px-9">
+    <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-fit max-w-4xl flex-col px-4 xs:px-9">
       <h1 className="mb-2 pt-4 text-center text-xl font-semibold text-sky-600 md:pt-8 md:text-2xl">
         Current Patients
       </h1>
       <div className="flex flex-row font-semibold">
         <p className="w-40">Name</p>
         <p className="w-64">Email</p>
-        <p>Patient Status</p>
+        <p className="w-52">Patient Status</p>
+        <p className="w-20">Med Rec</p>
       </div>
       {patients.length ? (
         patients?.map((patient, idx) => <Patient patient={patient} key={idx} />)
@@ -84,6 +97,7 @@ export default function DoctorDashboard() {
       >
         Logout
       </Button>
+      <PatientRecord open={open} setOpen={setOpen} fireDocId={fireDocId} />
     </main>
   );
 }

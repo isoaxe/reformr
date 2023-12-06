@@ -34,6 +34,7 @@ export async function POST(request) {
     await updateDoc(doc(db, 'users', docId), {
       dateAccountCreated: new Date(),
       userId: user.uid,
+      notes: [],
     });
     await updateDoc(doc(db, 'emails', email), { isAccountCreated: true });
   } catch (err) {
@@ -98,6 +99,7 @@ export async function GET() {
       const user = {
         name: `${screening.firstName} ${screening.lastName}`,
         email: screening.email,
+        docId: doc.id,
         patientStatus,
         identityStatus,
         orderStatus: status,
