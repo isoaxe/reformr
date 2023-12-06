@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Modal, TextField, Button } from '@mui/material';
+import { Modal, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { useAuth } from '@/util/hooks';
 
 /* Presents patient screening and medical data to the doctor. */
@@ -10,6 +11,7 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
   const [medical, setMedical] = useState({});
   const [note, setNote] = useState('');
   const [age, setAge] = useState(0);
+  const [isLoading, setLoading] = useState(false);
   const { user } = useAuth();
   const { firstName, lastName, email, phone, dob, sex, height, weight, bmi } =
     screening;
@@ -18,6 +20,7 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
     'flex flex-row items-center border-b border-slate-400 py-2'; // standard question and answer wrapper style
 
   async function saveNote() {
+    setLoading(true);
     const doctor = user.displayName;
     const options = {
       method: 'POST',
@@ -29,6 +32,7 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
     const data = await res.json();
     if (data.success) setNote('');
     else console.log('Error saving note: ', data.error);
+    setLoading(false);
   }
 
   function Question({ text }) {
@@ -243,9 +247,14 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
             minRows={5}
             className="my-5 w-full max-w-lg"
           />
-          <Button variant="outlined" className="w-36" onClick={saveNote}>
+          <LoadingButton
+            variant="outlined"
+            className="w-36"
+            onClick={saveNote}
+            loading={isLoading}
+          >
             Save Note
-          </Button>
+          </LoadingButton>
         </section>
       </div>
     </Modal>
