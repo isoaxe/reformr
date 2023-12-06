@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Modal, TextField, Button } from '@mui/material';
+import { useAuth } from '@/util/hooks';
 
 /* Presents patient screening and medical data to the doctor. */
 export default function PatientRecord({ open, setOpen, fireDocId }) {
@@ -9,11 +10,26 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
   const [medical, setMedical] = useState({});
   const [note, setNote] = useState('');
   const [age, setAge] = useState(0);
+  const { user } = useAuth();
   const { firstName, lastName, email, phone, dob, sex, height, weight, bmi } =
     screening;
 
   const wrapperStyle =
     'flex flex-row items-center border-b border-slate-400 py-2'; // standard question and answer wrapper style
+
+  async function saveNote() {
+    const doctor = user.displayName;
+    const options = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ noteText: note, docId: fireDocId, doctor }),
+    };
+    // TODO: Add token from firebase auth to request.
+    const res = await fetch('/api/users/patient/notes', options);
+    const data = await res.json();
+    if (data.success) setNote('');
+    else console.log('Error saving note: ', data.error);
+  }
 
   function Question({ text }) {
     return <p className="mr-10 w-72 italic">{text}</p>;
@@ -227,7 +243,7 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
             minRows={5}
             className="my-5 w-full max-w-lg"
           />
-          <Button variant="outlined" className="w-36">
+          <Button variant="outlined" className="w-36" onClick={saveNote}>
             Save Note
           </Button>
         </section>
