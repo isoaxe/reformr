@@ -251,7 +251,7 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
             <AnswerList answers={medical.wm20_medications} />
           </div>
           <div className={wrapperStyle}>
-            <Question text="Does the patient have any allergies? If so, what were they?" />
+            <Question text="Does the patient have any allergies? If so, what are they?" />
             <p>{medical.wm21_allergies?.response}</p>
             {medical.wm21_allergies?.response === 'Yes' && (
               <p className="ml-1.5">- {medical.wm21_allergies.moreInfo}</p>
