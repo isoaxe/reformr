@@ -75,8 +75,8 @@ export async function GET(request) {
     const db = admin.firestore();
     const userRef = await db.collection('users').doc(docId).get();
     const userData = userRef.data();
-    const { screening, medical } = userData;
-    return NextResponse.json({ success: true, screening, medical });
+    const { screening, medical, notes } = userData;
+    return NextResponse.json({ success: true, screening, medical, notes });
   } catch (err) {
     console.error('Error getting patient data: ', err);
     return NextResponse.json({ success: false, error: err });
