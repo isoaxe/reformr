@@ -36,7 +36,7 @@ export async function POST(request) {
   /* Access Firestore as required for all events. */
   await initialiseAdmin();
   const db = admin.firestore();
-  const usersPath = db.collection('users');
+  const patientsRef = db.collection('patients');
 
   /* Get customerId as required for all events. */
   const invoice = event?.data?.object;
@@ -88,7 +88,7 @@ export async function POST(request) {
       orders.push(order);
 
       /* Save payment and order data to Firestore. */
-      await usersPath
+      await patientsRef
         .doc(docId)
         .set({ payments: paymentData, orders }, { merge: true });
       console.log('✅ Payment made and data saved to Firestore.');
@@ -109,7 +109,7 @@ export async function POST(request) {
       await stripe.customers.update(customerId, {
         invoice_settings: { default_payment_method: paymentMethodId },
       });
-      await usersPath
+      await patientsRef
         .doc(docId)
         .set({ payments: { paymentMethodId } }, { merge: true });
       console.log(`✅ Payment method ${paymentMethodId} set as default`);
@@ -124,7 +124,7 @@ export async function POST(request) {
     const { docId } = await getUserData(customerId);
 
     /* Set user as unpaid in Firestore. */
-    await usersPath
+    await patientsRef
       .doc(docId)
       .set({ payments: { isPaid: false } }, { merge: true });
     console.log('ℹ️  User set as unpaid in Firestore.');
