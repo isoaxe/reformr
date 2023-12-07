@@ -31,7 +31,7 @@ export async function POST(request) {
     const docId = await getDocId(email);
 
     /* Update account creation date, uid and status on Firestore. */
-    await updateDoc(doc(db, 'users', docId), {
+    await updateDoc(doc(db, 'patients', docId), {
       dateAccountCreated: new Date(),
       userId: user.uid,
       notes: [],
@@ -56,12 +56,12 @@ export async function PUT(request) {
     /* Update patient status on Firestore. */
     await initialiseAdmin();
     const db = admin.firestore();
-    const userRef = db.collection('users').doc(docId);
+    const patientRef = db.collection('patients').doc(docId);
     /* Only one of these conditionals will run. */
-    if (patientStatus) await userRef.set({ patientStatus }, { merge: true });
+    if (patientStatus) await patientRef.set({ patientStatus }, { merge: true });
     if (orderStatus || trackingNumber) {
-      const user = await userRef.get();
-      const { orders } = user.data();
+      const patientDoc = await patientRef.get();
+      const { orders } = patientDoc.data();
       const order = orders.pop();
       if (trackingNumber) order.trackingNumber = trackingNumber;
       if (orderStatus) {
@@ -70,7 +70,7 @@ export async function PUT(request) {
         order.statusDates[statusKey] = new Date();
       }
       orders.push(order);
-      await userRef.set({ orders }, { merge: true });
+      await patientRef.set({ orders }, { merge: true });
     }
     return NextResponse.json({ success: true });
   } catch (err) {
@@ -79,24 +79,24 @@ export async function PUT(request) {
   }
 }
 
-/* Get all patient user from Firestore. */
+/* Get all patients from Firestore. */
 export async function GET() {
   // TODO: Add token from firebase auth to request.
   try {
-    /* Get a list of all users from Firestore. */
+    /* Get a list of all patients from Firestore. */
     await initialiseAdmin();
     const db = admin.firestore();
-    const usersPath = db.collection('users');
-    const allUserSnapshot = await usersPath
+    const paidPatientsRef = await db
+      .collection('patients')
       .where('payments.isPaid', '==', true)
       .get();
-    const allUsers = [];
-    allUserSnapshot.forEach((doc) => {
+    const paidPatients = [];
+    paidPatientsRef.forEach((doc) => {
       const { screening, patientStatus, identityStatus, orders, payments } =
         doc.data();
       const { status, trackingNumber } = orders.pop();
       const lastPayment = payments.payments.pop().paymentDate.seconds * 1000;
-      const user = {
+      const patient = {
         name: `${screening.firstName} ${screening.lastName}`,
         email: screening.email,
         docId: doc.id,
@@ -106,10 +106,10 @@ export async function GET() {
         lastPayment,
         trackingNumber,
       };
-      allUsers.push(user);
+      paidPatients.push(patient);
     });
 
-    return NextResponse.json({ success: true, allUsers });
+    return NextResponse.json({ success: true, allUsers: paidPatients });
   } catch (error) {
     console.error('Error getting users: ', error);
     return NextResponse.json({ success: false, error });
