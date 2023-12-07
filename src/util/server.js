@@ -6,7 +6,7 @@ import { initialiseAdmin } from '@/util/admin';
 import { getDocId } from './helpers';
 
 /* Get patient data from Firestore. */
-export async function getUserData(customerId) {
+export async function getPatientData(customerId) {
   await initialiseAdmin();
   const db = admin.firestore();
   const patientRef = await db
@@ -19,5 +19,5 @@ export async function getUserData(customerId) {
   const patientData = patientDoc.data();
   const { email } = patientData.screening;
   const docId = await getDocId(email);
-  return { docId, userData: patientData };
+  return { docId, patientData };
 }
