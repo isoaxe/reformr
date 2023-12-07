@@ -109,7 +109,7 @@ export async function GET() {
       paidPatients.push(patient);
     });
 
-    return NextResponse.json({ success: true, allUsers: paidPatients });
+    return NextResponse.json({ success: true, paidPatients });
   } catch (error) {
     console.error('Error getting users: ', error);
     return NextResponse.json({ success: false, error });

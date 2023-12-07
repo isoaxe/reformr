@@ -48,8 +48,8 @@ export default function DoctorDashboard() {
     // TODO: Add token from firebase auth to request.
     const getPatients = async () => {
       const res = await fetch('/api/users/patient');
-      const { success, allUsers } = await res.json();
-      if (success) setPatients(allUsers);
+      const { success, paidPatients } = await res.json();
+      if (success) setPatients(paidPatients);
     };
     getPatients();
   }, [user]);
