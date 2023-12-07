@@ -26,7 +26,7 @@ export async function POST(request) {
     screening.phone = '+' + screening.phone.slice(1); // fix phone formatting
     screening.dateCreated = new Date();
     /* Fine to overwrite data saved to Firestore before account creation. */
-    await setDoc(doc(db, 'users', docId), {
+    await setDoc(doc(db, 'patients', docId), {
       dateAccountCreated: null,
       orders: [], // contains tracking number and order status with dates
       patientStatus: 'pending', // medical status that doctor will set
