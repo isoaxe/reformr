@@ -54,8 +54,8 @@ export async function POST(request) {
     if (numFields === 23) {
       await initialiseAdmin();
       const db = admin.firestore();
-      const user = db.collection('users').doc(docId);
-      await user.set({ medical }, { merge: true });
+      const patientRef = db.collection('patients').doc(docId);
+      await patientRef.set({ medical }, { merge: true });
     } else console.log('Incorrect number of answers to medical.');
   } catch (err) {
     console.error('Error saving screening data: ', err);
@@ -73,9 +73,9 @@ export async function GET(request) {
   try {
     await initialiseAdmin();
     const db = admin.firestore();
-    const userRef = await db.collection('users').doc(docId).get();
-    const userData = userRef.data();
-    const { screening, medical, notes } = userData;
+    const patientDoc = await db.collection('patients').doc(docId).get();
+    const patientData = patientDoc.data();
+    const { screening, medical, notes } = patientData;
     return NextResponse.json({ success: true, screening, medical, notes });
   } catch (err) {
     console.error('Error getting patient data: ', err);
