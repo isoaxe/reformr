@@ -62,7 +62,7 @@ export default function PaymentWrapper({ address }) {
 
     /* Save address to Firestore. */
     try {
-      await updateDoc(doc(db, 'users', docId), { address });
+      await updateDoc(doc(db, 'patients', docId), { address });
     } catch (err) {
       console.log('Error saving address: ', err);
       setMessage('There was an issue saving your address.');
