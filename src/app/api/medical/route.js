@@ -51,18 +51,19 @@ export async function POST(request) {
     medical.dateCreated = new Date();
     /* Check that there's the correct number of fields in the submission. */
     const numFields = Object.keys(medical).length;
-    if (numFields === 23) {
-      await initialiseAdmin();
-      const db = admin.firestore();
-      const patientRef = db.collection('patients').doc(docId);
-      await patientRef.set({ medical }, { merge: true });
-    } else console.log('Incorrect number of answers to medical.');
+    const error = `Expected 23 fields, got ${numFields}.`;
+    if (numFields !== 23) return NextResponse.json({ success: false, error });
+
+    /* If correct number of fields, save to Firestore. */
+    await initialiseAdmin();
+    const db = admin.firestore();
+    const patientRef = db.collection('patients').doc(docId);
+    await patientRef.set({ medical }, { merge: true });
+    return NextResponse.json({ success: true });
   } catch (err) {
     console.error('Error saving screening data: ', err);
     return NextResponse.json({ success: false, error: err });
   }
-
-  return NextResponse.json({ success: true });
 }
 
 /* Get screening and medical data for the patient. */
