@@ -7,7 +7,7 @@ import { STRIPE_SECRET_KEY } from '@/util/constants';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
 
-/* Create new identity session for authenticated users. */
+/* Create new identity session for authenticated patients. */
 export async function POST(request) {
   const data = await request.json();
   // TODO: Authenticate with token rather than userId.

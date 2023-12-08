@@ -17,7 +17,7 @@ service cloud.firestore {
     }
     match /patients/{patientId} {
       allow get: if isSameUser();
-      allow list: if false; // don't allow fetching of all users
+      allow list: if false; // don't allow fetching of all patients
       allow create: if screeningDataVerified();
       allow update: if resource.data.dateAccountCreated == null || isSameUser();
     }

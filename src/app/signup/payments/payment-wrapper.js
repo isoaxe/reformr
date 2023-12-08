@@ -44,7 +44,7 @@ export default function PaymentWrapper({ address }) {
       return;
     }
 
-    /* Get the users document ID from Firestore. */
+    /* Get the patients document ID from Firestore. */
     let docId;
     try {
       // TODO: Replace this token with a Firebase authentication token.

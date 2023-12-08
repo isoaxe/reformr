@@ -111,7 +111,7 @@ export async function GET() {
 
     return NextResponse.json({ success: true, paidPatients });
   } catch (error) {
-    console.error('Error getting users: ', error);
+    console.error('Error getting patients: ', error);
     return NextResponse.json({ success: false, error });
   }
 }

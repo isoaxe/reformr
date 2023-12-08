@@ -11,7 +11,7 @@ import { useCookieState, useKeyPress } from '@/util/hooks';
 import { setQuizCookie } from '@/util/helpers';
 import { db } from '@/util/firebase';
 
-/* Collect users email address. */
+/* Collect patients email address. */
 export default function Email() {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');

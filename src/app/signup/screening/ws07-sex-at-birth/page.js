@@ -5,7 +5,7 @@ import { Typography, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import Button from '@/components/quiz/button';
 import { useCookieState } from '@/util/hooks';
 
-/* Collect the users sex as recorded at birth. */
+/* Collect the patients sex as recorded at birth. */
 export default function SexAtBirth() {
   const [sex, setSex] = useState('');
 
