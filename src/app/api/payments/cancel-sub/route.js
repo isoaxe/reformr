@@ -17,8 +17,8 @@ export async function POST(request) {
     const docId = await getDocId(email);
     await initialiseAdmin();
     const db = admin.firestore();
-    const userRef = db.collection('users').doc(docId);
-    await userRef.set(
+    const patientRef = db.collection('patients').doc(docId);
+    await patientRef.set(
       { payments: { subscription: { isCancelled: true } } },
       { merge: true }
     );

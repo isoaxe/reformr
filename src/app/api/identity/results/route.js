@@ -39,21 +39,20 @@ export async function POST(request) {
   /* Access Firestore as required for all events. */
   await initialiseAdmin();
   const db = admin.firestore();
-  const usersPath = db.collection('users');
-  const userDoc = usersPath.doc(docId);
+  const patientRef = db.collection('patients').doc(docId);
 
   switch (event.type) {
     case 'identity.verification_session.processing':
-      userDoc.set({ identityStatus: status }, { merge: true });
+      patientRef.set({ identityStatus: status }, { merge: true });
       break;
     case 'identity.verification_session.verified':
-      userDoc.set({ identityStatus: status }, { merge: true });
+      patientRef.set({ identityStatus: status }, { merge: true });
       break;
     case 'identity.verification_session.requires_input':
-      userDoc.set({ identityStatus: status }, { merge: true });
+      patientRef.set({ identityStatus: status }, { merge: true });
       break;
     case 'identity.verification_session.canceled':
-      userDoc.set({ identityStatus: status }, { merge: true });
+      patientRef.set({ identityStatus: status }, { merge: true });
       break;
     default:
       console.log(`⚠️  Unhandled event type ${event.type}`);

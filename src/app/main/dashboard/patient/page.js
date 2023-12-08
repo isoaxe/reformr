@@ -152,16 +152,16 @@ export default function PatientDashboard() {
 
     async function getPatientData() {
       const docId = await getDocId(email);
-      const userRef = doc(db, 'users', docId);
-      const userSnap = await getDoc(userRef);
-      const userData = userSnap.data();
-      const { payments } = userData;
+      const patientRef = doc(db, 'patients', docId);
+      const patientDoc = await getDoc(patientRef);
+      const patientData = patientDoc.data();
+      const { payments } = patientData;
       const lastPaymentUnix = payments?.payments?.pop()?.paymentDate?.seconds;
-      const lastOrder = userData?.orders?.pop();
-      setPhone(userData?.screening?.phone);
-      setAddress(userData?.address);
+      const lastOrder = patientData?.orders?.pop();
+      setPhone(patientData?.screening?.phone);
+      setAddress(patientData?.address);
       setStripeUid(payments?.stripeUid);
-      setMedicalStatus(userData?.patientStatus);
+      setMedicalStatus(patientData?.patientStatus);
       setOrderStatus(lastOrder.status);
       setTrackingNumber(lastOrder.trackingNumber);
       setLastPayment(new Date(lastPaymentUnix * 1000).toDateString());

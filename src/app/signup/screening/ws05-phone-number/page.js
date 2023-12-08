@@ -7,7 +7,7 @@ import Button from '@/components/quiz/button';
 import Captcha from '@/components/captcha';
 import { useCookieState } from '@/util/hooks';
 
-/* Collect users mobile phone number. */
+/* Collect patients mobile phone number. */
 export default function PhoneNumber() {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');

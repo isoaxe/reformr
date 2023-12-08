@@ -12,12 +12,12 @@ export async function POST(request) {
   try {
     await initialiseAdmin();
     const db = admin.firestore();
-    const userRef = db.collection('users').doc(docId);
-    const userDoc = await userRef.get();
-    const notes = userDoc.data().notes ?? [];
+    const patientRef = db.collection('patients').doc(docId);
+    const patientDoc = await patientRef.get();
+    const notes = patientDoc.data().notes ?? [];
     const note = { noteText, dateCreated: new Date(), doctor, noteId };
     notes.push(note);
-    await userRef.set({ notes }, { merge: true });
+    await patientRef.set({ notes }, { merge: true });
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error saving note: ', error);

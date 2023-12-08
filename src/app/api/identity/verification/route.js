@@ -7,9 +7,10 @@ import { STRIPE_SECRET_KEY } from '@/util/constants';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
 
-/* Create new identity session for authenticated users. */
+/* Create new identity session for authenticated patients. */
 export async function POST(request) {
   const data = await request.json();
+  // TODO: Authenticate with token rather than userId.
   const { email, userId } = data;
 
   try {
@@ -17,9 +18,9 @@ export async function POST(request) {
     const docId = await getDocId(email);
     await initialiseAdmin();
     const db = admin.firestore();
-    const user = await db.collection('users').doc(docId).get();
-    const userData = user.data();
-    const firestoreUserId = userData.userId;
+    const patientDoc = await db.collection('patients').doc(docId).get();
+    const patientData = patientDoc.data();
+    const firestoreUserId = patientData.userId;
 
     /* Check that userId from client is same as Firestore. */
     if (userId && userId !== firestoreUserId)

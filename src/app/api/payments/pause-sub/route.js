@@ -18,13 +18,13 @@ export async function POST(request) {
     const docId = await getDocId(email);
     await initialiseAdmin();
     const db = admin.firestore();
-    const userRef = db.collection('users').doc(docId);
-    const userDoc = await userRef.get();
-    const userData = userDoc.data();
-    let { numBoxesSkipped, expiryDate } = userData.payments;
+    const patientRef = db.collection('patients').doc(docId);
+    const patientDoc = await patientRef.get();
+    const patientData = patientDoc.data();
+    let { numBoxesSkipped, expiryDate } = patientData.payments;
     numBoxesSkipped++;
     const newExpiryDate = new Date(expiryDate.seconds * 1000 + ONE_MONTH);
-    await userRef.set(
+    await patientRef.set(
       {
         payments: {
           expiryDate: newExpiryDate,

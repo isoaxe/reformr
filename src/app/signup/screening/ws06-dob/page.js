@@ -8,7 +8,7 @@ import moment from 'moment';
 import Button from '@/components/quiz/button';
 import { useCookieState } from '@/util/hooks';
 
-/* Collect the users date of birth. */
+/* Collect the patients date of birth. */
 export default function DateOfBirth() {
   const [birthday, setBirthday] = useState(null); // moment object
   const [dob, setDob] = useState(''); // string to store in cookie

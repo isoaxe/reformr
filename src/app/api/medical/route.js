@@ -51,18 +51,19 @@ export async function POST(request) {
     medical.dateCreated = new Date();
     /* Check that there's the correct number of fields in the submission. */
     const numFields = Object.keys(medical).length;
-    if (numFields === 23) {
-      await initialiseAdmin();
-      const db = admin.firestore();
-      const user = db.collection('users').doc(docId);
-      await user.set({ medical }, { merge: true });
-    } else console.log('Incorrect number of answers to medical.');
+    const error = `Expected 23 fields, got ${numFields}.`;
+    if (numFields !== 23) return NextResponse.json({ success: false, error });
+
+    /* If correct number of fields, save to Firestore. */
+    await initialiseAdmin();
+    const db = admin.firestore();
+    const patientRef = db.collection('patients').doc(docId);
+    await patientRef.set({ medical }, { merge: true });
+    return NextResponse.json({ success: true });
   } catch (err) {
     console.error('Error saving screening data: ', err);
     return NextResponse.json({ success: false, error: err });
   }
-
-  return NextResponse.json({ success: true });
 }
 
 /* Get screening and medical data for the patient. */
@@ -73,9 +74,9 @@ export async function GET(request) {
   try {
     await initialiseAdmin();
     const db = admin.firestore();
-    const userRef = await db.collection('users').doc(docId).get();
-    const userData = userRef.data();
-    const { screening, medical, notes } = userData;
+    const patientDoc = await db.collection('patients').doc(docId).get();
+    const patientData = patientDoc.data();
+    const { screening, medical, notes } = patientData;
     return NextResponse.json({ success: true, screening, medical, notes });
   } catch (err) {
     console.error('Error getting patient data: ', err);

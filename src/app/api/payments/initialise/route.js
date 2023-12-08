@@ -21,10 +21,10 @@ export async function POST(request) {
     /* Return subscription if already in Firestore. */
     await initialiseAdmin();
     const db = admin.firestore();
-    const userRef = db.collection('users').doc(docId);
-    const user = await userRef.get();
-    const userData = user.data();
-    const { payments } = userData;
+    const patientRef = db.collection('patients').doc(docId);
+    const patientDoc = await patientRef.get();
+    const patientData = patientDoc.data();
+    const { payments } = patientData;
     if (payments) {
       const { subscription } = payments;
       return NextResponse.json(subscription);
@@ -44,7 +44,7 @@ export async function POST(request) {
       isPaid: false,
       payments: [],
     };
-    await userRef.set({ payments: paymentData }, { merge: true });
+    await patientRef.set({ payments: paymentData }, { merge: true });
 
     return NextResponse.json(subscription);
   } catch (err) {
