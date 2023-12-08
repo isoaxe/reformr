@@ -12,10 +12,10 @@ service cloud.firestore {
     }
     function isSameUser() {
       let docId = get(/databases/$(database)/documents/emails/$(request.auth.token.email)).data.docId;
-      let userId = get(/databases/$(database)/documents/users/$(docId)).data.userId;
-    	return request.auth != null && request.auth.uid == userId;
+      let patientId = get(/databases/$(database)/documents/patients/$(docId)).data.userId;
+    	return request.auth != null && request.auth.uid == patientId;
     }
-    match /users/{userId} {
+    match /patients/{patientId} {
       allow get: if isSameUser();
       allow list: if false; // don't allow fetching of all users
       allow create: if screeningDataVerified();
