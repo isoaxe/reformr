@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/util/hooks';
 import { auth } from '@/util/firebase';
-import { ADMIN_EMAIL } from '@/util/constants';
+import { ADMIN_EMAILS } from '@/util/constants';
 
 export default function NavLinks({ setOpen }) {
   const [navPath, setNavPath] = useState('/main/login');
@@ -42,7 +42,7 @@ export default function NavLinks({ setOpen }) {
     async function getUserType() {
       const tokenRes = await auth.currentUser.getIdTokenResult();
       const role = await tokenRes.claims.role;
-      if (user.email === ADMIN_EMAIL) setUserType('admin');
+      if (ADMIN_EMAILS.includes(user?.email)) setUserType('admin');
       else if (role) setUserType(role);
       else setUserType('patient');
     }

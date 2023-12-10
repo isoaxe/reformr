@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@mui/material';
 import Patients from './admin-patients';
-import { ADMIN_EMAIL } from '@/util/constants';
+import { ADMIN_EMAILS } from '@/util/constants';
 import { useAuth } from '@/util/hooks';
 import CreateNewUser from './new-user';
 
@@ -21,7 +21,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     if (!isPageLoaded) return;
-    if (user?.email !== ADMIN_EMAIL) router.push('/main/login'); // redirect to login if not admin.
+    if (!ADMIN_EMAILS.includes(user?.email)) router.push('/main/login'); // redirect to login if not admin.
   }, [isPageLoaded, user, router]);
 
   return (
