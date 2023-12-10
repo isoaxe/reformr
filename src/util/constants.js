@@ -54,4 +54,9 @@ export const STRIPE_PRICE_ID = isLive ? stripePriceIdLive : stripePriceIdTest;
 
 /* Other constants. */
 export const ONE_MONTH = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
-export const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+export const ADMIN_EMAILS = [
+  'luke@reformr.co.nz',
+  'jahan@reformr.co.nz',
+  'dhru@reformr.co.nz',
+  process.env.NEXT_PUBLIC_ADMIN_EMAIL,
+];
