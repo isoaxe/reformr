@@ -30,7 +30,10 @@ export default function NavLinks({ setOpen }) {
       return;
     }
 
-    const name = user.displayName?.split(' ')[0] || 'Luke';
+    const isAdmin = ADMIN_EMAILS.includes(user?.email);
+    let adminName = '';
+    if (isAdmin) adminName = user?.email?.split('@')[0];
+    const name = user.displayName?.split(' ')[0] || adminName;
     if (pathname.includes('dashboard')) setNavText('Greetings, ' + name);
     else setNavText('Dashboard');
     setNavPath(`/main/dashboard/${userType}`);
