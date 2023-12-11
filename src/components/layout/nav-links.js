@@ -19,9 +19,7 @@ export default function NavLinks({ setOpen }) {
   // Link styles.
   const constant = ' h-full flex items-center mt-5 md:mt-0';
   const active = 'font-bold bg-primary text-cyan-200' + constant;
-  const dormant =
-    'font-normal hover:drop-shadow-light md:hover:pb-2 transition-all' +
-    constant;
+  const dormant = 'hover:text-cyan-200' + constant;
 
   useEffect(() => {
     if (!user) {
