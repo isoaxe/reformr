@@ -48,6 +48,7 @@ export default function FullNavbar() {
               toggled={isOpen}
               toggle={setOpen}
               label="Menu button for smaller screens"
+              color="#fff"
             />
           </div>
         </div>
