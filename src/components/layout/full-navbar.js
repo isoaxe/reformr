@@ -26,7 +26,7 @@ export default function FullNavbar() {
         <div className="max-w-400 m-auto flex h-full w-full flex-row items-center justify-between">
           <Link
             href="/main/home"
-            className={`mr-10 w-32 md:w-44 lg:mr-20 ${
+            className={`mr-10 w-40 md:w-72 lg:mr-20 ${
               pathname !== '/main/home' && 'hover:opacity-60'
             }`}
             onClick={close}
@@ -34,7 +34,7 @@ export default function FullNavbar() {
             <Image
               src={logo}
               alt="Plain monotone version of Reformr text logo."
-              sizes="(max-width: 767px) 8rem, 11rem"
+              sizes="(max-width: 767px) 10rem, 18rem"
             />
           </Link>
           <div className="hidden h-full w-full md:flex">
