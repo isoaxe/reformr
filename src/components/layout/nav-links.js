@@ -17,7 +17,7 @@ export default function NavLinks({ setOpen }) {
   const close = () => setOpen(false);
 
   // Link styles.
-  const constant = ' h-full flex items-center mt-5 md:mt-0';
+  const constant = ' h-full flex items-center mt-10 md:mt-0';
   const active = 'font-bold bg-primary text-cyan-200' + constant;
   const dormant = 'hover:text-cyan-200' + constant;
 
