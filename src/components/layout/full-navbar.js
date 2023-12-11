@@ -20,7 +20,7 @@ export default function FullNavbar() {
     <>
       <div
         className={`fixed top-0 z-30 flex h-12 w-full flex-row justify-between bg-violet-500 px-4 xs:px-9 md:h-16 ${
-          isOpen ? '' : 'border-b-2 border-violet-800'
+          !isOpen && 'border-b-2 border-violet-800'
         }`}
       >
         <div className="max-w-400 m-auto flex h-full w-full flex-row items-center justify-between">
