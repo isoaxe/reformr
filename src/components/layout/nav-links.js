@@ -52,7 +52,7 @@ export default function NavLinks({ setOpen }) {
   }, [user]);
 
   return (
-    <div className="flex h-40 w-full flex-col justify-between text-xl text-white md:h-full md:flex-row">
+    <div className="flex h-40 w-full flex-col justify-between text-xl text-white md:h-full md:flex-row lg:text-2xl">
       <div className="flex h-80 flex-col pt-10 md:h-full md:w-full md:max-w-xl md:flex-row md:justify-between md:pr-16 md:pt-0">
         <h6 className={pathname === '/main/blog' ? active : dormant}>
           <Link href="/main/blog" onClick={close}>
