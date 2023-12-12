@@ -36,7 +36,7 @@ export default function Hero() {
             interval,
           ]}
           speed={50}
-          className="w-fit bg-gradient-to-l from-violet-300 to-violet-600 bg-clip-text text-4xl font-extrabold text-transparent xs:text-5xl md:text-6xl lg:text-7xl"
+          className="text-4xl font-extrabold text-white xs:text-5xl md:text-6xl lg:text-7xl"
           repeat={Infinity}
         />
         <h1 className="mt-4 text-4xl font-extrabold xs:text-5xl md:text-6xl lg:text-7xl">
