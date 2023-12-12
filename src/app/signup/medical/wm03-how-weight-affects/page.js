@@ -31,7 +31,7 @@ export default function HowWeightAffects() {
       <div className="mb-3 flex flex-row items-center justify-between">
         <p
           className={`w-64 text-lg md:text-xl xl:w-96 xl:text-2xl ${
-            !answers[name] ? 'text-slate-400' : ''
+            !answers[name] && 'text-slate-400'
           }`}
         >
           {label}

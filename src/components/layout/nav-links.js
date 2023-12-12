@@ -17,11 +17,9 @@ export default function NavLinks({ setOpen }) {
   const close = () => setOpen(false);
 
   // Link styles.
-  const constant = ' h-full flex items-center mt-5 md:mt-0';
+  const constant = ' h-full flex items-center mt-10 md:mt-0';
   const active = 'font-bold bg-primary text-cyan-200' + constant;
-  const dormant =
-    'font-normal hover:drop-shadow-light md:hover:pb-2 transition-all' +
-    constant;
+  const dormant = 'hover:text-cyan-200' + constant;
 
   useEffect(() => {
     if (!user) {
@@ -35,7 +33,7 @@ export default function NavLinks({ setOpen }) {
     if (isAdmin) adminName = user?.email?.split('@')[0];
     const name = user.displayName?.split(' ')[0] || adminName;
     if (pathname.includes('dashboard')) setNavText('Greetings, ' + name);
-    else setNavText('Dashboard');
+    else setNavText('My Account');
     setNavPath(`/main/dashboard/${userType}`);
   }, [user, pathname, userType]);
 
@@ -54,8 +52,8 @@ export default function NavLinks({ setOpen }) {
   }, [user]);
 
   return (
-    <div className="flex h-40 w-full flex-col justify-between pb-1 pt-6 text-xl text-white md:h-full md:flex-row">
-      <div className="flex h-80 flex-col md:h-full md:w-full md:max-w-xl md:flex-row md:justify-between md:pr-16">
+    <div className="flex h-40 w-full flex-col justify-between text-xl text-white md:h-full md:flex-row">
+      <div className="flex h-80 flex-col pt-10 md:h-full md:w-full md:max-w-xl md:flex-row md:justify-between md:pr-16 md:pt-0">
         <h6 className={pathname === '/main/blog' ? active : dormant}>
           <Link href="/main/blog" onClick={close}>
             Learn
