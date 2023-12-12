@@ -115,3 +115,17 @@ export function useRedirectNoUser(user) {
     if (!user) router.push('/main/login'); // redirect to login if no user.
   }, [isPageLoaded, user, router]);
 }
+
+/* Returns the vertical scroll position of the page. */
+export function useScrollPosition() {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollPosition(window.scrollY);
+
+    document.addEventListener('scroll', handleScroll);
+    return () => document.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return scrollPosition;
+}
