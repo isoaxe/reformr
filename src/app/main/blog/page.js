@@ -17,7 +17,7 @@ export default function Blog() {
             sizes="100vw"
           />
         </div>
-        <div className="relative flex h-screen w-fit max-w-xl flex-col justify-center px-4 pb-20 text-white xs:mr-4 lg:mr-10 xl:max-w-2xl 2xl:mr-40">
+        <div className="relative flex h-screen w-fit max-w-xl flex-col justify-center px-4 py-20 text-white xs:mr-4 lg:mr-10 xl:max-w-2xl 2xl:mr-40">
           <h1 className="text-6xl font-extrabold ml:text-7xl lg:text-8xl">
             Learning Hub
           </h1>
