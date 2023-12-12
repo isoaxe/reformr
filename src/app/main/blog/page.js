@@ -8,7 +8,7 @@ export default function Blog() {
   return (
     <main>
       <section className="relative flex h-screen justify-end">
-        <div className="absolute -top-[3rem] h-screen w-full md:-top-[4rem]">
+        <div className="absolute h-screen w-full">
           <Image
             src={doctor}
             alt="A smiling cartoon doctor with hand outstretched."
@@ -37,7 +37,7 @@ export default function Blog() {
           />
         </div>
       </section>
-      <section className="mx-5 flex flex-wrap justify-center">
+      <section className="mx-5 mt-10 flex flex-wrap justify-center">
         {blogTileData.map((tileData, index) => (
           <Tile data={tileData} key={index} />
         ))}
