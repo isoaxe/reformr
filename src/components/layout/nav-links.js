@@ -82,7 +82,7 @@ export default function NavLinks({ setOpen }) {
             : dormant
         }
       >
-        <Link href={navPath} onClick={close}>
+        <Link href={navPath} onClick={close} className="w-32">
           {navText}
         </Link>
       </h6>
