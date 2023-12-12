@@ -15,7 +15,7 @@ export default function Closer() {
           sizes="100vw"
         />
       </div>
-      <div className="relative flex h-full w-fit flex-col justify-center px-4 text-black drop-shadow-light xs:pl-8 sm:pl-12 lg:pl-32">
+      <div className="relative flex h-full w-fit flex-col justify-center px-4 text-black xs:pl-8 sm:pl-12 lg:pl-32">
         <h1 className="text-4xl font-extrabold xs:text-5xl md:text-6xl lg:text-7xl">
           Peace of mind.
         </h1>
