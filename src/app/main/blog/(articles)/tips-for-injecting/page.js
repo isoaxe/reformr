@@ -227,11 +227,7 @@ export default function TipsForInjecting() {
         .
       </p>
       <div className="my-12 text-center">
-        <Button
-          text="Take Our Quiz"
-          link="/signup/screening"
-          haloShade="dark"
-        />
+        <Button text="Take Our Quiz" link="/signup/screening" />
       </div>
     </main>
   );

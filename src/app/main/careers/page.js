@@ -26,7 +26,7 @@ export default function Careers() {
             access to the latest evidence-based treatments.
           </p>
           <div className="w-fit md:pb-20 lg:pb-64 2xl:pb-96">
-            <Button text="Contact Us" link="/contact" haloShade="light" />
+            <Button text="Contact Us" link="/contact" />
           </div>
         </div>
       </section>
@@ -40,7 +40,7 @@ export default function Careers() {
           strategic partnerships, and nurture our members.
         </p>
         <div className="w-fit">
-          <Button text="Get in Touch" link="/contact" haloShade="dark" />
+          <Button text="Get in Touch" link="/contact" />
         </div>
       </section>
       <section className="mx-auto flex flex-col items-center bg-pink-200 px-4 py-16 xs:px-9 md:py-28">

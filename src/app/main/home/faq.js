@@ -17,7 +17,7 @@ export default function FAQ() {
           <h3 className="mb-2 text-lg sm:mb-6 sm:mt-16 md:text-xl lg:text-2xl">
             Other Questions?
           </h3>
-          <Button text="Contact Us" link="/contact" haloShade="dark" />
+          <Button text="Contact Us" link="/contact" />
         </div>
       </div>
       <CollapsibleMenu data={faqData} />

@@ -30,11 +30,7 @@ export default function Blog() {
           <p className="my-12 text-lg font-semibold ml:my-16 ml:text-xl lg:text-2xl">
             Curious about weight loss injections?
           </p>
-          <Button
-            text="Take the Quiz"
-            link="/signup/screening"
-            haloShade="light"
-          />
+          <Button text="Take the Quiz" link="/signup/screening" />
         </div>
       </section>
       <section className="mx-5 mt-10 flex flex-wrap justify-center">

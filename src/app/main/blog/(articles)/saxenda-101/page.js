@@ -39,11 +39,7 @@ export default function Saxenda101() {
         </div>
       </div>
       <div className="text-center">
-        <Button
-          text="Find out if you're eligible"
-          link="/signup/screening"
-          haloShade="light"
-        />
+        <Button text="Find out if you're eligible" link="/signup/screening" />
       </div>
       <h2 className="mt-16 text-3xl font-medium xs:text-4xl md:text-5xl">
         What actually is Saxenda?
@@ -255,7 +251,7 @@ export default function Saxenda101() {
         to find out today.
       </p>
       <div className="my-12 text-center">
-        <Button text="Get Started!" link="/signup/screening" haloShade="dark" />
+        <Button text="Get Started!" link="/signup/screening" />
       </div>
     </main>
   );

@@ -33,11 +33,7 @@ export default function SalesPitch() {
             </span>{' '}
             compared with diet and exercise alone.
           </p>
-          <Button
-            text="Start Consult"
-            link="/signup/screening"
-            haloShade="dark"
-          />
+          <Button text="Start Consult" link="/signup/screening" />
         </div>
         <div className="relative aspect-square w-full max-w-md rounded-full shadow-2xl lg:max-w-lg">
           <Image
@@ -62,11 +58,7 @@ export default function SalesPitch() {
             that are revolutionising how hundreds of thousands of people are
             losing weight.
           </p>
-          <Button
-            text="Begin Assessment"
-            link="/signup/screening"
-            haloShade="dark"
-          />
+          <Button text="Begin Assessment" link="/signup/screening" />
         </div>
         <div className="relative aspect-square w-full max-w-md rounded-full shadow-2xl lg:max-w-lg">
           <Image
@@ -93,7 +85,7 @@ export default function SalesPitch() {
             <BulletPoint text="Reversal of fatty liver." />
             <BulletPoint text="Improvements in depression, anxiety, and quality of life." />
           </div>
-          <Button text="Knowledge Centre" link="/blog" haloShade="dark" />
+          <Button text="Knowledge Centre" link="/blog" />
         </div>
         <div className="relative aspect-square w-full max-w-md rounded-full shadow-2xl lg:max-w-lg">
           <Image

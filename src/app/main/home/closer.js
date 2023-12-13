@@ -43,11 +43,7 @@ export default function Closer() {
           </p>
         </div>
         <div className="w-fit">
-          <Button
-            text="Get Started"
-            link="/signup/screening"
-            haloShade="light"
-          />
+          <Button text="Get Started" link="/signup/screening" />
         </div>
       </div>
     </section>

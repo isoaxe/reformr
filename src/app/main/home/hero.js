@@ -46,11 +46,7 @@ export default function Hero() {
           Prescription medication that addresses weight at a biological level.
         </h2>
         <div className="w-fit">
-          <Button
-            text="Check Eligibility"
-            link="/signup/screening"
-            haloShade="light"
-          />
+          <Button text="Check Eligibility" link="/signup/screening" />
         </div>
       </div>
     </section>
