@@ -5,10 +5,12 @@ import { PiCaretDownLight } from 'react-icons/pi';
 import PlayBgVideo from '@/components/play-bg-video';
 import TrustBox from '@/components/trustpilot';
 import Button from '@/components/button';
+import { useDeviceType } from '@/util/hooks';
 
 /* Hero section that the user first sees at the top of the homepage. */
 export default function Hero() {
   const interval = 2000;
+  const deviceType = useDeviceType();
 
   return (
     <section className="relative h-[88vh]">
@@ -55,7 +57,9 @@ export default function Hero() {
         </div>
         <PiCaretDownLight
           size={50}
-          className="absolute bottom-0 left-0 right-0 mx-auto animate-bounce"
+          className={`absolute bottom-0 left-0 mx-auto animate-bounce ${
+            deviceType === 'Desktop' ? 'right-4' : 'right-0'
+          }`}
         />
         <div className="absolute bottom-0 right-0 h-0 w-0 border-l-[50vw] border-r-[50vw] border-t-[3rem] border-l-slate-200 border-r-slate-200 border-t-transparent md:border-t-[6rem]">
           {/* Overlay at the bottom of the video to create triangular shape. */}
