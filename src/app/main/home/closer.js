@@ -6,7 +6,7 @@ import manGrinning from '/public/images/man-grinning.jpeg';
 export default function Closer() {
   return (
     <section className="flex h-screen items-center">
-      <div className="absolute h-full w-full">
+      <div className="absolute h-screen w-full">
         <Image
           src={manGrinning}
           alt="A short-haired man grinning widely."
