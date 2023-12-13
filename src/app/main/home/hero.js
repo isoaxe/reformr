@@ -52,6 +52,9 @@ export default function Hero() {
         <div className="-ml-20 mt-6 w-96">
           <TrustBox />
         </div>
+        <div className="absolute bottom-0 right-0 h-0 w-0 border-l-[50vw] border-r-[50vw] border-t-[3rem] border-l-slate-200 border-r-slate-200 border-t-transparent md:border-t-[6rem]">
+          {/* Overlay at the bottom of the video to create triangular shape. */}
+        </div>
       </div>
     </section>
   );
