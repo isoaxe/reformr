@@ -2,6 +2,7 @@
 
 import { TypeAnimation } from 'react-type-animation';
 import PlayBgVideo from '@/components/play-bg-video';
+import TrustBox from '@/components/trustpilot';
 import Button from '@/components/button';
 
 /* Hero section that the user first sees at the top of the homepage. */
@@ -47,6 +48,9 @@ export default function Hero() {
         </h2>
         <div className="w-fit">
           <Button text="Take the Quiz" link="/signup/screening" />
+        </div>
+        <div className="-ml-20 mt-6 w-96">
+          <TrustBox />
         </div>
       </div>
     </section>

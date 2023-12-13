@@ -3,7 +3,6 @@
 import { AiOutlineInstagram as Instagram } from 'react-icons/ai';
 import Image from 'next/image';
 import Link from 'next/link';
-import TrustBox from '../trustpilot';
 import { INSTAGRAM } from '@/util/urls';
 import logo from 'public/images/text-logo-coloured.png';
 
@@ -33,7 +32,6 @@ export default function Footer() {
                 className="mb-4 fill-slate-700 transition hover:fill-violet-600"
               />
             </a>
-            <TrustBox />
           </div>
         </section>
         <section className="flex flex-col justify-between xs:flex-row md:ml-8 md:justify-start">
