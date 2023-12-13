@@ -25,7 +25,7 @@ export default function AdminDashboard() {
   }, [isPageLoaded, user, router]);
 
   return (
-    <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-full flex-col px-4 xs:px-9">
+    <main className="mx-auto mt-16 flex min-h-[calc(100vh-23rem)] w-full flex-col px-4 xs:px-9">
       <CreateNewUser />
       <Patients user={user} />
       <Button
