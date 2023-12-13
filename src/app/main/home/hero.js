@@ -12,7 +12,7 @@ export default function Hero() {
   return (
     <section className="relative h-[88vh]">
       <PlayBgVideo
-        className="absolute z-0 h-full w-full object-cover"
+        className="fixed z-0 h-full w-full object-cover"
         videoSrc="../videos/home-hero.mp4"
         altText="Slow-motion video of a woman slowly exhaling whilst rolling her shoulders."
       />

@@ -30,7 +30,7 @@ export default function Process() {
   }
 
   return (
-    <section className="my-10 flex flex-col items-center px-4">
+    <section className="relative flex flex-col items-center bg-slate-200 px-4 py-10">
       <h2 className="text-center text-xl md:text-2xl lg:text-3xl">
         Personalised medical weight loss. One simple subscription.
       </h2>

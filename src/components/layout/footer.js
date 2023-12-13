@@ -10,7 +10,7 @@ export default function Footer() {
   const linkStyle = 'mt-3 hover:text-violet-600 font-light transition';
 
   return (
-    <footer className="mt-8 px-4 xs:px-9">
+    <footer className="relative bg-slate-100 px-4 pt-8 xs:px-9">
       <div className="flex flex-col justify-between text-xl md:flex-row lg:text-2xl">
         <section className="mb-10 flex flex-col items-center md:mb-0">
           <div className="mb-5 w-64 max-w-full sm:w-80">
@@ -61,7 +61,7 @@ export default function Footer() {
           </div>
         </section>
       </div>
-      <p className="my-10 text-center font-light">
+      <p className="py-10 text-center font-light">
         © {new Date().getFullYear()} Reformr Health LLC. All rights reserved.
       </p>
     </footer>

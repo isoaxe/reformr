@@ -14,7 +14,7 @@ export default function SalesPitch() {
   );
 
   return (
-    <>
+    <div className="relative bg-slate-200">
       <section className="flex flex-col-reverse items-center justify-center bg-sky-200 px-4 py-16 xs:px-9 lg:flex-row lg:py-28">
         <div className="mt-12 flex max-w-2xl flex-col items-center lg:mr-8 lg:mt-0 lg:max-w-lg lg:items-start xl:mr-32 2xl:mr-56 2xl:max-w-4xl">
           <h2 className="mb-8 text-center text-2xl font-bold md:mb-16 md:text-3xl lg:text-4xl">
@@ -97,6 +97,6 @@ export default function SalesPitch() {
           />
         </div>
       </section>
-    </>
+    </div>
   );
 }
