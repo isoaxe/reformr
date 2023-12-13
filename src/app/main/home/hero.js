@@ -10,7 +10,7 @@ export default function Hero() {
   const interval = 2000;
 
   return (
-    <section className="relative h-screen">
+    <section className="relative h-[88vh]">
       <PlayBgVideo
         className="absolute z-0 h-full w-full object-cover"
         videoSrc="../videos/home-hero.mp4"
