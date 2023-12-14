@@ -106,11 +106,7 @@ export default function EmotionalEating() {
         .
       </p>
       <div className="my-12 text-center">
-        <Button
-          text="Find out if you're eligible"
-          link="/signup/screening"
-          haloShade="dark"
-        />
+        <Button text="Find out if you're eligible" link="/signup/screening" />
       </div>
     </main>
   );

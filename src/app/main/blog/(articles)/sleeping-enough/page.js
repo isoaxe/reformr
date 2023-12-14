@@ -154,11 +154,7 @@ export default function SleepingEnough() {
         .
       </p>
       <div className="my-12 text-center">
-        <Button
-          text="See if you're eligible"
-          link="/signup/screening"
-          haloShade="dark"
-        />
+        <Button text="See if you're eligible" link="/signup/screening" />
       </div>
     </main>
   );

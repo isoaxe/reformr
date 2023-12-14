@@ -30,7 +30,7 @@ export default function Process() {
   }
 
   return (
-    <section className="my-16 flex flex-col items-center px-4 md:my-28">
+    <section className="relative flex flex-col items-center bg-slate-200 px-4 py-10">
       <h2 className="text-center text-xl md:text-2xl lg:text-3xl">
         Personalised medical weight loss. One simple subscription.
       </h2>
@@ -51,7 +51,7 @@ export default function Process() {
           description="Your doctor will monitor your progress and make changes to your treatment as needed."
         />
       </div>
-      <Button text="Take Quiz" link="/signup/screening" haloShade="dark" />
+      <Button text="Check Eligibility" link="/signup/screening" />
     </section>
   );
 }

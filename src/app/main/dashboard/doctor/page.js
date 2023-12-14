@@ -75,7 +75,7 @@ export default function DoctorDashboard() {
   }, [isPageLoaded, user, role, router]);
 
   return (
-    <main className="mx-auto flex min-h-[calc(100vh-23rem)] w-fit max-w-4xl flex-col px-4 xs:px-9">
+    <main className="mx-auto mt-16 flex min-h-[calc(100vh-23rem)] w-fit max-w-4xl flex-col px-4 xs:px-9">
       <h1 className="mb-2 pt-4 text-center text-xl font-semibold text-sky-600 md:pt-8 md:text-2xl">
         Current Patients
       </h1>

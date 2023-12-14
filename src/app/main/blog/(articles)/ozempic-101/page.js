@@ -126,11 +126,7 @@ export default function Ozempic101() {
         can help you on your weight loss journey.
       </p>
       <div className="my-20 text-center">
-        <Button
-          text="Find out if you're eligible"
-          link="/signup/screening"
-          haloShade="dark"
-        />
+        <Button text="Find out if you're eligible" link="/signup/screening" />
       </div>
     </main>
   );
