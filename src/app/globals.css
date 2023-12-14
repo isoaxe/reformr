@@ -23,3 +23,19 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.typing-cursor::after {
+  content: '';
+  animation: cursor 1s infinite;
+  border-right: 1px solid #fff;
+  margin-left: 4px;
+}
+
+@keyframes cursor {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
