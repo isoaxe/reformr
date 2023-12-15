@@ -1,4 +1,5 @@
 import admin from 'firebase-admin';
+import { getAuth } from 'firebase-admin/auth';
 import { NextResponse } from 'next/server';
 import { generateToken } from '@/util/helpers';
 import { initialiseAdmin } from '@/util/admin';
