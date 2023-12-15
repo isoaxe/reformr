@@ -10,7 +10,7 @@ export async function POST(request) {
   const noteId = generateToken(20);
 
   try {
-    /* Verify that user had appropriate role. */
+    /* Verify that user is a doctor. */
     await initialiseAdmin();
     const user = await getAuth().verifyIdToken(fireToken);
     const { role } = user;

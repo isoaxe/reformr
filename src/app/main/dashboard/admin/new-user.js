@@ -5,6 +5,7 @@ import { TextField, Typography, RadioGroup } from '@mui/material';
 import { FormControlLabel, Radio, Button } from '@mui/material';
 import TextInput from '@/components/quiz/text-input';
 import Password from '@/components/quiz/password';
+import { auth } from '@/util/firebase';
 
 /* Creates a new company user with role of doctor, pharmacist or admin. */
 export default function CreateNewUser() {
@@ -18,14 +19,14 @@ export default function CreateNewUser() {
   const [isInvalidEmail, setInvalidEmail] = useState(false);
 
   async function createUser() {
+    setLoading(true);
+    const fireToken = await auth.currentUser.getIdToken(true);
     const name = `${firstName} ${lastName}`;
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, role, email, password }),
+      body: JSON.stringify({ name, role, email, password, fireToken }),
     };
-    setLoading(true);
-    // TODO: Add token from firebase auth to request.
     const res = await fetch('/api/users/professional', options);
     const data = await res.json();
     if (data.success) clearFields();
