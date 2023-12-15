@@ -22,7 +22,7 @@ export default function CancelModal(props) {
       console.log('Subscription cancelled.');
       setSubCancelled(true);
       setOpen(false);
-    } else console.log('Error cancelling subscription: ', data.error);
+    } else console.log('⚠️ Error cancelling subscription: ', data.error);
     setLoading(false);
   }
 

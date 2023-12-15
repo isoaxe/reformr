@@ -1,9 +1,6 @@
-import admin from 'firebase-admin';
-import { getAuth } from 'firebase-admin/auth';
 import { NextResponse } from 'next/server';
 import { cancelSubscription } from '@/util/stripe';
-import { getDocId } from '@/util/helpers';
-import { initialiseAdmin } from '@/util/admin';
+import { checkSameUser } from '@/util/server';
 
 /* Cancel Stripe subscription and set Firestore flag. */
 export async function POST(request) {
@@ -11,23 +8,9 @@ export async function POST(request) {
   const { subId, email, fireToken } = data;
 
   try {
-    /* Get current user ID. */
-    await initialiseAdmin();
-    const user = await getAuth().verifyIdToken(fireToken);
-    const { uid } = user;
-
-    /* Get user ID from Firestore. */
-    const docId = await getDocId(email);
-    const db = admin.firestore();
-    const patientRef = db.collection('patients').doc(docId);
-    const patientDoc = await patientRef.get();
-    const { userId } = patientDoc.data();
-
-    /* Check that user is modifying their own data. */
-    if (userId !== uid) {
-      const error = 'Not authorised to modify this data.';
-      return NextResponse.json({ error });
-    }
+    /* Check if user attempting to modify own data. */
+    const { error, patientRef } = await checkSameUser(fireToken, email);
+    if (error) return NextResponse.json({ error });
 
     /* Cancel subscription with Stripe at end of billing period. */
     await cancelSubscription(subId);
