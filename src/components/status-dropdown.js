@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { FormControl, Select, MenuItem } from '@mui/material';
+import { auth } from '@/util/firebase';
 
 /* Dropdown menu that allows the pharmacist to select order status. */
 export default function StatusDropdown(props) {
@@ -28,13 +29,13 @@ export default function StatusDropdown(props) {
   const statusType = isDoctor ? 'patient' : 'order';
 
   async function storeStatus(email, updatedStatus) {
+    setLoading(true);
+    const fireToken = await auth.currentUser.getIdToken(true);
     const options = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, [statusKey]: updatedStatus }),
+      body: JSON.stringify({ email, [statusKey]: updatedStatus, fireToken }),
     };
-    setLoading(true);
-    // TODO: Add token from firebase auth to request.
     const res = await fetch('/api/users/patient', options);
     const data = await res.json();
     if (data.success) console.log(`Successfully updated ${statusType} status.`);

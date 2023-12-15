@@ -48,14 +48,21 @@ export async function POST(request) {
 /* Change patient status or order status or order tracking number. */
 export async function PUT(request) {
   const data = await request.json();
-  const { email, patientStatus, orderStatus, trackingNumber } = data;
+  const { email, patientStatus, orderStatus, trackingNumber, fireToken } = data;
 
   try {
+    /* Verify that user had appropriate role. */
+    await initialiseAdmin();
+    const user = await getAuth().verifyIdToken(fireToken);
+    const { role } = user;
+    const allowed = ['doctor', 'pharmacist'];
+    if (!allowed.includes(role))
+      return NextResponse.json({ error: 'Invalid role.' });
+
     /* Get docId from Firestore. */
     const docId = await getDocId(email);
 
     /* Update patient status on Firestore. */
-    await initialiseAdmin();
     const db = admin.firestore();
     const patientRef = db.collection('patients').doc(docId);
     /* Only one of these conditionals will run. */
