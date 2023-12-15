@@ -6,7 +6,7 @@ import { FormControlLabel, Radio, Button } from '@mui/material';
 import TextInput from '@/components/quiz/text-input';
 import Password from '@/components/quiz/password';
 
-/* Creates a new professional user with role of doctor or pharmacist. */
+/* Creates a new company user with role of doctor, pharmacist or admin. */
 export default function CreateNewUser() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -43,7 +43,7 @@ export default function CreateNewUser() {
   }
 
   const FormLabel = ({ label }) => (
-    <Typography className="mr-10 mt-1 text-lg md:text-xl xl:text-2xl">
+    <Typography className="mt-1 text-lg md:text-xl xl:text-2xl">
       {label}
     </Typography>
   );
@@ -89,7 +89,7 @@ export default function CreateNewUser() {
         name="select-user-role"
         value={role}
         onChange={(e) => setRole(e.target.value)}
-        className="flex w-full flex-row"
+        className="flex w-full flex-row justify-between"
       >
         <FormControlLabel
           value="doctor"
@@ -100,6 +100,11 @@ export default function CreateNewUser() {
           value="pharmacist"
           control={<Radio />}
           label={<FormLabel label="Pharmacist" />}
+        />
+        <FormControlLabel
+          value="admin"
+          control={<Radio />}
+          label={<FormLabel label="Admin" />}
         />
       </RadioGroup>
       <Button
