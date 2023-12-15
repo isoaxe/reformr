@@ -18,14 +18,16 @@ export default function PharmacistDashboard() {
   useEffect(() => {
     if (!user) return;
     const getPatients = async () => {
-      const res = await fetch('/api/users/patient');
-      const { success, paidPatients } = await res.json();
-      if (success)
+      const fireToken = await auth.currentUser.getIdToken(true);
+      const res = await fetch(`/api/users/patient?fireToken=${fireToken}`);
+      const { error, paidPatients } = await res.json();
+      if (error)
         setPatients(
           paidPatients.filter(
             (patient) => patient.patientStatus === 'medically cleared'
           )
         );
+      else console.log('Error fetching patients: ', error);
     };
     getPatients();
   }, [user]);
