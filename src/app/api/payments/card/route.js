@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { getPatientData } from '@/util/server';
+import { getPatientData, checkSameUser } from '@/util/server';
 import { STRIPE_SECRET_KEY } from '@/util/constants';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
@@ -9,9 +9,14 @@ const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const stripeUid = searchParams.get('stripeUid');
-  // TODO: Add token from firebase auth to request.
+  const email = searchParams.get('email');
+  const fireToken = searchParams.get('fireToken');
 
   try {
+    /* Check is data belongs to the user. */
+    const { error } = await checkSameUser(fireToken, email);
+    if (error) return NextResponse.json({ error });
+
     /* Get card ID from Firestore. */
     const { patientData } = await getPatientData(stripeUid);
     const { paymentMethodId } = patientData.payments;
