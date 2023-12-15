@@ -10,12 +10,12 @@ import { auth, db } from '@/util/firebase';
 /* Create new patient user. Update creation date and uid on Firestore. */
 export async function POST(request) {
   const data = await request.json();
-  const { name, phone, email, password, token } = data;
+  const { name, phone, email, password, captchaToken } = data;
 
   let success = false;
   try {
     /* Verify reCAPTCHA token matches one from Firestore. */
-    const isVerified = await validateToken(email, token);
+    const isVerified = await validateToken(email, captchaToken);
     if (!isVerified)
       return NextResponse.json({ success: false, error: 'Invalid token.' });
 
