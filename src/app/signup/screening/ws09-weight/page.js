@@ -29,14 +29,14 @@ export default function Weight() {
     setLoading(true);
     setQuizCookie('screening', { weight }, cookies);
     const screening = cookies.get('screening');
-    const token = cookies.get('token');
+    const captchaToken = cookies.get('token');
     /* Save BMI as a separate cookie for next page. */
     cookies.set('bmi', bmi, { sameSite: 'strict' });
     try {
       /* Pass screening cookie and token generated after reCAPTCHA success. */
       const options = {
         method: 'POST',
-        body: JSON.stringify({ screening, bmi, token }),
+        body: JSON.stringify({ screening, bmi, captchaToken }),
         headers: { 'content-type': 'application/json' },
       };
       const res = await fetch('/api/screening', options);
