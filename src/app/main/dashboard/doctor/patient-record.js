@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Modal, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useAuth } from '@/util/hooks';
+import { auth } from '@/util/firebase';
 
 /* Presents patient screening and medical data to the doctor. */
 export default function PatientRecord({ open, setOpen, fireDocId }) {
@@ -22,13 +23,14 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
 
   async function saveNote() {
     setLoading(true);
+    const fireToken = await auth.currentUser.getIdToken(true);
     const doctor = user.displayName;
+    const reqBody = { noteText: note, docId: fireDocId, doctor, fireToken };
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ noteText: note, docId: fireDocId, doctor }),
+      body: JSON.stringify(reqBody),
     };
-    // TODO: Add token from firebase auth to request.
     const res = await fetch('/api/users/patient/notes', options);
     const data = await res.json();
     if (data.success) {

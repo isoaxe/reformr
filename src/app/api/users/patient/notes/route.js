@@ -10,7 +10,13 @@ export async function POST(request) {
   const noteId = generateToken(20);
 
   try {
+    /* Verify that user had appropriate role. */
     await initialiseAdmin();
+    const user = await getAuth().verifyIdToken(fireToken);
+    const { role } = user;
+    if (role !== 'doctor') return NextResponse.json({ error: 'Invalid role.' });
+
+    /* Save note to patient doc in Firestore. */
     const db = admin.firestore();
     const patientRef = db.collection('patients').doc(docId);
     const patientDoc = await patientRef.get();
