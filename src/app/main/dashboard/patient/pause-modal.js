@@ -2,19 +2,20 @@
 
 import { useState } from 'react';
 import { Modal, Button } from '@mui/material';
+import { auth } from '@/util/firebase';
 
 export default function PauseModal(props) {
   const [isLoading, setLoading] = useState(false);
   const { open, setOpen, setSubPaused, setExpiryDate, subId, email } = props;
 
   async function pauseSub() {
+    setLoading(true);
+    const fireToken = await auth.currentUser.getIdToken(true);
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ subId, email }),
+      body: JSON.stringify({ subId, email, fireToken }),
     };
-    setLoading(true);
-    // TODO: Add token from firebase auth to request.
     const res = await fetch('/api/payments/pause-sub', options);
     const data = await res.json();
     if (data.success) {
