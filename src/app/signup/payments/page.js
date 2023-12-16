@@ -1,20 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useCookies } from 'next-client-cookies';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import PaymentWrapper from './payment-wrapper';
+import Address from './address';
 import Spinner from '@/components/spinner';
 import { STRIPE_PUBLIC_KEY } from '@/util/constants';
-import { useCookieState, useAuth, useRedirectNoUser } from '@/util/hooks';
-import Address from './address';
+import { useAuth, useRedirectNoUser } from '@/util/hooks';
+import { auth } from '@/util/firebase';
 
 const stripePromise = loadStripe(STRIPE_PUBLIC_KEY);
 
 export default function Payments() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [options, setOptions] = useState({});
   const [address, setAddress] = useState({
     address1: '',
@@ -22,23 +20,18 @@ export default function Payments() {
     address3: '',
     postcode: '',
   });
-  const cookies = useCookies();
   const { user } = useAuth();
 
-  useCookieState('screening', 'firstName', setFirstName);
-  useCookieState('screening', 'lastName', setLastName);
   useRedirectNoUser(user);
 
   useEffect(() => {
-    const name = `${firstName} ${lastName}`;
-    const email = cookies.get('email');
-    const token = cookies.get('token');
     /* Fetch the client secret from the server and use to set options for Elements. */
     async function getElementsOptions() {
+      const fireToken = await auth.currentUser.getIdToken(true);
       const fetchOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, token }),
+        body: JSON.stringify({ fireToken }),
       };
       const response = await fetch('/api/payments/initialise', fetchOptions);
       const subscription = await response.json();
@@ -47,8 +40,8 @@ export default function Payments() {
       const options = { clientSecret, appearance };
       setOptions(options);
     }
-    if (firstName && email && token) getElementsOptions();
-  }, [firstName, lastName, cookies]);
+    if (user) getElementsOptions();
+  }, [user]);
 
   return (
     <main className="mx-auto min-h-[calc(100vh-7rem)] w-full max-w-xl">
