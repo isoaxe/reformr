@@ -13,13 +13,13 @@ export default function BookTelehealth() {
   useEffect(() => {
     async function saveMedicalData() {
       const medical = cookies.get('medical');
-      const token = cookies.get('token');
+      const captchaToken = cookies.get('token');
       const email = cookies.get('email');
 
       try {
         const options = {
           method: 'POST',
-          body: JSON.stringify({ medical, email, token }),
+          body: JSON.stringify({ medical, email, captchaToken }),
           headers: { 'content-type': 'application/json' },
         };
         const res = await fetch('/api/medical', options);

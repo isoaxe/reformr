@@ -7,7 +7,7 @@ import { initialiseAdmin } from '@/util/admin';
 /* Save medical data to Firestore if token is valid. */
 export async function POST(request) {
   const data = await request.json();
-  const { email, token } = data;
+  const { email, captchaToken } = data;
   const medicalAsString = data.medical;
   const medical = JSON.parse(medicalAsString); // medical as JSON
 
@@ -16,7 +16,7 @@ export async function POST(request) {
     const docId = await getDocId(email);
 
     /* Verify reCAPTCHA token against one from Firestore. */
-    const isVerified = await validateToken(email, token);
+    const isVerified = await validateToken(email, captchaToken);
     if (!isVerified)
       return NextResponse.json({ success: false, error: 'Invalid token.' });
 
