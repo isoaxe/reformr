@@ -81,8 +81,9 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
 
   useEffect(() => {
     async function getPatientRecord() {
-      // TODO: Add token from firebase auth to request.
-      const res = await fetch(`/api/medical?docId=${fireDocId}`);
+      const fireToken = await auth.currentUser.getIdToken(true);
+      const params = `docId=${fireDocId}&token=${fireToken}`;
+      const res = await fetch('/api/medical?' + params);
       const data = await res.json();
       if (data.success) {
         setScreening(data.screening);
@@ -90,8 +91,8 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
         setNotes(data.notes ?? []);
       } else console.log('Error getting patient record: ', data.error);
     }
-    if (fireDocId) getPatientRecord();
-  }, [fireDocId]);
+    if (user && fireDocId) getPatientRecord();
+  }, [user, fireDocId]);
 
   useEffect(() => {
     if (dob) {
