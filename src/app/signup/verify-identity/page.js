@@ -21,12 +21,11 @@ function VerifyButton({ stripePromise }) {
   async function handleClick(event) {
     event?.preventDefault();
     setLoading(true);
+    const fireToken = await auth.currentUser.getIdToken(true);
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: user.email, userId: user.uid }),
-      // TODO: Use token rather than uid when authentication.
-      // https://firebase.google.com/docs/auth/web/manage-users
+      body: JSON.stringify({ email: user.email, fireToken }),
     };
     const response = await fetch('/api/identity/verification', options);
     const { clientSecret } = await response.json();

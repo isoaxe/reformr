@@ -3,6 +3,7 @@ import Stripe from 'stripe';
 import { NextResponse } from 'next/server';
 import { initialiseAdmin } from '@/util/admin';
 import { getDocId } from '@/util/helpers';
+import { checkSameUser } from '@/util/server';
 import { STRIPE_SECRET_KEY } from '@/util/constants';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
@@ -10,21 +11,15 @@ const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
 /* Create new identity session for authenticated patients. */
 export async function POST(request) {
   const data = await request.json();
-  // TODO: Authenticate with token rather than userId.
-  const { email, userId } = data;
+  const { email, fireToken } = data;
 
   try {
-    /* Get userId from Firestore. */
-    const docId = await getDocId(email);
-    await initialiseAdmin();
-    const db = admin.firestore();
-    const patientDoc = await db.collection('patients').doc(docId).get();
-    const patientData = patientDoc.data();
-    const firestoreUserId = patientData.userId;
+    /* Check if user attempting to modify own data. */
+    const { error } = await checkSameUser(fireToken, email);
+    if (error) return NextResponse.json({ error });
 
-    /* Check that userId from client is same as Firestore. */
-    if (userId && userId !== firestoreUserId)
-      return NextResponse.json({ success: false, error: 'User auth failed.' });
+    /* Get docId from Firestore. */
+    const docId = await getDocId(email);
 
     /* Create identity verification session. */
     const verificationSession =
