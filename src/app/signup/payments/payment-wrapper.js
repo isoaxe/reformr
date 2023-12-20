@@ -24,7 +24,6 @@ export default function PaymentWrapper({ address }) {
     event?.preventDefault();
     setLoading(true);
 
-    const token = cookies.get('token');
     const email = cookies.get('email');
 
     /* Check that user is logged in. */
@@ -47,8 +46,8 @@ export default function PaymentWrapper({ address }) {
     /* Get the patients document ID from Firestore. */
     let docId;
     try {
-      // TODO: Replace this token with a Firebase authentication token.
-      const res = await fetch(`/api/doc-id?email=${email}&token=${token}`);
+      const fireToken = await auth.currentUser.getIdToken(true);
+      const res = await fetch(`/api/doc-id?email=${email}&token=${fireToken}`);
       const json = await res.json();
       if (!json.success) console.log(json.error);
       docId = json.docId;
