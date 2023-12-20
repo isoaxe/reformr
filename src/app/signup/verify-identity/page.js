@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { loadStripe } from '@stripe/stripe-js';
 import { LoadingButton } from '@mui/lab';
+import { auth } from '@/util/firebase';
 import { useAuth, useKeyPress, useRedirectNoUser } from '@/util/hooks';
 import { STRIPE_PUBLIC_KEY } from '@/util/constants';
 
