@@ -10,7 +10,7 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const stripeUid = searchParams.get('stripeUid');
   const email = searchParams.get('email');
-  const fireToken = searchParams.get('fireToken');
+  const fireToken = searchParams.get('token');
 
   try {
     /* Check is data belongs to the user. */
