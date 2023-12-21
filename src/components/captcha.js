@@ -5,11 +5,11 @@ import ReCAPTCHA from 'react-google-recaptcha';
 
 export default function Captcha(props) {
   const { firstName, lastName, email, setToken, setLoading } = props;
-  const [captchaToken, setCaptchaToken] = useState(null);
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
   const captchaRef = useRef(null);
 
   function handleChange(value) {
-    if (value) setCaptchaToken(value);
+    if (value) setRecaptchaToken(value);
   }
 
   useEffect(() => {
@@ -17,21 +17,21 @@ export default function Captcha(props) {
   }, [captchaRef]);
 
   useEffect(() => {
-    if (captchaToken) {
+    if (recaptchaToken) {
       (async () => {
         setLoading(true);
         const options = {
           method: 'POST',
-          body: JSON.stringify({ firstName, lastName, email, captchaToken }),
+          body: JSON.stringify({ firstName, lastName, email, recaptchaToken }),
           headers: { 'content-type': 'application/json' },
         };
         const res = await fetch('/api/captcha', options);
         const json = await res.json();
-        if (json.success) setToken(json.token);
+        if (json.success) setToken(json.captchaToken);
         setLoading(false);
       })();
     }
-  }, [captchaToken, firstName, lastName, email, setToken, setLoading]);
+  }, [recaptchaToken, firstName, lastName, email, setToken, setLoading]);
 
   return (
     <ReCAPTCHA
