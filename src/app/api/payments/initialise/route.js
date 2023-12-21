@@ -2,7 +2,7 @@ import admin from 'firebase-admin';
 import { getAuth } from 'firebase-admin/auth';
 import { NextResponse } from 'next/server';
 import { createCustomer, createSubscription } from '@/util/stripe';
-import { getDocId, validateToken } from '@/util/helpers';
+import { getDocId } from '@/util/helpers';
 import { initialiseAdmin } from '@/util/admin';
 
 /* Sign up a new customer and create a subscription. Make the first payment. */

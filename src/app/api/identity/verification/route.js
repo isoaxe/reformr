@@ -1,7 +1,5 @@
-import admin from 'firebase-admin';
 import Stripe from 'stripe';
 import { NextResponse } from 'next/server';
-import { initialiseAdmin } from '@/util/admin';
 import { getDocId } from '@/util/helpers';
 import { checkSameUser } from '@/util/server';
 import { STRIPE_SECRET_KEY } from '@/util/constants';
