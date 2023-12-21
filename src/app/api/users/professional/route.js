@@ -7,7 +7,7 @@ import { auth } from '@/util/firebase';
 /* Creates a new company user with role of doctor, pharmacist or admin. */
 export async function POST(request) {
   const data = await request.json();
-  const { name, role, email, password } = data;
+  const { name, role, email, password, fireToken } = data;
 
   try {
     /* Verify that user is an admin. */

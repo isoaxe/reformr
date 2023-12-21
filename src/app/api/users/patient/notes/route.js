@@ -7,7 +7,7 @@ import { initialiseAdmin } from '@/util/admin';
 /* Save doctors note to patient record in Firestore. */
 export async function POST(request) {
   const data = await request.json();
-  const { noteText, docId, doctor } = data;
+  const { noteText, docId, doctor, fireToken } = data;
   const noteId = generateToken(20);
 
   try {
