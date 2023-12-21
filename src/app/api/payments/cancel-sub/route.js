@@ -1,23 +1,21 @@
-import admin from 'firebase-admin';
 import { NextResponse } from 'next/server';
 import { cancelSubscription } from '@/util/stripe';
-import { getDocId } from '@/util/helpers';
-import { initialiseAdmin } from '@/util/admin';
+import { checkSameUser } from '@/util/server';
 
 /* Cancel Stripe subscription and set Firestore flag. */
 export async function POST(request) {
   const data = await request.json();
-  const { subId, email } = data;
+  const { subId, email, fireToken } = data;
 
   try {
+    /* Check if user attempting to modify own data. */
+    const { error, patientRef } = await checkSameUser(fireToken, email);
+    if (error) return NextResponse.json({ error });
+
     /* Cancel subscription with Stripe at end of billing period. */
     await cancelSubscription(subId);
 
-    /* Set isCancelled flag for subscription to true in Firestore. */
-    const docId = await getDocId(email);
-    await initialiseAdmin();
-    const db = admin.firestore();
-    const patientRef = db.collection('patients').doc(docId);
+    /* Set subscription to cancelled in Firestore. */
     await patientRef.set(
       { payments: { subscription: { isCancelled: true } } },
       { merge: true }

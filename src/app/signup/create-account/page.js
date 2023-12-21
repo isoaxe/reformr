@@ -32,10 +32,10 @@ export default function CreateAccount() {
     setLoading(true);
     const name = `${firstName} ${lastName}`;
     if (!name || !phone || !email) return;
-    const token = cookies.get('token');
+    const captchaToken = cookies.get('token');
     const options = {
       method: 'POST',
-      body: JSON.stringify({ name, phone, email, password, token }),
+      body: JSON.stringify({ name, phone, email, password, captchaToken }),
       headers: { 'content-type': 'application/json' },
     };
     const res = await fetch('/api/users/patient', options);

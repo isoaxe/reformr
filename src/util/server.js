@@ -2,6 +2,7 @@
  * Helper functions available on the server.
  */
 import admin from 'firebase-admin';
+import { getAuth } from 'firebase-admin/auth';
 import { initialiseAdmin } from '@/util/admin';
 import { getDocId } from './helpers';
 
@@ -20,4 +21,25 @@ export async function getPatientData(customerId) {
   const { email } = patientData.screening;
   const docId = await getDocId(email);
   return { docId, patientData };
+}
+
+/* Check if user is modifying own data. */
+export async function checkSameUser(fireToken, email) {
+  /* Get current user ID. */
+  await initialiseAdmin();
+  const user = await getAuth().verifyIdToken(fireToken);
+  const { uid } = user;
+
+  /* Get user ID from Firestore. */
+  const docId = await getDocId(email);
+  const db = admin.firestore();
+  const patientRef = db.collection('patients').doc(docId);
+  const patientDoc = await patientRef.get();
+  const { userId } = patientDoc.data();
+
+  /* Check that user is modifying their own data. */
+  let error;
+  if (userId !== uid) error = 'Not authorised to modify this data.';
+
+  return { error, patientRef };
 }

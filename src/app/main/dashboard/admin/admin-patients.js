@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Spinner from '@/components/spinner';
+import { auth } from '@/util/firebase';
 
 /* Displays a list of patients whose identity verification has failed to the admin user. */
 export default function AdminPatients({ user }) {
@@ -23,14 +24,15 @@ export default function AdminPatients({ user }) {
 
   useEffect(() => {
     if (!user) return;
-    // TODO: Add token from firebase auth to request.
     const getPatients = async () => {
-      const res = await fetch('/api/users/patient');
-      const { success, paidPatients } = await res.json();
-      if (success)
+      const fireToken = await auth.currentUser.getIdToken(true);
+      const res = await fetch(`/api/users/patient?fireToken=${fireToken}`);
+      const { error, paidPatients } = await res.json();
+      if (!error)
         setPatients(
           paidPatients.filter((patient) => patient.identityStatus === 'failed')
         );
+      else console.log('Error fetching patients: ', error);
       setFetched(true);
     };
     getPatients();

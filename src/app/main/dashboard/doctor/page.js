@@ -45,11 +45,12 @@ export default function DoctorDashboard() {
 
   useEffect(() => {
     if (!user) return;
-    // TODO: Add token from firebase auth to request.
     const getPatients = async () => {
-      const res = await fetch('/api/users/patient');
-      const { success, paidPatients } = await res.json();
-      if (success) setPatients(paidPatients);
+      const fireToken = await auth.currentUser.getIdToken(true);
+      const res = await fetch(`/api/users/patient?fireToken=${fireToken}`);
+      const { error, paidPatients } = await res.json();
+      if (!error) setPatients(paidPatients);
+      else console.log('Error fetching patients: ', error);
     };
     getPatients();
   }, [user]);

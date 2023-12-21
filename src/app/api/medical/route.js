@@ -1,4 +1,5 @@
 import admin from 'firebase-admin';
+import { getAuth } from 'firebase-admin/auth';
 import { NextResponse } from 'next/server';
 import { getDocId, validateToken } from '@/util/helpers';
 import { chooseManyLabels, manyRangeLabels } from '@/util/data';
@@ -7,7 +8,7 @@ import { initialiseAdmin } from '@/util/admin';
 /* Save medical data to Firestore if token is valid. */
 export async function POST(request) {
   const data = await request.json();
-  const { email, token } = data;
+  const { email, captchaToken } = data;
   const medicalAsString = data.medical;
   const medical = JSON.parse(medicalAsString); // medical as JSON
 
@@ -16,7 +17,7 @@ export async function POST(request) {
     const docId = await getDocId(email);
 
     /* Verify reCAPTCHA token against one from Firestore. */
-    const isVerified = await validateToken(email, token);
+    const isVerified = await validateToken(email, captchaToken);
     if (!isVerified)
       return NextResponse.json({ success: false, error: 'Invalid token.' });
 
@@ -70,9 +71,16 @@ export async function POST(request) {
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const docId = searchParams.get('docId');
+  const fireToken = searchParams.get('token');
 
   try {
+    /* Verify that user is a doctor. */
     await initialiseAdmin();
+    const user = await getAuth().verifyIdToken(fireToken);
+    const { role } = user;
+    if (role !== 'doctor') return NextResponse.json({ error: 'Invalid role.' });
+
+    /* Return patient screening and medical data to the doctor. */
     const db = admin.firestore();
     const patientDoc = await db.collection('patients').doc(docId).get();
     const patientData = patientDoc.data();

@@ -1,22 +1,23 @@
 import admin from 'firebase-admin';
+import { getAuth } from 'firebase-admin/auth';
 import { NextResponse } from 'next/server';
 import { createCustomer, createSubscription } from '@/util/stripe';
-import { getDocId, validateToken } from '@/util/helpers';
+import { getDocId } from '@/util/helpers';
 import { initialiseAdmin } from '@/util/admin';
 
 /* Sign up a new customer and create a subscription. Make the first payment. */
 export async function POST(request) {
   const data = await request.json();
-  const { name, email, token } = data;
+  const { fireToken } = data;
 
   try {
+    /* Get name and email from Firebase auth token. */
+    await initialiseAdmin();
+    const user = await getAuth().verifyIdToken(fireToken);
+    const { displayName, email } = user;
+
     /* Get docId from Firestore. */
     const docId = await getDocId(email);
-
-    /* Verify reCAPTCHA token matches one from Firestore. */
-    const isVerified = await validateToken(email, token);
-    if (!isVerified)
-      return NextResponse.json({ success: false, error: 'Invalid token.' });
 
     /* Return subscription if already in Firestore. */
     await initialiseAdmin();
@@ -31,7 +32,7 @@ export async function POST(request) {
     }
 
     /* Create a new subscription if not in Firestore, */
-    const stripeUid = await createCustomer(name, email);
+    const stripeUid = await createCustomer(displayName, email);
     const subscription = await createSubscription(stripeUid);
     subscription.isCancelled = false;
     subscription.isPaused = false;

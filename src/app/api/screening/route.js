@@ -6,7 +6,7 @@ import { db } from '@/util/firebase';
 /* Save screening data to Firestore if token is valid. */
 export async function POST(request) {
   const data = await request.json();
-  const { bmi, token } = data;
+  const { bmi, captchaToken } = data;
   const screeningAsString = data.screening;
   const screening = JSON.parse(screeningAsString); // screening as JSON
 
@@ -15,8 +15,8 @@ export async function POST(request) {
     const { email } = screening;
     const docId = await getDocId(email);
 
-    /* Verify reCAPTCHA token matches one from Firestore. */
-    const isVerified = await validateToken(email, token);
+    /* Verify CAPTCHA token matches one from Firestore. */
+    const isVerified = await validateToken(email, captchaToken);
     if (!isVerified)
       return NextResponse.json({ success: false, error: 'Invalid token.' });
 

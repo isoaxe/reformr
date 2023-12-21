@@ -2,26 +2,27 @@
 
 import { useState } from 'react';
 import { Modal, Button } from '@mui/material';
+import { auth } from '@/util/firebase';
 
 export default function CancelModal(props) {
   const [isLoading, setLoading] = useState(false);
   const { open, setOpen, setSubCancelled, subId, email } = props;
 
   async function cancelSub() {
+    setLoading(true);
+    const fireToken = await auth.currentUser.getIdToken(true);
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ subId, email }),
+      body: JSON.stringify({ subId, email, fireToken }),
     };
-    setLoading(true);
-    // TODO: Add token from firebase auth to request.
     const res = await fetch('/api/payments/cancel-sub', options);
     const data = await res.json();
     if (data.success) {
       console.log('Subscription cancelled.');
       setSubCancelled(true);
       setOpen(false);
-    } else console.log('Error cancelling subscription: ', data.error);
+    } else console.log('⚠️ Error cancelling subscription: ', data.error);
     setLoading(false);
   }
 

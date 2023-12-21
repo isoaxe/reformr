@@ -5,6 +5,7 @@ import { TextField, IconButton } from '@mui/material';
 import { CiSaveUp2 } from 'react-icons/ci';
 import StatusDropdown from '@/components/status-dropdown';
 import Toast from '@/components/toast';
+import { auth } from '@/util/firebase';
 
 /* This is a single patient as displayed on the pharmacist dashboard. */
 export default function PharmacistPatient({ patient, patients, setPatients }) {
@@ -14,13 +15,13 @@ export default function PharmacistPatient({ patient, patients, setPatients }) {
   const lastPaymentDate = new Date(lastPayment).toDateString().slice(4);
 
   async function storeTrackingNumber() {
+    setLoading(true);
+    const fireToken = await auth.currentUser.getIdToken(true);
     const options = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, trackingNumber }),
+      body: JSON.stringify({ email, trackingNumber, fireToken }),
     };
-    setLoading(true);
-    // TODO: Add token from firebase auth to request.
     const res = await fetch('/api/users/patient', options);
     const data = await res.json();
     if (data.success) setToastOpen(true);

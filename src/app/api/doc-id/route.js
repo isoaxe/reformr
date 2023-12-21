@@ -1,17 +1,17 @@
 import { NextResponse } from 'next/server';
-import { getDocId, validateToken } from '@/util/helpers';
+import { checkSameUser } from '@/util/server';
+import { getDocId } from '@/util/helpers';
 
 /* Return docId if token is valid. */
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const email = searchParams.get('email');
-  const token = searchParams.get('token');
+  const fireToken = searchParams.get('token');
 
   try {
-    /* Verify reCAPTCHA token matches one from Firestore. */
-    const isVerified = await validateToken(email, token);
-    if (!isVerified)
-      return NextResponse.json({ success: false, error: 'Invalid token.' });
+    /* Check is data belongs to the user. */
+    const { error } = await checkSameUser(fireToken, email);
+    if (error) return NextResponse.json({ error });
 
     /* Get docId from Firestore. */
     const docId = await getDocId(email);

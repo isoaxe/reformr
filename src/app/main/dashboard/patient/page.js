@@ -12,7 +12,7 @@ import CancelModal from './cancel-modal';
 import PauseModal from './pause-modal';
 import { getDocId } from '@/util/helpers';
 import { useAuth, useRedirectNoUser } from '@/util/hooks';
-import { db } from '@/util/firebase';
+import { auth, db } from '@/util/firebase';
 
 export default function PatientDashboard() {
   const [name, setName] = useState('');
@@ -176,8 +176,9 @@ export default function PatientDashboard() {
 
   useEffect(() => {
     async function getCardData() {
-      // TODO: Add token from firebase auth to request.
-      const res = await fetch(`/api/payments/card?stripeUid=${stripeUid}`);
+      const fireToken = await auth.currentUser.getIdToken(true);
+      const params = `stripeUid=${stripeUid}&email=${email}&token=${fireToken}`;
+      const res = await fetch(`/api/payments/card?${params}`);
       const json = await res.json();
       if (!json.success) console.log(json.error);
       else {
@@ -185,8 +186,8 @@ export default function PatientDashboard() {
         setCard(card);
       }
     }
-    if (stripeUid) getCardData();
-  }, [stripeUid]);
+    if (stripeUid && email) getCardData();
+  }, [stripeUid, email]);
 
   return (
     <main className="mx-auto mt-16 flex min-h-[calc(100vh-23rem)] w-full max-w-3xl flex-col px-4 xs:px-9">

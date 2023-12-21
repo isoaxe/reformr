@@ -1,4 +1,5 @@
 import admin from 'firebase-admin';
+import { getAuth } from 'firebase-admin/auth';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, updateDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
@@ -9,12 +10,12 @@ import { auth, db } from '@/util/firebase';
 /* Create new patient user. Update creation date and uid on Firestore. */
 export async function POST(request) {
   const data = await request.json();
-  const { name, phone, email, password, token } = data;
+  const { name, phone, email, password, captchaToken } = data;
 
   let success = false;
   try {
     /* Verify reCAPTCHA token matches one from Firestore. */
-    const isVerified = await validateToken(email, token);
+    const isVerified = await validateToken(email, captchaToken);
     if (!isVerified)
       return NextResponse.json({ success: false, error: 'Invalid token.' });
 
@@ -47,14 +48,21 @@ export async function POST(request) {
 /* Change patient status or order status or order tracking number. */
 export async function PUT(request) {
   const data = await request.json();
-  const { email, patientStatus, orderStatus, trackingNumber } = data;
+  const { email, patientStatus, orderStatus, trackingNumber, fireToken } = data;
 
   try {
+    /* Verify that user had appropriate role. */
+    await initialiseAdmin();
+    const user = await getAuth().verifyIdToken(fireToken);
+    const { role } = user;
+    const allowed = ['doctor', 'pharmacist'];
+    if (!allowed.includes(role))
+      return NextResponse.json({ error: 'Invalid role.' });
+
     /* Get docId from Firestore. */
     const docId = await getDocId(email);
 
     /* Update patient status on Firestore. */
-    await initialiseAdmin();
     const db = admin.firestore();
     const patientRef = db.collection('patients').doc(docId);
     /* Only one of these conditionals will run. */
@@ -80,11 +88,19 @@ export async function PUT(request) {
 }
 
 /* Get all patients from Firestore. */
-export async function GET() {
-  // TODO: Add token from firebase auth to request.
+export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const fireToken = searchParams.get('fireToken');
+
+  await initialiseAdmin();
+  const user = await getAuth().verifyIdToken(fireToken);
+  const { role } = user;
+  const allowed = ['admin', 'doctor', 'pharmacist'];
+  if (!allowed.includes(role))
+    return NextResponse.json({ error: 'Invalid role.' });
+
   try {
     /* Get a list of all patients from Firestore. */
-    await initialiseAdmin();
     const db = admin.firestore();
     const paidPatientsRef = await db
       .collection('patients')
@@ -109,9 +125,9 @@ export async function GET() {
       paidPatients.push(patient);
     });
 
-    return NextResponse.json({ success: true, paidPatients });
+    return NextResponse.json({ paidPatients });
   } catch (error) {
     console.error('Error getting patients: ', error);
-    return NextResponse.json({ success: false, error });
+    return NextResponse.json({ error });
   }
 }

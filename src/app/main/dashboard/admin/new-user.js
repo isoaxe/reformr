@@ -5,8 +5,9 @@ import { TextField, Typography, RadioGroup } from '@mui/material';
 import { FormControlLabel, Radio, Button } from '@mui/material';
 import TextInput from '@/components/quiz/text-input';
 import Password from '@/components/quiz/password';
+import { auth } from '@/util/firebase';
 
-/* Creates a new professional user with role of doctor or pharmacist. */
+/* Creates a new company user with role of doctor, pharmacist or admin. */
 export default function CreateNewUser() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -18,14 +19,14 @@ export default function CreateNewUser() {
   const [isInvalidEmail, setInvalidEmail] = useState(false);
 
   async function createUser() {
+    setLoading(true);
+    const fireToken = await auth.currentUser.getIdToken(true);
     const name = `${firstName} ${lastName}`;
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, role, email, password }),
+      body: JSON.stringify({ name, role, email, password, fireToken }),
     };
-    setLoading(true);
-    // TODO: Add token from firebase auth to request.
     const res = await fetch('/api/users/professional', options);
     const data = await res.json();
     if (data.success) clearFields();
@@ -43,7 +44,7 @@ export default function CreateNewUser() {
   }
 
   const FormLabel = ({ label }) => (
-    <Typography className="mr-10 mt-1 text-lg md:text-xl xl:text-2xl">
+    <Typography className="mt-1 text-lg md:text-xl xl:text-2xl">
       {label}
     </Typography>
   );
@@ -89,7 +90,7 @@ export default function CreateNewUser() {
         name="select-user-role"
         value={role}
         onChange={(e) => setRole(e.target.value)}
-        className="flex w-full flex-row"
+        className="flex w-full flex-row justify-between"
       >
         <FormControlLabel
           value="doctor"
@@ -100,6 +101,11 @@ export default function CreateNewUser() {
           value="pharmacist"
           control={<Radio />}
           label={<FormLabel label="Pharmacist" />}
+        />
+        <FormControlLabel
+          value="admin"
+          control={<Radio />}
+          label={<FormLabel label="Admin" />}
         />
       </RadioGroup>
       <Button

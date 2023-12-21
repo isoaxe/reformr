@@ -1,4 +1,5 @@
 import admin from 'firebase-admin';
+import { getAuth } from 'firebase-admin/auth';
 import { NextResponse } from 'next/server';
 import { generateToken } from '@/util/helpers';
 import { initialiseAdmin } from '@/util/admin';
@@ -6,11 +7,17 @@ import { initialiseAdmin } from '@/util/admin';
 /* Save doctors note to patient record in Firestore. */
 export async function POST(request) {
   const data = await request.json();
-  const { noteText, docId, doctor } = data;
+  const { noteText, docId, doctor, fireToken } = data;
   const noteId = generateToken(20);
 
   try {
+    /* Verify that user is a doctor. */
     await initialiseAdmin();
+    const user = await getAuth().verifyIdToken(fireToken);
+    const { role } = user;
+    if (role !== 'doctor') return NextResponse.json({ error: 'Invalid role.' });
+
+    /* Save note to patient doc in Firestore. */
     const db = admin.firestore();
     const patientRef = db.collection('patients').doc(docId);
     const patientDoc = await patientRef.get();
