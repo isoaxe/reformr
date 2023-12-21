@@ -6,7 +6,7 @@ import { useCookies } from 'next-client-cookies';
 import { LoadingButton } from '@mui/lab';
 import Toast from '@/components/toast';
 import { getBaseUrl } from '@/util/helpers';
-import { db } from '@/util/firebase';
+import { auth, db } from '@/util/firebase';
 import { useAuth, useKeyPress } from '@/util/hooks';
 
 export default function PaymentWrapper({ address }) {
