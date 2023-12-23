@@ -4,14 +4,24 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@mui/material';
 import Patients from './admin-patients';
-import { ADMIN_EMAILS } from '@/util/constants';
-import { useAuth } from '@/util/hooks';
 import CreateNewUser from './new-user';
+import { auth } from '@/util/firebase';
+import { useAuth } from '@/util/hooks';
 
 export default function AdminDashboard() {
   const [isPageLoaded, setPageLoaded] = useState(false);
+  const [role, setRole] = useState(null);
   const router = useRouter();
   const { user, logout } = useAuth();
+
+  useEffect(() => {
+    if (!user) return;
+    const getRole = async () =>
+      await auth.currentUser
+        .getIdTokenResult()
+        .then((res) => setRole(res.claims.role));
+    getRole();
+  }, [user]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -21,8 +31,8 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     if (!isPageLoaded) return;
-    if (!ADMIN_EMAILS.includes(user?.email)) router.push('/main/login'); // redirect to login if not admin.
-  }, [isPageLoaded, user, router]);
+    if (!user || role !== 'admin') router.push('/main/login'); // redirect to login if not admin.
+  }, [isPageLoaded, user, role, router]);
 
   return (
     <main className="mx-auto mt-16 flex min-h-[calc(100vh-23rem)] w-full flex-col px-4 xs:px-9">

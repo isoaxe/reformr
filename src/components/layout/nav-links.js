@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/util/hooks';
 import { auth } from '@/util/firebase';
-import { ADMIN_EMAILS } from '@/util/constants';
 
 export default function NavLinks({ setOpen }) {
   const [navPath, setNavPath] = useState('/main/login');
@@ -28,10 +27,7 @@ export default function NavLinks({ setOpen }) {
       return;
     }
 
-    const isAdmin = ADMIN_EMAILS.includes(user?.email);
-    let adminName = '';
-    if (isAdmin) adminName = user?.email?.split('@')[0];
-    const name = user.displayName?.split(' ')[0] || adminName;
+    const name = user.displayName?.split(' ')[0]; // first name only
     if (pathname.includes('dashboard')) setNavText('Greetings, ' + name);
     else setNavText('My Account');
     setNavPath(`/main/dashboard/${userType}`);
@@ -43,8 +39,7 @@ export default function NavLinks({ setOpen }) {
     async function getUserType() {
       const tokenRes = await auth.currentUser.getIdTokenResult();
       const role = await tokenRes.claims.role;
-      if (ADMIN_EMAILS.includes(user?.email)) setUserType('admin');
-      else if (role) setUserType(role);
+      if (role) setUserType(role);
       else setUserType('patient');
     }
 
