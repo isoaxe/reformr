@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import Password from '@/components/quiz/password';
 import Toast from '@/components/toast';
-import { ADMIN_EMAILS } from '@/util/constants';
 import { useAuth } from '@/util/hooks';
 import { auth } from '@/util/firebase';
 
@@ -30,8 +29,7 @@ export default function Login() {
       const role = await auth.currentUser
         .getIdTokenResult()
         .then((res) => res.claims.role);
-      const isAdmin = ADMIN_EMAILS.includes(user?.email);
-      if (isAdmin) router.push('/main/dashboard/admin');
+      if (role === 'admin') router.push('/main/dashboard/admin');
       else if (role) router.push(`/main/dashboard/${role}`); // doc or pharm
       else if (user) router.push('/main/dashboard/patient');
     } catch (error) {
