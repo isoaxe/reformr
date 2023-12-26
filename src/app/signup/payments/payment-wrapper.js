@@ -49,8 +49,9 @@ export default function PaymentWrapper({ address }) {
       const fireToken = await auth.currentUser.getIdToken(true);
       const res = await fetch(`/api/doc-id?email=${email}&token=${fireToken}`);
       const json = await res.json();
-      if (!json.success) console.log(json.error);
-      docId = json.docId;
+      const { error } = json;
+      if (error) console.log(error);
+      else docId = json.docId;
     } catch (err) {
       console.log('Error getting document ID: ', err);
       setMessage('There was an issue getting the document ID.');
