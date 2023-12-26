@@ -13,7 +13,7 @@ export async function POST(request) {
   const rawBody = await request.text();
   const signature = headers().get('Stripe-Signature');
 
-  let event;
+  let event, message;
   try {
     event = stripe.webhooks.constructEvent(
       rawBody,
@@ -22,13 +22,9 @@ export async function POST(request) {
     );
     console.log('ℹ️  Webhook signature verified and event created.');
   } catch (err) {
-    const failMessage = '⚠️  Webhook signature verification failed.';
-    console.log(failMessage, err.message);
-    return NextResponse.json({
-      success: false,
-      status: 400,
-      error: failMessage,
-    });
+    const message = '⚠️  Webhook signature verification failed.';
+    console.log(message, err.message);
+    return NextResponse.json({ message, status: 400 });
   }
 
   const verificationResult = event?.data?.object;
@@ -55,9 +51,11 @@ export async function POST(request) {
       patientRef.set({ identityStatus: status }, { merge: true });
       break;
     default:
-      console.log(`⚠️  Unhandled event type ${event.type}`);
-      return NextResponse.json({ success: false, status: 204 });
+      message = `⚠️  Unhandled event type ${event.type}`;
+      console.log(message);
+      return NextResponse.json({ message, status: 204 });
   }
-  console.log(`✅ Identity status updated to ${status}.`);
-  return NextResponse.json({ success: true, status: 200 });
+  message = `✅ Identity status updated to ${status}.`;
+  console.log(message);
+  return NextResponse.json({ message, status: 200 });
 }
