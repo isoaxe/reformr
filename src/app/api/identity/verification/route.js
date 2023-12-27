@@ -27,9 +27,9 @@ export async function POST(request) {
       });
     const clientSecret = verificationSession.client_secret;
 
-    return NextResponse.json({ success: true, clientSecret });
+    return NextResponse.json({ clientSecret });
   } catch (err) {
     console.error('Error processing identity verification: ', err);
-    return NextResponse.json({ success: false, error: err });
+    return NextResponse.json({ err });
   }
 }

@@ -29,8 +29,9 @@ function VerifyButton({ stripePromise }) {
       body: JSON.stringify({ email: user.email, fireToken }),
     };
     const response = await fetch('/api/identity/verification', options);
-    const { clientSecret } = await response.json();
-    const { error } = await stripe.verifyIdentity(clientSecret);
+    const { clientSecret, err } = await response.json();
+    if (err) return console.log(err); // backend error
+    const { error } = await stripe.verifyIdentity(clientSecret); // stripe error
     if (error) {
       console.error('Error creating identity session: ', error);
       setLoading(false);
