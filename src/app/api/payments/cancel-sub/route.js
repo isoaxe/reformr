@@ -21,9 +21,9 @@ export async function POST(request) {
       { merge: true }
     );
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ error: false });
   } catch (err) {
     console.error('Error cancelling subscription: ', err);
-    return NextResponse.json({ success: false, error: err });
+    return NextResponse.json({ error: err });
   }
 }

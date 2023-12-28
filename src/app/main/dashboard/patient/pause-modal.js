@@ -18,12 +18,13 @@ export default function PauseModal(props) {
     };
     const res = await fetch('/api/payments/pause-sub', options);
     const data = await res.json();
-    if (data.success) {
+    if (data.error) console.log('Error pausing subscription: ', data.error);
+    else {
       console.log('Subscription paused for one month.');
       setSubPaused(true);
       setExpiryDate(new Date(data.newExpiryDate));
       setOpen(false);
-    } else console.log('Error pausing subscription: ', data.error);
+    }
     setLoading(false);
   }
 

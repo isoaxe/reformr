@@ -26,11 +26,7 @@ export async function POST(request) {
   } catch (err) {
     const failMessage = '⚠️  Webhook signature verification failed.';
     console.log(failMessage, err.message);
-    return NextResponse.json({
-      success: false,
-      status: 400,
-      error: failMessage,
-    });
+    return NextResponse.json({ status: 400, error: failMessage });
   }
 
   /* Access Firestore as required for all events. */
@@ -114,7 +110,7 @@ export async function POST(request) {
         .set({ payments: { paymentMethodId } }, { merge: true });
       console.log(`✅ Payment method ${paymentMethodId} set as default`);
     }
-    return NextResponse.json({ success: true, status: 200 });
+    return NextResponse.json({ status: 200 });
   }
 
   if (event.type === 'invoice.payment_failed') {
@@ -128,9 +124,10 @@ export async function POST(request) {
       .doc(docId)
       .set({ payments: { isPaid: false } }, { merge: true });
     console.log('ℹ️  User set as unpaid in Firestore.');
-    return NextResponse.json({ success: true, status: 204 });
+    return NextResponse.json({ status: 204 });
   }
 
-  console.log(`⚠️  Unhandled event type. ${event.type}`);
-  return NextResponse.json({ success: false, status: 204 });
+  const error = `⚠️  Unhandled event type. ${event.type}`;
+  console.log(error);
+  return NextResponse.json({ status: 204, error });
 }

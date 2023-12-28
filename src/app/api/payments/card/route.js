@@ -21,10 +21,7 @@ export async function GET(request) {
     const { patientData } = await getPatientData(stripeUid);
     const { paymentMethodId } = patientData.payments;
     if (!paymentMethodId)
-      return NextResponse.json({
-        success: false,
-        error: '⚠️  Payment not yet made.',
-      });
+      return NextResponse.json({ error: '⚠️  Payment not yet made.' });
 
     /* Get card details from Stripe. */
     const { card } = await stripe.customers.retrievePaymentMethod(
@@ -34,9 +31,9 @@ export async function GET(request) {
     const { brand, exp_month, exp_year, last4 } = card;
     const coreCard = { brand, exp_month, exp_year, last4 }; // just the essentials
 
-    return NextResponse.json({ success: true, card: coreCard });
+    return NextResponse.json({ card: coreCard });
   } catch (err) {
     console.error('Error getting card details: ', err);
-    return NextResponse.json({ success: false, error: err });
+    return NextResponse.json({ error: err });
   }
 }

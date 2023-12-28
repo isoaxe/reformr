@@ -180,11 +180,8 @@ export default function PatientDashboard() {
       const params = `stripeUid=${stripeUid}&email=${email}&token=${fireToken}`;
       const res = await fetch(`/api/payments/card?${params}`);
       const json = await res.json();
-      if (!json.success) console.log(json.error);
-      else {
-        const { card } = json;
-        setCard(card);
-      }
+      if (json.error) console.log(json.error);
+      else setCard(json.card);
     }
     if (stripeUid && email) getCardData();
   }, [stripeUid, email]);

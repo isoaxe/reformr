@@ -36,9 +36,9 @@ export async function POST(request) {
       { merge: true }
     );
 
-    return NextResponse.json({ success: true, newExpiryDate });
+    return NextResponse.json({ newExpiryDate });
   } catch (err) {
     console.error('Error pausing subscription: ', err);
-    return NextResponse.json({ success: false, error: err });
+    return NextResponse.json({ error: err });
   }
 }

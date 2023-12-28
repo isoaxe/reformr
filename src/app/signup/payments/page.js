@@ -34,11 +34,14 @@ export default function Payments() {
         body: JSON.stringify({ fireToken }),
       };
       const response = await fetch('/api/payments/initialise', fetchOptions);
-      const subscription = await response.json();
-      const { clientSecret } = subscription;
-      const appearance = { theme: 'stripe', labels: 'floating' };
-      const options = { clientSecret, appearance };
-      setOptions(options);
+      const { subscription, error } = await response.json();
+      if (error) console.log('Error creating subscription: ', error);
+      else {
+        const { clientSecret } = subscription;
+        const appearance = { theme: 'stripe', labels: 'floating' };
+        const options = { clientSecret, appearance };
+        setOptions(options);
+      }
     }
     if (user) getElementsOptions();
   }, [user]);
