@@ -18,8 +18,7 @@ export async function POST(request) {
 
     /* Verify reCAPTCHA token against one from Firestore. */
     const isVerified = await validateToken(email, captchaToken);
-    if (!isVerified)
-      return NextResponse.json({ success: false, error: 'Invalid token.' });
+    if (!isVerified) return NextResponse.json({ error: 'Invalid token.' });
 
     /* Parse answers based on ChooseMany structure to attach meaningful results. */
     const checkboxQuestions = Object.keys(chooseManyLabels);
@@ -53,17 +52,17 @@ export async function POST(request) {
     /* Check that there's the correct number of fields in the submission. */
     const numFields = Object.keys(medical).length;
     const error = `Expected 23 fields, got ${numFields}.`;
-    if (numFields !== 23) return NextResponse.json({ success: false, error });
+    if (numFields !== 23) return NextResponse.json({ error });
 
     /* If correct number of fields, save to Firestore. */
     await initialiseAdmin();
     const db = admin.firestore();
     const patientRef = db.collection('patients').doc(docId);
     await patientRef.set({ medical }, { merge: true });
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ error: false });
   } catch (err) {
     console.error('Error saving screening data: ', err);
-    return NextResponse.json({ success: false, error: err });
+    return NextResponse.json({ error: err });
   }
 }
 
@@ -85,9 +84,9 @@ export async function GET(request) {
     const patientDoc = await db.collection('patients').doc(docId).get();
     const patientData = patientDoc.data();
     const { screening, medical, notes } = patientData;
-    return NextResponse.json({ success: true, screening, medical, notes });
+    return NextResponse.json({ screening, medical, notes });
   } catch (err) {
     console.error('Error getting patient data: ', err);
-    return NextResponse.json({ success: false, error: err });
+    return NextResponse.json({ error: err });
   }
 }

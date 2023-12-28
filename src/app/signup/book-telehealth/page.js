@@ -23,9 +23,9 @@ export default function BookTelehealth() {
           headers: { 'content-type': 'application/json' },
         };
         const res = await fetch('/api/medical', options);
-        const { success } = await res.json();
-        if (success) setShowSuccess(true);
-        else setShowFailure(true);
+        const { error } = await res.json();
+        if (error) setShowFailure(true);
+        else setShowSuccess(true);
       } catch (err) {
         console.error('Error saving medical data: ', err);
       }
