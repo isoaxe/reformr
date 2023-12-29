@@ -40,9 +40,11 @@ export default function Weight() {
         headers: { 'content-type': 'application/json' },
       };
       const res = await fetch('/api/screening', options);
-      const { success } = await res.json();
-      if (success) router.push(nextPage);
-      else setShowFailure(true);
+      const { error } = await res.json();
+      if (error) {
+        console.log('Error on the server: ', error);
+        setShowFailure(true);
+      } else router.push(nextPage);
     } catch (err) {
       console.error('Error saving screening data: ', err);
     }
