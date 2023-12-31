@@ -25,9 +25,9 @@ export async function POST(request) {
     const note = { noteText, dateCreated: new Date(), doctor, noteId };
     notes.push(note);
     await patientRef.set({ notes }, { merge: true });
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ error: false });
   } catch (error) {
     console.error('Error saving note: ', error);
-    return NextResponse.json({ success: false, error });
+    return NextResponse.json({ error });
   }
 }

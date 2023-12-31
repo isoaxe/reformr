@@ -32,11 +32,12 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
       body: JSON.stringify(reqBody),
     };
     const res = await fetch('/api/users/patient/notes', options);
-    const data = await res.json();
-    if (data.success) {
+    const { error } = await res.json();
+    if (error) console.log('Error saving note: ', error);
+    else {
       setNotes([...notes, { noteText: note, doctor }]);
       setNote('');
-    } else console.log('Error saving note: ', data.error);
+    }
     setLoading(false);
   }
 

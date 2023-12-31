@@ -39,10 +39,10 @@ export default function CreateAccount() {
       headers: { 'content-type': 'application/json' },
     };
     const res = await fetch('/api/users/patient', options);
-    const json = await res.json();
+    const { error } = await res.json();
 
     let user = null;
-    if (json.success) user = await login(email, password);
+    if (!error) user = await login(email, password);
     if (user) router.push('/signup/payments');
     else {
       setShowFailure(true);

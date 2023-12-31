@@ -21,13 +21,13 @@ export default function PharmacistDashboard() {
       const fireToken = await auth.currentUser.getIdToken(true);
       const res = await fetch(`/api/users/patient?fireToken=${fireToken}`);
       const { error, paidPatients } = await res.json();
-      if (error)
+      if (error) console.log('Error fetching patients: ', error);
+      else
         setPatients(
           paidPatients.filter(
             (patient) => patient.patientStatus === 'medically cleared'
           )
         );
-      else console.log('Error fetching patients: ', error);
     };
     getPatients();
   }, [user]);
