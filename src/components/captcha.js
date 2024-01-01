@@ -26,8 +26,8 @@ export default function Captcha(props) {
           headers: { 'content-type': 'application/json' },
         };
         const res = await fetch('/api/captcha', options);
-        const json = await res.json();
-        if (json.success) setToken(json.captchaToken);
+        const { success, captchaToken } = await res.json();
+        if (success) setToken(captchaToken);
         setLoading(false);
       })();
     }
