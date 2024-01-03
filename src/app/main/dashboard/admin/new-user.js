@@ -28,9 +28,9 @@ export default function CreateNewUser() {
       body: JSON.stringify({ name, role, email, password, fireToken }),
     };
     const res = await fetch('/api/users/professional', options);
-    const data = await res.json();
-    if (data.success) clearFields();
-    else console.log('Error creating user: ', data.error);
+    const { error } = await res.json();
+    if (error) console.log('Error creating user: ', error);
+    else clearFields();
     setLoading(false);
   }
 

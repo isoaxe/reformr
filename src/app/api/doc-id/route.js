@@ -16,9 +16,9 @@ export async function GET(request) {
     /* Get docId from Firestore. */
     const docId = await getDocId(email);
 
-    return NextResponse.json({ success: true, docId });
-  } catch (err) {
-    console.error('Error retrieving document ID: ', err);
-    return NextResponse.json({ success: false, error: err });
+    return NextResponse.json({ docId });
+  } catch (error) {
+    console.error('Error retrieving document ID: ', error);
+    return NextResponse.json({ error });
   }
 }

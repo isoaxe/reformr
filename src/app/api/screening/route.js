@@ -17,8 +17,7 @@ export async function POST(request) {
 
     /* Verify CAPTCHA token matches one from Firestore. */
     const isVerified = await validateToken(email, captchaToken);
-    if (!isVerified)
-      return NextResponse.json({ success: false, error: 'Invalid token.' });
+    if (!isVerified) return NextResponse.json({ error: 'Invalid token.' });
 
     screening.bmi = parseFloat(bmi);
     screening.height = parseInt(screening.height);
@@ -34,8 +33,8 @@ export async function POST(request) {
     });
   } catch (err) {
     console.error('Error saving screening data: ', err);
-    return NextResponse.json({ success: false, error: err });
+    return NextResponse.json({ error: err });
   }
 
-  return NextResponse.json({ success: true });
+  return NextResponse.json({ error: false });
 }

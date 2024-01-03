@@ -37,9 +37,9 @@ export default function StatusDropdown(props) {
       body: JSON.stringify({ email, [statusKey]: updatedStatus, fireToken }),
     };
     const res = await fetch('/api/users/patient', options);
-    const data = await res.json();
-    if (data.success) console.log(`Successfully updated ${statusType} status.`);
-    else console.log(`Error updating ${statusType} status: `, data.error);
+    const { error } = await res.json();
+    if (error) console.log(`Error updating ${statusType} status: `, error);
+    else console.log(`Successfully updated ${statusType} status.`);
     setLoading(false);
   }
 

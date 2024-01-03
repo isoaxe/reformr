@@ -23,9 +23,9 @@ export default function PharmacistPatient({ patient, patients, setPatients }) {
       body: JSON.stringify({ email, trackingNumber, fireToken }),
     };
     const res = await fetch('/api/users/patient', options);
-    const data = await res.json();
-    if (data.success) setToastOpen(true);
-    else console.log('Error updating tracking number: ', data.error);
+    const { error } = await res.json();
+    if (error) console.log('Error updating tracking number: ', error);
+    else setToastOpen(true);
     setLoading(false);
   }
 

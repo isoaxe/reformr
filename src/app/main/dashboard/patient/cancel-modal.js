@@ -18,11 +18,13 @@ export default function CancelModal(props) {
     };
     const res = await fetch('/api/payments/cancel-sub', options);
     const data = await res.json();
-    if (data.success) {
+    if (data.error)
+      console.log('⚠️ Error cancelling subscription: ', data.error);
+    else {
       console.log('Subscription cancelled.');
       setSubCancelled(true);
       setOpen(false);
-    } else console.log('⚠️ Error cancelling subscription: ', data.error);
+    }
     setLoading(false);
   }
 

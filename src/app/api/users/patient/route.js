@@ -12,16 +12,13 @@ export async function POST(request) {
   const data = await request.json();
   const { name, phone, email, password, captchaToken } = data;
 
-  let success = false;
   try {
     /* Verify reCAPTCHA token matches one from Firestore. */
     const isVerified = await validateToken(email, captchaToken);
-    if (!isVerified)
-      return NextResponse.json({ success: false, error: 'Invalid token.' });
+    if (!isVerified) return NextResponse.json({ error: 'Invalid token.' });
 
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    if (user) success = true;
     // TODO: Find why the phoneNumber field below is not getting set.
     updateProfile(auth.currentUser, {
       displayName: name,
@@ -42,7 +39,7 @@ export async function POST(request) {
     console.error('Error creating new user: ', err);
   }
 
-  return NextResponse.json({ success });
+  return NextResponse.json({ error: false });
 }
 
 /* Change patient status or order status or order tracking number. */
@@ -80,10 +77,10 @@ export async function PUT(request) {
       orders.push(order);
       await patientRef.set({ orders }, { merge: true });
     }
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ error: false });
   } catch (err) {
     console.error('Error updating status: ', err);
-    return NextResponse.json({ success: false, error: err });
+    return NextResponse.json({ error: err });
   }
 }
 

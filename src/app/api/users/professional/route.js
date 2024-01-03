@@ -22,9 +22,9 @@ export async function POST(request) {
     const newUser = res.user;
     await updateProfile(auth.currentUser, { displayName: name });
     await getAuth().setCustomUserClaims(newUser.uid, { role });
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ error: false });
   } catch (error) {
     console.error('Error creating new user: ', error);
-    return NextResponse.json({ success: false, error });
+    return NextResponse.json({ error });
   }
 }

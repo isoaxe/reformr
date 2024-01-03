@@ -28,11 +28,11 @@ export default function AdminPatients({ user }) {
       const fireToken = await auth.currentUser.getIdToken(true);
       const res = await fetch(`/api/users/patient?fireToken=${fireToken}`);
       const { error, paidPatients } = await res.json();
-      if (!error)
+      if (error) console.log('Error fetching patients: ', error);
+      else
         setPatients(
           paidPatients.filter((patient) => patient.identityStatus === 'failed')
         );
-      else console.log('Error fetching patients: ', error);
       setFetched(true);
     };
     getPatients();

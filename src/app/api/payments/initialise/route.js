@@ -47,9 +47,9 @@ export async function POST(request) {
     };
     await patientRef.set({ payments: paymentData }, { merge: true });
 
-    return NextResponse.json(subscription);
+    return NextResponse.json({ subscription });
   } catch (err) {
     console.error('Error creating subscription: ', err);
-    return NextResponse.json({ success: false, error: err });
+    return NextResponse.json({ error: err });
   }
 }
