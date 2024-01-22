@@ -38,6 +38,7 @@ export async function POST(request) {
   const invoice = event?.data?.object;
   let customerId = invoice?.customer;
   if (isCli) customerId = STRIPE_UID;
+  else console.log('⚠️  CLI mode is disabled. Using live webhook.');
 
   /* Handle the event. Add payment data to Firestore if payment is made. */
   if (event.type === 'invoice.paid') {
