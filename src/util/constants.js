@@ -4,9 +4,9 @@ const isDev = process.env.NODE_ENV === 'development';
 /* Stripe and Firestore details used when testing via the CLI. */
 export const isCli = false;
 /* Update the following values if test data reset */
-export const STRIPE_UID = 'cus_P1AMbBflaavUqw';
-export const FIRESTORE_DOC_ID = 'Carlsen-032832';
-export const PAYMENT_METHOD_ID = 'pm_1OD82jFPKktQy8tpiInqo8d8';
+export const STRIPE_UID = 'cus_PBvZjvVV5aWQy1';
+export const FIRESTORE_DOC_ID = 'Harris-820398';
+export const PAYMENT_METHOD_ID = 'pm_1ONXjaFPKktQy8tpj8pYmahw';
 // TODO: Add a redirect to patient dashboard after Calendly booking is complete.
 
 /* Stripe keys for the SquareSpace account. */
