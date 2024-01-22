@@ -4,4 +4,10 @@ The two webhooks that we currently have are as follows:
 payments processing: https://reformr.vercel.app/api/payments/recurring
 ID verification: https://reformr.vercel.app/api/identity/results
 
+Commands used for CLI testing:
+invoice listener: stripe listen --events invoice.paid,invoice.payment_failed --forward-to localhost:3000/api/payments/recurring
+invoice trigger: stripe trigger invoice.paid
+identity listener: stripe listen --events identity.verification_session.canceled --forward-to localhost:3000/api/identity/results
+identity trigger: stripe trigger identity.verification_session.canceled
+
 Important Note: Any instructions executed from the UI (e.g. manually filling in credit card details as a customer would do) will always use the production webhook - even when working in development mode. That means that the webhook needs to be deployed before any changes can be manually tested. The only way to test a webhook in developement is using the CLI.
