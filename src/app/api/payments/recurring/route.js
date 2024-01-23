@@ -26,7 +26,7 @@ export async function POST(request) {
   } catch (err) {
     const failMessage = '⚠️  Webhook signature verification failed.';
     console.log(failMessage, err.message);
-    return NextResponse.json({ status: 400, error: failMessage });
+    return NextResponse.json({ error: failMessage }, { status: 400 });
   }
 
   try {
@@ -112,7 +112,7 @@ export async function POST(request) {
           .set({ payments: { paymentMethodId } }, { merge: true });
         console.log(`✅ Payment method ${paymentMethodId} set as default`);
       }
-      return NextResponse.json({ message: 'Payment successful', status: 200 });
+      return NextResponse.json({ message: 'Payment success' }, { status: 200 });
     }
 
     if (event.type === 'invoice.payment_failed') {
@@ -125,15 +125,16 @@ export async function POST(request) {
       await patientsRef
         .doc(docId)
         .set({ payments: { isPaid: false } }, { merge: true });
-      console.log('ℹ️  User set as unpaid in Firestore.');
-      return NextResponse.json({ status: 204 });
+      const failMsg = 'ℹ️  User set as unpaid in Firestore.';
+      console.log(failMsg);
+      return NextResponse.json({ message: failMsg }, { status: 204 });
     }
 
     const error = `⚠️  Unhandled event type. ${event.type}`;
     console.log(error);
-    return NextResponse.json({ status: 204, error });
+    return NextResponse.json({ error }, { status: 204 });
   } catch (err) {
     console.log('⚠️  Fatal error in webhook. ', err.message);
-    return NextResponse.json({ status: 500, error: err.message });
+    return NextResponse.json({ error: err }, { status: 500 });
   }
 }
