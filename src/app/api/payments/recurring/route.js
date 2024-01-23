@@ -15,7 +15,7 @@ export async function POST(request) {
   const rawBody = await request.text();
   const signature = headers().get('Stripe-Signature');
 
-  let event;
+  let event = null;
   try {
     event = stripe.webhooks.constructEvent(
       rawBody,
@@ -135,6 +135,9 @@ export async function POST(request) {
     return NextResponse.json({ error }, { status: 204 });
   } catch (err) {
     console.log('⚠️  Fatal error in webhook. ', err.message);
-    return NextResponse.json({ error: err }, { status: 500 });
+    return NextResponse.json(
+      { error: err.message, event, eventType: event?.type },
+      { status: 500 }
+    );
   }
 }
