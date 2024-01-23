@@ -106,8 +106,8 @@ export function useRedirectNoUser(user) {
 
   useEffect(() => {
     setTimeout(() => {
-      setPageLoaded(true); // assume user fetched within a second.
-    }, 1000);
+      setPageLoaded(true); // assume user fetched within 2 seconds.
+    }, 2000);
   }, []);
 
   useEffect(() => {
