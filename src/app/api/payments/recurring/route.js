@@ -29,106 +29,111 @@ export async function POST(request) {
     return NextResponse.json({ status: 400, error: failMessage });
   }
 
-  /* Access Firestore as required for all events. */
-  await initialiseAdmin();
-  const db = admin.firestore();
-  const patientsRef = db.collection('patients');
+  try {
+    /* Access Firestore as required for all events. */
+    await initialiseAdmin();
+    const db = admin.firestore();
+    const patientsRef = db.collection('patients');
 
-  /* Get customerId as required for all events. */
-  const invoice = event?.data?.object;
-  let customerId = invoice?.customer;
-  const isCli = invoice?.description === '(created by Stripe CLI)';
-  if (isCli) customerId = STRIPE_UID;
+    /* Get customerId as required for all events. */
+    const invoice = event?.data?.object;
+    let customerId = invoice?.customer;
+    const isCli = invoice?.description === '(created by Stripe CLI)';
+    if (isCli) customerId = STRIPE_UID;
 
-  /* Handle the event. Add payment data to Firestore if payment is made. */
-  if (event.type === 'invoice.paid') {
-    const subscription = await stripe.subscriptions.list({
-      customer: customerId,
-    });
-    let paymentDate, expiryDate;
-    if (subscription) {
-      /* Assumes only a single subscription active. */
-      const { current_period_end } = subscription.data.pop();
-      const { created } = invoice;
-      paymentDate = new Date(created * 1000);
-      expiryDate = new Date(current_period_end * 1000);
-    }
-
-    /* Get payments data from Firestore. */
-    const { docId, patientData } = await getPatientData(customerId);
-    const allPaymentData = patientData.payments;
-
-    /* Save payments data to Firestore if invoice paid. */
-    if (invoice.paid) {
-      /* Update payments data and add new item to array. */
-      const { payments } = allPaymentData;
-      const payment = {
-        product: 'metabolic reset',
-        paymentDate,
-        paymentAmount: invoice.amount_paid / 100, // amount in NZD
-      };
-      payments.push(payment);
-      const paymentData = {
-        isPaid: true,
-        expiryDate,
-        payments,
-        subscription: { isPaused: false },
-      };
-
-      /* Update orders data and add new item to array. */
-      const { orders } = patientData;
-      const order = {
-        trackingNumber: '',
-        status: 'pending',
-        statusDates: { pending: new Date() },
-      };
-      orders.push(order);
-
-      /* Save payment and order data to Firestore. */
-      await patientsRef
-        .doc(docId)
-        .set({ payments: paymentData, orders }, { merge: true });
-      console.log('✅ Payment made and data saved to Firestore.');
-    } else {
-      console.log('❌ Payment was not made.');
-    }
-
-    /* Set default payment method for customer if recently created. */
-    let paymentMethodId = allPaymentData?.paymentMethodId;
-    if (!paymentMethodId) {
-      console.log('ℹ️  Payment method not yet saved. Doing so now.');
-      const paymentIntentId = invoice.payment_intent;
-      const paymentIntent = await stripe.paymentIntents.retrieve(
-        paymentIntentId
-      );
-      paymentMethodId = paymentIntent.payment_method; // card ID in Stripe
-      if (isCli) paymentMethodId = PAYMENT_METHOD_ID;
-      await stripe.customers.update(customerId, {
-        invoice_settings: { default_payment_method: paymentMethodId },
+    /* Handle the event. Add payment data to Firestore if payment is made. */
+    if (event.type === 'invoice.paid') {
+      const subscription = await stripe.subscriptions.list({
+        customer: customerId,
       });
+      let paymentDate, expiryDate;
+      if (subscription) {
+        /* Assumes only a single subscription active. */
+        const { current_period_end } = subscription.data.pop();
+        const { created } = invoice;
+        paymentDate = new Date(created * 1000);
+        expiryDate = new Date(current_period_end * 1000);
+      }
+
+      /* Get payments data from Firestore. */
+      const { docId, patientData } = await getPatientData(customerId);
+      const allPaymentData = patientData.payments;
+
+      /* Save payments data to Firestore if invoice paid. */
+      if (invoice.paid) {
+        /* Update payments data and add new item to array. */
+        const { payments } = allPaymentData;
+        const payment = {
+          product: 'metabolic reset',
+          paymentDate,
+          paymentAmount: invoice.amount_paid / 100, // amount in NZD
+        };
+        payments.push(payment);
+        const paymentData = {
+          isPaid: true,
+          expiryDate,
+          payments,
+          subscription: { isPaused: false },
+        };
+
+        /* Update orders data and add new item to array. */
+        const { orders } = patientData;
+        const order = {
+          trackingNumber: '',
+          status: 'pending',
+          statusDates: { pending: new Date() },
+        };
+        orders.push(order);
+
+        /* Save payment and order data to Firestore. */
+        await patientsRef
+          .doc(docId)
+          .set({ payments: paymentData, orders }, { merge: true });
+        console.log('✅ Payment made and data saved to Firestore.');
+      } else {
+        console.log('❌ Payment was not made.');
+      }
+
+      /* Set default payment method for customer if recently created. */
+      let paymentMethodId = allPaymentData?.paymentMethodId;
+      if (!paymentMethodId) {
+        console.log('ℹ️  Payment method not yet saved. Doing so now.');
+        const paymentIntentId = invoice.payment_intent;
+        const paymentIntent = await stripe.paymentIntents.retrieve(
+          paymentIntentId
+        );
+        paymentMethodId = paymentIntent.payment_method; // card ID in Stripe
+        if (isCli) paymentMethodId = PAYMENT_METHOD_ID;
+        await stripe.customers.update(customerId, {
+          invoice_settings: { default_payment_method: paymentMethodId },
+        });
+        await patientsRef
+          .doc(docId)
+          .set({ payments: { paymentMethodId } }, { merge: true });
+        console.log(`✅ Payment method ${paymentMethodId} set as default`);
+      }
+      return NextResponse.json({ message: 'Payment successful', status: 200 });
+    }
+
+    if (event.type === 'invoice.payment_failed') {
+      console.log('ℹ️  Invoice payment failed.');
+
+      /* Get user data from Firestore. */
+      const { docId } = await getPatientData(customerId);
+
+      /* Set user as unpaid in Firestore. */
       await patientsRef
         .doc(docId)
-        .set({ payments: { paymentMethodId } }, { merge: true });
-      console.log(`✅ Payment method ${paymentMethodId} set as default`);
+        .set({ payments: { isPaid: false } }, { merge: true });
+      console.log('ℹ️  User set as unpaid in Firestore.');
+      return NextResponse.json({ status: 204 });
     }
-    return NextResponse.json({ status: 200 });
+
+    const error = `⚠️  Unhandled event type. ${event.type}`;
+    console.log(error);
+    return NextResponse.json({ status: 204, error });
+  } catch (err) {
+    console.log('⚠️  Fatal error in webhook. ', err.message);
+    return NextResponse.json({ status: 500, error: err.message });
   }
-
-  if (event.type === 'invoice.payment_failed') {
-    console.log('ℹ️  Invoice payment failed.');
-
-    /* Get user data from Firestore. */
-    const { docId } = await getPatientData(customerId);
-
-    /* Set user as unpaid in Firestore. */
-    await patientsRef
-      .doc(docId)
-      .set({ payments: { isPaid: false } }, { merge: true });
-    console.log('ℹ️  User set as unpaid in Firestore.');
-    return NextResponse.json({ status: 204 });
-  }
-
-  const error = `⚠️  Unhandled event type. ${event.type}`;
-  console.log(error);
-  return NextResponse.json({ status: 204, error });
 }
