@@ -10,4 +10,4 @@ invoice trigger: stripe trigger invoice.paid
 identity listener: stripe listen --events identity.verification_session.canceled --forward-to localhost:3000/api/identity/results
 identity trigger: stripe trigger identity.verification_session.canceled
 
-Important Note: Any instructions executed from the UI (e.g. manually filling in credit card details as a customer would do) will always use the production webhook - even when working in development mode. That means that the webhook needs to be deployed before any changes can be manually tested. The only way to test a webhook in developement is using the CLI.
+Note: Instructions executed from the UI during development (e.g. manually filling in credit card details as a customer would do) can be logged via the listeners above. They're not just for CLI triggers. Responses will also logged to the Stripe dashboard, but these will be for the production webhook.

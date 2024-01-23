@@ -29,9 +29,6 @@ export async function POST(request) {
     return NextResponse.json({ error: failMessage }, { status: 400 });
   }
 
-  let sub = null,
-    patient = null; // for debugging
-
   try {
     /* Access Firestore as required for all events. */
     await initialiseAdmin();
@@ -49,7 +46,6 @@ export async function POST(request) {
       const subscription = await stripe.subscriptions.list({
         customer: customerId,
       });
-      sub = subscription; // temp for debugging
       let paymentDate, expiryDate;
       if (subscription) {
         /* Assumes only a single subscription active. */
@@ -61,7 +57,6 @@ export async function POST(request) {
 
       /* Get payments data from Firestore. */
       const { docId, patientData } = await getPatientData(customerId);
-      patient = patientData; // temp for debugging
       const allPaymentData = patientData.payments;
 
       /* Save payments data to Firestore if invoice paid. */
@@ -140,9 +135,6 @@ export async function POST(request) {
     return NextResponse.json({ error }, { status: 204 });
   } catch (err) {
     console.log('⚠️  Fatal error in webhook. ', err.message);
-    return NextResponse.json(
-      { error: err.message, sub, patient },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
