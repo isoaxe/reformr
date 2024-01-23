@@ -1,9 +1,7 @@
 const isLive = false; // TODO: Toggle to true when ready to go live
 const isDev = process.env.NODE_ENV === 'development';
 
-/* Stripe and Firestore details used when testing via the CLI. */
-export const isCli = false;
-/* Update the following values if test data reset */
+/* Constants used when testing via the CLI. Update if test data gets reset. */
 export const STRIPE_UID = 'cus_PBvZjvVV5aWQy1';
 export const FIRESTORE_DOC_ID = 'Harris-820398';
 export const PAYMENT_METHOD_ID = 'pm_1ONXjaFPKktQy8tpj8pYmahw';

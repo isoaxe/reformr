@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 import { initialiseAdmin } from '@/util/admin';
 import { STRIPE_SECRET_KEY } from '@/util/constants';
 import { STRIPE_INVOICE_WEBHOOK_SECRET } from '@/util/constants';
-import { STRIPE_UID, PAYMENT_METHOD_ID, isCli } from '@/util/constants';
+import { STRIPE_UID, PAYMENT_METHOD_ID } from '@/util/constants';
 import { getPatientData } from '@/util/server';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
@@ -37,8 +37,8 @@ export async function POST(request) {
   /* Get customerId as required for all events. */
   const invoice = event?.data?.object;
   let customerId = invoice?.customer;
+  const isCli = invoice?.description === '(created by Stripe CLI)';
   if (isCli) customerId = STRIPE_UID;
-  else console.log('⚠️  CLI mode is disabled. Using live webhook.');
 
   /* Handle the event. Add payment data to Firestore if payment is made. */
   if (event.type === 'invoice.paid') {
