@@ -24,7 +24,7 @@ export async function POST(request) {
   } catch (err) {
     const message = '⚠️  Webhook signature verification failed.';
     console.log(message, err.message);
-    return NextResponse.json({ message, status: 400 });
+    return NextResponse.json({ message }, { status: 400 });
   }
 
   const verificationResult = event?.data?.object;
@@ -53,9 +53,9 @@ export async function POST(request) {
     default:
       message = `⚠️  Unhandled event type ${event.type}`;
       console.log(message);
-      return NextResponse.json({ message, status: 204 });
+      return NextResponse.json({ message }, { status: 204 });
   }
   message = `✅ Identity status updated to ${status}.`;
   console.log(message);
-  return NextResponse.json({ message, status: 200 });
+  return NextResponse.json({ message }, { status: 200 });
 }
