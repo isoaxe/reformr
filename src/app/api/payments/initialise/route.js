@@ -14,7 +14,7 @@ export async function POST(request) {
     /* Get name and email from Firebase auth token. */
     await initialiseAdmin();
     const user = await getAuth().verifyIdToken(fireToken);
-    const { displayName, email } = user;
+    const { name, email } = user;
 
     /* Get docId from Firestore. */
     const docId = await getDocId(email);
@@ -32,7 +32,7 @@ export async function POST(request) {
     }
 
     /* Create a new subscription if not in Firestore, */
-    const stripeUid = await createCustomer(displayName, email);
+    const stripeUid = await createCustomer(name, email);
     const subscription = await createSubscription(stripeUid);
     subscription.isCancelled = false;
     subscription.isPaused = false;
