@@ -20,6 +20,7 @@ export default function Payments() {
     address3: '',
     postcode: '',
   });
+  const [isPageLoaded, setPageLoaded] = useState(false);
   const { user } = useAuth();
 
   useRedirectNoUser(user);
@@ -43,8 +44,14 @@ export default function Payments() {
         setOptions(options);
       }
     }
-    if (user) getElementsOptions();
-  }, [user]);
+    if (user && isPageLoaded) getElementsOptions();
+  }, [user, isPageLoaded]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setPageLoaded(true); // assume user fetched within 2 seconds.
+    }, 2000);
+  }, []);
 
   return (
     <main className="mx-auto min-h-[calc(100vh-7rem)] w-full max-w-xl">
