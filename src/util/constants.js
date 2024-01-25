@@ -2,9 +2,9 @@ const isLive = false; // TODO: Toggle to true when ready to go live
 const isDev = process.env.NODE_ENV === 'development';
 
 /* Constants used when testing via the CLI. Update if test data gets reset. */
-export const STRIPE_UID = 'cus_PBvZjvVV5aWQy1';
-export const FIRESTORE_DOC_ID = 'Harris-820398';
-export const PAYMENT_METHOD_ID = 'pm_1ONXjaFPKktQy8tpj8pYmahw';
+export const STRIPE_UID = 'cus_PRMr8KENrLynhS';
+export const FIRESTORE_DOC_ID = 'Carlsen-273656';
+export const PAYMENT_METHOD_ID = 'pm_1OcU8hFPKktQy8tp3c5CqkKS';
 // TODO: Add a redirect to patient dashboard after Calendly booking is complete.
 
 /* Stripe keys for the SquareSpace account. */
@@ -46,7 +46,7 @@ export const STRIPE_IDENTITY_WEBHOOK_SECRET = isLive
   ? stripeIdentityWebhookSecretLocal
   : stripeIdentityWebhookSecretTest;
 
-const stripePriceIdTest = 'price_1O9rYQFPKktQy8tpBuZCaJAw';
+const stripePriceIdTest = 'price_1OcU0qFPKktQy8tprgS2s2Wj';
 const stripePriceIdLive = 'price_1NlkQrFPKktQy8tpqjntJXwq';
 export const STRIPE_PRICE_ID = isLive ? stripePriceIdLive : stripePriceIdTest;
 
