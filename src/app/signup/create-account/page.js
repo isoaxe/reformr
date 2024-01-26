@@ -14,7 +14,6 @@ export default function CreateAccount() {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [helperText, setHelperText] = useState('');
@@ -26,16 +25,15 @@ export default function CreateAccount() {
   useCookieState('screening', 'email', setEmail);
   useCookieState('screening', 'firstName', setFirstName);
   useCookieState('screening', 'lastName', setLastName);
-  useCookieState('screening', 'phone', setPhone);
 
   async function createPatientAccount() {
     setLoading(true);
     const name = `${firstName} ${lastName}`;
-    if (!name || !phone || !email) return;
+    if (!name || !email) return;
     const captchaToken = cookies.get('token');
     const options = {
       method: 'POST',
-      body: JSON.stringify({ name, phone, email, password, captchaToken }),
+      body: JSON.stringify({ name, email, password, captchaToken }),
       headers: { 'content-type': 'application/json' },
     };
     const res = await fetch('/api/users/patient', options);

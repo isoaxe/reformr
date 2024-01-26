@@ -10,7 +10,7 @@ import { auth, db } from '@/util/firebase';
 /* Create new patient user. Update creation date and uid on Firestore. */
 export async function POST(request) {
   const data = await request.json();
-  const { name, phone, email, password, captchaToken } = data;
+  const { name, email, password, captchaToken } = data;
 
   try {
     /* Verify reCAPTCHA token matches one from Firestore. */
@@ -19,11 +19,7 @@ export async function POST(request) {
 
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    // TODO: Find why the phoneNumber field below is not getting set.
-    updateProfile(auth.currentUser, {
-      displayName: name,
-      phoneNumber: phone,
-    });
+    await updateProfile(auth.currentUser, { displayName: name });
 
     /* Get docId from Firestore. */
     const docId = await getDocId(email);
