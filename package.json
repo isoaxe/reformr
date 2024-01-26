@@ -1,12 +1,14 @@
 {
   "name": "reformr",
-  "version": "0.36.14",
+  "version": "0.36.15",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "listen": "stripe listen --events invoice.paid,invoice.payment_failed --forward-to localhost:3000/api/payments/recurring",
+    "trigger": "stripe trigger invoice.paid",
     "env-var": "vercel env pull .env.local"
   },
   "dependencies": {
