@@ -21,8 +21,7 @@ export async function getDocId(email) {
   const emailsRef = doc(db, 'emails', email);
   const emailSnap = await getDoc(emailsRef);
   const emailsData = emailSnap.data();
-  const { docId } = emailsData;
-  return docId;
+  return emailsData.docId;
 }
 
 /* Save email document to Firestore if not already there. */
