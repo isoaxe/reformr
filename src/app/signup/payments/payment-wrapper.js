@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { PaymentElement } from '@stripe/react-stripe-js';
 import { useStripe, useElements } from '@stripe/react-stripe-js';
 import { doc, updateDoc } from 'firebase/firestore';
-import { useCookies } from 'next-client-cookies';
 import { LoadingButton } from '@mui/lab';
 import Toast from '@/components/toast';
 import { getBaseUrl } from '@/util/helpers';
@@ -13,7 +12,6 @@ export default function PaymentWrapper({ address }) {
   const [message, setMessage] = useState('');
   const [showMessage, setShowMessage] = useState(false); // toast message
   const [isLoading, setLoading] = useState(false);
-  const cookies = useCookies();
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();
@@ -23,8 +21,6 @@ export default function PaymentWrapper({ address }) {
   async function handleSubmit(event) {
     event?.preventDefault();
     setLoading(true);
-
-    const email = cookies.get('email');
 
     /* Check that user is logged in. */
     if (!user) {
@@ -43,22 +39,10 @@ export default function PaymentWrapper({ address }) {
       return;
     }
 
-    /* Get the patients document ID from Firestore. */
-    let docId;
-    try {
-      const fireToken = await auth.currentUser.getIdToken(true);
-      const res = await fetch(`/api/doc-id?email=${email}&token=${fireToken}`);
-      const json = await res.json();
-      const { error } = json;
-      if (error) console.log(error);
-      else docId = json.docId;
-    } catch (err) {
-      console.log('Error getting document ID: ', err);
-      setMessage('There was an issue getting the document ID.');
-      setShowMessage(true);
-      setLoading(false);
-      return;
-    }
+    /* Get the patients document ID from auth. */
+    const docId = await auth.currentUser
+      .getIdTokenResult()
+      .then((res) => res.claims.docId);
 
     /* Save address to Firestore. */
     try {
