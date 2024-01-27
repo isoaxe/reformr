@@ -31,6 +31,10 @@ export async function POST(request) {
       notes: [],
     });
     await updateDoc(doc(db, 'emails', email), { isAccountCreated: true });
+
+    /* Save docId to auth for ease of access. */
+    await initialiseAdmin();
+    await getAuth().setCustomUserClaims(user.uid, { docId });
   } catch (err) {
     console.error('Error creating new user: ', err);
   }
