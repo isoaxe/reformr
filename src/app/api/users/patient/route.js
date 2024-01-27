@@ -17,24 +17,25 @@ export async function POST(request) {
     const isVerified = await validateToken(email, captchaToken);
     if (!isVerified) return NextResponse.json({ error: 'Invalid token.' });
 
+    /* Create a new patient user. */
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    await updateProfile(auth.currentUser, { displayName: name });
+    updateProfile(auth.currentUser, { displayName: name });
 
     /* Get docId from Firestore. */
     const docId = await getDocId(email);
 
     /* Update account creation date, uid and status on Firestore. */
-    await updateDoc(doc(db, 'patients', docId), {
+    updateDoc(doc(db, 'patients', docId), {
       dateAccountCreated: new Date(),
       userId: user.uid,
       notes: [],
     });
-    await updateDoc(doc(db, 'emails', email), { isAccountCreated: true });
+    updateDoc(doc(db, 'emails', email), { isAccountCreated: true });
 
     /* Save docId to auth for ease of access. */
     await initialiseAdmin();
-    await getAuth().setCustomUserClaims(user.uid, { docId });
+    getAuth().setCustomUserClaims(user.uid, { docId });
   } catch (err) {
     console.error('Error creating new user: ', err);
   }
