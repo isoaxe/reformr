@@ -13,10 +13,10 @@ export async function POST(request) {
   try {
     /* Validate Firebase token. */
     const user = await getAuth().verifyIdToken(fireToken);
-    const docId = user?.docId;
-    if (!docId) return NextResponse.json({ error: 'Invalid token.' });
+    if (!user) return NextResponse.json({ error: 'Invalid token.' });
 
     /* Create identity verification session. */
+    const { docId } = user;
     const verificationSession =
       await stripe.identity.verificationSessions.create({
         type: 'document',
