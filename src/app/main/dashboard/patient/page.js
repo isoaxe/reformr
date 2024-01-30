@@ -230,7 +230,6 @@ export default function PatientDashboard() {
         setSubPaused={setSubPaused}
         setExpiryDate={setExpiryDate}
         subId={subId}
-        email={email}
       />
       <CancelModal
         open={cancelModalOpen}
