@@ -19,7 +19,7 @@ export async function POST(request) {
 
     /* Create a new patient user. */
     const res = await createUserWithEmailAndPassword(auth, email, password);
-    const user = res.user;
+    const { user } = res;
     updateProfile(auth.currentUser, { displayName: name });
 
     /* Get docId from Firestore. */
@@ -50,7 +50,6 @@ export async function PUT(request) {
 
   try {
     /* Verify that user had appropriate role. */
-    await initialiseAdmin();
     const user = await getAuth().verifyIdToken(fireToken);
     const { role } = user;
     const allowed = ['doctor', 'pharmacist'];
@@ -61,6 +60,7 @@ export async function PUT(request) {
     const docId = await getDocId(email);
 
     /* Update patient status on Firestore. */
+    await initialiseAdmin();
     const db = admin.firestore();
     const patientRef = db.collection('patients').doc(docId);
     /* Only one of these conditionals will run. */
