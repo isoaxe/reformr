@@ -237,7 +237,6 @@ export default function PatientDashboard() {
         setOpen={setCancelModalOpen}
         setSubCancelled={setSubCancelled}
         subId={subId}
-        email={email}
       />
     </main>
   );

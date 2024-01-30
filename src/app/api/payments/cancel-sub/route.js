@@ -1,21 +1,25 @@
+import admin from 'firebase-admin';
+import { getAuth } from 'firebase-admin/auth';
 import { NextResponse } from 'next/server';
 import { cancelSubscription } from '@/util/stripe';
-import { checkSameUser } from '@/util/server';
 
 /* Cancel Stripe subscription and set Firestore flag. */
 export async function POST(request) {
   const data = await request.json();
-  const { subId, email, fireToken } = data;
+  const { subId, fireToken } = data;
 
   try {
-    /* Check if user attempting to modify own data. */
-    const { error, patientRef } = await checkSameUser(fireToken, email);
-    if (error) return NextResponse.json({ error });
+    /* Validate Firebase token. */
+    const user = await getAuth().verifyIdToken(fireToken);
+    if (!user) return NextResponse.json({ error: 'Invalid token.' });
 
     /* Cancel subscription with Stripe at end of billing period. */
     await cancelSubscription(subId);
 
     /* Set subscription to cancelled in Firestore. */
+    const db = admin.firestore();
+    const { docId } = user;
+    const patientRef = db.collection('patients').doc(docId);
     await patientRef.set(
       { payments: { subscription: { isCancelled: true } } },
       { merge: true }
