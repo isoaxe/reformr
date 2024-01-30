@@ -1,24 +1,23 @@
 import admin from 'firebase-admin';
 import { getAuth } from 'firebase-admin/auth';
 import { NextResponse } from 'next/server';
-import { getDocId, validateToken } from '@/util/helpers';
 import { chooseManyLabels, manyRangeLabels } from '@/util/data';
 import { initialiseAdmin } from '@/util/admin';
 
 /* Save medical data to Firestore if token is valid. */
 export async function POST(request) {
   const data = await request.json();
-  const { email, captchaToken } = data;
+  const { fireToken } = data;
   const medicalAsString = data.medical;
   const medical = JSON.parse(medicalAsString); // medical as JSON
 
   try {
-    /* Get docId from Firestore. */
-    const docId = await getDocId(email);
+    /* Validate Firebase token. */
+    const user = await getAuth().verifyIdToken(fireToken);
+    if (!user) return NextResponse.json({ error: 'Invalid token.' });
 
-    /* Verify reCAPTCHA token against one from Firestore. */
-    const isVerified = await validateToken(email, captchaToken);
-    if (!isVerified) return NextResponse.json({ error: 'Invalid token.' });
+    const { docId } = user;
+    if (!docId) return NextResponse.json({ error: 'Invalid docId.' });
 
     /* Parse answers based on ChooseMany structure to attach meaningful results. */
     const checkboxQuestions = Object.keys(chooseManyLabels);

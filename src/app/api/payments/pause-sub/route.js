@@ -1,24 +1,26 @@
+import admin from 'firebase-admin';
+import { getAuth } from 'firebase-admin/auth';
 import { NextResponse } from 'next/server';
 import { pauseSubscription } from '@/util/stripe';
-import { initialiseAdmin } from '@/util/admin';
-import { checkSameUser } from '@/util/server';
 import { ONE_MONTH } from '@/util/constants';
 
 /* Pause Stripe subscription and update Firestore data. */
 export async function POST(request) {
   const data = await request.json();
-  const { subId, email, fireToken } = data;
+  const { subId, fireToken } = data;
 
   try {
-    /* Check is data belongs to the user. */
-    await initialiseAdmin();
-    const { error, patientRef } = await checkSameUser(fireToken, email);
-    if (error) return NextResponse.json({ error });
+    /* Validate Firebase token. */
+    const user = await getAuth().verifyIdToken(fireToken);
+    if (!user) return NextResponse.json({ error: 'Invalid token.' });
 
     /* Pause subscription with Stripe for one month. */
     await pauseSubscription(subId);
 
     /* Increment numBoxesSkipped and turn off isPaid and isPaused flags in Firestore. */
+    const db = admin.firestore();
+    const { docId } = user;
+    const patientRef = db.collection('patients').doc(docId);
     const patientDoc = await patientRef.get();
     const patientData = patientDoc.data();
     let { numBoxesSkipped, expiryDate } = patientData.payments;

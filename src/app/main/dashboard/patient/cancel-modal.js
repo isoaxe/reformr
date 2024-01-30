@@ -6,7 +6,7 @@ import { auth } from '@/util/firebase';
 
 export default function CancelModal(props) {
   const [isLoading, setLoading] = useState(false);
-  const { open, setOpen, setSubCancelled, subId, email } = props;
+  const { open, setOpen, setSubCancelled, subId } = props;
 
   async function cancelSub() {
     setLoading(true);
@@ -14,7 +14,7 @@ export default function CancelModal(props) {
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ subId, email, fireToken }),
+      body: JSON.stringify({ subId, fireToken }),
     };
     const res = await fetch('/api/payments/cancel-sub', options);
     const data = await res.json();

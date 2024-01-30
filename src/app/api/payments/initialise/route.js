@@ -2,7 +2,6 @@ import admin from 'firebase-admin';
 import { getAuth } from 'firebase-admin/auth';
 import { NextResponse } from 'next/server';
 import { createCustomer, createSubscription } from '@/util/stripe';
-import { getDocId } from '@/util/helpers';
 import { initialiseAdmin } from '@/util/admin';
 
 /* Sign up a new customer and create a subscription. Make the first payment. */
@@ -11,13 +10,9 @@ export async function POST(request) {
   const { fireToken } = data;
 
   try {
-    /* Get name and email from Firebase auth token. */
-    await initialiseAdmin();
+    /* Get name, email and docId from Firebase auth token. */
     const user = await getAuth().verifyIdToken(fireToken);
-    const { name, email } = user;
-
-    /* Get docId from Firestore. */
-    const docId = await getDocId(email);
+    const { name, email, docId } = user;
 
     /* Return subscription if already in Firestore. */
     await initialiseAdmin();

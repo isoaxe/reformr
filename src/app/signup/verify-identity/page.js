@@ -26,7 +26,7 @@ function VerifyButton({ stripePromise }) {
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: user.email, fireToken }),
+      body: JSON.stringify({ fireToken }),
     };
     const response = await fetch('/api/identity/verification', options);
     const { clientSecret, err } = await response.json();

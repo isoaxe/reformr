@@ -6,7 +6,7 @@ import { auth } from '@/util/firebase';
 
 export default function PauseModal(props) {
   const [isLoading, setLoading] = useState(false);
-  const { open, setOpen, setSubPaused, setExpiryDate, subId, email } = props;
+  const { open, setOpen, setSubPaused, setExpiryDate, subId } = props;
 
   async function pauseSub() {
     setLoading(true);
@@ -14,7 +14,7 @@ export default function PauseModal(props) {
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ subId, email, fireToken }),
+      body: JSON.stringify({ subId, fireToken }),
     };
     const res = await fetch('/api/payments/pause-sub', options);
     const data = await res.json();
