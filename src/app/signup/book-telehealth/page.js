@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useCookies } from 'next-client-cookies';
+import { auth } from '@/util/firebase';
 import Toast from '@/components/toast';
 import Calendly from './calendly';
 
@@ -13,13 +14,12 @@ export default function BookTelehealth() {
   useEffect(() => {
     async function saveMedicalData() {
       const medical = cookies.get('medical');
-      const captchaToken = cookies.get('token');
-      const email = cookies.get('email');
+      const fireToken = await auth.currentUser.getIdToken(true);
 
       try {
         const options = {
           method: 'POST',
-          body: JSON.stringify({ medical, email, captchaToken }),
+          body: JSON.stringify({ medical, fireToken }),
           headers: { 'content-type': 'application/json' },
         };
         const res = await fetch('/api/medical', options);
