@@ -10,7 +10,6 @@ import { FaCreditCard } from 'react-icons/fa6';
 import DropdownItem from '../dropdown-item';
 import CancelModal from './cancel-modal';
 import PauseModal from './pause-modal';
-import { getDocId } from '@/util/helpers';
 import { useAuth, useRedirectNoUser } from '@/util/hooks';
 import { auth, db } from '@/util/firebase';
 
@@ -151,7 +150,8 @@ export default function PatientDashboard() {
     setEmail(user.email);
 
     async function getPatientData() {
-      const docId = await getDocId(email);
+      const tokenResult = await user.getIdTokenResult();
+      const { docId } = tokenResult.claims;
       const patientRef = doc(db, 'patients', docId);
       const patientDoc = await getDoc(patientRef);
       const patientData = patientDoc.data();
