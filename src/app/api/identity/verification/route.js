@@ -1,7 +1,6 @@
 import Stripe from 'stripe';
+import { getAuth } from 'firebase-admin/auth';
 import { NextResponse } from 'next/server';
-import { getDocId } from '@/util/helpers';
-import { checkSameUser } from '@/util/server';
 import { STRIPE_SECRET_KEY } from '@/util/constants';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
@@ -9,15 +8,13 @@ const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
 /* Create new identity session for authenticated patients. */
 export async function POST(request) {
   const data = await request.json();
-  const { email, fireToken } = data;
+  const { fireToken } = data;
 
   try {
-    /* Check if user attempting to modify own data. */
-    const { error } = await checkSameUser(fireToken, email);
-    if (error) return NextResponse.json({ error });
-
-    /* Get docId from Firestore. */
-    const docId = await getDocId(email);
+    /* Validate Firebase token. */
+    const user = await getAuth().verifyIdToken(fireToken);
+    const docId = user?.docId;
+    if (!docId) return NextResponse.json({ error: 'Invalid token.' });
 
     /* Create identity verification session. */
     const verificationSession =
