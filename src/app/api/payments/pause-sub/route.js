@@ -1,8 +1,8 @@
 import admin from 'firebase-admin';
 import { getAuth } from 'firebase-admin/auth';
 import { NextResponse } from 'next/server';
+import dayjs from 'dayjs';
 import { pauseSubscription } from '@/util/stripe';
-import { ONE_MONTH } from '@/util/constants';
 
 /* Pause Stripe subscription and update Firestore data. */
 export async function POST(request) {
@@ -25,7 +25,12 @@ export async function POST(request) {
     const patientData = patientDoc.data();
     let { numBoxesSkipped, expiryDate } = patientData.payments;
     numBoxesSkipped++;
-    const newExpiryDate = new Date(expiryDate.seconds * 1000 + ONE_MONTH);
+
+    /* Extend expiry date by one month. */
+    const oldExpiry = dayjs(expiryDate.seconds * 1000);
+    const newExpiry = oldExpiry.add(1, 'month');
+    const newExpiryDate = new Date(newExpiry.unix() * 1000);
+
     await patientRef.set(
       {
         payments: {

@@ -49,6 +49,3 @@ export const STRIPE_IDENTITY_WEBHOOK_SECRET = isLive
 const stripePriceIdTest = 'price_1OcU0qFPKktQy8tprgS2s2Wj';
 const stripePriceIdLive = 'price_1NlkQrFPKktQy8tpqjntJXwq';
 export const STRIPE_PRICE_ID = isLive ? stripePriceIdLive : stripePriceIdTest;
-
-/* Other constants. */
-export const ONE_MONTH = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
