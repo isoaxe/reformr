@@ -27,16 +27,19 @@ export async function createSubscription(customerId) {
   };
 }
 
-/* Cancel existing subscription with Stripe. */
+/* Any invoice issued during the paused period will be voided (i.e. collection will not be made). Applies to both cancel and pause subscription below. */
+
+/* Pause subscription indefinitely with Stripe. */
 export async function cancelSubscription(subId) {
-  await stripe.subscriptions.update(subId, { cancel_at_period_end: true });
+  await stripe.subscriptions.update(subId, {
+    pause_collection: { behavior: 'void' },
+  });
 }
 
 /* Pause subscription for one month with Stripe. */
 export async function pauseSubscription(subId) {
   const oneMonthFromNow = Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60; // UNIX timestamp in seconds
   await stripe.subscriptions.update(subId, {
-    /* The invoice issued during the paused period will be voided (i.e. collection will not be made). */
     pause_collection: { behavior: 'void', resumes_at: oneMonthFromNow },
   });
 }
