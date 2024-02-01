@@ -23,7 +23,7 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
 
   async function saveNote() {
     setLoading(true);
-    const fireToken = await auth.currentUser.getIdToken(true);
+    const fireToken = await auth.currentUser.getIdToken();
     const doctor = user.displayName;
     const reqBody = { noteText: note, docId: fireDocId, doctor, fireToken };
     const options = {
@@ -82,7 +82,7 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
 
   useEffect(() => {
     async function getPatientRecord() {
-      const fireToken = await auth.currentUser.getIdToken(true);
+      const fireToken = await auth.currentUser.getIdToken();
       const params = `docId=${fireDocId}&token=${fireToken}`;
       const res = await fetch('/api/medical?' + params);
       const data = await res.json();

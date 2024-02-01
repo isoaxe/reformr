@@ -20,7 +20,7 @@ export default function CreateNewUser() {
 
   async function createUser() {
     setLoading(true);
-    const fireToken = await auth.currentUser.getIdToken(true);
+    const fireToken = await auth.currentUser.getIdToken();
     const name = `${firstName} ${lastName}`;
     const options = {
       method: 'POST',

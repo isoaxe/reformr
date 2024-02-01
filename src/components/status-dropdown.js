@@ -30,7 +30,7 @@ export default function StatusDropdown(props) {
 
   async function storeStatus(email, updatedStatus) {
     setLoading(true);
-    const fireToken = await auth.currentUser.getIdToken(true);
+    const fireToken = await auth.currentUser.getIdToken();
     const options = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },

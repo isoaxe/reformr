@@ -22,7 +22,7 @@ function VerifyButton({ stripePromise }) {
   async function handleClick(event) {
     event?.preventDefault();
     setLoading(true);
-    const fireToken = await auth.currentUser.getIdToken(true);
+    const fireToken = await auth.currentUser.getIdToken();
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

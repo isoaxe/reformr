@@ -10,7 +10,7 @@ export default function PauseModal(props) {
 
   async function pauseSub() {
     setLoading(true);
-    const fireToken = await auth.currentUser.getIdToken(true);
+    const fireToken = await auth.currentUser.getIdToken();
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

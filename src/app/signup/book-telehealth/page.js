@@ -14,7 +14,7 @@ export default function BookTelehealth() {
   useEffect(() => {
     async function saveMedicalData() {
       const medical = cookies.get('medical');
-      const fireToken = await auth.currentUser.getIdToken(true);
+      const fireToken = await auth.currentUser.getIdToken();
 
       try {
         const options = {

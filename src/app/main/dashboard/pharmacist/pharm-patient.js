@@ -16,7 +16,7 @@ export default function PharmacistPatient({ patient, patients, setPatients }) {
 
   async function storeTrackingNumber() {
     setLoading(true);
-    const fireToken = await auth.currentUser.getIdToken(true);
+    const fireToken = await auth.currentUser.getIdToken();
     const options = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },

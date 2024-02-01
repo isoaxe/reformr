@@ -28,7 +28,7 @@ export default function Payments() {
   useEffect(() => {
     /* Fetch the client secret from the server and use to set options for Elements. */
     async function getElementsOptions() {
-      const fireToken = await auth.currentUser.getIdToken(true);
+      const fireToken = await auth.currentUser.getIdToken();
       const fetchOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
