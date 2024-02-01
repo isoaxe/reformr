@@ -3,6 +3,7 @@ import { getAuth } from 'firebase-admin/auth';
 import { NextResponse } from 'next/server';
 import dayjs from 'dayjs';
 import { pauseSubscription } from '@/util/stripe';
+import { initialiseAdmin } from '@/util/admin';
 
 /* Pause Stripe subscription and update Firestore data. */
 export async function POST(request) {
@@ -11,6 +12,7 @@ export async function POST(request) {
 
   try {
     /* Validate Firebase token. */
+    await initialiseAdmin();
     const user = await getAuth().verifyIdToken(fireToken);
     if (!user) return NextResponse.json({ error: 'Invalid token.' });
 

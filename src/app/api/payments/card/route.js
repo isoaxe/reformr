@@ -2,6 +2,7 @@ import Stripe from 'stripe';
 import { getAuth } from 'firebase-admin/auth';
 import { NextResponse } from 'next/server';
 import { getPatientData } from '@/util/server';
+import { initialiseAdmin } from '@/util/admin';
 import { STRIPE_SECRET_KEY } from '@/util/constants';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
@@ -14,6 +15,7 @@ export async function GET(request) {
 
   try {
     /* Validate Firebase token. */
+    await initialiseAdmin();
     const user = await getAuth().verifyIdToken(fireToken);
     if (!user) return NextResponse.json({ error: 'Invalid token.' });
 

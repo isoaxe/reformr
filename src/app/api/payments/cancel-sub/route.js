@@ -2,6 +2,7 @@ import admin from 'firebase-admin';
 import { getAuth } from 'firebase-admin/auth';
 import { NextResponse } from 'next/server';
 import { cancelSubscription } from '@/util/stripe';
+import { initialiseAdmin } from '@/util/admin';
 
 /* Cancel Stripe subscription and set Firestore flag. */
 export async function POST(request) {
@@ -10,6 +11,7 @@ export async function POST(request) {
 
   try {
     /* Validate Firebase token. */
+    await initialiseAdmin();
     const user = await getAuth().verifyIdToken(fireToken);
     if (!user) return NextResponse.json({ error: 'Invalid token.' });
 

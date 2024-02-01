@@ -11,11 +11,11 @@ export async function POST(request) {
 
   try {
     /* Get name, email and docId from Firebase auth token. */
+    await initialiseAdmin();
     const user = await getAuth().verifyIdToken(fireToken);
     const { name, email, docId } = user;
 
     /* Return subscription if already in Firestore. */
-    await initialiseAdmin();
     const db = admin.firestore();
     const patientRef = db.collection('patients').doc(docId);
     const patientDoc = await patientRef.get();

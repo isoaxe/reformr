@@ -13,6 +13,7 @@ export async function POST(request) {
 
   try {
     /* Validate Firebase token. */
+    await initialiseAdmin();
     const user = await getAuth().verifyIdToken(fireToken);
     if (!user) return NextResponse.json({ error: 'Invalid token.' });
 
@@ -54,7 +55,6 @@ export async function POST(request) {
     if (numFields !== 23) return NextResponse.json({ error });
 
     /* If correct number of fields, save to Firestore. */
-    await initialiseAdmin();
     const db = admin.firestore();
     const patientRef = db.collection('patients').doc(docId);
     await patientRef.set({ medical }, { merge: true });

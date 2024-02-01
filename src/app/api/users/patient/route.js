@@ -50,6 +50,7 @@ export async function PUT(request) {
 
   try {
     /* Verify that user had appropriate role. */
+    await initialiseAdmin();
     const user = await getAuth().verifyIdToken(fireToken);
     const { role } = user;
     const allowed = ['doctor', 'pharmacist'];
@@ -60,7 +61,6 @@ export async function PUT(request) {
     const docId = await getDocId(email);
 
     /* Update patient status on Firestore. */
-    await initialiseAdmin();
     const db = admin.firestore();
     const patientRef = db.collection('patients').doc(docId);
     /* Only one of these conditionals will run. */
@@ -90,6 +90,7 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const fireToken = searchParams.get('fireToken');
 
+  /* Verify that user is appropriate role. */
   await initialiseAdmin();
   const user = await getAuth().verifyIdToken(fireToken);
   const { role } = user;
