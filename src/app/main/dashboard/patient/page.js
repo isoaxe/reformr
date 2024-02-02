@@ -185,9 +185,9 @@ export default function PatientDashboard() {
         `/api/payments/card?stripeUid=${stripeUid}`,
         options
       );
-      const json = await res.json();
-      if (json.error) console.log({ error: json.error });
-      else setCard(json.card);
+      const data = await res.json();
+      if (data.error) console.log({ error: data.error });
+      else setCard(data.card);
     }
     if (stripeUid && email) getCardData();
   }, [stripeUid, email]);
