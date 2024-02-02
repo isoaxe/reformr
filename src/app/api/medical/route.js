@@ -1,6 +1,7 @@
 import admin from 'firebase-admin';
 import { getAuth } from 'firebase-admin/auth';
 import { NextResponse } from 'next/server';
+import { extractFirebaseToken } from '@/util/server';
 import { chooseManyLabels, manyRangeLabels } from '@/util/data';
 import { initialiseAdmin } from '@/util/admin';
 
@@ -69,9 +70,12 @@ export async function POST(request) {
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const docId = searchParams.get('docId');
-  const fireToken = searchParams.get('token');
 
   try {
+    /* Extract Firebase token. */
+    const { fireToken, error } = extractFirebaseToken(request);
+    if (error) return NextResponse.json({ error }, { status: 401 });
+
     /* Verify that user is a doctor. */
     await initialiseAdmin();
     const user = await getAuth().verifyIdToken(fireToken);

@@ -83,10 +83,13 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
   useEffect(() => {
     async function getPatientRecord() {
       const fireToken = await auth.currentUser.getIdToken();
-      const params = `docId=${fireDocId}&token=${fireToken}`;
-      const res = await fetch('/api/medical?' + params);
+      const options = {
+        method: 'GET',
+        headers: { authorization: `Bearer ${fireToken}` },
+      };
+      const res = await fetch(`/api/medical?docId=${fireDocId}`, options);
       const data = await res.json();
-      if (data.error) console.log('Error getting patient record: ', data.error);
+      if (data.error) console.log({ error: data.error });
       else {
         setScreening(data.screening);
         setMedical(data.medical);
