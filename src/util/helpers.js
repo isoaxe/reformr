@@ -2,7 +2,7 @@
  * Helper functions available for use throughout the project.
  */
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { db } from '@/util/firebase';
+import { auth, db } from '@/util/firebase';
 
 /* Generate a token of a given length. */
 export function generateToken(length) {
@@ -58,6 +58,18 @@ export async function validateToken(email, token) {
   const savedToken = captchasData?.token;
   if (token !== savedToken || token.length !== 50) return false; // invalid
   else return true; // valid
+}
+
+/* Makes a GET request to a given endpoint. */
+export async function makeGetRequest(url) {
+  const fireToken = await auth.currentUser.getIdToken();
+  const options = {
+    method: 'GET',
+    headers: { authorization: `Bearer ${fireToken}` },
+  };
+  const res = await fetch(url, options);
+  const data = await res.json();
+  return data;
 }
 
 /* Save new data to quiz cookie on client. */

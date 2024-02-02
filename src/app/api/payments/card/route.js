@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 import { getAuth } from 'firebase-admin/auth';
 import { NextResponse } from 'next/server';
-import { getPatientData } from '@/util/server';
+import { extractFirebaseToken, getPatientData } from '@/util/server';
 import { initialiseAdmin } from '@/util/admin';
 import { STRIPE_SECRET_KEY } from '@/util/constants';
 
@@ -11,9 +11,12 @@ const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const stripeUid = searchParams.get('stripeUid');
-  const fireToken = searchParams.get('token');
 
   try {
+    /* Extract Firebase token. */
+    const { fireToken, error } = extractFirebaseToken(request);
+    if (error) return NextResponse.json({ error }, { status: 401 });
+
     /* Validate Firebase token. */
     await initialiseAdmin();
     const user = await getAuth().verifyIdToken(fireToken);

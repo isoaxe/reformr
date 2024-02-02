@@ -7,6 +7,7 @@ import { PiNotepadLight } from 'react-icons/pi';
 import PatientRecord from './patient-record';
 import StatusDropdown from '@/components/status-dropdown';
 import Spinner from '@/components/spinner';
+import { makeGetRequest } from '@/util/helpers';
 import { auth } from '@/util/firebase';
 import { useAuth } from '@/util/hooks';
 
@@ -46,10 +47,10 @@ export default function DoctorDashboard() {
   useEffect(() => {
     if (!user) return;
     const getPatients = async () => {
-      const fireToken = await auth.currentUser.getIdToken();
-      const res = await fetch(`/api/users/patient?fireToken=${fireToken}`);
-      const { error, paidPatients } = await res.json();
-      if (error) console.log('Error fetching patients: ', error);
+      const url = '/api/users/patient';
+      const data = await makeGetRequest(url);
+      const { error, paidPatients } = data;
+      if (error) console.log('Error fetching patients: ', { error });
       else setPatients(paidPatients);
     };
     getPatients();
