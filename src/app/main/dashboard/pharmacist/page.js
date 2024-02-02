@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@mui/material';
 import Patient from './pharm-patient';
 import Spinner from '@/components/spinner';
+import { makeGetRequest } from '@/util/helpers';
 import { auth } from '@/util/firebase';
 import { useAuth } from '@/util/hooks';
 
@@ -18,13 +19,9 @@ export default function PharmacistDashboard() {
   useEffect(() => {
     if (!user) return;
     const getPatients = async () => {
-      const fireToken = await auth.currentUser.getIdToken();
-      const options = {
-        method: 'GET',
-        headers: { authorization: `Bearer ${fireToken}` },
-      };
-      const res = await fetch('/api/users/patient', options);
-      const { error, paidPatients } = await res.json();
+      const url = '/api/users/patient';
+      const data = await makeGetRequest(url);
+      const { error, paidPatients } = data;
       if (error) console.log('Error fetching patients: ', { error });
       else
         setPatients(

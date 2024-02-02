@@ -10,8 +10,9 @@ import { FaCreditCard } from 'react-icons/fa6';
 import DropdownItem from '../dropdown-item';
 import CancelModal from './cancel-modal';
 import PauseModal from './pause-modal';
+import { makeGetRequest } from '@/util/helpers';
 import { useAuth, useRedirectNoUser } from '@/util/hooks';
-import { auth, db } from '@/util/firebase';
+import { db } from '@/util/firebase';
 
 export default function PatientDashboard() {
   const [name, setName] = useState('');
@@ -176,16 +177,8 @@ export default function PatientDashboard() {
 
   useEffect(() => {
     async function getCardData() {
-      const fireToken = await auth.currentUser.getIdToken();
-      const options = {
-        method: 'GET',
-        headers: { authorization: `Bearer ${fireToken}` },
-      };
-      const res = await fetch(
-        `/api/payments/card?stripeUid=${stripeUid}`,
-        options
-      );
-      const data = await res.json();
+      const url = `/api/payments/card?stripeUid=${stripeUid}`;
+      const data = await makeGetRequest(url);
       if (data.error) console.log({ error: data.error });
       else setCard(data.card);
     }

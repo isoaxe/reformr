@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Modal, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { makeGetRequest } from '@/util/helpers';
 import { useAuth } from '@/util/hooks';
 import { auth } from '@/util/firebase';
 
@@ -82,13 +83,8 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
 
   useEffect(() => {
     async function getPatientRecord() {
-      const fireToken = await auth.currentUser.getIdToken();
-      const options = {
-        method: 'GET',
-        headers: { authorization: `Bearer ${fireToken}` },
-      };
-      const res = await fetch(`/api/medical?docId=${fireDocId}`, options);
-      const data = await res.json();
+      const url = `/api/medical?docId=${fireDocId}`;
+      const data = await makeGetRequest(url);
       const { error } = data;
       if (error) console.log('Error getting patient record: ', { error });
       else {
