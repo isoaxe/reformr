@@ -89,7 +89,8 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
       };
       const res = await fetch(`/api/medical?docId=${fireDocId}`, options);
       const data = await res.json();
-      if (data.error) console.log({ error: data.error });
+      const { error } = data;
+      if (error) console.log('Error getting patient record: ', { error });
       else {
         setScreening(data.screening);
         setMedical(data.medical);
