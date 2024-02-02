@@ -176,7 +176,7 @@ export default function PatientDashboard() {
 
   useEffect(() => {
     async function getCardData() {
-      const fireToken = await auth.currentUser.getIdToken(true);
+      const fireToken = await auth.currentUser.getIdToken();
       const options = {
         method: 'GET',
         headers: { authorization: `Bearer ${fireToken}` },
