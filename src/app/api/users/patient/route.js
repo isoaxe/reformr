@@ -90,15 +90,15 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const fireToken = searchParams.get('fireToken');
 
-  /* Verify that user is appropriate role. */
-  await initialiseAdmin();
-  const user = await getAuth().verifyIdToken(fireToken);
-  const { role } = user;
-  const allowed = ['admin', 'doctor', 'pharmacist'];
-  if (!allowed.includes(role))
-    return NextResponse.json({ error: 'Invalid role.' });
-
   try {
+    /* Verify that user is appropriate role. */
+    await initialiseAdmin();
+    const user = await getAuth().verifyIdToken(fireToken);
+    const { role } = user;
+    const allowed = ['admin', 'doctor', 'pharmacist'];
+    if (!allowed.includes(role))
+      return NextResponse.json({ error: 'Invalid role.' });
+
     /* Get a list of all patients from Firestore. */
     const db = admin.firestore();
     const paidPatientsRef = await db
