@@ -3,6 +3,7 @@ import { getAuth } from 'firebase-admin/auth';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, updateDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
+import { extractFirebaseToken } from '@/util/server';
 import { getDocId, validateToken, makeCamelCase } from '@/util/helpers';
 import { initialiseAdmin } from '@/util/admin';
 import { auth, db } from '@/util/firebase';
@@ -87,17 +88,18 @@ export async function PUT(request) {
 
 /* Get all patients from Firestore. */
 export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const fireToken = searchParams.get('fireToken');
-
   try {
+    /* Extract Firebase token. */
+    const { fireToken, error } = extractFirebaseToken(request);
+    if (error) return NextResponse.json({ error }, { status: 401 });
+
     /* Verify that user is appropriate role. */
     await initialiseAdmin();
     const user = await getAuth().verifyIdToken(fireToken);
     const { role } = user;
     const allowed = ['admin', 'doctor', 'pharmacist'];
     if (!allowed.includes(role))
-      return NextResponse.json({ error: 'Invalid role.' });
+      return NextResponse.json({ error: 'Invalid role.' }, { status: 401 });
 
     /* Get a list of all patients from Firestore. */
     const db = admin.firestore();

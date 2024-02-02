@@ -47,9 +47,13 @@ export default function DoctorDashboard() {
     if (!user) return;
     const getPatients = async () => {
       const fireToken = await auth.currentUser.getIdToken();
-      const res = await fetch(`/api/users/patient?fireToken=${fireToken}`);
+      const options = {
+        method: 'GET',
+        headers: { authorization: `Bearer ${fireToken}` },
+      };
+      const res = await fetch('/api/users/patient', options);
       const { error, paidPatients } = await res.json();
-      if (error) console.log('Error fetching patients: ', error);
+      if (error) console.log('Error fetching patients: ', { error });
       else setPatients(paidPatients);
     };
     getPatients();
