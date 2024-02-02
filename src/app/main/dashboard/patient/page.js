@@ -176,11 +176,17 @@ export default function PatientDashboard() {
 
   useEffect(() => {
     async function getCardData() {
-      const fireToken = await auth.currentUser.getIdToken();
-      const params = `stripeUid=${stripeUid}&token=${fireToken}`;
-      const res = await fetch(`/api/payments/card?${params}`);
+      const fireToken = await auth.currentUser.getIdToken(true);
+      const options = {
+        method: 'GET',
+        headers: { authorization: `Bearer ${fireToken}` },
+      };
+      const res = await fetch(
+        `/api/payments/card?stripeUid=${stripeUid}`,
+        options
+      );
       const json = await res.json();
-      if (json.error) console.log(json.error);
+      if (json.error) console.log({ error: json.error });
       else setCard(json.card);
     }
     if (stripeUid && email) getCardData();
