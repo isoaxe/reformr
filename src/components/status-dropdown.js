@@ -20,7 +20,6 @@ export default function StatusDropdown(props) {
   const patientStatusOptions = [
     'pending',
     'medically cleared',
-    'labs needed',
     'medically failed',
   ];
 
