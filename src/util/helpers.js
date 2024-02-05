@@ -91,8 +91,8 @@ export function getBaseUrl() {
   const currentUrl = window.location.href;
   if (currentUrl.includes('localhost')) baseUrl = 'http://localhost:3000';
   else if (currentUrl.includes('.app')) baseUrl = 'https://reformr.vercel.app';
-  else if (currentUrl.includes('.nz')) baseUrl = 'https://reformr.nz';
-  else if (currentUrl.includes('.com')) baseUrl = 'https://reformr.com';
+  else if (currentUrl.includes('.nz')) baseUrl = 'https://reformr.co.nz';
+  else if (currentUrl.includes('.au')) baseUrl = 'https://reformr.com.au';
   return baseUrl;
 }
 
