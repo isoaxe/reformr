@@ -41,8 +41,9 @@ export async function POST(request) {
 
     /* Save docId to auth for ease of access. */
     getAuth().setCustomUserClaims(user.uid, { docId });
-  } catch (err) {
-    console.error('Error creating new user: ', err);
+  } catch (error) {
+    console.error('Error creating new user: ', error);
+    return NextResponse.json({ error });
   }
 
   return NextResponse.json({ error: false });
