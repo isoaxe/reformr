@@ -21,13 +21,13 @@ export async function POST(request) {
     /* Create a new patient user. */
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const { user } = res;
-    updateProfile(auth.currentUser, { displayName: name });
+    await updateProfile(auth.currentUser, { displayName: name });
 
     /* Get docId from Firestore. */
     const docId = await getDocId(email);
 
     /* Update account creation date and uid on Firestore. */
-    updateDoc(doc(db, 'patients', docId), {
+    await updateDoc(doc(db, 'patients', docId), {
       dateAccountCreated: new Date(),
       userId: user.uid,
       notes: [],
@@ -40,7 +40,7 @@ export async function POST(request) {
     emailsRef.set({ isAccountCreated: true }, { merge: true });
 
     /* Save docId to auth for ease of access. */
-    getAuth().setCustomUserClaims(user.uid, { docId });
+    await getAuth().setCustomUserClaims(user.uid, { docId });
   } catch (error) {
     console.error('Error creating new user: ', error);
     return NextResponse.json({ error });
