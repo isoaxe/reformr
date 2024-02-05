@@ -41,6 +41,7 @@ export default function CreateAccount() {
 
     let user = null;
     if (!error) user = await login(email, password);
+    else console.log('Error creating new user: ', { error });
     if (user) router.push('/signup/payments');
     else {
       setShowFailure(true);

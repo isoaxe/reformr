@@ -21,24 +21,29 @@ export async function POST(request) {
     /* Create a new patient user. */
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const { user } = res;
-    updateProfile(auth.currentUser, { displayName: name });
+    await updateProfile(auth.currentUser, { displayName: name });
 
     /* Get docId from Firestore. */
     const docId = await getDocId(email);
 
-    /* Update account creation date, uid and status on Firestore. */
-    updateDoc(doc(db, 'patients', docId), {
+    /* Update account creation date and uid on Firestore. */
+    await updateDoc(doc(db, 'patients', docId), {
       dateAccountCreated: new Date(),
       userId: user.uid,
       notes: [],
     });
-    updateDoc(doc(db, 'emails', email), { isAccountCreated: true });
+
+    /* Set account as created to lock further mutations of emails collection. */
+    await initialiseAdmin();
+    const database = admin.firestore();
+    const emailsRef = database.collection('emails').doc(email);
+    emailsRef.set({ isAccountCreated: true }, { merge: true });
 
     /* Save docId to auth for ease of access. */
-    await initialiseAdmin();
-    getAuth().setCustomUserClaims(user.uid, { docId });
-  } catch (err) {
-    console.error('Error creating new user: ', err);
+    await getAuth().setCustomUserClaims(user.uid, { docId });
+  } catch (error) {
+    console.error('Error creating new user: ', error);
+    return NextResponse.json({ error });
   }
 
   return NextResponse.json({ error: false });

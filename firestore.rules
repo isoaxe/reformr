@@ -11,9 +11,7 @@ service cloud.firestore {
       return hasKeys && validTypes;
     }
     function isSameUser() {
-      let docId = get(/databases/$(database)/documents/emails/$(request.auth.token.email)).data.docId;
-      let patientId = get(/databases/$(database)/documents/patients/$(docId)).data.userId;
-    	return request.auth != null && request.auth.uid == patientId;
+    	return request.auth != null && request.auth.uid == resource.data.userId;
     }
     match /patients/{patientId} {
       allow get: if isSameUser();
@@ -25,7 +23,7 @@ service cloud.firestore {
       allow get;
       allow list: if false; // don't allow fetching of all emails
       allow create;
-      allow update: if isSameUser();
+      allow update: if false;
     }
     match /captchas/{userEmail} {
       allow get;
