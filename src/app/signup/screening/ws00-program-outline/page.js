@@ -11,7 +11,7 @@ export default function ProgramOutline() {
         How our program works
       </h1>
       {programOutlineData.map((step, index) => (
-        <Step key={index} {...step} />
+        <Step key={index} {...step} number={index + 1} />
       ))}
       <Button text="Ok" link="./ws01-accept-terms" />
       <KeyPrompt />
