@@ -47,5 +47,8 @@ export const STRIPE_IDENTITY_WEBHOOK_SECRET = isLive
   : stripeIdentityWebhookSecretTest;
 
 const stripePriceIdTest = 'price_1OcU0qFPKktQy8tprgS2s2Wj';
-const stripePriceIdLive = 'price_1NlkQrFPKktQy8tpqjntJXwq';
-export const STRIPE_PRICE_ID = isLive ? stripePriceIdLive : stripePriceIdTest;
+// const stripePriceIdLive = 'price_1NlkQrFPKktQy8tpqjntJXwq';
+const stripePriceIdLiveNominal = 'price_1OgemuFPKktQy8tpsYpMm5GC';
+export const STRIPE_PRICE_ID = isLive
+  ? stripePriceIdLiveNominal
+  : stripePriceIdTest;
