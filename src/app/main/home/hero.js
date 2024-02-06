@@ -16,7 +16,7 @@ export default function Hero() {
     <section className="relative h-[88vh]">
       <PlayBgVideo
         className="fixed z-0 h-full w-full object-cover"
-        videoSrc="../videos/home-hero.mp4"
+        videoSrc="/videos/home-hero.mp4"
         altText="Slow-motion video of a woman slowly exhaling whilst rolling her shoulders."
       />
       <div className="relative flex h-full w-full flex-col justify-center bg-blue-600 bg-opacity-20 px-4 text-white xs:pl-12 lg:pl-32">
