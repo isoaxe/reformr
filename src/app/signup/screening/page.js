@@ -3,7 +3,7 @@ import Button from '@/components/quiz/button';
 import KeyPrompt from '@/components/quiz/key-prompt';
 import peaceSign from '/public/images/hand-peace-sign.png';
 
-/* This is just the first intro page of the quiz and doen't contain questions. */
+/* This is just the first intro page of the quiz and doesn't contain questions. */
 export default function Screening() {
   return (
     <main className="flex w-full max-w-5xl flex-col sm:flex-row">
@@ -22,7 +22,7 @@ export default function Screening() {
           Answer a few simple questions to see if you’re eligible for the
           <span className="font-semibold"> Metabolic Reset Program.</span>
         </p>
-        <Button text="Start" link="./screening/ws01-accept-terms" />
+        <Button text="Start" link="./screening/ws00-program-outline" />
         <KeyPrompt />
       </div>
     </main>

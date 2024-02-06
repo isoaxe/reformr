@@ -295,3 +295,43 @@ export const blogTileData = [
     slug: 'sugar-free-drinks',
   },
 ];
+
+import initialScreening from '/public/images/initial-screening.jpeg';
+import paymentConfirmation from '/public/images/payment-confirmation.jpeg';
+import medicalEvaluation from '/public/images/medical-evaluation.jpeg';
+import consultation from '/public/images/consultation.jpeg';
+import seamlessDelivery from '/public/images/seamless-delivery.jpeg';
+
+/* The program outline at the start of the signup flow. */
+export const programOutlineData = [
+  {
+    title: 'Initial Screening',
+    image: initialScreening,
+    description:
+      'Take a short quiz to see if you are likely to be eligible for our program.',
+  },
+  {
+    title: 'Payment Confirmation',
+    image: paymentConfirmation,
+    description:
+      'Proceed to pay for your treatment. If later deemed unsuitable, a full refund will be issued. Identify is also verified through our secure online portal.',
+  },
+  {
+    title: 'Medical Evaluation',
+    image: medicalEvaluation,
+    description:
+      'Respond to a set of medical questions, enabling your practitioner to prepare for your upcoming consultation.',
+  },
+  {
+    title: 'Consultation with your Practitioner',
+    image: consultation,
+    description:
+      'Phone call where your practitioner will validate your details and, if appropriate, discuss your treatment plan.',
+  },
+  {
+    title: 'Seamless Delivery',
+    image: seamlessDelivery,
+    description:
+      'Enjoy complimentary shipping and discreet delivery of all necessary items to kickstart your journey.',
+  },
+];
