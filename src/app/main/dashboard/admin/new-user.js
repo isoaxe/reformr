@@ -44,7 +44,7 @@ export default function CreateNewUser() {
   }
 
   const FormLabel = ({ label }) => (
-    <Typography className="mt-1 text-lg md:text-xl xl:text-2xl">
+    <Typography className="!mt-1 !text-lg md:!text-xl xl:!text-2xl">
       {label}
     </Typography>
   );
@@ -67,7 +67,7 @@ export default function CreateNewUser() {
       <TextField
         variant="standard"
         label={
-          <Typography className="text-lg md:text-xl xl:text-2xl">
+          <Typography className="!text-lg md:!text-xl xl:!text-2xl">
             Email
           </Typography>
         }
@@ -75,7 +75,7 @@ export default function CreateNewUser() {
         error={isInvalidEmail && !!email}
         onChange={(e) => setEmail(e.target.value)}
         sx={{ mb: 2 }}
-        InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
+        InputProps={{ className: '!text-xl md:!text-2xl xl:!text-3xl' }}
       />
       <Password
         password={password}
@@ -90,7 +90,7 @@ export default function CreateNewUser() {
         name="select-user-role"
         value={role}
         onChange={(e) => setRole(e.target.value)}
-        className="flex w-full flex-row justify-between"
+        className="!flex w-full !flex-row justify-between"
       >
         <FormControlLabel
           value="doctor"
@@ -110,7 +110,7 @@ export default function CreateNewUser() {
       </RadioGroup>
       <Button
         variant="outlined"
-        className="mt-6 w-full text-lg md:text-xl"
+        className="!mt-6 w-full !text-lg md:!text-xl"
         onClick={createUser}
         disabled={
           !firstName ||

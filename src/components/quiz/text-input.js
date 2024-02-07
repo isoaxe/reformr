@@ -9,7 +9,7 @@ export default function TextInput(props) {
       autoFocus
       variant="standard"
       label={
-        <Typography className="text-lg md:text-xl xl:text-2xl">
+        <Typography className="!text-lg md:!text-xl xl:!text-2xl">
           {label}
         </Typography>
       }
