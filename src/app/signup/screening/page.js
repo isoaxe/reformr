@@ -22,7 +22,7 @@ export default function Screening() {
           Answer a few simple questions to see if you’re eligible for the
           <span className="font-semibold"> Metabolic Reset Program.</span>
         </p>
-        <Button text="Start" link="./screening/ws00-program-outline" />
+        <Button text="Start" link="./screening/under-construction" />
         <KeyPrompt />
       </div>
     </main>
