@@ -9,7 +9,7 @@ export default function TextInput(props) {
       autoFocus
       variant="standard"
       label={
-        <Typography className="text-lg md:text-xl xl:text-2xl">
+        <Typography className="!text-lg md:!text-xl xl:!text-2xl">
           {label}
         </Typography>
       }
@@ -17,7 +17,7 @@ export default function TextInput(props) {
       onChange={(e) => setText(e.target.value)}
       error={isError}
       sx={{ mb: 2 }}
-      InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
+      InputProps={{ className: '!text-xl md:!text-2xl xl:!text-3xl' }}
     />
   );
 }

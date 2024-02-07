@@ -57,7 +57,7 @@ export default function CreateAccount() {
           value={email}
           disabled={true}
           sx={{ mb: 6 }}
-          InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
+          InputProps={{ className: '!text-xl md:!text-2xl xl:!text-3xl' }}
         />
         <Password
           password={password}
@@ -68,7 +68,7 @@ export default function CreateAccount() {
         />
         <LoadingButton
           variant="outlined"
-          className="mt-16 w-fit text-lg md:text-xl"
+          className="!mt-16 w-fit !text-lg md:!text-xl"
           onClick={createPatientAccount}
           disabled={!password || !!helperText}
           loading={isLoading}

@@ -12,7 +12,7 @@ export function AddressInput(props) {
       label={label}
       placeholder={placeholder}
       sx={{ width: '100%', mb: 1 }}
-      InputProps={{ className: 'text-lg md:text-xl xl:text-2xl' }}
+      InputProps={{ className: '!text-lg md:!text-xl xl:!text-2xl' }}
     />
   );
 }

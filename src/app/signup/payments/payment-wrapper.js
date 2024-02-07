@@ -77,7 +77,7 @@ export default function PaymentWrapper({ address }) {
       <LoadingButton
         onClick={handleSubmit}
         variant="outlined"
-        className="mt-4 w-full md:text-lg"
+        className="!mt-4 w-full md:!text-lg"
         disabled={!stripe || !elements}
         loading={isLoading}
       >

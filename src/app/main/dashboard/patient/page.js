@@ -126,7 +126,7 @@ export default function PatientDashboard() {
       <div className="flex w-full flex-row justify-between">
         <Button
           variant="outlined"
-          className="w-fit text-lg md:text-xl"
+          className="w-fit !text-lg md:!text-xl"
           onClick={() => setPauseModalOpen(true)}
           disabled={isSubCancelled || isSubPaused}
         >
@@ -134,7 +134,7 @@ export default function PatientDashboard() {
         </Button>
         <Button
           variant="outlined"
-          className="w-fit text-lg md:text-xl"
+          className="w-fit !text-lg md:!text-xl"
           color="error"
           onClick={() => setCancelModalOpen(true)}
           disabled={isSubCancelled}
@@ -213,7 +213,7 @@ export default function PatientDashboard() {
       />
       <Button
         variant="outlined"
-        className="mx-auto mb-5 w-full max-w-xs text-lg md:text-xl"
+        className="!mx-auto !mb-5 w-full max-w-xs !text-lg md:!text-xl"
         onClick={logout}
       >
         Logout

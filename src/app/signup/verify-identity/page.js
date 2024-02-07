@@ -52,7 +52,7 @@ function VerifyButton({ stripePromise }) {
       loading={isLoading}
       onClick={handleClick}
       variant="outlined"
-      className="w-fit text-lg md:text-xl"
+      className="w-fit !text-lg md:!text-xl"
     >
       Verify Identity
     </LoadingButton>

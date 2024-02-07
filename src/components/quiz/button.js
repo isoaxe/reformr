@@ -26,7 +26,7 @@ export default function Button(props) {
   return (
     <LoadingButton
       variant="outlined"
-      className="w-fit text-lg md:text-xl"
+      className="w-fit !text-lg md:!text-xl"
       onClick={handleClick}
       disabled={isDisabled}
       loading={isLoading}

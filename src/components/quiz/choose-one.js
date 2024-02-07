@@ -19,7 +19,7 @@ export default function ChooseOne(props) {
         value={label} // value saved can be the same as label
         control={<Radio />}
         label={
-          <Typography className="mt-1 text-lg md:text-xl xl:text-2xl">
+          <Typography className="!mt-1 !text-lg md:!text-xl xl:!text-2xl">
             {label}
           </Typography>
         }

@@ -283,7 +283,7 @@ export default function PatientRecord({ open, setOpen, fireDocId }) {
             value={note}
             onChange={(e) => setNote(e.target.value)}
             minRows={5}
-            className="my-5 w-full max-w-lg"
+            className="!my-5 w-full max-w-lg"
           />
           <LoadingButton
             variant="outlined"

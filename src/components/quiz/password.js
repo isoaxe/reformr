@@ -22,7 +22,7 @@ export default function Password(props) {
         id="password-field"
         variant="standard"
         label={
-          <Typography className="text-lg md:text-xl xl:text-2xl">
+          <Typography className="!text-lg md:!text-xl xl:!text-2xl">
             Password
           </Typography>
         }
@@ -31,7 +31,7 @@ export default function Password(props) {
         onChange={(e) => setPassword(e.target.value)}
         error={!!helperText}
         InputProps={{
-          className: 'text-xl md:text-2xl xl:text-3xl',
+          className: '!text-xl md:!text-2xl xl:!text-3xl',
           endAdornment: (
             <InputAdornment position="end">
               <IconButton

@@ -79,7 +79,7 @@ export default function PharmacistDashboard() {
       )}
       <Button
         variant="outlined"
-        className="mx-auto mt-5 w-full max-w-xs text-lg md:text-xl"
+        className="!mx-auto !mt-5 w-full max-w-xs !text-lg md:!text-xl"
         onClick={logout}
       >
         Logout

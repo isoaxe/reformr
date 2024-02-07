@@ -58,7 +58,7 @@ export default function CookieManager() {
       <div className="flex w-2/5 flex-col">
         <Button
           variant="outlined"
-          className="md:text-xl"
+          className="md:!text-xl"
           sx={{ mb: 2 }}
           onClick={getAllCookies}
         >
@@ -66,7 +66,7 @@ export default function CookieManager() {
         </Button>
         <Button
           variant="outlined"
-          className="md:text-xl"
+          className="md:!text-xl"
           sx={{ mb: 2 }}
           onClick={() => getQuizCookie('screening')}
         >
@@ -74,7 +74,7 @@ export default function CookieManager() {
         </Button>
         <Button
           variant="outlined"
-          className="md:text-xl"
+          className="md:!text-xl"
           onClick={() => getQuizCookie('medical')}
         >
           Show Medical Cookie
@@ -83,7 +83,7 @@ export default function CookieManager() {
       <div className="flex w-2/5 flex-col">
         <Button
           variant="outlined"
-          className="md:text-xl"
+          className="md:!text-xl"
           color="error"
           sx={{ mb: 2 }}
           onClick={deleteAllCookies}
@@ -92,7 +92,7 @@ export default function CookieManager() {
         </Button>
         <Button
           variant="outlined"
-          className="md:text-xl"
+          className="md:!text-xl"
           color="error"
           sx={{ mb: 2 }}
           onClick={deleteScreeningCookie}
@@ -101,7 +101,7 @@ export default function CookieManager() {
         </Button>
         <Button
           variant="outlined"
-          className="md:text-xl"
+          className="md:!text-xl"
           color="error"
           onClick={deleteMedicalCookie}
         >

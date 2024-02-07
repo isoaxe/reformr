@@ -26,7 +26,7 @@ export default function BooleanExplain(props) {
         value={label} // value saved can be the same as label
         control={<Radio />}
         label={
-          <Typography className="mt-1 text-lg md:text-xl xl:text-2xl">
+          <Typography className="!mt-1 !text-lg md:!text-xl xl:!text-2xl">
             {label}
           </Typography>
         }
@@ -61,7 +61,7 @@ export default function BooleanExplain(props) {
             value={answer.moreInfo}
             onChange={(e) => setAnswer({ ...answer, moreInfo: e.target.value })}
             sx={{ mb: 3 }}
-            InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
+            InputProps={{ className: '!text-xl md:!text-2xl xl:!text-3xl' }}
           />
         </>
       )}

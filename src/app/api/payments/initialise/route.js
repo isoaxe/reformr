@@ -23,7 +23,7 @@ export async function POST(request) {
     const { payments } = patientData;
     if (payments) {
       const { subscription } = payments;
-      return NextResponse.json(subscription);
+      return NextResponse.json({ subscription });
     }
 
     /* Create a new subscription if not in Firestore, */
