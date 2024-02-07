@@ -6,6 +6,7 @@ import Button from '@/components/quiz/button';
 import peaceSign from '/public/images/hand-peace-sign.png';
 
 /* User will be asked some medical questions to determine eligibility. */
+/* This page is currently not used. We only have the low-BMI and high-BMI paths. */
 export default function MidBmi() {
   const cookies = useCookies();
 

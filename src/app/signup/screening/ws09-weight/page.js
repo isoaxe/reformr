@@ -63,8 +63,8 @@ export default function Weight() {
     const updatedBmi = parseFloat((weight / heightInMetres ** 2).toFixed(2));
     setBmi(updatedBmi);
     if (updatedBmi < 27) setNextPage('./bmi-low');
-    else if (updatedBmi > 30) setNextPage('./bmi-high');
-    else setNextPage('./bmi-mid');
+    // else if (updatedBmi > 30) setNextPage('./bmi-high');
+    else setNextPage('./bmi-high'); // TODO: Revert this to bmi-mid and uncomment above when mid BMI flow complete.
   }, [height, weight]);
 
   return (
