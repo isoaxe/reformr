@@ -16,7 +16,7 @@ export default function Step({ title, image, description, number }) {
             alt={title}
             fill
             className="z-0 rounded object-cover"
-            sizes="24rem"
+            sizes="7rem"
           />
         </div>
         <p className="ml-2 w-full text-base font-thin sm:ml-4 sm:text-lg">
