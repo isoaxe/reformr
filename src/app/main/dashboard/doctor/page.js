@@ -37,7 +37,10 @@ export default function DoctorDashboard() {
           setPatients={setPatients}
           isDoctor={true}
         />
-        <IconButton onClick={() => openMedicalRecord(docId)} className="m-auto">
+        <IconButton
+          onClick={() => openMedicalRecord(docId)}
+          className="!m-auto"
+        >
           <PiNotepadLight />
         </IconButton>
       </div>
@@ -94,7 +97,7 @@ export default function DoctorDashboard() {
       )}
       <Button
         variant="outlined"
-        className="mx-auto mt-5 w-full max-w-xs text-lg md:text-xl"
+        className="!mx-auto !mt-5 w-full max-w-xs !text-lg md:!text-xl"
         onClick={logout}
       >
         Logout
