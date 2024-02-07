@@ -42,7 +42,7 @@ export default function CancelModal(props) {
         <div className="mb-5 flex w-full flex-row justify-around">
           <Button
             variant="outlined"
-            className="w-40 text-lg md:text-xl"
+            className="w-40 !text-lg md:!text-xl"
             onClick={() => setOpen(false)}
             disabled={isLoading}
           >
@@ -50,7 +50,7 @@ export default function CancelModal(props) {
           </Button>
           <Button
             variant="contained"
-            className="w-44 bg-red-500 text-lg hover:bg-red-600 md:text-xl"
+            className="w-44 !bg-red-500 !text-lg hover:!bg-red-600 md:!text-xl"
             onClick={cancelSub}
             disabled={isLoading}
           >

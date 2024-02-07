@@ -42,14 +42,14 @@ export default function PauseModal(props) {
         <div className="mb-5 flex w-full flex-row justify-around">
           <Button
             variant="outlined"
-            className="w-40 text-lg md:text-xl"
+            className="w-40 !text-lg md:!text-xl"
             onClick={() => setOpen(false)}
           >
             Close
           </Button>
           <Button
             variant="contained"
-            className="w-44 bg-blue-500 text-lg  hover:bg-blue-600 md:text-xl"
+            className="w-44 !bg-blue-500 !text-lg  hover:!bg-blue-600 md:!text-xl"
             onClick={pauseSub}
             disabled={isLoading}
           >
