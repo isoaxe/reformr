@@ -82,7 +82,7 @@ export default function Weight() {
       <LoadingButton
         onClick={saveScreeningData}
         variant="outlined"
-        className="w-fit text-lg md:text-xl"
+        className="w-fit !text-lg md:!text-xl"
         disabled={isInvalid || !weight} // enabled if weight is 50-500kg
         loading={isLoading}
       >

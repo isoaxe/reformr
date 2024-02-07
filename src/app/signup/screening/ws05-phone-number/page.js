@@ -53,7 +53,7 @@ export default function PhoneNumber() {
         sx={{ mb: 3 }}
         forceCallingCode
         onlyCountries={['NZ', 'AU']}
-        InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
+        InputProps={{ className: '!text-xl md:!text-2xl xl:!text-3xl' }}
         error={isInvalid && phone.length > 3}
       />
       <Button

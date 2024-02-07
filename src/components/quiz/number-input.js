@@ -21,7 +21,7 @@ export default function NumberInput(props) {
       onChange={handleChange}
       error={isError}
       sx={{ mb: 3 }}
-      InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
+      InputProps={{ className: '!text-xl md:!text-2xl xl:!text-3xl' }}
     />
   );
 }
