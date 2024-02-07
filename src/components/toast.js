@@ -16,7 +16,7 @@ export default function Toast(props) {
       <Alert
         severity={severity}
         variant="filled"
-        className="max-w-xl text-lg md:text-xl xl:text-2xl"
+        className="max-w-xl !text-lg md:!text-xl xl:!text-2xl"
       >
         {message}
       </Alert>
