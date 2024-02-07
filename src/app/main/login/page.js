@@ -56,7 +56,7 @@ export default function Login() {
         <TextField
           variant="standard"
           label={
-            <Typography className="text-lg md:text-xl xl:text-2xl">
+            <Typography className="!text-lg md:!text-xl xl:!text-2xl">
               Email
             </Typography>
           }
@@ -64,7 +64,7 @@ export default function Login() {
           error={isInvalidEmail && !!email}
           onChange={(e) => setEmail(e.target.value)}
           sx={{ mb: 6 }}
-          InputProps={{ className: 'text-xl md:text-2xl xl:text-3xl' }}
+          InputProps={{ className: '!text-xl md:!text-2xl xl:!text-3xl' }}
         />
         <Password
           password={password}
@@ -74,7 +74,7 @@ export default function Login() {
         />
         <LoadingButton
           variant="outlined"
-          className="mt-16 w-fit text-lg md:text-xl"
+          className="!mt-16 w-fit !text-lg md:!text-xl"
           onClick={signIn}
           disabled={!password || !!helperText || isInvalidEmail}
           loading={isLoading}
