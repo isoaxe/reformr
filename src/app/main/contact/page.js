@@ -114,7 +114,7 @@ export default function Contact() {
             variant="contained"
             type="submit"
             loading={state.submitting}
-            className="w-32 bg-blue-600 py-2 hover:bg-blue-500"
+            className="w-32 !bg-blue-600 !py-2 hover:!bg-blue-500"
           >
             Submit
           </LoadingButton>
