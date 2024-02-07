@@ -23,7 +23,7 @@ export default function HighBmi() {
       <div className="flex aspect-square flex-col justify-center sm:w-1/2 sm:px-9">
         <p>Thanks for taking the time to complete this quiz.</p>
         <p className="my-6">
-          You have a BMI of {cookies.get('bmi')} and are eligible for the
+          You have a BMI of {cookies.get('bmi')} and may be eligible for the
           Reformr weight loss program.
         </p>
         <Button text="Create Account" link="/signup/create-account" />
