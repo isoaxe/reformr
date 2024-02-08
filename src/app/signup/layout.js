@@ -1,4 +1,6 @@
+import { cookies } from 'next/headers';
 import FocusNavbar from '@/components/layout/focus-navbar';
+import { ClientCookiesProvider } from '@/util/providers';
 
 export default function SignupLayout({ children }) {
   return (
@@ -6,7 +8,9 @@ export default function SignupLayout({ children }) {
       <FocusNavbar />
       <div className="mt-12 flex min-h-[calc(100vh-3rem)] items-center py-6 text-xl md:mt-16 md:min-h-[calc(100vh-4rem)] md:text-2xl xl:text-3xl">
         <div className="mx-auto flex w-full max-w-md px-4 xs:px-9 sm:max-w-6xl">
-          {children}
+          <ClientCookiesProvider value={cookies().getAll()}>
+            {children}
+          </ClientCookiesProvider>
         </div>
       </div>
     </>
