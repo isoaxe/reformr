@@ -176,7 +176,7 @@ export const chooseManyLabels = {
     'None of the above',
   ],
   wm22_past_procedures: [
-    'Lab band',
+    'Lap band',
     'Roux-en-Y gastric bypass',
     'Sleeve gastrectomy',
     'Gastric balloon',
