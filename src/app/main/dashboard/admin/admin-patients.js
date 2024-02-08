@@ -31,7 +31,9 @@ export default function AdminPatients({ user }) {
       if (error) console.log('Error fetching patients: ', { error });
       else
         setPatients(
-          paidPatients.filter((patient) => patient.identityStatus === 'failed')
+          paidPatients.filter(
+            (patient) => patient.identityStatus === 'requires_input'
+          )
         );
       setFetched(true);
     };
@@ -51,7 +53,7 @@ export default function AdminPatients({ user }) {
         <div className="flex flex-row font-semibold">
           <p className="w-40">Name</p>
           <p className="w-64">Email</p>
-          <p className="w-28">Last Payment</p>
+          <p className="w-28">Payment Date</p>
         </div>
       )}
       {isFetched ? (
