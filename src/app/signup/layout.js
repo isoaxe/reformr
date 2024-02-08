@@ -1,6 +1,6 @@
 import FocusNavbar from '@/components/layout/focus-navbar';
 
-export default function ScreeningLayout({ children }) {
+export default function SignupLayout({ children }) {
   return (
     <>
       <FocusNavbar />
