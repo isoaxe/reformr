@@ -31,9 +31,9 @@ export default function AdminPatients({ user }) {
       if (error) console.log('Error fetching patients: ', { error });
       else
         setPatients(
-          paidPatients.filter(
-            (patient) => patient.identityStatus === 'requires_input'
-          )
+          paidPatients
+            .filter((patient) => patient.identityStatus === 'requires_input')
+            .sort((a, b) => b.lastPayment - a.lastPayment) // most recent first
         );
       setFetched(true);
     };
