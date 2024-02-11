@@ -46,8 +46,8 @@ export const STRIPE_IDENTITY_WEBHOOK_SECRET = isLive
   ? stripeIdentityWebhookSecretLocal
   : stripeIdentityWebhookSecretTest;
 
-const stripePriceIdTest = 'price_1OcU0qFPKktQy8tprgS2s2Wj'; // NZ$550 per month
-const stripePriceIdLive = 'price_1Ogf9dFPKktQy8tpASudD9tt'; // NZ$650 per month
+const stripePriceIdTest = 'price_1OiYWEFPKktQy8tprxPEqPA0'; // NZ$599 per month
+const stripePriceIdLive = 'price_1OiYOaFPKktQy8tp9RjCvbdt'; // NZ$599 per month
 const stripePriceIdLiveNominal = 'price_1OgemuFPKktQy8tpsYpMm5GC'; // NZ$1 per month
 export const STRIPE_PRICE_ID = isLive
   ? stripePriceIdLiveNominal // TODO: Change to stripePriceIdLive
