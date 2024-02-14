@@ -4,7 +4,7 @@
 .next
 
 # Miscellaneous
-npm-debug.log*
+*.log
 .DS_Store
-.env*.local
+.env.local
 .vercel
