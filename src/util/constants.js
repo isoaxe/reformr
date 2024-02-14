@@ -1,5 +1,5 @@
 const isLive = false; // TODO: Toggle to true when ready to go live
-const isDev = process.env.NODE_ENV === 'development';
+export const isDev = process.env.NODE_ENV === 'development';
 
 /* Constants used when testing via the CLI. Update if test data gets reset. */
 export const STRIPE_UID = 'cus_PYOSXJXLrlQvYZ';
