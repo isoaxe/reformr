@@ -28,12 +28,12 @@ export default function CreateAccount() {
 
   async function createPatientAccount() {
     setLoading(true);
-    const name = `${firstName} ${lastName}`;
-    if (!name || !email) return;
+    const displayName = `${firstName} ${lastName}`;
+    if (!displayName || !email) return;
     const captchaToken = cookies.get('token');
     const options = {
       method: 'POST',
-      body: JSON.stringify({ name, email, password, captchaToken }),
+      body: JSON.stringify({ displayName, email, password, captchaToken }),
       headers: { 'content-type': 'application/json' },
     };
     const res = await fetch('/api/users/patient', options);

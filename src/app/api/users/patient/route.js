@@ -11,7 +11,7 @@ import { auth, db } from '@/util/firebase';
 /* Create new patient user. Update creation date and uid on Firestore. */
 export async function POST(request) {
   const data = await request.json();
-  const { name, email, password, captchaToken } = data;
+  const { displayName, email, password, captchaToken } = data;
 
   try {
     /* Verify reCAPTCHA token matches one from Firestore. */
@@ -21,7 +21,7 @@ export async function POST(request) {
     /* Create a new patient user. */
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const { user } = res;
-    await updateProfile(auth.currentUser, { displayName: name });
+    await updateProfile(auth.currentUser, { displayName });
 
     /* Get docId from Firestore. */
     const docId = await getDocId(email);
