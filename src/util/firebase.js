@@ -21,9 +21,10 @@ export const db = getFirestore(app);
 export const auth = getAuth(app);
 
 if (isDev) {
-  process.env['FIREBASE_AUTH_EMULATOR_HOST'] = '127.0.0.1:9099'; // set env var
+  process.env['FIREBASE_AUTH_EMULATOR_HOST'] = '127.0.0.1:9099'; // set env vars
+  process.env['FIRESTORE_EMULATOR_HOST'] = '127.0.0.1:8080';
+  connectAuthEmulator(auth, 'http://127.0.0.1:9099'); // connect emulators
   connectFirestoreEmulator(db, '127.0.0.1', 8080);
-  connectAuthEmulator(auth, 'http://127.0.0.1:9099');
 }
 
 // TODO: Add analytics when required, current implementation was causing issues.
