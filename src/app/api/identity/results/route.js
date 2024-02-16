@@ -3,8 +3,9 @@ import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { initialiseAdmin } from '@/util/admin';
+import { startEmulators } from '@/util/firebase';
 import { STRIPE_SECRET_KEY, FIRESTORE_DOC_ID } from '@/util/constants';
-import { STRIPE_IDENTITY_WEBHOOK_SECRET } from '@/util/constants';
+import { STRIPE_IDENTITY_WEBHOOK_SECRET, isDev } from '@/util/constants';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
 
@@ -26,6 +27,8 @@ export async function POST(request) {
     console.log(message, err.message);
     return NextResponse.json({ message }, { status: 400 });
   }
+
+  if (isDev) startEmulators();
 
   const verificationResult = event?.data?.object;
   const docId =
