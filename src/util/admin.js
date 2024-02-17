@@ -2,8 +2,14 @@
 
 import admin from 'firebase-admin';
 
-function formatFirebasePrivateKey(key) {
-  return key.replace(/\\n/g, '\n');
+export async function initialiseAdmin() {
+  const params = {
+    projectId: 'reformr-health',
+    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+    rawPrivateKey: process.env.FIREBASE_PRIVATE_KEY,
+  };
+
+  return createFirebaseAdminApp(params);
 }
 
 function createFirebaseAdminApp(params) {
@@ -20,12 +26,6 @@ function createFirebaseAdminApp(params) {
   return admin.initializeApp({ credential: cert, projectId });
 }
 
-export async function initialiseAdmin() {
-  const params = {
-    projectId: 'reformr-health',
-    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-    rawPrivateKey: process.env.FIREBASE_PRIVATE_KEY,
-  };
-
-  return createFirebaseAdminApp(params);
+function formatFirebasePrivateKey(key) {
+  return key.replace(/\\n/g, '\n');
 }

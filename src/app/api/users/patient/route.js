@@ -1,17 +1,16 @@
 import admin from 'firebase-admin';
 import { getAuth } from 'firebase-admin/auth';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, updateDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 import { extractFirebaseToken } from '@/util/server';
 import { getDocId, validateToken, makeCamelCase } from '@/util/helpers';
 import { initialiseAdmin } from '@/util/admin';
-import { auth, db } from '@/util/firebase';
+import { db } from '@/util/firebase';
 
 /* Create new patient user. Update creation date and uid on Firestore. */
 export async function POST(request) {
   const data = await request.json();
-  const { name, email, password, captchaToken } = data;
+  const { displayName, email, password, captchaToken } = data;
 
   try {
     /* Verify reCAPTCHA token matches one from Firestore. */
@@ -19,9 +18,8 @@ export async function POST(request) {
     if (!isVerified) return NextResponse.json({ error: 'Invalid token.' });
 
     /* Create a new patient user. */
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const { user } = res;
-    await updateProfile(auth.currentUser, { displayName: name });
+    await initialiseAdmin();
+    const user = await getAuth().createUser({ email, password, displayName });
 
     /* Get docId from Firestore. */
     const docId = await getDocId(email);
@@ -34,7 +32,6 @@ export async function POST(request) {
     });
 
     /* Set account as created to lock further mutations of emails collection. */
-    await initialiseAdmin();
     const database = admin.firestore();
     const emailsRef = database.collection('emails').doc(email);
     emailsRef.set({ isAccountCreated: true }, { merge: true });

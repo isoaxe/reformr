@@ -3,10 +3,11 @@ import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { initialiseAdmin } from '@/util/admin';
-import { STRIPE_SECRET_KEY } from '@/util/constants';
+import { STRIPE_SECRET_KEY, isLocal } from '@/util/constants';
 import { STRIPE_INVOICE_WEBHOOK_SECRET } from '@/util/constants';
 import { STRIPE_UID, PAYMENT_METHOD_ID } from '@/util/constants';
 import { getPatientData } from '@/util/server';
+import { startEmulators } from '@/util/firebase';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
 
@@ -28,6 +29,8 @@ export async function POST(request) {
     console.log(failMessage, err.message);
     return NextResponse.json({ error: failMessage }, { status: 400 });
   }
+
+  if (isLocal) startEmulators();
 
   try {
     /* Access Firestore as required for all events. */
@@ -56,7 +59,8 @@ export async function POST(request) {
       }
 
       /* Get payments data from Firestore. */
-      const { docId, patientData } = await getPatientData(customerId);
+      const { docId, patientData, message } = await getPatientData(customerId);
+      if (message) return NextResponse.json({ message }, { status: 204 }); // no patient found
       const allPaymentData = patientData.payments;
 
       /* Save payments data to Firestore if invoice paid. */
@@ -119,7 +123,8 @@ export async function POST(request) {
       console.log('ℹ️  Invoice payment failed.');
 
       /* Get user data from Firestore. */
-      const { docId } = await getPatientData(customerId);
+      const { docId, message } = await getPatientData(customerId);
+      if (message) return NextResponse.json({ message }, { status: 204 }); // no patient found
 
       /* Set user as unpaid in Firestore. */
       await patientsRef

@@ -3,8 +3,9 @@ import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { initialiseAdmin } from '@/util/admin';
+import { startEmulators } from '@/util/firebase';
 import { STRIPE_SECRET_KEY, FIRESTORE_DOC_ID } from '@/util/constants';
-import { STRIPE_IDENTITY_WEBHOOK_SECRET } from '@/util/constants';
+import { STRIPE_IDENTITY_WEBHOOK_SECRET, isLocal } from '@/util/constants';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2022-11-15' });
 
@@ -27,10 +28,17 @@ export async function POST(request) {
     return NextResponse.json({ message }, { status: 400 });
   }
 
+  if (isLocal) startEmulators();
+
   const verificationResult = event?.data?.object;
-  const docId =
-    verificationResult?.metadata?.firestoreDocId || FIRESTORE_DOC_ID;
-  const { status } = verificationResult;
+  const { metadata, status } = verificationResult;
+  const docId = metadata?.docId ?? FIRESTORE_DOC_ID;
+
+  /* Remote webhooks shouldn't respond to events when testing locally. */
+  const { isOriginLocal } = metadata; // environment of the event source
+  message = `⚠️  Webhook received from local source, so disregard.`;
+  if (!isLocal && isOriginLocal)
+    return NextResponse.json({ message }, { status: 204 });
 
   /* Access Firestore as required for all events. */
   await initialiseAdmin();

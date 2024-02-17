@@ -1,14 +1,17 @@
 {
   "name": "reformr",
-  "version": "1.1.11",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "conc \"next dev\" \"npm:emulate\" \"npm:listen-pay\" \"npm:listen-id\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "listen": "stripe listen --events invoice.paid,invoice.payment_failed --forward-to localhost:3000/api/payments/recurring",
-    "trigger": "stripe trigger invoice.paid",
+    "emulate": "firebase emulators:start --import emulated --export-on-exit emulated",
+    "listen-pay": "stripe listen --events invoice.paid,invoice.payment_failed --forward-to localhost:3000/api/payments/recurring",
+    "listen-id": "stripe listen --events identity.verification_session.canceled,identity.verification_session.processing,identity.verification_session.verified,identity.verification_session.requires_input --forward-to localhost:3000/api/identity/results",
+    "trigger-pay": "stripe trigger invoice.paid",
+    "trigger-id": "stripe trigger identity.verification_session.canceled",
     "env-var": "vercel env pull .env.local"
   },
   "dependencies": {
@@ -39,6 +42,7 @@
   },
   "devDependencies": {
     "autoprefixer": "latest",
+    "concurrently": "^8.2.2",
     "encoding": "^0.1.13",
     "eslint": "latest",
     "eslint-config-next": "latest",

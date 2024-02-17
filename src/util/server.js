@@ -15,8 +15,11 @@ export async function getPatientData(customerId) {
     .where('payments.stripeUid', '==', customerId)
     .get(); // returns a single patient
   const patientDoc = patientRef.docs[0];
-  /* This will occur if patient details in constants.js not updated when using CLI. */
-  if (!patientDoc) console.log(`⚠️  No patient with customerId ${customerId}`);
+  const message = `⚠️  No patient with customerId ${customerId}. This may be due to a local event reaching a remote webhook. It could also be due to the patient details in constants.js not being updated when using the CLI.`;
+  if (!patientDoc) {
+    console.log(message);
+    return { message };
+  }
   const patientData = patientDoc.data();
   const { email } = patientData.screening;
   const docId = await getDocId(email);
