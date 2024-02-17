@@ -22,7 +22,7 @@ export async function POST(request) {
     const verificationSession =
       await stripe.identity.verificationSessions.create({
         type: 'document',
-        metadata: { firestoreDocId: docId },
+        metadata: { docId },
       });
     const clientSecret = verificationSession.client_secret;
 

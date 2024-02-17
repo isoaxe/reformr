@@ -31,9 +31,8 @@ export async function POST(request) {
   if (isDev) startEmulators();
 
   const verificationResult = event?.data?.object;
-  const docId =
-    verificationResult?.metadata?.firestoreDocId || FIRESTORE_DOC_ID;
-  const { status } = verificationResult;
+  const { metadata, status } = verificationResult;
+  const docId = metadata?.docId ?? FIRESTORE_DOC_ID;
 
   /* Access Firestore as required for all events. */
   await initialiseAdmin();
