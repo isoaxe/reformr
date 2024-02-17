@@ -7,7 +7,7 @@ ID verification: https://reformr.vercel.app/api/identity/results
 Commands used for CLI testing:
 invoice listener: stripe listen --events invoice.paid,invoice.payment_failed --forward-to localhost:3000/api/payments/recurring
 invoice trigger: stripe trigger invoice.paid
-identity listener: stripe listen --events identity.verification_session.canceled --forward-to localhost:3000/api/identity/results
+identity listener: stripe listen --events identity.verification_session.canceled,identity.verification_session.processing,identity.verification_session.verified,identity.verification_session.requires_input --forward-to localhost:3000/api/identity/results
 identity trigger: stripe trigger identity.verification_session.canceled
 
 Note: Instructions executed from the UI during development (e.g. manually filling in credit card details as a customer would do) can be logged via the listeners above. They're not just for CLI triggers. Responses will also logged to the Stripe dashboard, but these will be for the production webhook.
