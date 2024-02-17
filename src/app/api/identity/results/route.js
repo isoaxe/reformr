@@ -34,6 +34,12 @@ export async function POST(request) {
   const { metadata, status } = verificationResult;
   const docId = metadata?.docId ?? FIRESTORE_DOC_ID;
 
+  /* Remote webhooks shouldn't respond to events when testing locally. */
+  const { isOriginLocal } = metadata; // environment of the event source
+  message = `⚠️  Webhook received from local source, so disregard.`;
+  if (!isLocal && isOriginLocal)
+    return NextResponse.json({ message }, { status: 204 });
+
   /* Access Firestore as required for all events. */
   await initialiseAdmin();
   const db = admin.firestore();
