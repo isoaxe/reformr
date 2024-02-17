@@ -4,6 +4,7 @@
 .next
 
 # Miscellaneous
+/emulated
 *.log
 .DS_Store
 .env.local
