@@ -1,5 +1,5 @@
 const isLive = false; // TODO: Toggle to true when ready to go live
-export const isDev = process.env.NODE_ENV === 'development';
+export const isLocal = process.env.HOST === 'localhost';
 
 /* Constants used when testing via the CLI. Update if test data gets reset. */
 export const STRIPE_UID = 'cus_PYOSXJXLrlQvYZ';
@@ -30,7 +30,7 @@ const stripeInvoiceWebhookSecretLive =
   process.env.STRIPE_INVOICE_WEBHOOK_SECRET_LIVE;
 export const STRIPE_INVOICE_WEBHOOK_SECRET = isLive
   ? stripeInvoiceWebhookSecretLive
-  : isDev
+  : isLocal
   ? stripeInvoiceWebhookSecretLocal
   : stripeInvoiceWebhookSecretTest;
 
@@ -42,7 +42,7 @@ const stripeIdentityWebhookSecretLive =
   process.env.STRIPE_IDENTITY_WEBHOOK_SECRET_LIVE;
 export const STRIPE_IDENTITY_WEBHOOK_SECRET = isLive
   ? stripeIdentityWebhookSecretLive
-  : isDev
+  : isLocal
   ? stripeIdentityWebhookSecretLocal
   : stripeIdentityWebhookSecretTest;
 

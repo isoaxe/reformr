@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 // import { getAnalytics } from 'firebase/analytics';
 import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
 import { getAuth, connectAuthEmulator } from 'firebase/auth';
-import { isDev } from './constants';
+import { isLocal } from './constants';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBybFqYIedZbGQIw7YNQmk9AWS8yWyky-k',
@@ -28,7 +28,7 @@ export function startEmulators() {
   connectFirestoreEmulator(db, '127.0.0.1', 8080);
 }
 
-if (isDev) startEmulators();
+if (isLocal) startEmulators();
 
 // TODO: Add analytics when required, current implementation was causing issues.
 // Search commit 'Suspend analytics from Firebase' for more details.

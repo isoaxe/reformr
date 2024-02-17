@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { initialiseAdmin } from '@/util/admin';
-import { STRIPE_SECRET_KEY, isDev } from '@/util/constants';
+import { STRIPE_SECRET_KEY, isLocal } from '@/util/constants';
 import { STRIPE_INVOICE_WEBHOOK_SECRET } from '@/util/constants';
 import { STRIPE_UID, PAYMENT_METHOD_ID } from '@/util/constants';
 import { getPatientData } from '@/util/server';
@@ -30,7 +30,7 @@ export async function POST(request) {
     return NextResponse.json({ error: failMessage }, { status: 400 });
   }
 
-  if (isDev) startEmulators();
+  if (isLocal) startEmulators();
 
   try {
     /* Access Firestore as required for all events. */
