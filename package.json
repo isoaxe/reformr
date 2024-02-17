@@ -8,8 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "emulate": "firebase emulators:start",
-    "listen": "stripe listen --events invoice.paid,invoice.payment_failed --forward-to localhost:3000/api/payments/recurring",
-    "trigger": "stripe trigger invoice.paid",
+    "listen-pay": "stripe listen --events invoice.paid,invoice.payment_failed --forward-to localhost:3000/api/payments/recurring",
+    "listen-id": "stripe listen --events identity.verification_session.canceled,identity.verification_session.processing,identity.verification_session.verified,identity.verification_session.requires_input --forward-to localhost:3000/api/identity/results",
+    "trigger-pay": "stripe trigger invoice.paid",
+    "trigger-id": "stripe trigger identity.verification_session.canceled",
     "env-var": "vercel env pull .env.local"
   },
   "dependencies": {
