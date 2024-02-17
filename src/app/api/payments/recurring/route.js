@@ -59,7 +59,8 @@ export async function POST(request) {
       }
 
       /* Get payments data from Firestore. */
-      const { docId, patientData } = await getPatientData(customerId);
+      const { docId, patientData, message } = await getPatientData(customerId);
+      if (message) return NextResponse.json({ message }, { status: 204 }); // no patient found
       const allPaymentData = patientData.payments;
 
       /* Save payments data to Firestore if invoice paid. */
@@ -122,7 +123,8 @@ export async function POST(request) {
       console.log('ℹ️  Invoice payment failed.');
 
       /* Get user data from Firestore. */
-      const { docId } = await getPatientData(customerId);
+      const { docId, message } = await getPatientData(customerId);
+      if (message) return NextResponse.json({ message }, { status: 204 }); // no patient found
 
       /* Set user as unpaid in Firestore. */
       await patientsRef
