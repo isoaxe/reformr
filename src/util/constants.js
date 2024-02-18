@@ -8,45 +8,29 @@ export const PAYMENT_METHOD_ID = 'pm_1Okf4oFPKktQy8tpwPwvsDBP';
 
 // TODO: Add a redirect to patient dashboard after Calendly booking is complete.
 
-/* Stripe keys for the SquareSpace account. */
-const stripePublicKeyTest =
-  'pk_test_51MercyFPKktQy8tpfcK2JfsIQcXMMpvl04HKmGpsYXwEvSziRHaUvxPGKnBu7khVchuIBj2vzLHuaOj9I0xLxVJP00a1f3fm93';
-const stripePublicKeyLive =
-  'pk_live_51MercyFPKktQy8tpvFWJwqLJByyrMptoggDwhmEt5yz5Q4omJ5RoZvPyWoukSMx9gSUIV0DwWFAyV2wHnMhKXOID00zz3NEMqc';
+/* Stripe standard keys. */
 export const STRIPE_PUBLIC_KEY = isLive
-  ? stripePublicKeyLive
-  : stripePublicKeyTest;
+  ? process.env.STRIPE_PUBLIC_KEY_LIVE
+  : process.env.STRIPE_PUBLIC_KEY_TEST;
 
-const stripeSecretKeyTest = process.env.STRIPE_SECRET_KEY_TEST;
-const stripeSecretKeyLive = process.env.STRIPE_SECRET_KEY_LIVE;
 export const STRIPE_SECRET_KEY = isLive
-  ? stripeSecretKeyLive
-  : stripeSecretKeyTest;
+  ? process.env.STRIPE_SECRET_KEY_LIVE
+  : process.env.STRIPE_SECRET_KEY_TEST;
 
-const stripeInvoiceWebhookSecretLocal =
-  process.env.STRIPE_INVOICE_WEBHOOK_SECRET_LOCAL;
-const stripeInvoiceWebhookSecretTest =
-  process.env.STRIPE_INVOICE_WEBHOOK_SECRET_TEST;
-const stripeInvoiceWebhookSecretLive =
-  process.env.STRIPE_INVOICE_WEBHOOK_SECRET_LIVE;
+/* Stripe webhook secrets. */
 export const STRIPE_INVOICE_WEBHOOK_SECRET = isLive
-  ? stripeInvoiceWebhookSecretLive
+  ? process.env.STRIPE_INVOICE_WEBHOOK_SECRET_LIVE
   : isLocal
-  ? stripeInvoiceWebhookSecretLocal
-  : stripeInvoiceWebhookSecretTest;
+  ? process.env.STRIPE_INVOICE_WEBHOOK_SECRET_LOCAL
+  : process.env.STRIPE_INVOICE_WEBHOOK_SECRET_TEST;
 
-const stripeIdentityWebhookSecretLocal =
-  process.env.STRIPE_IDENTITY_WEBHOOK_SECRET_LOCAL;
-const stripeIdentityWebhookSecretTest =
-  process.env.STRIPE_IDENTITY_WEBHOOK_SECRET_TEST;
-const stripeIdentityWebhookSecretLive =
-  process.env.STRIPE_IDENTITY_WEBHOOK_SECRET_LIVE;
 export const STRIPE_IDENTITY_WEBHOOK_SECRET = isLive
-  ? stripeIdentityWebhookSecretLive
+  ? process.env.STRIPE_IDENTITY_WEBHOOK_SECRET_LIVE
   : isLocal
-  ? stripeIdentityWebhookSecretLocal
-  : stripeIdentityWebhookSecretTest;
+  ? process.env.STRIPE_IDENTITY_WEBHOOK_SECRET_LOCAL
+  : process.env.STRIPE_IDENTITY_WEBHOOK_SECRET_TEST;
 
+/* Stripe price ID. */
 const stripePriceIdTest = 'price_1OiYWEFPKktQy8tprxPEqPA0'; // NZ$599 per month
 const stripePriceIdLive = 'price_1OiYOaFPKktQy8tp9RjCvbdt'; // NZ$599 per month
 const stripePriceIdLiveNominal = 'price_1OgemuFPKktQy8tpsYpMm5GC'; // NZ$1 per month
