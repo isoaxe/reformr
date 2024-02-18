@@ -60,7 +60,7 @@ export async function POST(request) {
 
       /* Get payments data from Firestore. */
       const { docId, patientData, message } = await getPatientData(customerId);
-      if (message) return NextResponse.json({ message }, { status: 204 }); // no patient found
+      if (message) return NextResponse.json({ message }, { status: 202 }); // no patient found
       const allPaymentData = patientData.payments;
 
       /* Save payments data to Firestore if invoice paid. */
@@ -124,7 +124,7 @@ export async function POST(request) {
 
       /* Get user data from Firestore. */
       const { docId, message } = await getPatientData(customerId);
-      if (message) return NextResponse.json({ message }, { status: 204 }); // no patient found
+      if (message) return NextResponse.json({ message }, { status: 202 }); // no patient found
 
       /* Set user as unpaid in Firestore. */
       await patientsRef
@@ -132,12 +132,12 @@ export async function POST(request) {
         .set({ payments: { isPaid: false } }, { merge: true });
       const failMsg = 'ℹ️  User set as unpaid in Firestore.';
       console.log(failMsg);
-      return NextResponse.json({ message: failMsg }, { status: 204 });
+      return NextResponse.json({ message: failMsg }, { status: 202 });
     }
 
     const error = `⚠️  Unhandled event type. ${event.type}`;
     console.log(error);
-    return NextResponse.json({ error }, { status: 204 });
+    return NextResponse.json({ error }, { status: 202 });
   } catch (err) {
     console.log('⚠️  Fatal error in webhook. ', err.message);
     return NextResponse.json({ error: err.message }, { status: 500 });

@@ -38,7 +38,7 @@ export async function POST(request) {
   const { isOriginLocal } = metadata; // environment of the event source
   message = `⚠️  Webhook received from local source, so disregard.`;
   if (!isLocal && isOriginLocal)
-    return NextResponse.json({ message }, { status: 204 });
+    return NextResponse.json({ message }, { status: 202 });
 
   /* Access Firestore as required for all events. */
   await initialiseAdmin();
@@ -60,10 +60,8 @@ export async function POST(request) {
       break;
     default:
       message = `⚠️  Unhandled event type ${event.type}`;
-      console.log(message);
-      return NextResponse.json({ message }, { status: 204 });
+      return NextResponse.json({ message }, { status: 202 });
   }
   message = `✅ Identity status updated to ${status}.`;
-  console.log(message);
   return NextResponse.json({ message }, { status: 200 });
 }
