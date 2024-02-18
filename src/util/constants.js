@@ -1,10 +1,11 @@
 const isLive = false; // TODO: Toggle to true when ready to go live
 export const isLocal = process.env.HOST === 'localhost';
 
-/* Constants used when testing via the CLI. Update if test data gets reset. */
-export const STRIPE_UID = 'cus_PYOSXJXLrlQvYZ';
-export const FIRESTORE_DOC_ID = 'User-955039';
-export const PAYMENT_METHOD_ID = 'pm_1OjHgEFPKktQy8tpb37WDVPT';
+/* Constants used in CLI testing. Update if emulated data gets reset. */
+export const STRIPE_UID = 'cus_PZohtqPBQ4Bthz';
+export const FIRESTORE_DOC_ID = 'Shelly-269531';
+export const PAYMENT_METHOD_ID = 'pm_1Okf4oFPKktQy8tpwPwvsDBP';
+
 // TODO: Add a redirect to patient dashboard after Calendly booking is complete.
 
 /* Stripe keys for the SquareSpace account. */
