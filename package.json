@@ -1,6 +1,6 @@
 {
   "name": "reformr",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "private": true,
   "scripts": {
     "dev": "conc \"next dev\" \"npm:emulate\" \"npm:listen-pay\" \"npm:listen-id\"",
@@ -11,7 +11,7 @@
     "listen-pay": "stripe listen --events invoice.paid,invoice.payment_failed --forward-to localhost:3000/api/payments/recurring",
     "listen-id": "stripe listen --events identity.verification_session.canceled,identity.verification_session.processing,identity.verification_session.verified,identity.verification_session.requires_input --forward-to localhost:3000/api/identity/results",
     "trigger-pay": "stripe trigger invoice.paid",
-    "trigger-id": "stripe trigger identity.verification_session.canceled",
+    "trigger-id": "stripe trigger identity.verification_session.canceled --add verification_session:metadata.isOriginLocal=true",
     "env-var": "vercel env pull .env.local"
   },
   "dependencies": {
