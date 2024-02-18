@@ -30,38 +30,43 @@ export async function POST(request) {
 
   if (isLocal) startEmulators();
 
-  const verificationResult = event?.data?.object;
-  const { metadata, status } = verificationResult;
-  const docId = metadata?.docId ?? FIRESTORE_DOC_ID;
+  try {
+    const verificationResult = event?.data?.object;
+    const { metadata, status } = verificationResult;
+    const docId = metadata?.docId ?? FIRESTORE_DOC_ID;
 
-  /* Remote webhooks shouldn't respond to events when testing locally. */
-  const { isOriginLocal } = metadata; // environment of the event source
-  message = `⚠️  Webhook received from local source, so disregard.`;
-  if (!isLocal && isOriginLocal)
-    return NextResponse.json({ message }, { status: 202 });
-
-  /* Access Firestore as required for all events. */
-  await initialiseAdmin();
-  const db = admin.firestore();
-  const patientRef = db.collection('patients').doc(docId);
-
-  switch (event.type) {
-    case 'identity.verification_session.processing':
-      patientRef.set({ identityStatus: status }, { merge: true });
-      break;
-    case 'identity.verification_session.verified':
-      patientRef.set({ identityStatus: status }, { merge: true });
-      break;
-    case 'identity.verification_session.requires_input':
-      patientRef.set({ identityStatus: status }, { merge: true });
-      break;
-    case 'identity.verification_session.canceled':
-      patientRef.set({ identityStatus: status }, { merge: true });
-      break;
-    default:
-      message = `⚠️  Unhandled event type ${event.type}`;
+    /* Remote webhooks shouldn't respond to events when testing locally. */
+    const { isOriginLocal } = metadata; // environment of the event source
+    message = `⚠️  Webhook received from local source, so disregard.`;
+    if (!isLocal && isOriginLocal)
       return NextResponse.json({ message }, { status: 202 });
+
+    /* Access Firestore as required for all events. */
+    await initialiseAdmin();
+    const db = admin.firestore();
+    const patientRef = db.collection('patients').doc(docId);
+
+    switch (event.type) {
+      case 'identity.verification_session.processing':
+        patientRef.set({ identityStatus: status }, { merge: true });
+        break;
+      case 'identity.verification_session.verified':
+        patientRef.set({ identityStatus: status }, { merge: true });
+        break;
+      case 'identity.verification_session.requires_input':
+        patientRef.set({ identityStatus: status }, { merge: true });
+        break;
+      case 'identity.verification_session.canceled':
+        patientRef.set({ identityStatus: status }, { merge: true });
+        break;
+      default:
+        message = `⚠️  Unhandled event type ${event.type}`;
+        return NextResponse.json({ message }, { status: 202 });
+    }
+    message = `✅ Identity status updated to ${status}.`;
+    return NextResponse.json({ message }, { status: 200 });
+  } catch (err) {
+    console.log('⚠️  Fatal error in webhook. ', err.message);
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
-  message = `✅ Identity status updated to ${status}.`;
-  return NextResponse.json({ message }, { status: 200 });
 }
