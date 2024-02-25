@@ -1,13 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import { useCookies } from 'next-client-cookies';
 import { useRouter } from 'next/navigation';
-import {
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from 'firebase/auth';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { authContext } from './context';
-import { auth } from './firebase';
+import { auth, startEmulators } from './firebase';
+import { isLocal } from './constants';
 
 /* Checks if a provided key is on the cookie and saves to state if so. */
 export function useCookieState(quiz, stateName, setState, delay = 0) {
@@ -54,6 +52,7 @@ export function useAuthProvider() {
 
   /* Wrap any Firebase methods we want to use making sure to save the user to state. */
   async function login(email, password) {
+    if (isLocal) startEmulators();
     const response = await signInWithEmailAndPassword(auth, email, password);
     setUser(response.user);
     return response.user;
