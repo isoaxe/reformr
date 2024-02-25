@@ -1,5 +1,6 @@
 const isLive = false; // TODO: Toggle to true when ready to go live
-export const isLocal = process.env.HOST === 'localhost';
+export const isLocal =
+  process.env.HOST === 'localhost' || window.location.hostname === 'localhost';
 
 /* Constants used in CLI testing. Update if emulated data gets reset. */
 export const STRIPE_UID = 'cus_PZohtqPBQ4Bthz';
