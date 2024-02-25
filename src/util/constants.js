@@ -10,8 +10,8 @@ export const PAYMENT_METHOD_ID = 'pm_1Okf4oFPKktQy8tpwPwvsDBP';
 
 /* Stripe standard keys. */
 export const STRIPE_PUBLIC_KEY = isLive
-  ? process.env.STRIPE_PUBLIC_KEY_LIVE
-  : process.env.STRIPE_PUBLIC_KEY_TEST;
+  ? process.env.NEXT_PUBLIC_STRIPE_KEY_LIVE
+  : process.env.NEXT_PUBLIC_STRIPE_KEY_TEST;
 
 export const STRIPE_SECRET_KEY = isLive
   ? process.env.STRIPE_SECRET_KEY_LIVE
