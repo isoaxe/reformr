@@ -38,7 +38,7 @@ export async function POST(request) {
     /* Remote webhooks shouldn't respond to events when testing locally. */
     const { isOriginLocal } = metadata; // environment of the event source
     message = `⚠️  Webhook received from local source, so disregard.`;
-    if (!isLocal && isOriginLocal)
+    if (!isLocal && isOriginLocal === 'true')
       return NextResponse.json({ message }, { status: 202 });
 
     /* Access Firestore as required for all events. */
