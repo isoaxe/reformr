@@ -62,7 +62,7 @@ export default function Email() {
       <LoadingButton
         onClick={nextPage}
         variant="outlined"
-        className="w-fit text-lg md:text-xl"
+        className="w-fit !text-lg md:!text-xl"
         disabled={isInvalid}
         loading={isLoading}
       >
