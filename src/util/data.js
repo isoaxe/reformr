@@ -36,9 +36,8 @@ export const faqData = [
   {
     visible: 'How much does the Reformr program cost?',
     hidden: [
-      'Reformr’s Metabolic Reset Program includes prescription medication delivered to your door, unlimited consultations with your doctor, 1:1 health tracking, and a Welcome Kit - all for just $18 a day.',
-      'Pharmacies charge this much for the medication alone, making Reformr the best value for money option on the market.',
-      'Your initial consultation with a Reformr doctor is free. We offer a $55 discount on your first month, and the option for flexible payment plans with Afterpay.',
+      'Reformr’s Metabolic Reset Program includes prescription medication delivered to your door, unlimited consultations with your doctor, 1:1 health tracking, and a Welcome Kit - all for just $20 a day.',
+      'Pharmacies charge almost this much for the medication alone, making Reformr the best value for money option on the market.',
     ],
   },
   {
