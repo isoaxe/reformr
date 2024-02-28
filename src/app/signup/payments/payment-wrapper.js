@@ -81,7 +81,7 @@ export default function PaymentWrapper({ address }) {
         disabled={!stripe || !elements}
         loading={isLoading}
       >
-        Submit
+        Pay NZ$599
       </LoadingButton>
       <Toast
         message={message}
