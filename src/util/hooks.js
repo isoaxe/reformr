@@ -52,7 +52,8 @@ export function useAuthProvider() {
 
   /* Wrap any Firebase methods we want to use making sure to save the user to state. */
   async function login(email, password) {
-    if (isLocal) startEmulators();
+    const isEmulatorStarted = process.env.FIREBASE_AUTH_EMULATOR_HOST;
+    if (!isEmulatorStarted && isLocal) startEmulators();
     const response = await signInWithEmailAndPassword(auth, email, password);
     setUser(response.user);
     return response.user;
