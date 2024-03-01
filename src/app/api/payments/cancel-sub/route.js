@@ -23,7 +23,11 @@ export async function POST(request) {
     const { docId } = user;
     const patientRef = db.collection('patients').doc(docId);
     await patientRef.set(
-      { payments: { subscription: { isCancelled: true } } },
+      {
+        paymentInfo: {
+          metabolicReset: { subscription: { isCancelled: true } },
+        },
+      },
       { merge: true }
     );
 
