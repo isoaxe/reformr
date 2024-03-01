@@ -84,6 +84,7 @@ export async function POST(request) {
         const { orders } = patientData;
         const order = {
           trackingNumber: '',
+          product: 'metabolic reset',
           status: 'pending',
           statusDates: { pending: new Date() },
         };
