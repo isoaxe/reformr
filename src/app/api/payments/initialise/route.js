@@ -20,9 +20,9 @@ export async function POST(request) {
     const patientRef = db.collection('patients').doc(docId);
     const patientDoc = await patientRef.get();
     const patientData = patientDoc.data();
-    const { payments } = patientData;
-    if (payments) {
-      const { subscription } = payments;
+    const { metabolicReset } = patientData.paymentInfo;
+    if (metabolicReset) {
+      const { subscription } = metabolicReset;
       return NextResponse.json({ subscription });
     }
 
@@ -33,14 +33,11 @@ export async function POST(request) {
     subscription.isPaused = false;
 
     /* Save Stripe payments data to Firestore if not already there. */
-    const paymentData = {
-      subscription,
-      stripeUid,
-      numBoxesSkipped: 0,
-      isPaid: false,
-      payments: [],
-    };
-    await patientRef.set({ payments: paymentData }, { merge: true });
+    const paymentData = { subscription, numBoxesSkipped: 0, isPaid: false };
+    await patientRef.set(
+      { paymentInfo: { stripeUid, metabolicReset: paymentData }, payments: [] },
+      { merge: true }
+    );
 
     return NextResponse.json({ subscription });
   } catch (err) {
