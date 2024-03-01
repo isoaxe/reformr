@@ -25,7 +25,8 @@ export async function POST(request) {
     const patientRef = db.collection('patients').doc(docId);
     const patientDoc = await patientRef.get();
     const patientData = patientDoc.data();
-    let { numBoxesSkipped, expiryDate } = patientData.payments;
+    const { paymentInfo } = patientData;
+    let { numBoxesSkipped, expiryDate } = paymentInfo.metabolicReset;
     numBoxesSkipped++;
 
     /* Extend expiry date by one month. */
@@ -35,11 +36,13 @@ export async function POST(request) {
 
     await patientRef.set(
       {
-        payments: {
-          expiryDate: newExpiryDate,
-          isPaid: false,
-          numBoxesSkipped,
-          subscription: { isPaused: true },
+        paymentInfo: {
+          metabolicReset: {
+            expiryDate: newExpiryDate,
+            isPaid: false,
+            numBoxesSkipped,
+            subscription: { isPaused: true },
+          },
         },
       },
       { merge: true }
