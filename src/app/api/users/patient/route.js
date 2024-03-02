@@ -107,14 +107,14 @@ export async function GET(request) {
     const db = admin.firestore();
     const paidPatientsRef = await db
       .collection('patients')
-      .where('payments.isPaid', '==', true)
+      .where('paymentInfo.metabolicReset.isPaid', '==', true)
       .get();
     const paidPatients = [];
     paidPatientsRef.forEach((doc) => {
       const { screening, patientStatus, identityStatus, orders, payments } =
         doc.data();
       const { status, trackingNumber } = orders.pop();
-      const lastPayment = payments.payments.pop().paymentDate.seconds * 1000;
+      const lastPayment = payments.pop().paymentDate.seconds * 1000;
       const patient = {
         name: `${screening.firstName} ${screening.lastName}`,
         email: screening.email,
