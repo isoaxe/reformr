@@ -162,7 +162,7 @@ export default function PatientDashboard() {
       const lastOrder = patientData?.orders?.pop();
       setPhone(patientData?.screening?.phone);
       setAddress(patientData?.address);
-      setStripeUid(metabolicReset?.stripeUid);
+      setStripeUid(paymentInfo?.stripeUid);
       setMedicalStatus(patientData?.patientStatus);
       setOrderStatus(lastOrder.status);
       setTrackingNumber(lastOrder.trackingNumber);
