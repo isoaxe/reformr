@@ -20,14 +20,14 @@ export async function POST(request) {
     const patientRef = db.collection('patients').doc(docId);
     const patientDoc = await patientRef.get();
     const patientData = patientDoc.data();
-    const { metabolicReset } = patientData.paymentInfo;
+    let { metabolicReset, stripeUid } = patientData.paymentInfo;
     if (metabolicReset) {
       const { subscription } = metabolicReset;
       return NextResponse.json({ subscription });
     }
 
     /* Create a new subscription if not in Firestore. */
-    const stripeUid = await createCustomer(name, email);
+    if (!stripeUid) stripeUid = await createCustomer(name, email);
     const subscription = await createSubscription(stripeUid);
     subscription.isCancelled = false;
     subscription.isPaused = false;
