@@ -156,20 +156,21 @@ export default function PatientDashboard() {
       const patientRef = doc(db, 'patients', docId);
       const patientDoc = await getDoc(patientRef);
       const patientData = patientDoc.data();
-      const { payments } = patientData;
-      const lastPaymentUnix = payments?.payments?.pop()?.paymentDate?.seconds;
+      const { paymentInfo, payments } = patientData;
+      const { metabolicReset } = paymentInfo;
+      const lastPaymentUnix = payments?.pop()?.paymentDate?.seconds;
       const lastOrder = patientData?.orders?.pop();
       setPhone(patientData?.screening?.phone);
       setAddress(patientData?.address);
-      setStripeUid(payments?.stripeUid);
+      setStripeUid(metabolicReset?.stripeUid);
       setMedicalStatus(patientData?.patientStatus);
       setOrderStatus(lastOrder.status);
       setTrackingNumber(lastOrder.trackingNumber);
       setLastPayment(new Date(lastPaymentUnix * 1000).toDateString());
-      setExpiryDate(new Date(payments?.expiryDate?.seconds * 1000));
-      setSubId(payments?.subscription?.subscriptionId);
-      setSubCancelled(payments?.subscription?.isCancelled);
-      setSubPaused(payments?.subscription?.isPaused);
+      setExpiryDate(new Date(metabolicReset?.expiryDate?.seconds * 1000));
+      setSubId(metabolicReset?.subscription?.subscriptionId);
+      setSubCancelled(metabolicReset?.subscription?.isCancelled);
+      setSubPaused(metabolicReset?.subscription?.isPaused);
     }
 
     if (email) getPatientData();
