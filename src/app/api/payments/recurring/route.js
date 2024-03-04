@@ -61,7 +61,7 @@ export async function POST(request) {
       /* Get payments data from Firestore. */
       const { docId, patientData, message } = await getPatientData(customerId);
       if (message) return NextResponse.json({ message }, { status: 202 }); // no patient found
-      const { paymentInfo, payments } = patientData;
+      const { paymentInfo, payments, orders } = patientData;
 
       /* Save payments data to Firestore if invoice paid. */
       if (invoice.paid) {
@@ -81,7 +81,6 @@ export async function POST(request) {
         };
 
         /* Update orders data and add new item to array. */
-        const { orders } = patientData;
         const order = {
           trackingNumber: '',
           product: 'metabolic reset',
