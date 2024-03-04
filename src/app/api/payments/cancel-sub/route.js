@@ -24,9 +24,7 @@ export async function POST(request) {
     const patientRef = db.collection('patients').doc(docId);
     await patientRef.set(
       {
-        paymentInfo: {
-          metabolicReset: { subscription: { isCancelled: true } },
-        },
+        paymentInfo: { metabolicReset: { isCancelled: true } },
       },
       { merge: true }
     );

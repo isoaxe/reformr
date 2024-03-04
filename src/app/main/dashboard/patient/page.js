@@ -168,9 +168,9 @@ export default function PatientDashboard() {
       setTrackingNumber(lastOrder.trackingNumber);
       setLastPayment(new Date(lastPaymentUnix * 1000).toDateString());
       setExpiryDate(new Date(metabolicReset?.expiryDate?.seconds * 1000));
-      setSubId(metabolicReset?.subscription?.subscriptionId);
-      setSubCancelled(metabolicReset?.subscription?.isCancelled);
-      setSubPaused(metabolicReset?.subscription?.isPaused);
+      setSubId(metabolicReset?.subscriptionId);
+      setSubCancelled(metabolicReset?.isCancelled);
+      setSubPaused(metabolicReset?.isPaused);
     }
 
     if (email) getPatientData();

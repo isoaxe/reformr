@@ -73,11 +73,7 @@ export async function POST(request) {
         };
         payments.push(payment);
         const paymentData = {
-          metabolicReset: {
-            isPaid: true,
-            expiryDate,
-            subscription: { isPaused: false },
-          },
+          metabolicReset: { isPaid: true, isPaused: false, expiryDate },
         };
 
         /* Update orders data and add new item to array. */

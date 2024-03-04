@@ -40,8 +40,8 @@ export async function POST(request) {
           metabolicReset: {
             expiryDate: newExpiryDate,
             isPaid: false,
+            isPaused: true,
             numBoxesSkipped,
-            subscription: { isPaused: true },
           },
         },
       },

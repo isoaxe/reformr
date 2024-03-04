@@ -35,10 +35,10 @@ export default function Payments() {
         body: JSON.stringify({ fireToken }),
       };
       const response = await fetch('/api/payments/initialise', fetchOptions);
-      const { subscription, error } = await response.json();
+      const { metabolicReset, error } = await response.json();
       if (error) console.log('Error creating subscription: ', error);
       else {
-        const { clientSecret } = subscription;
+        const { clientSecret } = metabolicReset;
         const appearance = { theme: 'stripe', labels: 'floating' };
         const options = { clientSecret, appearance };
         setOptions(options);
