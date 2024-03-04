@@ -12,7 +12,7 @@ export async function getPatientData(customerId) {
   const db = admin.firestore();
   const patientRef = await db
     .collection('patients')
-    .where('payments.stripeUid', '==', customerId)
+    .where('paymentInfo.stripeUid', '==', customerId)
     .get(); // returns a single patient
   const patientDoc = patientRef.docs[0];
   const message = `⚠️  No patient with customerId ${customerId}. This may be due to a local event reaching a remote webhook. It could also be due to the patient details in constants.js not being updated when using the CLI.`;

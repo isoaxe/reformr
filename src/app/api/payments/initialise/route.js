@@ -26,7 +26,7 @@ export async function POST(request) {
       return NextResponse.json({ subscription });
     }
 
-    /* Create a new subscription if not in Firestore, */
+    /* Create a new subscription if not in Firestore. */
     const stripeUid = await createCustomer(name, email);
     const subscription = await createSubscription(stripeUid);
     subscription.isCancelled = false;
