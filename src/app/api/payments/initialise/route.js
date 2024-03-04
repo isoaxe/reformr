@@ -20,7 +20,8 @@ export async function POST(request) {
     const patientRef = db.collection('patients').doc(docId);
     const patientDoc = await patientRef.get();
     const patientData = patientDoc.data();
-    let { metabolicReset, stripeUid } = patientData.paymentInfo;
+    const metabolicReset = patientData.paymentInfo?.metabolicReset;
+    let stripeUid = patientData.paymentInfo?.metabolicReset;
     if (metabolicReset) {
       const { subscription } = metabolicReset;
       return NextResponse.json({ subscription });
