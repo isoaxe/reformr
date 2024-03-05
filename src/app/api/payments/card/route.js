@@ -24,7 +24,7 @@ export async function GET(request) {
 
     /* Get card ID from Firestore. */
     const { patientData } = await getPatientData(stripeUid);
-    const { paymentMethodId } = patientData.payments;
+    const { paymentMethodId } = patientData.paymentInfo.metabolicReset;
     if (!paymentMethodId)
       return NextResponse.json({ error: '⚠️  Payment not yet made.' });
 

@@ -61,12 +61,11 @@ export async function POST(request) {
       /* Get payments data from Firestore. */
       const { docId, patientData, message } = await getPatientData(customerId);
       if (message) return NextResponse.json({ message }, { status: 202 }); // no patient found
-      const allPaymentData = patientData.payments;
+      const { paymentInfo, payments, orders } = patientData;
 
       /* Save payments data to Firestore if invoice paid. */
       if (invoice.paid) {
         /* Update payments data and add new item to array. */
-        const { payments } = allPaymentData;
         const payment = {
           product: 'metabolic reset',
           paymentDate,
@@ -74,14 +73,10 @@ export async function POST(request) {
         };
         payments.push(payment);
         const paymentData = {
-          isPaid: true,
-          expiryDate,
-          payments,
-          subscription: { isPaused: false },
+          metabolicReset: { isPaid: true, isPaused: false, expiryDate },
         };
 
         /* Update orders data and add new item to array. */
-        const { orders } = patientData;
         const order = {
           trackingNumber: '',
           product: 'metabolic reset',
@@ -93,14 +88,14 @@ export async function POST(request) {
         /* Save payment and order data to Firestore. */
         await patientsRef
           .doc(docId)
-          .set({ payments: paymentData, orders }, { merge: true });
+          .set({ paymentInfo: paymentData, payments, orders }, { merge: true });
         console.log('✅ Payment made and data saved to Firestore.');
       } else {
         console.log('❌ Payment was not made.');
       }
 
       /* Set default payment method for customer if recently created. */
-      let paymentMethodId = allPaymentData?.paymentMethodId;
+      let { paymentMethodId } = paymentInfo.metabolicReset;
       if (!paymentMethodId) {
         console.log('ℹ️  Payment method not yet saved. Doing so now.');
         const paymentIntentId = invoice.payment_intent;
@@ -114,7 +109,10 @@ export async function POST(request) {
         });
         await patientsRef
           .doc(docId)
-          .set({ payments: { paymentMethodId } }, { merge: true });
+          .set(
+            { paymentInfo: { metabolicReset: { paymentMethodId } } },
+            { merge: true }
+          );
         console.log(`✅ Payment method ${paymentMethodId} set as default`);
       }
       return NextResponse.json({ message: 'Payment success' }, { status: 200 });
@@ -130,7 +128,10 @@ export async function POST(request) {
       /* Set user as unpaid in Firestore. */
       await patientsRef
         .doc(docId)
-        .set({ payments: { isPaid: false } }, { merge: true });
+        .set(
+          { paymentInfo: { metabolicReset: { isPaid: false } } },
+          { merge: true }
+        );
       const failMsg = 'ℹ️  User set as unpaid in Firestore.';
       console.log(failMsg);
       return NextResponse.json({ message: failMsg }, { status: 202 });

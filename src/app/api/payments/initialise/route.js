@@ -20,29 +20,28 @@ export async function POST(request) {
     const patientRef = db.collection('patients').doc(docId);
     const patientDoc = await patientRef.get();
     const patientData = patientDoc.data();
-    const { payments } = patientData;
-    if (payments) {
-      const { subscription } = payments;
-      return NextResponse.json({ subscription });
-    }
+    let metabolicReset = patientData.paymentInfo?.metabolicReset;
+    let stripeUid = patientData.paymentInfo?.metabolicReset;
+    if (metabolicReset) return NextResponse.json({ metabolicReset });
 
-    /* Create a new subscription if not in Firestore, */
-    const stripeUid = await createCustomer(name, email);
+    /* Create a new subscription if not in Firestore. */
+    if (!stripeUid) stripeUid = await createCustomer(name, email);
     const subscription = await createSubscription(stripeUid);
-    subscription.isCancelled = false;
-    subscription.isPaused = false;
-
-    /* Save Stripe payments data to Firestore if not already there. */
-    const paymentData = {
-      subscription,
-      stripeUid,
+    metabolicReset = {
+      ...subscription,
       numBoxesSkipped: 0,
       isPaid: false,
-      payments: [],
+      isPaused: false,
+      isCancelled: false,
     };
-    await patientRef.set({ payments: paymentData }, { merge: true });
 
-    return NextResponse.json({ subscription });
+    /* Save Stripe payments data to Firestore if not already there. */
+    await patientRef.set(
+      { paymentInfo: { stripeUid, metabolicReset }, payments: [] },
+      { merge: true }
+    );
+
+    return NextResponse.json({ metabolicReset });
   } catch (err) {
     console.error('Error creating subscription: ', err);
     return NextResponse.json({ error: err });
