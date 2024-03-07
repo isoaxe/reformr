@@ -76,7 +76,7 @@ export default function DoctorDashboard() {
 
   useEffect(() => {
     if (!isPageLoaded) return;
-    if (!user || role !== 'doctor') router.push('/main/login'); // redirect to login if not doctor.
+    if (!user || role !== 'doctor') router.push('/login'); // redirect to login if not doctor.
   }, [isPageLoaded, user, role, router]);
 
   return (

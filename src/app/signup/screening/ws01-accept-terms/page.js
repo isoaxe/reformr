@@ -8,15 +8,11 @@ export default function AcceptTerms() {
     <main className="mx-auto max-w-4xl">
       <p className="mb-6">
         By proceeding, you acknowledge you have read and agree with our{' '}
-        <Link href="/main/tos" target="_blank" className="text-sky-700">
+        <Link href="/tos" target="_blank" className="text-sky-700">
           Terms of Service
         </Link>{' '}
         and{' '}
-        <Link
-          href="/main/privacy-policy"
-          target="_blank"
-          className="text-sky-700"
-        >
+        <Link href="/privacy-policy" target="_blank" className="text-sky-700">
           Privacy Policy
         </Link>
         .

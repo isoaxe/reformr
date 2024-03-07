@@ -47,9 +47,9 @@ export default function FullNavbar() {
       >
         <div className="m-auto flex h-full w-full flex-row items-center justify-between">
           <Link
-            href="/main/home"
+            href="/home"
             className={`mr-10 w-40 md:w-72 lg:mr-20 ${
-              pathname !== '/main/home' && 'hover:opacity-60'
+              pathname !== '/home' && 'hover:opacity-60'
             }`}
             onClick={close}
           >

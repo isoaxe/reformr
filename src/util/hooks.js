@@ -112,7 +112,7 @@ export function useRedirectNoUser(user) {
 
   useEffect(() => {
     if (!isPageLoaded) return;
-    if (!user) router.push('/main/login'); // redirect to login if no user.
+    if (!user) router.push('/login'); // redirect to login if no user.
   }, [isPageLoaded, user, router]);
 }
 

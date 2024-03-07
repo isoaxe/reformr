@@ -29,9 +29,9 @@ export default function Login() {
       const role = await auth.currentUser
         .getIdTokenResult()
         .then((res) => res.claims.role);
-      if (role === 'admin') router.push('/main/dashboard/admin');
-      else if (role) router.push(`/main/dashboard/${role}`); // doc or pharm
-      else if (user) router.push('/main/dashboard/patient');
+      if (role === 'admin') router.push('/dashboard/admin');
+      else if (role) router.push(`/dashboard/${role}`); // doc or pharm
+      else if (user) router.push('/dashboard/patient');
     } catch (error) {
       console.log(error);
       setShowLoginFailure(true);

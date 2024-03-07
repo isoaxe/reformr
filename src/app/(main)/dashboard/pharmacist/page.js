@@ -50,7 +50,7 @@ export default function PharmacistDashboard() {
 
   useEffect(() => {
     if (!isPageLoaded) return;
-    if (!user || role !== 'pharmacist') router.push('/main/login'); // redirect to login if not pharmacist.
+    if (!user || role !== 'pharmacist') router.push('/login'); // redirect to login if not pharmacist.
   }, [isPageLoaded, user, role, router]);
 
   return (
