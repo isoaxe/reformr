@@ -13,7 +13,7 @@ import logo from 'public/images/text-logo-plain.png';
 export default function FullNavbar() {
   const [isOpen, setOpen] = useState(false);
   const [isOpaque, setOpaque] = useState(false);
-  const [isPageDark, setPageDark] = useState(false);
+  const [isPageLight, setPageLight] = useState(false);
   const pathname = usePathname();
 
   const position = useScrollPosition();
@@ -21,18 +21,18 @@ export default function FullNavbar() {
   const close = () => setOpen(false);
 
   useEffect(() => {
-    /* Check if the current page has a dark background. */
-    const darkPages = ['home', 'blog', 'careers'];
-    for (const darkPage of darkPages)
-      if (pathname.includes(darkPage)) return setPageDark(true);
-      else setPageDark(false);
+    /* Check if the current page has a light background. */
+    const lightPages = ['blog/', 'contact', 'login', 'dashboard'];
+    for (const lightPage of lightPages)
+      if (pathname.includes(lightPage)) return setPageLight(true);
+      else setPageLight(false);
   }, [pathname]);
 
   useEffect(() => {
     /* Set Navbar to transparent when at top of dark page. */
-    if (isPageDark && position < 50) setOpaque(false);
-    else setOpaque(true);
-  }, [isPageDark, position]);
+    if (isPageLight || position > 50) setOpaque(true);
+    else setOpaque(false);
+  }, [isPageLight, position]);
 
   return (
     <>
