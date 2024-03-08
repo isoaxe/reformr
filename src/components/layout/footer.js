@@ -43,7 +43,7 @@ export default function Footer() {
             <Link href="/contact" className={linkStyle}>
               Customer Support
             </Link>
-            <a href="/home#faq" className={linkStyle}>
+            <a href="/#faq" className={linkStyle}>
               FAQs
             </a>
           </div>
