@@ -1,7 +1,21 @@
-import { redirect } from 'next/navigation';
+import Hero from './(main)/home/hero';
+import Process from './(main)/home/process';
+import SalesPitch from './(main)/home/sales-pitch';
+import FAQ from './(main)/home/faq';
+import Closer from './(main)/home/closer';
+import FullNavbar from '@/components/layout/full-navbar';
+import Footer from '@/components/layout/footer';
 
-/* This replaces <Home/> as the entry point to the app. */
-/* Needed to move <Home/> so that new layout got applied to it. */
-export default function Entry() {
-  redirect('/home');
+export default function Home() {
+  return (
+    <main>
+      <FullNavbar />
+      <Hero />
+      <Process />
+      <SalesPitch />
+      <FAQ />
+      <Closer />
+      <Footer />
+    </main>
+  );
 }

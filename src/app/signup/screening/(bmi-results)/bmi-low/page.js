@@ -26,7 +26,7 @@ export default function LowBmi() {
           Based on your BMI of {cookies.get('bmi')}, the Reformr weight loss
           program is unsuitable for you.
         </p>
-        <Button text="Return Home" link="/home" />
+        <Button text="Return Home" link="/" />
       </div>
     </main>
   );
