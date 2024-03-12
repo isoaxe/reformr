@@ -7,7 +7,7 @@ import { auth } from '@/util/firebase';
 /* Creates a new company user with role of doctor, pharmacist or admin. */
 export async function POST(request) {
   const data = await request.json();
-  const { name, role, email, password, fireToken } = data;
+  const { displayName, role, email, password, fireToken } = data;
 
   try {
     /* Verify that user is an admin. */
@@ -20,7 +20,7 @@ export async function POST(request) {
     /* Create new company user. */
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const newUser = res.user;
-    await updateProfile(auth.currentUser, { displayName: name });
+    await updateProfile(auth.currentUser, { displayName });
     await getAuth().setCustomUserClaims(newUser.uid, { role });
     return NextResponse.json({ error: false });
   } catch (error) {
