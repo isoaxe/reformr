@@ -21,11 +21,11 @@ export default function CreateNewUser() {
   async function createUser() {
     setLoading(true);
     const fireToken = await auth.currentUser.getIdToken();
-    const name = `${firstName} ${lastName}`;
+    const displayName = `${firstName} ${lastName}`;
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, role, email, password, fireToken }),
+      body: JSON.stringify({ displayName, role, email, password, fireToken }),
     };
     const res = await fetch('/api/users/professional', options);
     const { error } = await res.json();
