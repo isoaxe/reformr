@@ -1,6 +1,6 @@
 {
   "name": "reformr",
-  "version": "1.2.24",
+  "version": "1.2.25",
   "private": true,
   "scripts": {
     "dev": "run-p dev-core emulate listen-pay listen-id",
