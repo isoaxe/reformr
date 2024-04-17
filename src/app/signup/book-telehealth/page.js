@@ -12,6 +12,14 @@ export default function BookTelehealth() {
   const cookies = useCookies();
 
   useEffect(() => {
+    function deleteAllCookies() {
+      cookies.remove('token');
+      cookies.remove('email');
+      cookies.remove('bmi');
+      cookies.remove('screening');
+      cookies.remove('medical');
+    }
+
     async function saveMedicalData() {
       const medical = cookies.get('medical');
       const fireToken = await auth.currentUser.getIdToken();
@@ -25,7 +33,10 @@ export default function BookTelehealth() {
         const res = await fetch('/api/medical', options);
         const { error } = await res.json();
         if (error) setShowFailure(true);
-        else setShowSuccess(true);
+        else {
+          setShowSuccess(true);
+          deleteAllCookies();
+        }
       } catch (err) {
         console.error('Error saving medical data: ', err);
       }
