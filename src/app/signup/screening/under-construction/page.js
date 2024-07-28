@@ -5,8 +5,7 @@ export default function UnderConstruction() {
         The updated Reformr platform is still under construction.
       </h1>
       <p className="text-center text-lg md:text-xl xl:text-2xl">
-        Our expected launch date is mid-April 2024. Please call back then to
-        check your eligibility for the programme.
+        Our launch has been delayed, but please check back soon for updates.
       </p>
     </main>
   );
