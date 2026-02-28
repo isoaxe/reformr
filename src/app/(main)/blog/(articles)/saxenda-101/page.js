@@ -1,9 +1,6 @@
 import Image from 'next/image';
 import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
-import saxendaPenClosed from '/public/images/blog/tiles/saxenda-pen-closed.jpg';
-import scaleStudyArticle from '/public/images/blog/posts/13/scale-study-article.png';
-import weightLossGraph from '/public/images/blog/posts/13/weight-loss-graph.png';
 
 export default function Saxenda101() {
   const { date, title } = blogTileData[0];
@@ -19,7 +16,7 @@ export default function Saxenda101() {
       <div className="mb-8 flex w-full flex-col md:mb-16 md:flex-row">
         <div className="relative aspect-video md:w-1/2">
           <Image
-            src={saxendaPenClosed}
+            src="/images/blog/tiles/saxenda-pen-closed.jpg"
             alt="A Saxenda pen with the lid on."
             fill
             className="z-0 object-cover"
@@ -136,7 +133,9 @@ export default function Saxenda101() {
       </p>
       <div className="relative w-full">
         <Image
-          src={scaleStudyArticle}
+          src="/images/blog/posts/13/scale-study-article.png"
+            width={800}
+            height={600}
           alt="The medical study document relating to Saxenda."
           sizes="100vw"
         />
@@ -203,7 +202,9 @@ export default function Saxenda101() {
       <div className="my-12 flex w-full flex-col items-center md:flex-row">
         <div className="relative md:w-1/2">
           <Image
-            src={weightLossGraph}
+            src="/images/blog/posts/13/weight-loss-graph.png"
+            width={800}
+            height={600}
             alt="A graph showing weight loss progress against a control over 56 weeks."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"

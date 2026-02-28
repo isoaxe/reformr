@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Button from '@/components/button';
 import Tile from './tile';
 import { blogTileData } from '@/util/data';
-import doctor from '/public/images/cartoon-doctor.jpg';
 
 export default function Blog() {
   return (
@@ -10,7 +9,7 @@ export default function Blog() {
       <section className="relative flex h-screen justify-end">
         <div className="absolute h-screen w-full">
           <Image
-            src={doctor}
+            src="/images/cartoon-doctor.jpg"
             alt="A smiling cartoon doctor with hand outstretched."
             fill
             className="z-0 object-cover object-right-top"

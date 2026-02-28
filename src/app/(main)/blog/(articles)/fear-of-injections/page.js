@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
-import needleCoin from '/public/images/blog/posts/10/saxenda-needle-with-coin-2.jpg';
 
 export default function FearOfInjections() {
   const { date, title, image } = blogTileData[3];
@@ -25,7 +24,9 @@ export default function FearOfInjections() {
         </p>
         <div className="md:w-1/2">
           <Image
-            src={needleCoin}
+            src="/images/blog/posts/10/saxenda-needle-with-coin-2.jpg"
+            width={800}
+            height={600}
             alt="A Saxenda pen showing it's tiny needle with a coin for scale"
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
@@ -64,6 +65,8 @@ export default function FearOfInjections() {
             alt="A Saxenda pen showing it's tiny needle with a coin for scale"
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
+            width={800}
+            height={600}
           />
         </div>
       </div>

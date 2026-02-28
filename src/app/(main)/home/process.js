@@ -1,8 +1,5 @@
 import Image from 'next/image';
 import Button from '@/components/button';
-import stage1 from '/public/images/stage-1.png';
-import stage2 from '/public/images/stage-2.png';
-import stage3 from '/public/images/stage-3.png';
 
 /* Section that outlines the stages in the process shown on the homepage. */
 export default function Process() {
@@ -37,17 +34,17 @@ export default function Process() {
       <div className="m-auto flex w-full max-w-[100rem] flex-wrap justify-around md:flex-nowrap">
         <Stage
           title="1. Online Assessment"
-          image={stage1}
+          image="/images/stage-1.png"
           description="Take our quiz, then have a free consultation with one of our qualified Kiwi doctors and receive a personalised weight loss plan."
         />
         <Stage
           title="2. Medication Ships"
-          image={stage2}
+          image="/images/stage-2.png"
           description="Your state-of-the-art weight loss medication arrives in discreet packaging."
         />
         <Stage
           title="3. Ongoing Care"
-          image={stage3}
+          image="/images/stage-3.png"
           description="Your doctor will monitor your progress and make changes to your treatment as needed."
         />
       </div>

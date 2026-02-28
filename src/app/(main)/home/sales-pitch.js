@@ -1,9 +1,5 @@
 import Image from 'next/image';
 import Button from '@/components/button';
-import vial from '/public/images/vial.jpg';
-import dna from '/public/images/dna.jpg';
-import labLady from '/public/images/lab-lady.png';
-
 /* Three sections of the homepage that comprise the product pitch. */
 export default function SalesPitch() {
   const BulletPoint = ({ text }) => (
@@ -37,7 +33,7 @@ export default function SalesPitch() {
         </div>
         <div className="relative aspect-square w-full max-w-md rounded-full shadow-2xl lg:max-w-lg">
           <Image
-            src={vial}
+            src="/images/vial.jpg"
             alt="Close-up of a vial being held by a lab technician in the background."
             fill
             className="z-0 rounded-full object-cover"
@@ -62,7 +58,7 @@ export default function SalesPitch() {
         </div>
         <div className="relative aspect-square w-full max-w-md rounded-full shadow-2xl lg:max-w-lg">
           <Image
-            src={dna}
+            src="/images/dna.jpg"
             alt="Stylised graphic of a DNA strand with blue hue."
             fill
             className="z-0 rounded-full object-cover"
@@ -89,7 +85,7 @@ export default function SalesPitch() {
         </div>
         <div className="relative aspect-square w-full max-w-md rounded-full shadow-2xl lg:max-w-lg">
           <Image
-            src={labLady}
+            src="/images/lab-lady.png"
             alt="A smiling woman in a lab with her arms crossed."
             fill
             className="z-0 rounded-full object-cover"

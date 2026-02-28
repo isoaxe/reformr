@@ -4,7 +4,6 @@ import { AiOutlineInstagram as Instagram } from 'react-icons/ai';
 import Image from 'next/image';
 import Link from 'next/link';
 import { INSTAGRAM } from '@/util/urls';
-import logo from 'public/images/text-logo-coloured.png';
 
 export default function Footer() {
   const linkStyle = 'mt-3 hover:text-violet-600 font-light transition';
@@ -15,7 +14,9 @@ export default function Footer() {
         <section className="mb-10 flex flex-col items-center md:mb-0">
           <div className="mb-5 w-64 max-w-full sm:w-80">
             <Image
-              src={logo}
+              src="/images/text-logo-coloured.png"
+              width={320}
+              height={80}
               alt="Coloured version of Reformr text logo."
               sizes="(max-width: 639px) 16rem, 20rem"
             />

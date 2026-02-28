@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
-import penOpen from '/public/images/blog/posts/11/ozempic-pen-open-vert.jpg';
 
 export default function Ozempic101() {
   const { date, title } = blogTileData[2];
@@ -21,10 +20,12 @@ export default function Ozempic101() {
         </p>
         <div className="md:w-1/2">
           <Image
-            src={penOpen}
+            src="/images/blog/posts/11/ozempic-pen-open-vert.jpg"
             alt="An open Ozempic pen."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
+            width={800}
+            height={600}
           />
         </div>
       </div>

@@ -25,6 +25,8 @@ export default function WeightLossBenefits() {
             alt="A group of smiling women cycling along a tree-lined road."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
+            width={800}
+            height={600}
           />
         </div>
       </div>

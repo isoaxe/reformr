@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Button from '@/components/quiz/button';
 import KeyPrompt from '@/components/quiz/key-prompt';
-import peaceSign from '/public/images/hand-peace-sign.png';
 
 /* This is just the first intro page of the quiz and doesn't contain questions. */
 export default function Screening() {
@@ -9,7 +8,7 @@ export default function Screening() {
     <main className="flex w-full max-w-5xl flex-col sm:flex-row">
       <div className="relative aspect-square sm:w-1/2">
         <Image
-          src={peaceSign}
+          src="/images/hand-peace-sign.png"
           alt="A hand making a peace sign with a yellow background."
           fill
           className="z-0 object-cover"

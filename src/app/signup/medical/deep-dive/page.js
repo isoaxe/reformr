@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Button from '@/components/quiz/button';
 import KeyPrompt from '@/components/quiz/key-prompt';
 import { useAuth, useRedirectNoUser } from '@/util/hooks';
-import womanOnRock from '/public/images/woman-on-rock.jpg';
 
 /* This is the intro to the first of three sections for the medical quiz. */
 export default function DeepDive() {
@@ -15,7 +14,7 @@ export default function DeepDive() {
     <main className="flex w-full max-w-5xl flex-col sm:flex-row">
       <div className="relative aspect-square sm:w-1/2">
         <Image
-          src={womanOnRock}
+          src="/images/woman-on-rock.jpg"
           alt="A female hiker with her back to the camera looking out across a valley."
           fill
           className="z-0 object-cover"

@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import Button from '@/components/quiz/button';
 import { useAuth, useRedirectNoUser } from '@/util/hooks';
-import twoThumbsUp from '/public/images/two-thumbs-up.jpg';
 
 /* This is the intro to the third and last section for the medical quiz. */
 export default function HealthAndTreatment() {
@@ -14,7 +13,7 @@ export default function HealthAndTreatment() {
     <main className="flex w-full max-w-5xl flex-col sm:flex-row">
       <div className="relative aspect-square sm:w-1/2">
         <Image
-          src={twoThumbsUp}
+          src="/images/two-thumbs-up.jpg"
           alt="Two male hands wearing surgical gloves giving a double thumbs up."
           fill
           className="z-0 object-cover"

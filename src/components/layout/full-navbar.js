@@ -8,7 +8,6 @@ import { usePathname } from 'next/navigation';
 import MobileNavbar from './navbar-mobile';
 import NavLinks from './nav-links';
 import { useScrollPosition } from '@/util/hooks';
-import logo from 'public/images/text-logo-plain.png';
 
 export default function FullNavbar() {
   const [isOpen, setOpen] = useState(false);
@@ -54,7 +53,9 @@ export default function FullNavbar() {
             onClick={close}
           >
             <Image
-              src={logo}
+              src="/images/text-logo-plain.png"
+              width={288}
+              height={72}
               alt="Plain monotone version of Reformr text logo."
               sizes="(max-width: 767px) 10rem, 18rem"
             />
