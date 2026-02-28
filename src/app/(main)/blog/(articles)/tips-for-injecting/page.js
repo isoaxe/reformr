@@ -1,12 +1,9 @@
 import Image from 'next/image';
 import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
-import penClosed from '/public/images/blog/posts/12/saxenda-pen-closed-2.png';
-import penOpen from '/public/images/blog/posts/12/saxenda-pen-open-2.jpg';
-import newNeedle from '/public/images/blog/posts/12/saxenda-new-needle.jpg';
-import checkFlow from '/public/images/blog/posts/12/saxenda-check-flow.jpg';
-import selectDose from '/public/images/blog/posts/12/saxenda-select-dose.jpg';
-import injectionSites from '/public/images/blog/posts/12/injection-sites.jpg';
+
+const IMG_W = 800;
+const IMG_H = 600;
 
 export default function TipsForInjecting() {
   const { date, title, image } = blogTileData[1];
@@ -21,10 +18,12 @@ export default function TipsForInjecting() {
       </h1>
       <div className="relative my-8 w-full max-w-lg self-center text-center">
         <Image
-          src={penClosed}
+          src="/images/blog/posts/12/saxenda-pen-closed-2.png"
           alt="A Saxenda pen with the lid on."
           className="z-0 object-cover"
           sizes="(max-width: 767px) 100vw, 50vw"
+          width={IMG_W}
+          height={IMG_H}
         />
       </div>
       <p className="my-8">
@@ -91,10 +90,12 @@ export default function TipsForInjecting() {
         </div>
         <div className="md:w-1/2">
           <Image
-            src={penOpen}
+            src="/images/blog/posts/12/saxenda-pen-open-2.jpg"
             alt="An open Saxenda pen."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
+            width={IMG_W}
+            height={IMG_H}
           />
         </div>
       </div>
@@ -108,7 +109,9 @@ export default function TipsForInjecting() {
         </div>
         <div className="md:w-1/2">
           <Image
-            src={newNeedle}
+            src="/images/blog/posts/12/saxenda-new-needle.jpg"
+            width={IMG_W}
+            height={IMG_H}
             alt="An open Saxenda pen showing needle with cover."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
@@ -124,7 +127,9 @@ export default function TipsForInjecting() {
         </div>
         <div className="md:w-1/2">
           <Image
-            src={checkFlow}
+            src="/images/blog/posts/12/saxenda-check-flow.jpg"
+            width={IMG_W}
+            height={IMG_H}
             alt="A close-up of the Saxenda pen showing how to adjust dose."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
@@ -145,7 +150,9 @@ export default function TipsForInjecting() {
         </div>
         <div className="md:w-1/2">
           <Image
-            src={selectDose}
+            src="/images/blog/posts/12/saxenda-select-dose.jpg"
+            width={IMG_W}
+            height={IMG_H}
             alt="A close-up of the Saxenda pen showing current dose."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
@@ -163,7 +170,9 @@ export default function TipsForInjecting() {
         </div>
         <div className="md:w-1/2">
           <Image
-            src={injectionSites}
+            src="/images/blog/posts/12/injection-sites.jpg"
+            width={IMG_W}
+            height={IMG_H}
             alt="Outline of a human body with lines pointing to arm, thigh and abdomen."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
@@ -185,6 +194,8 @@ export default function TipsForInjecting() {
             alt="A closed Saxenda pen."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
+            width={IMG_W}
+            height={IMG_H}
           />
         </div>
       </div>

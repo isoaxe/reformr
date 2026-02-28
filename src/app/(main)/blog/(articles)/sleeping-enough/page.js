@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
-import babyYawning from '/public/images/blog/posts/8/baby-yawning.jpg';
 
 export default function SleepingEnough() {
   const { date, title, image } = blogTileData[5];
@@ -30,6 +29,8 @@ export default function SleepingEnough() {
             alt="A woman in full makeup pretending to sleep on a bed."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
+            width={800}
+            height={600}
           />
         </div>
       </div>
@@ -86,10 +87,12 @@ export default function SleepingEnough() {
         </div>
         <div className="md:w-1/2">
           <Image
-            src={babyYawning}
+            src="/images/blog/posts/8/baby-yawning.jpg"
             alt="A baby wearing a hat and yawning beside a teddy in a bed."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
+            width={800}
+            height={600}
           />
         </div>
       </div>

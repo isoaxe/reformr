@@ -198,138 +198,143 @@ export const manyRangeLabels = {
   ],
 };
 
-import saxendaPenOpen from '/public/images/blog/tiles/saxenda-pen-open.jpg';
-import saxendaPenClosed from '/public/images/blog/tiles/saxenda-pen-closed.jpg';
-import ozempicPenOpen from '/public/images/blog/tiles/ozempic-pen-open.jpg';
-import saxendaNeedleCoin from '/public/images/blog/tiles/saxenda-needle-with-coin.jpg';
-import vegBaskets from '/public/images/blog/tiles/baskets-of-veg.jpg';
-import womanSleeping from '/public/images/blog/tiles/woman-sleeping.jpg';
-import cyclists from '/public/images/blog/tiles/smiling-cyclists.jpg';
-import nutsAndDates from '/public/images/blog/tiles/nuts-and-dates.jpg';
-import sunflowers from '/public/images/blog/tiles/woman-with-sunflowers.jpg';
-import pharmacist from '/public/images/blog/tiles/pharmacist-with-packet.jpg';
-import measuringWaist from '/public/images/blog/tiles/woman-measuring-waist.jpg';
-import tapeAndFork from '/public/images/blog/tiles/tape-measure-with-fork.jpg';
-import spoonWithSugar from '/public/images/blog/tiles/spoon-with-sugar.jpg';
+/* Blog tile and program images use public URL paths for Turbopack compatibility. */
+const blogTileImages = {
+  saxendaPenOpen: '/images/blog/tiles/saxenda-pen-open.jpg',
+  saxendaPenClosed: '/images/blog/tiles/saxenda-pen-closed.jpg',
+  ozempicPenOpen: '/images/blog/tiles/ozempic-pen-open.jpg',
+  saxendaNeedleCoin: '/images/blog/tiles/saxenda-needle-with-coin.jpg',
+  vegBaskets: '/images/blog/tiles/baskets-of-veg.jpg',
+  womanSleeping: '/images/blog/tiles/woman-sleeping.jpg',
+  cyclists: '/images/blog/tiles/smiling-cyclists.jpg',
+  nutsAndDates: '/images/blog/tiles/nuts-and-dates.jpg',
+  sunflowers: '/images/blog/tiles/woman-with-sunflowers.jpg',
+  pharmacist: '/images/blog/tiles/pharmacist-with-packet.jpg',
+  measuringWaist: '/images/blog/tiles/woman-measuring-waist.jpg',
+  tapeAndFork: '/images/blog/tiles/tape-measure-with-fork.jpg',
+  spoonWithSugar: '/images/blog/tiles/spoon-with-sugar.jpg',
+};
 
 /* The article details as appear on the blog page. */
 export const blogTileData = [
   {
     title: 'Saxenda 101',
-    image: saxendaPenOpen,
+    image: blogTileImages.saxendaPenOpen,
     date: 'April 6, 2023',
     slug: 'saxenda-101',
   },
   {
     title: 'Tips for injecting your first dose of Saxenda',
-    image: saxendaPenClosed,
+    image: blogTileImages.saxendaPenClosed,
     date: 'March 25, 2023',
     slug: 'tips-for-injecting',
   },
   {
     title: 'Ozempic 101',
-    image: ozempicPenOpen,
+    image: blogTileImages.ozempicPenOpen,
     date: 'March 21, 2023',
     slug: 'ozempic-101',
   },
   {
     title: 'Breaking down the fear factor of Saxenda injections',
-    image: saxendaNeedleCoin,
+    image: blogTileImages.saxendaNeedleCoin,
     date: 'March 20, 2023',
     slug: 'fear-of-injections',
   },
   {
     title:
       '5 Strategies to break free from emotional eating and establish a healthier relationship with food ',
-    image: vegBaskets,
+    image: blogTileImages.vegBaskets,
     date: 'March 19, 2023',
     slug: 'emotional-eating',
   },
   {
     title: 'Is sleep the missing link in your weight loss journey?',
-    image: womanSleeping,
+    image: blogTileImages.womanSleeping,
     date: 'March 18, 2023',
     slug: 'sleeping-enough',
   },
   {
     title: '10 ways losing weight can change your life',
-    image: cyclists,
+    image: blogTileImages.cyclists,
     date: 'March 17, 2023',
     slug: 'weight-loss-benefits',
   },
   {
     title: 'Everything you need to know about intermittent fasting',
-    image: nutsAndDates,
+    image: blogTileImages.nutsAndDates,
     date: 'March 16, 2023',
     slug: 'intermittent-fasting',
   },
   {
     title: 'Unlock the power of incidental exercise',
-    image: sunflowers,
+    image: blogTileImages.sunflowers,
     date: 'March 13, 2023',
     slug: 'incidental-exercise',
   },
   {
     title: 'Emerging weight loss medications',
-    image: pharmacist,
+    image: blogTileImages.pharmacist,
     date: 'February 27, 2023',
     slug: 'emerging-medications',
   },
   {
     title: '8 reasons you’re not losing weight',
-    image: measuringWaist,
+    image: blogTileImages.measuringWaist,
     date: 'March 12, 2019',
     slug: 'not-losing-weight',
   },
   {
     title: "Calorie restriction: 5 reasons why you're not losing weight",
-    image: tapeAndFork,
+    image: blogTileImages.tapeAndFork,
     date: 'March 10, 2019',
     slug: 'calorie-restriction',
   },
   {
     title: 'Can sugar-free drinks help you lose weight?',
-    image: spoonWithSugar,
+    image: blogTileImages.spoonWithSugar,
     date: 'March 8, 2019',
     slug: 'sugar-free-drinks',
   },
 ];
 
-import initialScreening from '/public/images/initial-screening.jpeg';
-import paymentConfirmation from '/public/images/payment-confirmation.jpeg';
-import medicalEvaluation from '/public/images/medical-evaluation.jpeg';
-import consultation from '/public/images/consultation.jpeg';
-import seamlessDelivery from '/public/images/seamless-delivery.jpeg';
+const programOutlineImages = {
+  initialScreening: '/images/initial-screening.jpeg',
+  paymentConfirmation: '/images/payment-confirmation.jpeg',
+  medicalEvaluation: '/images/medical-evaluation.jpeg',
+  consultation: '/images/consultation.jpeg',
+  seamlessDelivery: '/images/seamless-delivery.jpeg',
+};
 
 /* The program outline at the start of the signup flow. */
 export const programOutlineData = [
   {
     title: 'Initial Screening',
-    image: initialScreening,
+    image: programOutlineImages.initialScreening,
     description:
       'Take a short quiz to see if you are likely to be eligible for our program.',
   },
   {
     title: 'Payment Confirmation',
-    image: paymentConfirmation,
+    image: programOutlineImages.paymentConfirmation,
     description:
       'Proceed to pay for your treatment. If later deemed unsuitable, a full refund will be issued. Identify is also verified through our secure online portal.',
   },
   {
     title: 'Medical Evaluation',
-    image: medicalEvaluation,
+    image: programOutlineImages.medicalEvaluation,
     description:
       'Respond to a set of medical questions, enabling your practitioner to prepare for your upcoming consultation.',
   },
   {
     title: 'Consultation with your Practitioner',
-    image: consultation,
+    image: programOutlineImages.consultation,
     description:
       'Phone call where your practitioner will validate your details and, if appropriate, discuss your treatment plan.',
   },
   {
     title: 'Seamless Delivery',
-    image: seamlessDelivery,
+    image: programOutlineImages.seamlessDelivery,
     description:
       'Enjoy complimentary shipping and discreet delivery of all necessary items to kickstart your journey.',
   },

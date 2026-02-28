@@ -3,7 +3,6 @@
 import { useCookies } from 'next-client-cookies';
 import Image from 'next/image';
 import Button from '@/components/quiz/button';
-import peaceSign from '/public/images/hand-peace-sign.png';
 
 /* Assessment ends if the user has a low BMI and they return to homepage. */
 export default function LowBmi() {
@@ -13,7 +12,7 @@ export default function LowBmi() {
     <main className="flex flex-col sm:flex-row">
       <div className="relative aspect-square sm:w-1/2">
         <Image
-          src={peaceSign}
+          src="/images/hand-peace-sign.png"
           alt="A hand making a peace sign with a yellow background."
           fill
           className="z-0 object-cover"

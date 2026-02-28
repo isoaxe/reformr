@@ -35,6 +35,8 @@ export default function IncidentalExercise() {
             alt="A measuring tape wrapped around a fork with a yellow background."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
+            width={800}
+            height={600}
           />
         </div>
       </div>

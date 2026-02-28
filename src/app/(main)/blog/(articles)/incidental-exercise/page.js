@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Button from '@/components/button';
 import { blogTileData } from '@/util/data';
-import exerciseClass from '/public/images/blog/posts/5/exercise-class.jpg';
 
 export default function IncidentalExercise() {
   const { date, title, image } = blogTileData[8];
@@ -26,6 +25,8 @@ export default function IncidentalExercise() {
             alt="A smiling woman with arms outstretched by a field of sunflowers."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
+            width={800}
+            height={600}
           />
         </div>
       </div>
@@ -101,10 +102,14 @@ export default function IncidentalExercise() {
         </p>
         <div className="md:w-1/2">
           <Image
-            src={exerciseClass}
+            src="/images/blog/posts/5/exercise-class.jpg"
+            width={800}
+            height={600}
             alt="A group of people exercising in a yard."
             className="z-0 object-cover"
             sizes="(max-width: 767px) 100vw, 50vw"
+            width={800}
+            height={600}
           />
         </div>
       </div>

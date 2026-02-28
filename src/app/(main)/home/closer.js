@@ -1,14 +1,12 @@
 import Image from 'next/image';
 import Button from '@/components/button';
-import manGrinning from '/public/images/man-grinning.jpeg';
-
 /* Final section of homepage that acts as a closing statement to the pitch. */
 export default function Closer() {
   return (
     <section className="flex h-screen items-center">
       <div className="absolute h-screen w-full">
         <Image
-          src={manGrinning}
+          src="/images/man-grinning.jpeg"
           alt="A short-haired man grinning widely."
           fill
           className="z-0 object-cover"

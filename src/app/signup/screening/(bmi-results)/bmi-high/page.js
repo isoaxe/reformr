@@ -3,7 +3,6 @@
 import { useCookies } from 'next-client-cookies';
 import Image from 'next/image';
 import Button from '@/components/quiz/button';
-import stethoscope from '/public/images/stethoscope.jpg';
 
 /* User can proceed to account creation if they have a high BMI. */
 export default function HighBmi() {
@@ -13,7 +12,7 @@ export default function HighBmi() {
     <main className="flex flex-col sm:flex-row">
       <div className="relative aspect-square sm:w-1/2">
         <Image
-          src={stethoscope}
+          src="/images/stethoscope.jpg"
           alt="A stethoscope attached to a smartphone with a light blue background."
           fill
           className="z-0 object-cover"

@@ -3,6 +3,10 @@
 /build
 .next
 
+# IDE files
+.cursor/
+.vscode/
+
 # Firebase
 /emulated
 firebase-export*
