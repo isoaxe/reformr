@@ -27,7 +27,7 @@
     "@stripe/stripe-js": "^1.54.2",
     "dayjs": "^1.11.10",
     "firebase": "^10.4.0",
-    "firebase-admin": "^11.11.0",
+    "firebase-admin": "^13.7.0",
     "hamburger-react": "^2.5.0",
     "moment": "^2.29.4",
     "mui-tel-input": "^4.0.0",
